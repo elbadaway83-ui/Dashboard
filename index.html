@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>وسيط برو — لوحة التحكم</title>
+
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════════════ -->
+<aside class="sidebar">
+
+  <!-- Logo -->
+  <div class="sidebar-logo">
+    <div class="logo-badge">
+      <div class="logo-icon">🛡️</div>
+      <div class="logo-text">
+        <h2>وسيط برو</h2>
+        <span>منصة الوساطة الآمنة</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Card -->
+  <div class="admin-card">
+    <div class="admin-avatar">أ</div>
+    <div class="admin-info">
+      <h4>أحمد — الأدمن</h4>
+      <span>وسيط رئيسي</span>
+    </div>
+    <div class="status-dot"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sidebar-nav">
+
+    <div class="nav-section-title">الرئيسية</div>
+
+    <a class="nav-item" data-page="dashboard">
+      <span class="nav-icon">📊</span>
+      <span class="nav-label">لوحة التحكم</span>
+    </a>
+
+    <a class="nav-item" data-page="live">
+      <span class="nav-icon">⚡</span>
+      <span class="nav-label">النشاط المباشر</span>
+      <span class="nav-badge green" id="live-count">3</span>
+    </a>
+
+    <div class="nav-section-title" style="margin-top:8px">المعاملات</div>
+
+    <a class="nav-item" data-page="deals">
+      <span class="nav-icon">💰</span>
+      <span class="nav-label">الصفقات</span>
+      <span class="nav-badge">12</span>
+    </a>
+
+    <a class="nav-item" data-page="disputes">
+      <span class="nav-icon">⚖️</span>
+      <span class="nav-label">النزاعات</span>
+      <span class="nav-badge">5</span>
+    </a>
+
+    <a class="nav-item" data-page="vault">
+      <span class="nav-icon">🔒</span>
+      <span class="nav-label">الخزنة الآمنة</span>
+    </a>
+
+    <a class="nav-item" data-page="payments">
+      <span class="nav-icon">💳</span>
+      <span class="nav-label">المدفوعات</span>
+    </a>
+
+    <div class="nav-section-title" style="margin-top:8px">المستخدمون</div>
+
+    <a class="nav-item" data-page="buyers">
+      <span class="nav-icon">🛒</span>
+      <span class="nav-label">المشترون</span>
+    </a>
+
+    <a class="nav-item" data-page="sellers">
+      <span class="nav-icon">🏪</span>
+      <span class="nav-label">البائعون</span>
+      <span class="nav-badge yellow">2</span>
+    </a>
+
+    <a class="nav-item" data-page="services">
+      <span class="nav-icon">📦</span>
+      <span class="nav-label">الخدمات</span>
+    </a>
+
+    <div class="nav-section-title" style="margin-top:8px">الإعدادات</div>
+
+    <a class="nav-item" data-page="settings">
+      <span class="nav-icon">⚙️</span>
+      <span class="nav-label">الإعدادات العامة</span>
+    </a>
+
+    <a class="nav-item" data-page="reports">
+      <span class="nav-icon">📋</span>
+      <span class="nav-label">تقارير وإحصائيات</span>
+    </a>
+
+  </nav><!-- /sidebar-nav -->
+
+  <div class="sidebar-footer">
+    <a class="nav-item">
+      <span class="nav-icon">🚪</span>
+      <span class="nav-label">تسجيل الخروج</span>
+    </a>
+  </div>
+
+</aside><!-- /sidebar -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN WRAPPER
+════════════════════════════════════════════════════════ -->
+<div class="main-wrapper">
+
+  <!-- ── TOPBAR ── -->
+  <div class="topbar">
+    <div>
+      <p class="topbar-title" id="topbar-title">لوحة التحكم 📊</p>
+      <p class="topbar-sub"   id="topbar-sub"   id="live-clock">الاثنين، 14 أبريل 2026 — مرحباً أحمد 👋</p>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <div class="topbar-search">
+        <span>🔍</span>
+        <input type="text" placeholder="بحث عن صفقة، مستخدم...">
+      </div>
+      <button class="topbar-btn" id="notif-btn">
+        🔔 <span class="notif-dot"></span>
+      </button>
+      <button class="topbar-btn">📨</button>
+      <button class="topbar-btn">🌙</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE CONTENT
+  ══════════════════════════════════════════════════ -->
+  <div class="page-content">
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: DASHBOARD                             ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-dashboard" class="page-section">
+
+      <!-- Stat cards row -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3">
+          <div class="stat-card card bg-white">
+            <div class="stat-icon" style="background:var(--blue-50)">💰</div>
+            <div class="stat-value">٤٨,٣٢٠</div>
+            <div class="stat-label">إجمالي المعاملات (جنيه)</div>
+            <div class="stat-change up">▲ ١٨٪ هذا الأسبوع</div>
+          </div>
+        </div>
+        <div class="col-6 col-xl-3">
+          <div class="stat-card card bg-white">
+            <div class="stat-icon" style="background:#d1fae5">✅</div>
+            <div class="stat-value">١٣٤</div>
+            <div class="stat-label">صفقات مكتملة</div>
+            <div class="stat-change up">▲ ٢٣٪ هذا الشهر</div>
+          </div>
+        </div>
+        <div class="col-6 col-xl-3">
+          <div class="stat-card card bg-white">
+            <div class="stat-icon" style="background:#fef3c7">⏳</div>
+            <div class="stat-value">١٢</div>
+            <div class="stat-label">صفقات نشطة الآن</div>
+            <div class="stat-change up">▲ ٤ جديدة اليوم</div>
+          </div>
+        </div>
+        <div class="col-6 col-xl-3">
+          <div class="stat-card card bg-white">
+            <div class="stat-icon" style="background:#fee2e2">⚖️</div>
+            <div class="stat-value">٥</div>
+            <div class="stat-label">نزاعات معلقة</div>
+            <div class="stat-change down">▼ تحتاج مراجعة</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini stat row -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3">
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon" style="background:var(--blue-50)">👥</div>
+            <div>
+              <div class="mini-stat-val">٢٨٦</div>
+              <div class="mini-stat-label">إجمالي المستخدمين</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-xl-3">
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon" style="background:#d1fae5">🏪</div>
+            <div>
+              <div class="mini-stat-val">٤٧</div>
+              <div class="mini-stat-label">بائعون نشطون</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-xl-3">
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon" style="background:#fef3c7">🔒</div>
+            <div>
+              <div class="mini-stat-val">١٢,٦٠٠</div>
+              <div class="mini-stat-label">مجمّد في الخزنة</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-xl-3">
+          <div class="mini-stat-card">
+            <div class="mini-stat-icon" style="background:#ede9fe">⭐</div>
+            <div>
+              <div class="mini-stat-val">٩٨٪</div>
+              <div class="mini-stat-label">معدل رضا العملاء</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content row -->
+      <div class="row g-3 mb-4">
+
+        <!-- Transactions table -->
+        <div class="col-12 col-xl-8">
+          <div class="card">
+            <div class="card-header-custom">
+              <div>
+                <p class="section-title">الصفقات الأخيرة</p>
+                <p class="section-sub">آخر المعاملات على المنصة</p>
+              </div>
+              <button class="card-action-btn" data-page="deals" onclick="document.querySelector('[data-page=deals]').click()">عرض الكل</button>
+            </div>
+            <div class="tab-bar" data-group="dash-deals">
+              <button class="tab-item active">الكل</button>
+              <button class="tab-item">نشطة</button>
+              <button class="tab-item">مكتملة</button>
+              <button class="tab-item">نزاعات</button>
+            </div>
+            <div class="px-3 pb-3" style="overflow-x:auto">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>المستخدم</th>
+                    <th>الخدمة</th>
+                    <th>المبلغ</th>
+                    <th>الحالة</th>
+                    <th>الوقت</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="td-user"><div class="user-av av-blue">م</div><div><div class="user-name">محمد علي</div><div class="user-id">#TXN-0041</div></div></div></td>
+                    <td>📱 سوشيال ميديا</td>
+                    <td><span class="amount">٣٥٠ج</span></td>
+                    <td><span class="badge-custom badge-active">✅ مكتملة</span></td>
+                    <td style="color:#94a3b8;font-size:12px">منذ ١٠د</td>
+                  </tr>
+                  <tr>
+                    <td><div class="td-user"><div class="user-av av-green">ن</div><div><div class="user-name">نورا حسن</div><div class="user-id">#TXN-0040</div></div></div></td>
+                    <td>🎮 شحن ألعاب</td>
+                    <td><span class="amount">٨٠٠ج</span></td>
+                    <td><span class="badge-custom badge-hold">🔒 فترة أمان</span></td>
+                    <td style="color:#94a3b8;font-size:12px">منذ ٣٥د</td>
+                  </tr>
+                  <tr>
+                    <td><div class="td-user"><div class="user-av av-amber">ك</div><div><div class="user-name">كريم سعد</div><div class="user-id">#TXN-0039</div></div></div></td>
+                    <td>🎵 سبوتيفاي</td>
+                    <td><span class="amount">١٥٠ج</span></td>
+                    <td><span class="badge-custom badge-pending">⏳ مراجعة</span></td>
+                    <td style="color:#94a3b8;font-size:12px">منذ ١س</td>
+                  </tr>
+                  <tr>
+                    <td><div class="td-user"><div class="user-av av-purple">س</div><div><div class="user-name">سارة محمود</div><div class="user-id">#TXN-0038</div></div></div></td>
+                    <td>📺 نتفليكس</td>
+                    <td><span class="amount">٢٢٠ج</span></td>
+                    <td><span class="badge-custom badge-dispute">⚠️ نزاع</span></td>
+                    <td style="color:#94a3b8;font-size:12px">منذ ٢س</td>
+                  </tr>
+                  <tr>
+                    <td><div class="td-user"><div class="user-av av-red">ع</div><div><div class="user-name">عمر خالد</div><div class="user-id">#TXN-0037</div></div></div></td>
+                    <td>🎮 PUBG UC</td>
+                    <td><span class="amount">٤٥٠ج</span></td>
+                    <td><span class="badge-custom badge-active">✅ مكتملة</span></td>
+                    <td style="color:#94a3b8;font-size:12px">منذ ٣س</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="col-12 col-xl-4 d-flex flex-column gap-3">
+          <!-- Vault -->
+          <div class="vault-card">
+            <div class="vault-label">🔒 الخزنة الآمنة</div>
+            <div class="vault-amount">١٢,٦٠٠ج</div>
+            <div class="vault-sub">أموال مجمّدة تحت إشراف الوسيط</div>
+            <div class="row g-2 mt-2">
+              <div class="col-6"><div class="vault-mini"><div class="vault-mini-label">⏳ قيد التنفيذ</div><div class="vault-mini-val">٨,٢٠٠ج</div></div></div>
+              <div class="col-6"><div class="vault-mini"><div class="vault-mini-label">🔄 فترة أمان</div><div class="vault-mini-val">٤,٤٠٠ج</div></div></div>
+            </div>
+          </div>
+          <!-- Quick actions -->
+          <div class="card">
+            <div class="card-header-custom">
+              <div>
+                <p class="section-title">إجراءات سريعة</p>
+                <p class="section-sub">أدوات الأدمن</p>
+              </div>
+            </div>
+            <div class="px-3 pb-3">
+              <div class="row g-2">
+                <div class="col-6"><button class="qa-btn" data-page="sellers"><div class="qa-icon" style="background:var(--blue-50)">✅</div><div><p class="qa-label">قبول خدمة</p><p class="qa-desc">مراجعة بائع</p></div></button></div>
+                <div class="col-6"><button class="qa-btn" data-page="disputes"><div class="qa-icon" style="background:#fee2e2">💸</div><div><p class="qa-label">رد مبلغ</p><p class="qa-desc">حل نزاع</p></div></button></div>
+                <div class="col-6"><button class="qa-btn" data-page="vault"><div class="qa-icon" style="background:#d1fae5">📤</div><div><p class="qa-label">تحويل بائع</p><p class="qa-desc">صرف الأرباح</p></div></button></div>
+                <div class="col-6"><button class="qa-btn" data-page="sellers"><div class="qa-icon" style="background:#fef3c7">⚠️</div><div><p class="qa-label">تحذير</p><p class="qa-desc">إيقاف مؤقت</p></div></button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="row g-3">
+        <!-- Disputes -->
+        <div class="col-12 col-xl-6">
+          <div class="card">
+            <div class="card-header-custom">
+              <div>
+                <p class="section-title">⚖️ النزاعات المعلقة</p>
+                <p class="section-sub">تحتاج لقرار عادل</p>
+              </div>
+              <button class="card-action-btn">عرض الكل (٥)</button>
+            </div>
+            <div class="px-3 pb-3">
+              <div class="dispute-item">
+                <div class="dispute-icon">🚨</div>
+                <div class="flex-grow-1">
+                  <div class="dispute-title">سارة محمود vs بائع نتفليكس</div>
+                  <div class="dispute-meta">المبلغ: ٢٢٠ج · نتفليكس بريميوم · منذ ٢ ساعات</div>
+                </div>
+                <div class="d-flex flex-column align-items-end gap-1">
+                  <span style="font-size:11px;color:#ef4444;font-weight:700">عاجل</span>
+                  <button class="btn-resolve btn-red">فتح القضية</button>
+                </div>
+              </div>
+              <div class="dispute-item">
+                <div class="dispute-icon warn">⚠️</div>
+                <div class="flex-grow-1">
+                  <div class="dispute-title">أحمد فاروق vs بائع PUBG</div>
+                  <div class="dispute-meta">المبلغ: ٦٠٠ج · شحن UC · منذ ٥ ساعات</div>
+                </div>
+                <div class="d-flex flex-column align-items-end gap-1">
+                  <span style="font-size:11px;color:#94a3b8">اليوم</span>
+                  <button class="btn-resolve btn-blue">مراجعة</button>
+                </div>
+              </div>
+              <div class="dispute-item" style="margin-bottom:0">
+                <div class="dispute-icon blue-i">📹</div>
+                <div class="flex-grow-1">
+                  <div class="dispute-title">مريم أحمد vs بائع إنستغرام</div>
+                  <div class="dispute-meta">المبلغ: ٤٠٠ج · فيديو إثبات مرفق</div>
+                </div>
+                <div class="d-flex flex-column align-items-end gap-1">
+                  <span style="font-size:11px;color:#94a3b8">أمس</span>
+                  <button class="btn-resolve btn-blue">مراجعة</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity + Services -->
+        <div class="col-12 col-xl-6 d-flex flex-column gap-3">
+          <!-- Services -->
+          <div class="card">
+            <div class="card-header-custom">
+              <div><p class="section-title">📦 أكثر الخدمات مبيعاً</p><p class="section-sub">هذا الشهر</p></div>
+            </div>
+            <div class="px-3 pb-3">
+              <div class="row g-2">
+                <div class="col-4"><div class="svc-card"><div class="svc-emoji">🎮</div><div class="svc-name">شحن ألعاب</div><div class="svc-count">٤٢ صفقة</div><div class="svc-rev">١٨,٤٠٠ج</div></div></div>
+                <div class="col-4"><div class="svc-card"><div class="svc-emoji">📱</div><div class="svc-name">سوشيال ميديا</div><div class="svc-count">٣٨ صفقة</div><div class="svc-rev">١١,٢٠٠ج</div></div></div>
+                <div class="col-4"><div class="svc-card"><div class="svc-emoji">📺</div><div class="svc-name">اشتراكات</div><div class="svc-count">٢٩ صفقة</div><div class="svc-rev">٨,٧٠٠ج</div></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Activity -->
+          <div class="card">
+            <div class="card-header-custom">
+              <div><p class="section-title">⚡ النشاط الأخير</p></div>
+              <div style="width:8px;height:8px;background:var(--success);border-radius:50%;box-shadow:0 0 8px var(--success);animation:blink 2s infinite"></div>
+            </div>
+            <div class="px-3 pb-3">
+              <div class="activity-item"><div class="act-dot act-green">💸</div><div class="flex-grow-1"><div class="act-text"><strong>نورا حسن</strong> شحنت محفظتها بمبلغ ٨٠٠ج</div><div class="act-time">منذ ٥ دقائق</div></div><div class="act-time-r">واتساب ↗</div></div>
+              <div class="activity-item"><div class="act-dot act-blue">📦</div><div class="flex-grow-1"><div class="act-text"><strong>بائع جديد</strong> طلب نشر خدمة FIFA Points</div><div class="act-time">منذ ١٢ دقيقة</div></div><div class="act-time-r">مراجعة ↗</div></div>
+              <div class="activity-item"><div class="act-dot act-green">✅</div><div class="flex-grow-1"><div class="act-text"><strong>عمر خالد</strong> أكمل صفقة PUBG بنجاح</div><div class="act-time">منذ ٢٠ دقيقة</div></div><div class="act-time-r">مكتملة</div></div>
+              <div class="activity-item"><div class="act-dot act-yellow">⏰</div><div class="flex-grow-1"><div class="act-text">انتهت فترة أمان صفقة <strong>#TXN-0035</strong></div><div class="act-time">منذ ٣٥ دقيقة</div></div><div class="act-time-r">صرف ↗</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-dashboard -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: LIVE ACTIVITY                         ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-live" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">🟢</div><div class="stat-value" id="live-active-count">٣</div><div class="stat-label">صفقات تجري الآن</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">👁️</div><div class="stat-value">١٨</div><div class="stat-label">مستخدمون متصلون</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">⏱️</div><div class="stat-value">٢٤د</div><div class="stat-label">متوسط وقت التسليم</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fee2e2">🔔</div><div class="stat-value">٢</div><div class="stat-label">تنبيهات تحتاج رد</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header-custom">
+          <div><p class="section-title">الصفقات الجارية الآن</p><p class="section-sub">يتجدد تلقائياً كل ٣٠ ثانية</p></div>
+          <span class="badge-custom badge-active" style="animation:blink 2s infinite">🟢 مباشر</span>
+        </div>
+        <div class="px-3 pb-3" style="overflow-x:auto">
+          <table class="custom-table">
+            <thead><tr><th>#</th><th>المشتري</th><th>البائع</th><th>الخدمة</th><th>المبلغ</th><th>المرحلة</th><th>الوقت المتبقي</th></tr></thead>
+            <tbody>
+              <tr><td style="color:#94a3b8;font-size:12px">TXN-0041</td><td><div class="td-user"><div class="user-av av-blue">م</div><div class="user-name">محمد علي</div></div></td><td><div class="td-user"><div class="user-av av-green">ب١</div><div class="user-name">بائع سوشيال</div></div></td><td>📱 فولوورز إنستا</td><td><span class="amount">٣٥٠ج</span></td><td><span class="badge-custom badge-pending">⏳ انتظار التسليم</span></td><td data-countdown="3600" style="color:var(--blue-600);font-weight:700">١س ٠د متبقية</td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">TXN-0040</td><td><div class="td-user"><div class="user-av av-amber">ن</div><div class="user-name">نورا حسن</div></div></td><td><div class="td-user"><div class="user-av av-teal">ب٢</div><div class="user-name">بائع ألعاب</div></div></td><td>🎮 شحن يو سي</td><td><span class="amount">٨٠٠ج</span></td><td><span class="badge-custom badge-info">📋 فترة المراجعة</span></td><td data-countdown="1800" style="color:var(--blue-600);font-weight:700">٠س ٣٠د متبقية</td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">TXN-0039</td><td><div class="td-user"><div class="user-av av-purple">ك</div><div class="user-name">كريم سعد</div></div></td><td><div class="td-user"><div class="user-av av-red">ب٣</div><div class="user-name">بائع اشتراكات</div></div></td><td>🎵 سبوتيفاي بريميوم</td><td><span class="amount">١٥٠ج</span></td><td><span class="badge-custom badge-hold">🔒 فترة أمان ٤٨س</span></td><td style="color:#94a3b8;font-size:12px">٤٧س ١٥د متبقية</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- /page-live -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: DEALS                                 ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-deals" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">📈</div><div class="stat-value">١٣٤</div><div class="stat-label">مكتملة هذا الشهر</div><div class="stat-change up">▲ ٢٣٪</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">⏳</div><div class="stat-value">١٢</div><div class="stat-label">قيد التنفيذ</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fee2e2">⚠️</div><div class="stat-value">٥</div><div class="stat-label">نزاعات</div><div class="stat-change down">▼ تحتاج رد</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">💰</div><div class="stat-value">٤٨,٣٢٠</div><div class="stat-label">إجمالي الجنيه</div><div class="stat-change up">▲ ١٨٪</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header-custom">
+          <div><p class="section-title">جميع الصفقات</p></div>
+        </div>
+        <div class="filter-bar">
+          <select class="filter-select"><option>كل الحالات</option><option>مكتملة</option><option>نشطة</option><option>فترة أمان</option><option>نزاع</option></select>
+          <select class="filter-select"><option>كل الخدمات</option><option>سوشيال ميديا</option><option>ألعاب</option><option>اشتراكات</option></select>
+          <select class="filter-select"><option>هذا الشهر</option><option>هذا الأسبوع</option><option>اليوم</option></select>
+        </div>
+        <div class="px-3 pb-3" style="overflow-x:auto">
+          <table class="custom-table">
+            <thead><tr><th>المعرف</th><th>المشتري</th><th>البائع</th><th>الخدمة</th><th>المبلغ</th><th>الحالة</th><th>التاريخ</th><th>إجراء</th></tr></thead>
+            <tbody>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0041</td><td><div class="td-user"><div class="user-av av-blue">م</div><div><div class="user-name">محمد علي</div></div></div></td><td><div class="td-user"><div class="user-av av-green">ب</div><div class="user-name">بائع سوشيال</div></div></td><td>📱 فولوورز</td><td><span class="amount">٣٥٠ج</span></td><td><span class="badge-custom badge-active">✅ مكتملة</span></td><td style="font-size:12px;color:#94a3b8">١٣ أبريل</td><td><button class="btn-resolve btn-blue">تفاصيل</button></td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0040</td><td><div class="td-user"><div class="user-av av-green">ن</div><div><div class="user-name">نورا حسن</div></div></div></td><td><div class="td-user"><div class="user-av av-teal">ب</div><div class="user-name">بائع ألعاب</div></div></td><td>🎮 PUBG UC</td><td><span class="amount">٨٠٠ج</span></td><td><span class="badge-custom badge-hold">🔒 فترة أمان</span></td><td style="font-size:12px;color:#94a3b8">١٣ أبريل</td><td><button class="btn-resolve btn-blue">تفاصيل</button></td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0039</td><td><div class="td-user"><div class="user-av av-amber">ك</div><div><div class="user-name">كريم سعد</div></div></div></td><td><div class="td-user"><div class="user-av av-purple">ب</div><div class="user-name">بائع اشتراكات</div></div></td><td>🎵 سبوتيفاي</td><td><span class="amount">١٥٠ج</span></td><td><span class="badge-custom badge-pending">⏳ مراجعة</span></td><td style="font-size:12px;color:#94a3b8">١٣ أبريل</td><td><button class="btn-resolve btn-blue">تفاصيل</button></td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0038</td><td><div class="td-user"><div class="user-av av-purple">س</div><div><div class="user-name">سارة محمود</div></div></div></td><td><div class="td-user"><div class="user-av av-red">ب</div><div class="user-name">بائع نتفليكس</div></div></td><td>📺 نتفليكس</td><td><span class="amount">٢٢٠ج</span></td><td><span class="badge-custom badge-dispute">⚠️ نزاع</span></td><td style="font-size:12px;color:#94a3b8">١٢ أبريل</td><td><button class="btn-resolve btn-red">فتح نزاع</button></td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0037</td><td><div class="td-user"><div class="user-av av-red">ع</div><div><div class="user-name">عمر خالد</div></div></div></td><td><div class="td-user"><div class="user-av av-blue">ب</div><div class="user-name">بائع ألعاب</div></div></td><td>🎮 PUBG UC</td><td><span class="amount">٤٥٠ج</span></td><td><span class="badge-custom badge-active">✅ مكتملة</span></td><td style="font-size:12px;color:#94a3b8">١٢ أبريل</td><td><button class="btn-resolve btn-blue">تفاصيل</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- /page-deals -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: DISPUTES                              ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-disputes" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fee2e2">⚖️</div><div class="stat-value">٥</div><div class="stat-label">نزاعات معلقة</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">✅</div><div class="stat-value">٢٨</div><div class="stat-label">نزاعات محلولة</div><div class="stat-change up">▲ هذا الشهر</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">⏱️</div><div class="stat-value">١٨س</div><div class="stat-label">متوسط وقت الحل</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">💰</div><div class="stat-value">٢,٤٠٠</div><div class="stat-label">إجمالي المبالغ المتنازع عليها</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header-custom">
+          <div><p class="section-title">النزاعات المعلقة</p><p class="section-sub">مرتبة حسب الأولوية</p></div>
+        </div>
+        <div class="p-3">
+          <div class="dispute-item">
+            <div class="dispute-icon">🚨</div>
+            <div class="flex-grow-1">
+              <div class="dispute-title">سارة محمود vs بائع نتفليكس — #TXN-0038</div>
+              <div class="dispute-meta">المبلغ: ٢٢٠ج · "لم يتم تسليم الحساب كما اتُفق" · فيديو إثبات مرفق ✅</div>
+            </div>
+            <div class="d-flex flex-column align-items-end gap-1">
+              <span style="font-size:11px;color:#ef4444;font-weight:700">عاجل — ٢ ساعات</span>
+              <div class="d-flex gap-1">
+                <button class="btn-resolve btn-blue">رد المبلغ</button>
+                <button class="btn-resolve btn-red">تحويل البائع</button>
+              </div>
+            </div>
+          </div>
+          <div class="dispute-item">
+            <div class="dispute-icon warn">⚠️</div>
+            <div class="flex-grow-1">
+              <div class="dispute-title">أحمد فاروق vs بائع PUBG — #TXN-0036</div>
+              <div class="dispute-meta">المبلغ: ٦٠٠ج · "الكود لم يعمل" · لا يوجد فيديو إثبات ❌</div>
+            </div>
+            <div class="d-flex flex-column align-items-end gap-1">
+              <span style="font-size:11px;color:#94a3b8">اليوم — ٥ ساعات</span>
+              <div class="d-flex gap-1">
+                <button class="btn-resolve btn-blue">طلب إثبات</button>
+                <button class="btn-resolve btn-red">فتح القضية</button>
+              </div>
+            </div>
+          </div>
+          <div class="dispute-item" style="margin-bottom:0">
+            <div class="dispute-icon blue-i">📹</div>
+            <div class="flex-grow-1">
+              <div class="dispute-title">مريم أحمد vs بائع إنستغرام — #TXN-0034</div>
+              <div class="dispute-meta">المبلغ: ٤٠٠ج · فيديو بوجه + بطاقة مرفق ✅ · الحساب تم تسليمه</div>
+            </div>
+            <div class="d-flex flex-column align-items-end gap-1">
+              <span style="font-size:11px;color:#94a3b8">أمس</span>
+              <div class="d-flex gap-1">
+                <button class="btn-resolve btn-blue">مراجعة الأدلة</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-disputes -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: VAULT                                 ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-vault" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-xl-4">
+          <div class="vault-card">
+            <div class="vault-label">🔒 إجمالي الخزنة</div>
+            <div class="vault-amount">١٢,٦٠٠ج</div>
+            <div class="vault-sub">جاهزة تحت إشراف الوسيط</div>
+            <div class="row g-2 mt-2">
+              <div class="col-6"><div class="vault-mini"><div class="vault-mini-label">⏳ قيد التنفيذ</div><div class="vault-mini-val">٨,٢٠٠ج</div></div></div>
+              <div class="col-6"><div class="vault-mini"><div class="vault-mini-label">🔄 فترة أمان</div><div class="vault-mini-val">٤,٤٠٠ج</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-xl-4"><div class="stat-card card bg-white h-100"><div class="stat-icon" style="background:#d1fae5">✅</div><div class="stat-value">٣٢,٠٠٠</div><div class="stat-label">صُرفت هذا الشهر (جنيه)</div><div class="stat-change up">▲ ١٥٪</div></div></div>
+        <div class="col-6 col-xl-4"><div class="stat-card card bg-white h-100"><div class="stat-icon" style="background:#fef3c7">🕐</div><div class="stat-value">٧</div><div class="stat-label">ينتظرون انتهاء فترة الأمان</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header-custom">
+          <div><p class="section-title">الأموال المجمّدة — تفاصيل</p><p class="section-sub">مرتبة حسب تاريخ الانتهاء</p></div>
+        </div>
+        <div class="px-3 pb-3" style="overflow-x:auto">
+          <table class="custom-table">
+            <thead><tr><th>الصفقة</th><th>البائع</th><th>المبلغ</th><th>نوع الفترة</th><th>تنتهي في</th><th>إجراء</th></tr></thead>
+            <tbody>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0040</td><td><div class="td-user"><div class="user-av av-green">ب</div><div class="user-name">بائع ألعاب</div></div></td><td><span class="amount">٨٠٠ج</span></td><td><span class="badge-custom badge-pending">مراجعة ١س</span></td><td style="color:var(--blue-600);font-weight:700;font-size:13px">٣٠ دقيقة</td><td><button class="btn-resolve btn-blue">صرف</button></td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0035</td><td><div class="td-user"><div class="user-av av-teal">ب</div><div class="user-name">بائع اشتراكات</div></div></td><td><span class="amount">٢٢٠ج</span></td><td><span class="badge-custom badge-hold">أمان ٤٨س</span></td><td style="color:var(--success);font-weight:700;font-size:13px">منتهية ✅</td><td><button class="btn-resolve btn-blue">صرف الآن</button></td></tr>
+              <tr><td style="color:#94a3b8;font-size:12px">#TXN-0033</td><td><div class="td-user"><div class="user-av av-purple">ب</div><div class="user-name">بائع سوشيال</div></div></td><td><span class="amount">٣٥٠ج</span></td><td><span class="badge-custom badge-hold">أمان أسبوع</span></td><td style="color:#94a3b8;font-size:13px">٥ أيام</td><td><button class="btn-resolve btn-blue" disabled style="opacity:.5">انتظر</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- /page-vault -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: PAYMENTS                              ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-payments" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">💳</div><div class="stat-value">١٣٤</div><div class="stat-label">إجمالي المعاملات</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">📱</div><div class="stat-value">٦٨</div><div class="stat-label">فودافون كاش</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">⚡</div><div class="stat-value">٤٥</div><div class="stat-label">إنستاباي</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#ede9fe">🏦</div><div class="stat-value">٢١</div><div class="stat-label">تحويل بنكي</div></div></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-xl-7">
+          <div class="card">
+            <div class="card-header-custom"><div><p class="section-title">💳 وسائل الدفع المتاحة</p></div></div>
+            <div class="p-3">
+              <div class="row g-3">
+                <div class="col-6"><div class="pay-card"><div class="d-flex justify-content-between align-items-center mb-2"><span style="font-size:22px">📱</span><span class="badge-custom badge-active" style="font-size:10px">نشط</span></div><div style="font-size:14px;font-weight:800;color:var(--blue-900);margin-bottom:2px">فودافون كاش</div><div style="font-size:12px;color:#64748b">٦٨ معاملة هذا الشهر</div><div class="progress-track"><div class="progress-fill" style="width:68%;background:linear-gradient(90deg,var(--blue-400),var(--blue-600))"></div></div></div></div>
+                <div class="col-6"><div class="pay-card"><div class="d-flex justify-content-between align-items-center mb-2"><span style="font-size:22px">⚡</span><span class="badge-custom badge-active" style="font-size:10px">نشط</span></div><div style="font-size:14px;font-weight:800;color:var(--blue-900);margin-bottom:2px">إنستاباي</div><div style="font-size:12px;color:#64748b">٤٥ معاملة هذا الشهر</div><div class="progress-track"><div class="progress-fill" style="width:45%;background:linear-gradient(90deg,#10b981,#059669)"></div></div></div></div>
+                <div class="col-6"><div class="pay-card"><div class="d-flex justify-content-between align-items-center mb-2"><span style="font-size:22px">🏦</span><span class="badge-custom badge-active" style="font-size:10px">نشط</span></div><div style="font-size:14px;font-weight:800;color:var(--blue-900);margin-bottom:2px">تحويل بنكي</div><div style="font-size:12px;color:#64748b">٢١ معاملة هذا الشهر</div><div class="progress-track"><div class="progress-fill" style="width:21%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div></div></div>
+                <div class="col-6"><div class="pay-card"><div class="d-flex justify-content-between align-items-center mb-2"><span style="font-size:22px">💵</span><span class="badge-custom badge-pending" style="font-size:10px">قريباً</span></div><div style="font-size:14px;font-weight:800;color:var(--blue-900);margin-bottom:2px">كريدت كارد</div><div style="font-size:12px;color:#64748b">قيد الإعداد</div><div class="progress-track"><div class="progress-fill" style="width:10%;background:#cbd5e1"></div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-5">
+          <div class="card">
+            <div class="card-header-custom"><div><p class="section-title">آخر التحويلات</p></div></div>
+            <div class="px-3 pb-3">
+              <div class="activity-item"><div class="act-dot act-green">📱</div><div class="flex-grow-1"><div class="act-text"><strong>نورا حسن</strong> شحنت ٨٠٠ج عبر فودافون كاش</div><div class="act-time">منذ ٣٥ دقيقة</div></div></div>
+              <div class="activity-item"><div class="act-dot act-blue">⚡</div><div class="flex-grow-1"><div class="act-text"><strong>محمد علي</strong> دفع ٣٥٠ج عبر إنستاباي</div><div class="act-time">منذ ١ ساعة</div></div></div>
+              <div class="activity-item"><div class="act-dot act-yellow">🏦</div><div class="flex-grow-1"><div class="act-text"><strong>كريم سعد</strong> حوّل ١٥٠ج بنكياً</div><div class="act-time">منذ ٣ ساعات</div></div></div>
+              <div class="activity-item"><div class="act-dot act-green">📱</div><div class="flex-grow-1"><div class="act-text"><strong>سارة محمود</strong> شحنت ٢٢٠ج عبر فودافون كاش</div><div class="act-time">أمس</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-payments -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: BUYERS                                ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-buyers" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">👥</div><div class="stat-value">٢٣٩</div><div class="stat-label">إجمالي المشترين</div><div class="stat-change up">▲ ١٤ هذا الأسبوع</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">🟢</div><div class="stat-value">١٨</div><div class="stat-label">نشطون الآن</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">🔁</div><div class="stat-value">٨٣٪</div><div class="stat-label">نسبة الإعادة</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#ede9fe">⭐</div><div class="stat-value">٤.٨</div><div class="stat-label">متوسط التقييم</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header-custom"><div><p class="section-title">قائمة المشترين</p></div></div>
+        <div class="px-3 pb-3" style="overflow-x:auto">
+          <table class="custom-table">
+            <thead><tr><th>المشتري</th><th>الهاتف</th><th>عدد الصفقات</th><th>إجمالي الإنفاق</th><th>آخر نشاط</th><th>الحالة</th></tr></thead>
+            <tbody>
+              <tr><td><div class="td-user"><div class="user-av av-blue">م</div><div><div class="user-name">محمد علي</div><div class="user-id">buyer_001</div></div></div></td><td style="font-size:13px;color:#64748b">01012345678</td><td style="font-weight:700;color:var(--blue-700)">١٥</td><td><span class="amount">٤,٢٠٠ج</span></td><td style="font-size:12px;color:#94a3b8">منذ ١٠ دقائق</td><td><span class="badge-custom badge-active">🟢 نشط</span></td></tr>
+              <tr><td><div class="td-user"><div class="user-av av-green">ن</div><div><div class="user-name">نورا حسن</div><div class="user-id">buyer_002</div></div></div></td><td style="font-size:13px;color:#64748b">01098765432</td><td style="font-weight:700;color:var(--blue-700)">٨</td><td><span class="amount">٢,٦٠٠ج</span></td><td style="font-size:12px;color:#94a3b8">منذ ٣٥ دقيقة</td><td><span class="badge-custom badge-active">🟢 نشط</span></td></tr>
+              <tr><td><div class="td-user"><div class="user-av av-purple">س</div><div><div class="user-name">سارة محمود</div><div class="user-id">buyer_003</div></div></div></td><td style="font-size:13px;color:#64748b">01155556666</td><td style="font-weight:700;color:var(--blue-700)">٣</td><td><span class="amount">٧٧٠ج</span></td><td style="font-size:12px;color:#94a3b8">منذ ٢ ساعات</td><td><span class="badge-custom badge-dispute">⚠️ في نزاع</span></td></tr>
+              <tr><td><div class="td-user"><div class="user-av av-amber">ك</div><div><div class="user-name">كريم سعد</div><div class="user-id">buyer_004</div></div></div></td><td style="font-size:13px;color:#64748b">01277778888</td><td style="font-weight:700;color:var(--blue-700)">٢٢</td><td><span class="amount">٧,٨٠٠ج</span></td><td style="font-size:12px;color:#94a3b8">اليوم</td><td><span class="badge-custom badge-active">🟢 نشط</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- /page-buyers -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: SELLERS                               ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-sellers" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">🏪</div><div class="stat-value">٤٧</div><div class="stat-label">بائعون نشطون</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">⏳</div><div class="stat-value">٢</div><div class="stat-label">طلبات انضمام معلقة</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fee2e2">🚫</div><div class="stat-value">٣</div><div class="stat-label">موقوفون مؤقتاً</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">📹</div><div class="stat-value">٤٤</div><div class="stat-label">قدّموا فيديو إثبات</div></div></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-xl-5">
+          <div class="card">
+            <div class="card-header-custom"><div><p class="section-title">⏳ طلبات انضمام معلقة</p><p class="section-sub">تحتاج موافقة الأدمن</p></div></div>
+            <div class="p-3">
+              <div class="seller-pending-card">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="user-av av-amber">ط</div>
+                  <div>
+                    <div class="user-name">طارق حسام</div>
+                    <div class="user-id" style="font-size:11px;color:#94a3b8">خدمة: شحن ألعاب موبايل</div>
+                  </div>
+                  <span class="badge-custom badge-pending ms-auto" style="font-size:10px">جديد</span>
+                </div>
+                <div style="font-size:12px;color:#64748b;margin-bottom:10px">📹 فيديو إثبات: مرفق ✅ · السعر: ٢٠٠-١٠٠٠ج</div>
+                <div class="d-flex gap-2">
+                  <button class="btn-resolve btn-blue btn-approve flex-grow-1">✅ قبول</button>
+                  <button class="btn-resolve btn-red btn-reject flex-grow-1">❌ رفض</button>
+                </div>
+              </div>
+              <div class="seller-pending-card" style="margin-bottom:0">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="user-av av-teal">ر</div>
+                  <div>
+                    <div class="user-name">رنا عبدالله</div>
+                    <div class="user-id" style="font-size:11px;color:#94a3b8">خدمة: حسابات نتفليكس</div>
+                  </div>
+                  <span class="badge-custom badge-pending ms-auto" style="font-size:10px">جديد</span>
+                </div>
+                <div style="font-size:12px;color:#64748b;margin-bottom:10px">📹 فيديو إثبات: مرفق ✅ · السعر: ١٥٠-٣٠٠ج</div>
+                <div class="d-flex gap-2">
+                  <button class="btn-resolve btn-blue btn-approve flex-grow-1">✅ قبول</button>
+                  <button class="btn-resolve btn-red btn-reject flex-grow-1">❌ رفض</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-7">
+          <div class="card">
+            <div class="card-header-custom"><div><p class="section-title">البائعون النشطون</p></div></div>
+            <div class="px-3 pb-3" style="overflow-x:auto">
+              <table class="custom-table">
+                <thead><tr><th>البائع</th><th>الخدمة</th><th>الصفقات</th><th>التقييم</th><th>الحالة</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="td-user"><div class="user-av av-blue">أ</div><div><div class="user-name">أحمد بائع</div><div class="user-id">seller_001</div></div></div></td><td style="font-size:13px">🎮 شحن ألعاب</td><td style="font-weight:700;color:var(--blue-700)">٤٢</td><td style="font-weight:700;color:#f59e0b">⭐ ٤.٩</td><td><span class="badge-custom badge-active">نشط</span></td></tr>
+                  <tr><td><div class="td-user"><div class="user-av av-green">م</div><div><div class="user-name">مصطفى بائع</div><div class="user-id">seller_002</div></div></div></td><td style="font-size:13px">📱 سوشيال ميديا</td><td style="font-weight:700;color:var(--blue-700)">٣٨</td><td style="font-weight:700;color:#f59e0b">⭐ ٤.٧</td><td><span class="badge-custom badge-active">نشط</span></td></tr>
+                  <tr><td><div class="td-user"><div class="user-av av-red">ح</div><div><div class="user-name">حسن بائع</div><div class="user-id">seller_003</div></div></div></td><td style="font-size:13px">📺 اشتراكات</td><td style="font-weight:700;color:var(--blue-700)">١٢</td><td style="font-weight:700;color:#f59e0b">⭐ ٣.٨</td><td><span class="badge-custom badge-dispute">موقوف</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-sellers -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: SERVICES                              ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-services" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">📦</div><div class="stat-value">٢٤</div><div class="stat-label">خدمة نشطة</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">⏳</div><div class="stat-value">٤</div><div class="stat-label">تنتظر المراجعة</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">🏆</div><div class="stat-value">🎮 ألعاب</div><div class="stat-label">الأكثر مبيعاً</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#ede9fe">💰</div><div class="stat-value">٤٨,٣٢٠</div><div class="stat-label">إيرادات الخدمات</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header-custom"><div><p class="section-title">كل الخدمات</p></div></div>
+        <div class="p-3">
+          <div class="row g-3">
+            <div class="col-6 col-xl-3"><div class="svc-card"><div class="svc-emoji">🎮</div><div class="svc-name">شحن ألعاب</div><div class="svc-count">٤٢ صفقة · ١٢ بائع</div><div class="svc-rev">١٨,٤٠٠ج</div></div></div>
+            <div class="col-6 col-xl-3"><div class="svc-card"><div class="svc-emoji">📱</div><div class="svc-name">سوشيال ميديا</div><div class="svc-count">٣٨ صفقة · ٨ بائع</div><div class="svc-rev">١١,٢٠٠ج</div></div></div>
+            <div class="col-6 col-xl-3"><div class="svc-card"><div class="svc-emoji">📺</div><div class="svc-name">اشتراكات</div><div class="svc-count">٢٩ صفقة · ٦ بائع</div><div class="svc-rev">٨,٧٠٠ج</div></div></div>
+            <div class="col-6 col-xl-3"><div class="svc-card"><div class="svc-emoji">🎵</div><div class="svc-name">موسيقى</div><div class="svc-count">١٥ صفقة · ٤ بائع</div><div class="svc-rev">٣,٢٠٠ج</div></div></div>
+            <div class="col-6 col-xl-3"><div class="svc-card"><div class="svc-emoji">🔑</div><div class="svc-name">حسابات</div><div class="svc-count">١٠ صفقة · ٥ بائع</div><div class="svc-rev">٤,٨٢٠ج</div></div></div>
+            <div class="col-6 col-xl-3"><div class="svc-card" style="border-style:dashed;background:#f8fafc"><div class="svc-emoji">➕</div><div class="svc-name" style="color:var(--blue-500)">إضافة خدمة</div><div class="svc-count">للبائعين</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-services -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: SETTINGS                              ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-settings" class="page-section">
+      <div class="row g-3">
+        <div class="col-12 col-xl-6">
+          <div class="card mb-3">
+            <div class="card-header-custom"><div><p class="section-title">⚙️ إعدادات الوساطة</p></div></div>
+            <div class="p-3">
+              <div class="mb-3 p-3" style="border:1.5px solid #e2e8f0;border-radius:12px">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div><div style="font-size:13px;font-weight:700;color:var(--blue-900)">فترة المراجعة الافتراضية</div><div style="font-size:11.5px;color:#94a3b8">ساعة يراجع فيها المشتري الخدمة</div></div>
+                  <select class="filter-select"><option>١ ساعة</option><option>٢ ساعة</option><option>٣ ساعات</option></select>
+                </div>
+              </div>
+              <div class="mb-3 p-3" style="border:1.5px solid #e2e8f0;border-radius:12px">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div><div style="font-size:13px;font-weight:700;color:var(--blue-900)">فترة الأمان الافتراضية</div><div style="font-size:11.5px;color:#94a3b8">الوقت قبل صرف أموال البائع</div></div>
+                  <select class="filter-select"><option>٤٨ ساعة</option><option>٧٢ ساعة</option><option>أسبوع</option></select>
+                </div>
+              </div>
+              <div class="p-3" style="border:1.5px solid #e2e8f0;border-radius:12px">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div><div style="font-size:13px;font-weight:700;color:var(--blue-900)">عمولة المنصة</div><div style="font-size:11.5px;color:#94a3b8">النسبة المقتطعة من كل صفقة</div></div>
+                  <select class="filter-select"><option>٥٪</option><option>٧٪</option><option>١٠٪</option></select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-6">
+          <div class="card">
+            <div class="card-header-custom"><div><p class="section-title">🔔 إعدادات الإشعارات</p></div></div>
+            <div class="p-3">
+              <div class="mb-3 p-3 d-flex justify-content-between align-items-center" style="border:1.5px solid #e2e8f0;border-radius:12px">
+                <div><div style="font-size:13px;font-weight:700;color:var(--blue-900)">إشعارات النزاعات الجديدة</div><div style="font-size:11.5px;color:#94a3b8">تنبيه فوري عند نزاع جديد</div></div>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="toggle-label" style="font-size:12px;color:var(--success);font-weight:700">مفعّل</span>
+                  <div class="form-check form-switch mb-0"><input class="form-check-input setting-toggle" type="checkbox" checked></div>
+                </div>
+              </div>
+              <div class="mb-3 p-3 d-flex justify-content-between align-items-center" style="border:1.5px solid #e2e8f0;border-radius:12px">
+                <div><div style="font-size:13px;font-weight:700;color:var(--blue-900)">إشعارات انتهاء فترة الأمان</div><div style="font-size:11.5px;color:#94a3b8">تذكير بصرف أموال البائعين</div></div>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="toggle-label" style="font-size:12px;color:var(--success);font-weight:700">مفعّل</span>
+                  <div class="form-check form-switch mb-0"><input class="form-check-input setting-toggle" type="checkbox" checked></div>
+                </div>
+              </div>
+              <div class="p-3 d-flex justify-content-between align-items-center" style="border:1.5px solid #e2e8f0;border-radius:12px">
+                <div><div style="font-size:13px;font-weight:700;color:var(--blue-900)">تقارير يومية</div><div style="font-size:11.5px;color:#94a3b8">ملخص يومي على واتساب</div></div>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="toggle-label" style="font-size:12px;color:#94a3b8;font-weight:700">معطّل</span>
+                  <div class="form-check form-switch mb-0"><input class="form-check-input setting-toggle" type="checkbox"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-settings -->
+
+
+    <!-- ╔══════════════════════════════════════════════╗
+         ║  PAGE: REPORTS                               ║
+         ╚══════════════════════════════════════════════╝ -->
+    <div id="page-reports" class="page-section">
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:var(--blue-50)">📈</div><div class="stat-value">٤٨,٣٢٠</div><div class="stat-label">إيرادات هذا الشهر</div><div class="stat-change up">▲ ١٨٪ عن الشهر الماضي</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#d1fae5">💰</div><div class="stat-value">٢,٤١٦</div><div class="stat-label">عمولة المنصة (٥٪)</div><div class="stat-change up">▲ ١٨٪</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fef3c7">✅</div><div class="stat-value">٩٦٪</div><div class="stat-label">معدل نجاح الصفقات</div></div></div>
+        <div class="col-6 col-xl-3"><div class="stat-card card bg-white"><div class="stat-icon" style="background:#fee2e2">⚖️</div><div class="stat-value">٤٪</div><div class="stat-label">نسبة النزاعات</div><div class="stat-change down">▼ جيد</div></div></div>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-xl-6">
+          <div class="card">
+            <div class="card-header-custom"><div><p class="section-title">📊 أداء الخدمات</p></div></div>
+            <div class="p-3">
+              <div class="mb-3"><div class="d-flex justify-content-between mb-1"><span style="font-size:13px;font-weight:600">🎮 شحن ألعاب</span><span style="font-size:13px;font-weight:800;color:var(--blue-700)">١٨,٤٠٠ج</span></div><div class="progress-track"><div class="progress-fill" style="width:85%;background:linear-gradient(90deg,var(--blue-400),var(--blue-600))"></div></div></div>
+              <div class="mb-3"><div class="d-flex justify-content-between mb-1"><span style="font-size:13px;font-weight:600">📱 سوشيال ميديا</span><span style="font-size:13px;font-weight:800;color:var(--blue-700)">١١,٢٠٠ج</span></div><div class="progress-track"><div class="progress-fill" style="width:60%;background:linear-gradient(90deg,#10b981,#059669)"></div></div></div>
+              <div class="mb-3"><div class="d-flex justify-content-between mb-1"><span style="font-size:13px;font-weight:600">📺 اشتراكات</span><span style="font-size:13px;font-weight:800;color:var(--blue-700)">٨,٧٠٠ج</span></div><div class="progress-track"><div class="progress-fill" style="width:45%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div></div>
+              <div><div class="d-flex justify-content-between mb-1"><span style="font-size:13px;font-weight:600">🎵 موسيقى</span><span style="font-size:13px;font-weight:800;color:var(--blue-700)">٣,٢٠٠ج</span></div><div class="progress-track"><div class="progress-fill" style="width:25%;background:linear-gradient(90deg,#8b5cf6,#7c3aed)"></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-6">
+          <div class="card">
+            <div class="card-header-custom"><div><p class="section-title">📅 ملخص الأشهر الأخيرة</p></div></div>
+            <div class="p-3">
+              <div class="activity-item"><div class="act-dot act-blue">📅</div><div class="flex-grow-1"><div class="act-text"><strong>أبريل ٢٠٢٦</strong> — الشهر الحالي</div><div class="act-time">٤٨,٣٢٠ج · ١٣٤ صفقة · ٥ نزاعات</div></div><div class="act-time-r"><span class="badge-custom badge-active" style="font-size:10px">▲ ١٨٪</span></div></div>
+              <div class="activity-item"><div class="act-dot act-green">📅</div><div class="flex-grow-1"><div class="act-text"><strong>مارس ٢٠٢٦</strong></div><div class="act-time">٤١,٠٠٠ج · ١١٠ صفقة · ٣ نزاعات</div></div><div class="act-time-r"><span class="badge-custom badge-active" style="font-size:10px">▲ ١٢٪</span></div></div>
+              <div class="activity-item"><div class="act-dot act-yellow">📅</div><div class="flex-grow-1"><div class="act-text"><strong>فبراير ٢٠٢٦</strong></div><div class="act-time">٣٦,٦٠٠ج · ٩٨ صفقة · ٦ نزاعات</div></div><div class="act-time-r"><span class="badge-custom badge-active" style="font-size:10px">▲ ٨٪</span></div></div>
+              <div class="activity-item"><div class="act-dot act-blue">📅</div><div class="flex-grow-1"><div class="act-text"><strong>يناير ٢٠٢٦</strong></div><div class="act-time">٣٣,٩٠٠ج · ٩١ صفقة · ٤ نزاعات</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-reports -->
+
+
+  </div><!-- /page-content -->
+</div><!-- /main-wrapper -->
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- App JS -->
+<script src="./assets/script/script.js"></script>
+</body>
+</html>
