@@ -1,8 +1,4 @@
-/* ================================================================
-   Elawaady Dashboard — Main Script
-   ================================================================ */
 
-/* ── Toast helper (global) ── */
 function toast(message, type = 'info', icon = null) {
   let container = document.getElementById('toast-container');
   if (!container) {
@@ -23,7 +19,7 @@ function toast(message, type = 'info', icon = null) {
   setTimeout(() => t.remove(), 4200);
 }
 
-/* ── Modal helper (global) ── */
+
 function openModal({ title = '', body = '', confirmLabel = 'تأكيد', confirmType = 'primary', onConfirm = null } = {}) {
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
@@ -57,7 +53,7 @@ function openModal({ title = '', body = '', confirmLabel = 'تأكيد', confirm
   overlay.querySelector('#modalConfirmBtn').focus();
 }
 
-/* ================================================================ */
+
 document.addEventListener('DOMContentLoaded', function () {
 
   /* ── Sidebar toggle ── */
