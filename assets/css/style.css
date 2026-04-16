@@ -671,7 +671,7 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
    MAIN CONTENT AREA
    ============================================================ */
 .main-content {
-  padding: 22px;
+  padding: 28px 24px;
   flex: 1;
   background: var(--surface-2);
   transition: background var(--t-slow);
@@ -703,9 +703,10 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
 .alert-close:hover { background: var(--brand-mid); }
 
 /* ============================================================
-   STATS GRID
+   STATS CARDS
+   Now laid out with Bootstrap row / col-sm-6 col-xl-3
+   Each card gets .h-100 in HTML for perfect equal-height rows
    ============================================================ */
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
 
 .stat-card {
   background: var(--surface);
@@ -715,8 +716,11 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
   display: flex;
   align-items: center;
   gap: 16px;
+  min-height: 96px;
+  width: 100%;                              /* fill its Bootstrap column */
   box-shadow: var(--shadow-xs);
-  transition: box-shadow var(--t-base), transform var(--t-base), border-color var(--t-base);
+  transition: box-shadow var(--t-base), transform var(--t-base),
+              border-color var(--t-base), background var(--t-slow);
   position: relative;
   overflow: hidden;
   cursor: default;
@@ -799,15 +803,13 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
 }
 .card:hover { box-shadow: var(--shadow-sm); border-color: var(--border-2) !important; }
 
-/* ── Uniform card sizes on stat cards ── */
-.stat-card { min-height: 96px; }
+/* ── Uniform stat-card min-height already set above ── */
 
-/* Equal height stat cards in the grid — using flexbox on grid children */
-.stats-grid { align-items: stretch; }
-.stats-grid .stat-card { height: auto; flex: 1; }
-
-/* In Bootstrap row grids, stat-cards fill their column height */
-.row [class*="col"] .stat-card { height: 100%; }
+/* Bootstrap h-100 on .stat-card inside col makes all cards same row height */
+.col-sm-6 .stat-card,
+.col-xl-3 .stat-card,
+.col-lg-3 .stat-card,
+.col-md-4 .stat-card { width: 100%; }
 
 .card-header-custom {
   display: flex;
