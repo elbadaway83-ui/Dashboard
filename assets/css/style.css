@@ -125,8 +125,13 @@ body {
 
 /* Dark mode: make sure html + body both get dark background */
 body.dark-mode,
-html:has(body.dark-mode) { background: var(--surface); }
-body.dark-mode { background: var(--surface); }
+html:has(body.dark-mode) { background: var(--surface-2) !important; }
+body.dark-mode { background: var(--surface-2) !important; }
+
+/* Sub-pages: override inline body padding style with dark background */
+body.dark-mode {
+  color: var(--text-1);
+}
 
 /* ============================================================
    OVERLAY
@@ -667,7 +672,7 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
 /* ============================================================
    STATS GRID
    ============================================================ */
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
 
 .stat-card {
   background: var(--surface);
@@ -761,7 +766,11 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
 .card:hover { box-shadow: var(--shadow-sm); border-color: var(--border-2) !important; }
 
 /* ── Uniform card sizes on stat cards ── */
-.stat-card { min-height: 92px; }
+.stat-card { min-height: 96px; }
+
+/* Equal height stat cards in row layout */
+.stats-grid .stat-card,
+.row .stat-card { height: 100%; }
 
 .card-header-custom {
   display: flex;
@@ -822,7 +831,22 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
   transition: all var(--t-fast);
 }
 .tab-item:hover { background: var(--surface-3); color: var(--text-2); border-color: var(--border); }
+/* ── Unified active state — always brand blue ── */
 .tab-item.active { background: var(--brand-light); color: var(--brand); border-color: var(--brand-mid); font-weight: 700; }
+
+/* ── Unified Active state for ALL interactive cards & items ── */
+.nav-item.active {
+  background: var(--brand-light) !important;
+  color: var(--brand) !important;
+  font-weight: 700;
+  border-color: var(--brand-mid) !important;
+}
+.settings-nav-item.active {
+  background: var(--brand-light) !important;
+  color: var(--brand) !important;
+  border-color: var(--brand-mid) !important;
+  font-weight: 700;
+}
 
 /* ============================================================
    TABLES
@@ -1338,6 +1362,20 @@ select.form-input { cursor: pointer; appearance: none; }
   margin-top: 22px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   DARK MODE — Charts & canvas support
+   ============================================================ */
+body.dark-mode canvas { filter: brightness(.92); }
+body.dark-mode .card-body-chart { background: var(--surface); }
+body.dark-mode .target-body { background: var(--surface); }
+
+/* ============================================================
+   DARK MODE — Sub-pages body background (pages in /pages/ dir)
+   ============================================================ */
+body.dark-mode {
+  background: var(--surface-2) !important;
 }
 
 /* ============================================================

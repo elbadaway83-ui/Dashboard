@@ -233,63 +233,102 @@ document.addEventListener('DOMContentLoaded', function () {
 }); // end DOMContentLoaded
 
 /* ================================================================
-   Charts (run outside DOMContentLoaded so they init after canvas renders)
+   Charts — initialized after DOM is ready to pick up CSS variables
    ================================================================ */
-const C_TEXT   = getComputedStyle(document.documentElement).getPropertyValue('--text-3').trim() || '#64748b';
-const C_GRID   = 'rgba(203,213,225,.5)';
-const C_BLUE2  = '#6366f1';
+function getChartColors() {
+  const isDark = document.body.classList.contains('dark-mode');
+  return {
+    text:    isDark ? '#64748b' : '#94a3b8',
+    grid:    isDark ? 'rgba(51,65,85,.5)' : 'rgba(203,213,225,.5)',
+    barFill: isDark ? 'rgba(129,140,248,.8)' : 'rgba(99,102,241,.75)',
+    blue2:   isDark ? '#818cf8' : '#6366f1',
+    gaugeTrack: isDark ? '#283548' : '#e2e8f0',
+    tooltipBg:    isDark ? '#1e293b' : '#fff',
+    tooltipTitle: isDark ? '#f8fafc' : '#0f172a',
+    tooltipBody:  isDark ? '#94a3b8' : '#475569',
+    tooltipBorder:isDark ? '#334155' : '#e2e8f0',
+  };
+}
 
-const monthlySalesCtx = document.getElementById('monthlySalesChart');
-if (monthlySalesCtx) {
-  new Chart(monthlySalesCtx.getContext('2d'), {
-    type: 'bar',
-    data: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      datasets: [{
-        label: 'المبيعات',
-        data: [120, 380, 210, 290, 170, 340, 260, 310, 280, 400, 190, 150],
-        backgroundColor: 'rgba(99,102,241,.75)',
-        borderRadius: 7,
-        borderSkipped: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: { ticks: { color: '#94a3b8', font: { family: 'Cairo', size: 11 } }, grid: { color: C_GRID } },
-        y: { beginAtZero: true, ticks: { color: '#94a3b8', font: { family: 'Cairo', size: 11 }, callback: v => '$'+v }, grid: { color: C_GRID } }
+let salesChart = null;
+let gaugeChart = null;
+
+function initCharts() {
+  const c = getChartColors();
+
+  const monthlySalesCtx = document.getElementById('monthlySalesChart');
+  if (monthlySalesCtx) {
+    if (salesChart) salesChart.destroy();
+    salesChart = new Chart(monthlySalesCtx.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [{
+          label: 'المبيعات',
+          data: [120, 380, 210, 290, 170, 340, 260, 310, 280, 400, 190, 150],
+          backgroundColor: c.barFill,
+          borderRadius: 7,
+          borderSkipped: false
+        }]
       },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          titleColor: '#0f172a', bodyColor: '#475569', backgroundColor: '#fff',
-          borderColor: '#e2e8f0', borderWidth: 1, padding: 10,
-          callbacks: { label: ctx => ' $' + ctx.formattedValue }
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { color: c.text, font: { family: 'Cairo', size: 11 } }, grid: { color: c.grid } },
+          y: { beginAtZero: true, ticks: { color: c.text, font: { family: 'Cairo', size: 11 }, callback: v => '$'+v }, grid: { color: c.grid } }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            titleColor: c.tooltipTitle, bodyColor: c.tooltipBody,
+            backgroundColor: c.tooltipBg,
+            borderColor: c.tooltipBorder, borderWidth: 1, padding: 10,
+            callbacks: { label: ctx => ' $' + ctx.formattedValue }
+          }
         }
       }
-    }
-  });
+    });
+  }
+
+  const gaugeCtx = document.getElementById('gaugeChart');
+  if (gaugeCtx) {
+    if (gaugeChart) gaugeChart.destroy();
+    const pct = 75.55;
+    gaugeChart = new Chart(gaugeCtx.getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [pct, 100 - pct],
+          backgroundColor: [c.blue2, c.gaugeTrack],
+          borderWidth: 0,
+          circumference: 180,
+          rotation: 270
+        }]
+      },
+      options: {
+        responsive: false,
+        cutout: '70%',
+        plugins: { legend: { display: false }, tooltip: { enabled: false } }
+      }
+    });
+  }
 }
 
-const gaugeCtx = document.getElementById('gaugeChart');
-if (gaugeCtx) {
-  const pct = 75.55;
-  new Chart(gaugeCtx.getContext('2d'), {
-    type: 'doughnut',
-    data: {
-      datasets: [{
-        data: [pct, 100 - pct],
-        backgroundColor: [C_BLUE2, '#e2e8f0'],
-        borderWidth: 0,
-        circumference: 180,
-        rotation: 270
-      }]
-    },
-    options: {
-      responsive: false,
-      cutout: '70%',
-      plugins: { legend: { display: false }, tooltip: { enabled: false } }
-    }
-  });
+/* Init charts after page load */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCharts);
+} else {
+  initCharts();
 }
+
+/* Re-init charts on theme toggle to update colors */
+document.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.getElementById('themeToggleBtn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      /* Wait for class toggle to apply, then refresh charts */
+      setTimeout(initCharts, 50);
+    });
+  }
+});
