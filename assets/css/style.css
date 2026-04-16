@@ -5,6 +5,9 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Apply background to html too so dark mode fully covers the page */
+html { background: var(--surface-2); transition: background var(--t-slow); }
+
 :root {
   /* Brand Colors */
   --brand:        #4f46e5;
@@ -69,7 +72,9 @@
   --success: #059669;
 }
 
-/* Dark mode overrides */
+/* ============================================================
+   DARK MODE — full page override via body.dark-mode class
+   ============================================================ */
 body.dark-mode {
   --brand:        #818cf8;
   --brand-dark:   #6366f1;
@@ -109,13 +114,19 @@ body.dark-mode {
    ============================================================ */
 html, body { height: 100%; }
 body {
+  /* smooth background transition for dark mode */
   font-family: 'Cairo', sans-serif;
   background: var(--surface-2);
   color: var(--text-1);
   direction: rtl;
   -webkit-font-smoothing: antialiased;
-  transition: background var(--t-slow), color var(--t-slow);
+  transition: background var(--t-slow), color var(--t-slow), border-color var(--t-slow);
 }
+
+/* Dark mode: make sure html + body both get dark background */
+body.dark-mode,
+html:has(body.dark-mode) { background: var(--surface); }
+body.dark-mode { background: var(--surface); }
 
 /* ============================================================
    OVERLAY
@@ -670,7 +681,30 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
   transition: box-shadow var(--t-base), transform var(--t-base), border-color var(--t-base);
   position: relative;
   overflow: hidden;
+  cursor: default;
+  user-select: none;
 }
+
+/* ── Unified :active press effect for all interactive cards ── */
+.stat-card:active,
+.qa-btn:active,
+.svc-card:active,
+.provider-card:active,
+.escrow-card:active,
+.dispute-item:active,
+.ticket-card:active,
+.testimonial-card:active {
+  transform: scale(.98) !important;
+  box-shadow: var(--shadow-xs) !important;
+}
+
+.qa-btn:active { background: var(--surface-3) !important; }
+
+/* btn-primary / secondary / danger active */
+.btn-primary:active  { transform: scale(.97) !important; opacity: .88 !important; }
+.btn-secondary:active { transform: scale(.97) !important; }
+.btn-danger:active   { transform: scale(.97) !important; }
+.btn-resolve:active  { transform: scale(.97) !important; }
 .stat-card::before {
   content: '';
   position: absolute;
@@ -722,9 +756,12 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
   border-radius: var(--radius) !important;
   box-shadow: var(--shadow-xs);
   overflow: hidden;
-  transition: box-shadow var(--t-base), border-color var(--t-base);
+  transition: box-shadow var(--t-base), border-color var(--t-base), background var(--t-slow);
 }
 .card:hover { box-shadow: var(--shadow-sm); border-color: var(--border-2) !important; }
+
+/* ── Uniform card sizes on stat cards ── */
+.stat-card { min-height: 92px; }
 
 .card-header-custom {
   display: flex;
@@ -1193,6 +1230,114 @@ select.form-input { cursor: pointer; appearance: none; }
   border-top: 1px solid var(--border);
   font-size: .8rem;
   color: var(--text-3);
+}
+
+/* ============================================================
+   TOAST NOTIFICATIONS
+   ============================================================ */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast-msg {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--text-1);
+  font-family: 'Cairo', sans-serif;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: toastIn .28s ease forwards, toastOut .28s ease 3.5s forwards;
+  min-width: 240px;
+}
+
+.toast-msg i { font-size: 1rem; flex-shrink: 0; }
+.toast-msg.success { border-right: 3px solid var(--green); }
+.toast-msg.success i { color: var(--green); }
+.toast-msg.warning { border-right: 3px solid var(--orange); }
+.toast-msg.warning i { color: var(--orange); }
+.toast-msg.danger  { border-right: 3px solid var(--red); }
+.toast-msg.danger  i { color: var(--red); }
+.toast-msg.info    { border-right: 3px solid var(--brand); }
+.toast-msg.info    i { color: var(--brand); }
+
+@keyframes toastIn  { to { opacity: 1; transform: translateY(0); } }
+@keyframes toastOut { to { opacity: 0; transform: translateY(16px); } }
+
+/* ============================================================
+   MODAL OVERLAY
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.5);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn .18s ease;
+}
+.modal-overlay.closing { animation: fadeOut .18s ease forwards; }
+@keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeOut { from { opacity:1; } to { opacity:0; } }
+
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  width: min(92vw, 480px);
+  box-shadow: var(--shadow-lg);
+  animation: modalIn .22s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes modalIn { from { opacity:0; transform: scale(.92) translateY(20px); } to { opacity:1; transform: scale(1) translateY(0); } }
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-title { font-size: 1rem; font-weight: 800; color: var(--text-1); margin: 0; }
+.modal-close {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+  transition: all var(--t-fast);
+}
+.modal-close:hover { background: var(--red-light); border-color: #fecaca; color: var(--red); }
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
 /* ============================================================
