@@ -119,7 +119,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function applyDark(isDark, save = true) {
     document.body.classList.toggle('dark-mode', isDark);
+    document.documentElement.classList.toggle('dark-mode', isDark);
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    /* Force background on html so scrollbar gutter & full viewport goes dark */
+    document.documentElement.style.background = isDark ? '#1e293b' : '';
     if (moonIcon) moonIcon.style.display = isDark ? 'none'  : 'block';
     if (sunIcon)  sunIcon.style.display  = isDark ? 'block' : 'none';
     if (save) localStorage.setItem('dashboard-theme', isDark ? 'dark' : 'light');

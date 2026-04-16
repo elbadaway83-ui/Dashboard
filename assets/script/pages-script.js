@@ -64,7 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ── Dark mode persistence (synced from localStorage) ── */
   function applyDark(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
+    document.documentElement.classList.toggle('dark-mode', isDark);
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    document.documentElement.style.background = isDark ? '#1e293b' : '';
   }
 
   const savedTheme = localStorage.getItem('dashboard-theme') || 'light';

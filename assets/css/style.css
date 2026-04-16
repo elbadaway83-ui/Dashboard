@@ -5,8 +5,12 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Apply background to html too so dark mode fully covers the page */
-html { background: var(--surface-2); transition: background var(--t-slow); }
+/* Apply background to html so dark mode covers scrollbar gutter & all areas */
+html {
+  background: var(--surface-2, #f8fafc);
+  transition: background var(--t-slow, .35s ease);
+  min-height: 100%;
+}
 
 :root {
   /* Brand Colors */
@@ -114,24 +118,46 @@ body.dark-mode {
    ============================================================ */
 html, body { height: 100%; }
 body {
-  /* smooth background transition for dark mode */
   font-family: 'Cairo', sans-serif;
-  background: var(--surface-2);
+  background-color: var(--surface-2) !important;  /* override Bootstrap reset */
+  background:       var(--surface-2) !important;
   color: var(--text-1);
   direction: rtl;
   -webkit-font-smoothing: antialiased;
-  transition: background var(--t-slow), color var(--t-slow), border-color var(--t-slow);
+  transition: background var(--t-slow), color var(--t-slow);
 }
 
-/* Dark mode: make sure html + body both get dark background */
-body.dark-mode,
-html:has(body.dark-mode) { background: var(--surface-2) !important; }
-body.dark-mode { background: var(--surface-2) !important; }
-
-/* Sub-pages: override inline body padding style with dark background */
+/* ============================================================
+   DARK MODE — Complete page coverage
+   The body.dark-mode redefines CSS variables (above, in :root block)
+   AND must also explicitly repaint every major structural element.
+   ============================================================ */
 body.dark-mode {
+  background-color: var(--surface-2) !important;
+  background:       var(--surface-2) !important;
   color: var(--text-1);
 }
+
+/* html element inherits dark bg so scrollbar gutter matches */
+html:has(body.dark-mode),
+html.dark-mode {
+  background: var(--surface-2) !important;
+}
+
+/* All layout containers must be dark in dark mode */
+body.dark-mode #mainContent,
+body.dark-mode .main-content {
+  background: var(--surface-2) !important;
+}
+
+/* Topbar & sidebar already use var(--surface) which updates with dark mode vars */
+body.dark-mode .topbar      { background: var(--surface) !important; }
+body.dark-mode aside#sidebar { background: var(--surface) !important; }
+body.dark-mode .custom-table th { background: var(--surface-3) !important; }
+body.dark-mode .custom-table tbody tr:hover td { background: var(--surface-3) !important; }
+
+/* Sub-pages (pages/*.html) have inline body { padding; background } in <style> */
+/* The !important on body.dark-mode background above wins over those inline styles */
 
 /* ============================================================
    OVERLAY
@@ -299,7 +325,9 @@ aside#sidebar {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: margin-right var(--t-slow) cubic-bezier(.4,0,.2,1);
+  background: var(--surface-2);            /* explicit — not just inherited */
+  transition: margin-right var(--t-slow) cubic-bezier(.4,0,.2,1),
+              background var(--t-slow);
 }
 
 /* ============================================================
@@ -642,7 +670,12 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
 /* ============================================================
    MAIN CONTENT AREA
    ============================================================ */
-.main-content { padding: 22px; flex: 1; }
+.main-content {
+  padding: 22px;
+  flex: 1;
+  background: var(--surface-2);
+  transition: background var(--t-slow);
+}
 
 /* Page header */
 .page-header { margin-bottom: 22px; }
@@ -761,16 +794,20 @@ body.dark-mode .notif-item.unread { background: rgba(79,70,229,.06); }
   border-radius: var(--radius) !important;
   box-shadow: var(--shadow-xs);
   overflow: hidden;
-  transition: box-shadow var(--t-base), border-color var(--t-base), background var(--t-slow);
+  transition: box-shadow var(--t-base), border-color var(--t-base),
+              background var(--t-slow), color var(--t-slow);
 }
 .card:hover { box-shadow: var(--shadow-sm); border-color: var(--border-2) !important; }
 
 /* ── Uniform card sizes on stat cards ── */
 .stat-card { min-height: 96px; }
 
-/* Equal height stat cards in row layout */
-.stats-grid .stat-card,
-.row .stat-card { height: 100%; }
+/* Equal height stat cards in the grid — using flexbox on grid children */
+.stats-grid { align-items: stretch; }
+.stats-grid .stat-card { height: auto; flex: 1; }
+
+/* In Bootstrap row grids, stat-cards fill their column height */
+.row [class*="col"] .stat-card { height: 100%; }
 
 .card-header-custom {
   display: flex;
