@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خدمات الكروت — Elawaady</title>
+  <meta name="description" content="إدارة خدمات الكروت والأسعار">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body { padding: 28px; background: var(--surface-2); }
+    .main-content { max-width: 1140px; margin: 0 auto; animation: fadeInUp .4s ease-out; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+  </style>
+</head>
+<body>
+
+<main class="main-content">
+  <div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+      <h1 class="page-title"><i class="bi bi-grid-3x3-gap me-2 text-primary"></i>خدمات الكروت</h1>
+      <p class="page-subtitle">إدارة خدمات الكروت المتاحة وأسعارها للعملاء</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn-secondary"><i class="bi bi-funnel me-1"></i>تصفية</button>
+      <button class="btn-primary"><i class="bi bi-plus-lg"></i>إضافة خدمة</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="row g-3 mb-4">
+    <div class="col-sm-4">
+      <div class="stat-card blue" style="padding:14px 16px">
+        <div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-grid-3x3-gap"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">48</div><div class="stat-label">إجمالي الخدمات</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card green" style="padding:14px 16px">
+        <div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-toggle-on"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">42</div><div class="stat-label">نشطة</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card orange" style="padding:14px 16px">
+        <div class="stat-icon-wrap orange" style="width:38px;height:38px"><i class="bi bi-toggle-off"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">6</div><div class="stat-label">معطلة</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header-custom">
+      <div><p class="section-title">قائمة الخدمات</p><p class="section-sub">كل خدمات الكروت المتاحة للعملاء</p></div>
+      <div class="d-flex gap-2">
+        <div style="position:relative">
+          <i class="bi bi-search" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:.85rem"></i>
+          <input type="text" class="form-input" placeholder="بحث عن خدمة..." style="width:210px;padding-right:32px;height:36px;font-size:.82rem">
+        </div>
+        <select class="form-input" style="width:140px;height:36px;font-size:.82rem;padding:0 10px">
+          <option>كل الفئات</option>
+          <option>ألعاب</option>
+          <option>تطبيقات</option>
+          <option>اشتراكات</option>
+          <option>سوشيال</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="px-3 pb-3" style="overflow-x:auto">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" style="accent-color:var(--brand)"></th>
+            <th>الخدمة</th>
+            <th>الفئة</th>
+            <th>السعر الأساسي</th>
+            <th>سعر الجملة</th>
+            <th>المبيعات</th>
+            <th>الحالة</th>
+            <th>إجراء</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--brand)"></td>
+            <td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:var(--orange-light);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-controller"></i></div><div><div class="user-name">PUBG Mobile UC</div><div class="user-id">شحن 60 UC</div></div></div></td>
+            <td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">ألعاب</span></td>
+            <td class="amount">٤٥ج</td>
+            <td style="font-size:.82rem;color:var(--green);font-weight:700">٣٨ج</td>
+            <td style="font-size:.82rem;font-weight:600;color:var(--text-1)">٢٤٢ مبيعة</td>
+            <td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill me-1"></i>نشط</span></td>
+            <td><div class="d-flex gap-2"><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--brand)"></td>
+            <td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:#e0f2fe;color:#0369a1;display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-music-note-beamed"></i></div><div><div class="user-name">Spotify Premium</div><div class="user-id">اشتراك شهري</div></div></div></td>
+            <td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">اشتراكات</span></td>
+            <td class="amount">١٥٠ج</td>
+            <td style="font-size:.82rem;color:var(--green);font-weight:700">١٢٠ج</td>
+            <td style="font-size:.82rem;font-weight:600;color:var(--text-1)">١٠٨ مبيعة</td>
+            <td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill me-1"></i>نشط</span></td>
+            <td><div class="d-flex gap-2"><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--brand)"></td>
+            <td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:var(--red-light);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-film"></i></div><div><div class="user-name">Netflix Premium</div><div class="user-id">اشتراك شهري</div></div></div></td>
+            <td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">اشتراكات</span></td>
+            <td class="amount">٢٢٠ج</td>
+            <td style="font-size:.82rem;color:var(--green);font-weight:700">١٨٠ج</td>
+            <td style="font-size:.82rem;font-weight:600;color:var(--text-1)">٨١ مبيعة</td>
+            <td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill me-1"></i>نشط</span></td>
+            <td><div class="d-flex gap-2"><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--brand)"></td>
+            <td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:var(--surface-3);color:var(--text-3);display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-phone"></i></div><div><div class="user-name">كارت شحن فودافون</div><div class="user-id">قيمة ١٠٠ج</div></div></div></td>
+            <td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">شحن رصيد</span></td>
+            <td class="amount">١٠٠ج</td>
+            <td style="font-size:.82rem;color:var(--green);font-weight:700">٩٥ج</td>
+            <td style="font-size:.82rem;font-weight:600;color:var(--text-1)">٣ مبيعة</td>
+            <td><span class="badge-custom badge-pending"><i class="bi bi-eye-slash me-1"></i>معطل</span></td>
+            <td><div class="d-flex gap-2"><button class="btn-resolve btn-green"><i class="bi bi-check-circle me-1"></i>تفعيل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination-bar">
+      <span>عرض <strong>10</strong> من أصل <strong>48</strong> خدمة</span>
+      <div class="d-flex gap-2 align-items-center">
+        <button class="btn-secondary" style="padding:5px 12px;font-size:.78rem"><i class="bi bi-chevron-right"></i></button>
+        <span style="font-size:.82rem;color:var(--text-2);font-weight:600">1 / 5</span>
+        <button class="btn-secondary" style="padding:5px 12px;font-size:.78rem"><i class="bi bi-chevron-left"></i></button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

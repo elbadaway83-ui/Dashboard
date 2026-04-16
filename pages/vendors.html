@@ -3,482 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elawaady — لوحة البائع</title>
+  <title>نظام التجار — Elawaady</title>
+  <meta name="description" content="إدارة حسابات الجملة والموزعين المعتمدين">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    :root { --brand: #059669; --brand-dark: #047857; --brand-light: #ecfdf5; --brand-mid: #a7f3d0; }
+    body { padding: 28px; background: var(--surface-2); }
+    .main-content { max-width: 1140px; margin: 0 auto; animation: fadeInUp .4s ease-out; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
   </style>
 </head>
 <body>
-<div id="overlay"></div>
 
-<!-- ══════════ SIDEBAR ══════════ -->
-<aside id="sidebar">
-  <div class="sidebar-logo">
-    <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#059669,#34d399);display:flex;align-items:center;justify-content:center;">
-      <i class="bi bi-shop" style="color:white;font-size:15px;"></i>
+<main class="main-content">
+  <div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+      <h1 class="page-title"><i class="bi bi-shop me-2 text-primary"></i>نظام التجار والوكلاء</h1>
+      <p class="page-subtitle">إدارة حسابات الجملة والموزعين المعتمدين</p>
     </div>
-    <span class="brand-name" style="color:#059669;">Elawaady</span>
+    <button class="btn-primary"><i class="bi bi-plus-lg"></i>إضافة تاجر</button>
   </div>
-  <div class="sidebar-scroll">
-    <div class="nav-group">
-      <span class="nav-label">لوحتي</span>
-      <a href="./vendor.html" class="nav-item active">
-        <i class="bi bi-grid-1x2-fill"></i>الرئيسية
-      </a>
-      <a href="./my-services.html" class="nav-item">
-        <i class="bi bi-box-seam-fill"></i>خدماتي
-      </a>
-      <a href="./add-service.html" class="nav-item">
-        <i class="bi bi-plus-circle-fill"></i>إضافة خدمة
-      </a>
-      <a href="./vendor-orders.html" class="nav-item">
-        <i class="bi bi-bag-check-fill"></i>الطلبات الواردة
-        <span class="nav-badge" style="background:#059669;">١</span>
-      </a>
+
+  <!-- Stats -->
+  <div class="row g-3 mb-4">
+    <div class="col-sm-3">
+      <div class="stat-card blue" style="padding:14px 16px">
+        <div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-shop"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">18</div><div class="stat-label">إجمالي التجار</div></div>
+      </div>
     </div>
-    <div class="nav-group">
-      <span class="nav-label">الأرباح</span>
-      <a href="./earnings.html" class="nav-item">
-        <i class="bi bi-wallet2"></i>أرباحي
-      </a>
-      <a href="./withdraw.html" class="nav-item">
-        <i class="bi bi-send-fill"></i>سحب الأرباح
-      </a>
-      <a href="./sales-history.html" class="nav-item">
-        <i class="bi bi-clock-history"></i>سجل المبيعات
-      </a>
+    <div class="col-sm-3">
+      <div class="stat-card green" style="padding:14px 16px">
+        <div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-star"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">5</div><div class="stat-label">VIP</div></div>
+      </div>
     </div>
-    <div class="nav-group">
-      <span class="nav-label">الدعم</span>
-      <a href="./vendor-support.html" class="nav-item">
-        <i class="bi bi-headset"></i>الدعم الفني
-      </a>
+    <div class="col-sm-3">
+      <div class="stat-card purple" style="padding:14px 16px">
+        <div class="stat-icon-wrap purple" style="width:38px;height:38px"><i class="bi bi-cash-stack"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">٨٢,٤٠٠ج</div><div class="stat-label">إجمالي السحوبات</div></div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="stat-card orange" style="padding:14px 16px">
+        <div class="stat-icon-wrap orange" style="width:38px;height:38px"><i class="bi bi-hourglass-split"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">2</div><div class="stat-label">طلبات انتظار</div></div>
+      </div>
     </div>
   </div>
-  <div class="sidebar-footer">
-    <div class="sidebar-user">
-      <div class="sidebar-user-av" style="background:linear-gradient(135deg,#059669,#34d399);">م</div>
-      <div>
-        <div class="sidebar-user-name">محمد سالم</div>
-        <div class="sidebar-user-role">بائع</div>
-      </div>
-    </div>
-    <button class="logout-btn">
-      <i class="bi bi-box-arrow-right"></i>تسجيل الخروج
-    </button>
-  </div>
-</aside>
 
-<!-- ══════════ MAIN ══════════ -->
-<div id="mainContent">
-  <header class="topbar">
-    <div class="topbar-start">
-      <button id="toggleSidebarBtn" class="menu-toggle"><i class="bi bi-list"></i></button>
-      <div class="search-wrapper">
-        <div class="search-icon-wrap"><i class="bi bi-search"></i></div>
-        <input type="text" class="search-input" id="searchInput" placeholder="ابحث في لوحة البائع..." autocomplete="off">
-        <span class="search-kbd">⌘K</span>
-        <div class="search-dropdown">
-          <div class="search-section-label">الصفحات</div>
-          <a href="./my-services.html" class="search-result-item"><i class="bi bi-box-seam-fill"></i>خدماتي</a>
-          <a href="./add-service.html" class="search-result-item"><i class="bi bi-plus-circle-fill"></i>إضافة خدمة</a>
-          <a href="./earnings.html" class="search-result-item"><i class="bi bi-wallet2"></i>أرباحي</a>
+  <div class="card">
+    <div class="card-header-custom">
+      <div><p class="section-title">قائمة التجار والوكلاء</p><p class="section-sub">الموزعون المعتمدون وأرصدة الخصومات</p></div>
+      <div class="d-flex gap-2">
+        <div style="position:relative">
+          <i class="bi bi-search" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:.85rem"></i>
+          <input type="text" class="form-input" placeholder="بحث عن تاجر..." style="width:210px;padding-right:32px;height:36px;font-size:.82rem">
         </div>
-      </div>
-    </div>
-    <div class="topbar-end">
-      <button class="icon-btn" id="themeToggleBtn">
-        <i class="bi bi-moon-fill" id="moonIcon"></i>
-        <i class="bi bi-sun-fill" id="sunIcon" style="display:none"></i>
-      </button>
-      <div class="dropdown-wrapper">
-        <button class="icon-btn" data-dropdown="notifPanelVendor" style="position:relative">
-          <i class="bi bi-bell-fill"></i>
-          <span class="notif-dot"></span>
-        </button>
-        <div class="notif-panel" id="notifPanelVendor">
-          <div class="notif-head"><span class="notif-head-title">الإشعارات</span></div>
-          <div class="notif-item notif-unread">
-            <div class="notif-avatar" style="background:linear-gradient(135deg,#059669,#34d399);">E</div>
-            <div>
-              <div class="notif-text"><strong>بيعة جديدة!</strong> نورا حسن اشترت Netflix Premium</div>
-              <div class="notif-ts">منذ ٥ دقائق</div>
-            </div>
-          </div>
-          <div class="notif-item notif-unread">
-            <div class="notif-avatar av-green">E</div>
-            <div>
-              <div class="notif-text">خدمتك <strong>PUBG UC</strong> تمت الموافقة عليها</div>
-              <div class="notif-ts">منذ ٢ ساعات</div>
-            </div>
-          </div>
-          <div class="notif-item">
-            <div class="notif-avatar av-brand">E</div>
-            <div>
-              <div class="notif-text">انتهت فترة الأمان · <strong>٣٥٠ج</strong> جاهزة للسحب</div>
-              <div class="notif-ts">منذ ٥ ساعات</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="dropdown-wrapper">
-        <button class="topbar-profile" data-dropdown="profileMenuVendor">
-          <div class="avatar" style="background:linear-gradient(135deg,#059669,#34d399);">م</div>
-          <div>
-            <div class="profile-name">محمد</div>
-            <div class="profile-role">بائع</div>
-          </div>
-          <i class="bi bi-chevron-down" style="font-size:11px;color:var(--text-3);margin-right:2px;"></i>
-        </button>
-        <div class="dropdown-menu-custom" id="profileMenuVendor">
-          <a href="#" class="dropdown-item-custom"><i class="bi bi-person-circle"></i>ملفي الشخصي</a>
-          <a href="./earnings.html" class="dropdown-item-custom"><i class="bi bi-wallet2"></i>أرباحي</a>
-          <div class="dropdown-divider"></div>
-          <button class="dropdown-item-custom danger"><i class="bi bi-box-arrow-right"></i>تسجيل الخروج</button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="main-content">
-    <div class="page-header d-flex align-items-center justify-content-between">
-      <div>
-        <h1 class="page-title">مرحباً محمد</h1>
-        <p class="page-sub">إليك ملخص أرباحك ومبيعاتك اليوم</p>
-      </div>
-      <button class="btn btn-primary btn-sm" data-modal-open="addServiceModal">
-        <i class="bi bi-plus-circle-fill"></i>إضافة خدمة
-      </button>
-    </div>
-
-    <!-- Earnings Cards -->
-    <div class="stats-grid">
-      <div class="stat-card" style="--card-accent:var(--green)">
-        <div class="stat-top">
-          <div>
-            <div class="stat-label">إجمالي الأرباح</div>
-            <div class="stat-value"><span class="stat-unit">ج</span>٨,٤٢٠</div>
-            <span class="stat-delta up"><i class="bi bi-arrow-up-short"></i>+٨.٢٪ هذا الشهر</span>
-          </div>
-          <div class="stat-icon" style="background:var(--green-light);color:var(--green)">
-            <i class="bi bi-graph-up-arrow"></i>
-          </div>
-        </div>
-      </div>
-      <div class="stat-card" style="--card-accent:var(--orange)">
-        <div class="stat-top">
-          <div>
-            <div class="stat-label">محجوزة (فترة أمان)</div>
-            <div class="stat-value"><span class="stat-unit">ج</span>١,٢٠٠</div>
-            <span class="stat-delta neutral">٣ صفقات</span>
-          </div>
-          <div class="stat-icon" style="background:var(--orange-light);color:var(--orange)">
-            <i class="bi bi-lock-fill"></i>
-          </div>
-        </div>
-      </div>
-      <div class="stat-card" style="--card-accent:var(--green)">
-        <div class="stat-top">
-          <div>
-            <div class="stat-label">جاهزة للسحب</div>
-            <div class="stat-value"><span class="stat-unit">ج</span>٣٥٠</div>
-            <span class="stat-delta up"><i class="bi bi-check-circle"></i>متاحة الآن</span>
-          </div>
-          <div class="stat-icon" style="background:var(--green-light);color:var(--green)">
-            <i class="bi bi-wallet2"></i>
-          </div>
-        </div>
-      </div>
-      <div class="stat-card" style="--card-accent:var(--brand)">
-        <div class="stat-top">
-          <div>
-            <div class="stat-label">إجمالي المبيعات</div>
-            <div class="stat-value">٤٢</div>
-            <span class="stat-delta up"><i class="bi bi-arrow-up-short"></i>+٥ هذا الأسبوع</span>
-          </div>
-          <div class="stat-icon" style="background:var(--brand-light);color:var(--brand)">
-            <i class="bi bi-bag-check-fill"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Withdrawal CTA -->
-    <div style="background:linear-gradient(135deg,#059669,#047857);border-radius:var(--radius);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;color:white;">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;">
-          <i class="bi bi-wallet2" style="font-size:20px;"></i>
-        </div>
-        <div>
-          <div style="font-size:.82rem;opacity:.7;">متاح للسحب الآن</div>
-          <div style="font-size:1.5rem;font-weight:900;">٣٥٠ج</div>
-        </div>
-      </div>
-      <button class="btn btn-sm" style="background:white;color:#059669;font-weight:800;" data-modal-open="withdrawModal">
-        <i class="bi bi-send-fill"></i>سحب فوري
-      </button>
-    </div>
-
-    <!-- Row: Chart + New Sale Alert -->
-    <div class="row g-3 mb-3">
-      <div class="col-lg-8">
-        <div class="card">
-          <div class="card-header-custom">
-            <div><p class="section-title">أرباحي هذا الأسبوع</p></div>
-          </div>
-          <div class="chart-wrap" style="height:180px">
-            <canvas id="earningsChart"></canvas>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="card h-100">
-          <div class="card-header-custom">
-            <div><p class="section-title">بيعة جديدة</p><p class="section-sub">تحتاج رفع فيديو توثيق</p></p></div>
-            <span class="badge-custom badge-pending">جديد</span>
-          </div>
-          <div class="px-3 pb-3 pt-2">
-            <div style="background:var(--green-light);border:1px solid #a7f3d0;border-radius:var(--radius-sm);padding:12px;margin-bottom:12px;">
-              <div style="font-size:.85rem;font-weight:800;color:var(--text-1);">Netflix Premium</div>
-              <div style="font-size:.75rem;color:var(--text-3);margin-top:2px;">نورا حسن · ٢٢٠ج</div>
-              <div style="font-size:.72rem;color:var(--green);margin-top:4px;font-weight:700;">بدأت منذ ٥ دقائق</div>
-            </div>
-            <div style="font-size:.78rem;color:var(--text-3);margin-bottom:10px;">
-              <i class="bi bi-camera-video-fill" style="color:var(--brand);margin-left:4px;"></i>
-              ارفع فيديو يثبت تسليم الخدمة للحماية في حال النزاع
-            </div>
-            <button class="btn btn-primary btn-sm w-100" data-modal-open="uploadVideoModal">
-              <i class="bi bi-cloud-upload-fill"></i>رفع فيديو التوثيق
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- My Services -->
-    <div class="card mb-3">
-      <div class="card-header-custom">
-        <div><p class="section-title">خدماتي</p><p class="section-sub">إدارة ومتابعة خدماتك</p></div>
-        <button class="card-action-btn" data-modal-open="addServiceModal">+ إضافة جديدة</button>
-      </div>
-      <div style="overflow-x:auto">
-        <table class="custom-table">
-          <thead><tr><th>الخدمة</th><th>السعر</th><th>الحالة</th><th>المبيعات</th><th>الأرباح</th><th>إجراء</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><div class="td-user"><div class="user-av av-red" style="width:32px;height:32px;border-radius:9px;font-size:.75rem;">N</div><div><div class="user-name">Netflix Premium</div><div class="user-id">اشتراك · ١ شهر</div></div></div></td>
-              <td><span class="amount">٢٢٠ج</span></td>
-              <td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill"></i>منشورة</span></td>
-              <td>١٨ بيعة</td>
-              <td style="font-weight:700;color:var(--green);">٣,٩٦٠ج</td>
-              <td><button class="btn-resolve btn-blue">تعديل</button></td>
-            </tr>
-            <tr>
-              <td><div class="td-user"><div class="user-av av-orange" style="width:32px;height:32px;border-radius:9px;font-size:.75rem;">P</div><div><div class="user-name">PUBG UC ×٦٠٠</div><div class="user-id">ألعاب · شحن</div></div></div></td>
-              <td><span class="amount">٣٥٠ج</span></td>
-              <td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill"></i>منشورة</span></td>
-              <td>٢٤ بيعة</td>
-              <td style="font-weight:700;color:var(--green);">٨,٤٠٠ج</td>
-              <td><button class="btn-resolve btn-blue">تعديل</button></td>
-            </tr>
-            <tr>
-              <td><div class="td-user"><div class="user-av av-purple" style="width:32px;height:32px;border-radius:9px;font-size:.75rem;">F</div><div><div class="user-name">FIFA Points ×٢٠٠٠</div><div class="user-id">ألعاب · شحن</div></div></div></td>
-              <td><span class="amount">٤٥٠ج</span></td>
-              <td><span class="badge-custom badge-review"><i class="bi bi-hourglass-split"></i>قيد المراجعة</span></td>
-              <td>—</td>
-              <td style="color:var(--text-3);">—</td>
-              <td><button class="btn-resolve btn-blue">تفاصيل</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Funds Status -->
-    <div class="row g-3 mb-3">
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header-custom">
-            <div><p class="section-title">حالة الأموال</p><p class="section-sub">تتبع مبالغك</p></div>
-          </div>
-          <div class="px-3 pb-3 pt-2">
-            <!-- Locked order -->
-            <div style="background:var(--orange-light);border:1px solid #fde68a;border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;">
-              <div class="d-flex align-items-center justify-content-between mb-1">
-                <div style="font-size:.82rem;font-weight:700;color:var(--text-1);">#ORD-0044 · Netflix Premium</div>
-                <span class="badge-custom badge-hold" style="font-size:.67rem;">محجوزة</span>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                <div class="safety-timer" style="flex:1;padding:7px 10px;margin:0;">
-                  <i class="bi bi-lock-fill"></i>
-                  <div>
-                    <div class="safety-label">فترة الأمان المتبقية</div>
-                    <div class="safety-time" data-countdown="85500" style="font-size:.95rem;">٢٣:٤٥:٠٠</div>
-                  </div>
-                </div>
-                <div style="font-size:1.1rem;font-weight:800;color:var(--text-1);margin-right:12px;">٢٢٠ج</div>
-              </div>
-            </div>
-            <!-- Ready order -->
-            <div style="background:var(--green-light);border:1px solid #a7f3d0;border-radius:var(--radius-sm);padding:12px;">
-              <div class="d-flex align-items-center justify-content-between mb-1">
-                <div style="font-size:.82rem;font-weight:700;color:var(--text-1);">#ORD-0043 · PUBG UC</div>
-                <span class="badge-custom badge-active" style="font-size:.67rem;">جاهزة</span>
-              </div>
-              <div class="d-flex align-items-center justify-content-between">
-                <div style="font-size:.75rem;color:var(--green);">انتهت فترة الأمان — جاهزة للسحب</div>
-                <div style="font-size:1.1rem;font-weight:800;color:var(--green);">٣٥٠ج</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header-custom">
-            <div><p class="section-title">آخر المبيعات</p></div>
-            <a href="./sales-history.html" class="card-action-btn">الكل</a>
-          </div>
-          <div style="overflow-x:auto">
-            <table class="custom-table">
-              <thead><tr><th>المشتري</th><th>الخدمة</th><th>المبلغ</th><th>الحالة</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td><div class="td-user"><div class="user-av av-brand" style="width:26px;height:26px;font-size:.7rem;border-radius:7px;">ن</div><div><div class="user-name" style="font-size:.8rem;">نورا حسن</div></div></div></td>
-                  <td style="font-size:.79rem;">Netflix</td>
-                  <td><span class="amount" style="font-size:.8rem;">٢٢٠ج</span></td>
-                  <td><span class="badge-custom badge-hold" style="font-size:.67rem;">محجوزة</span></td>
-                </tr>
-                <tr>
-                  <td><div class="td-user"><div class="user-av av-green" style="width:26px;height:26px;font-size:.7rem;border-radius:7px;">ع</div><div><div class="user-name" style="font-size:.8rem;">عمر خالد</div></div></div></td>
-                  <td style="font-size:.79rem;">PUBG</td>
-                  <td><span class="amount" style="font-size:.8rem;">٣٥٠ج</span></td>
-                  <td><span class="badge-custom badge-active" style="font-size:.67rem;">مكتملة</span></td>
-                </tr>
-                <tr>
-                  <td><div class="td-user"><div class="user-av av-purple" style="width:26px;height:26px;font-size:.7rem;border-radius:7px;">م</div><div><div class="user-name" style="font-size:.8rem;">مريم أحمد</div></div></div></td>
-                  <td style="font-size:.79rem;">Netflix</td>
-                  <td><span class="amount" style="font-size:.8rem;">٢٢٠ج</span></td>
-                  <td><span class="badge-custom badge-active" style="font-size:.67rem;">مكتملة</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-</div>
-
-<!-- Modal: Add Service -->
-<div class="modal-overlay" id="addServiceModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span class="modal-title">إضافة خدمة جديدة</span>
-      <button class="modal-close" data-modal-close><i class="bi bi-x-lg"></i></button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">اسم الخدمة</label>
-        <input type="text" class="form-control" placeholder="مثال: Netflix Premium 1 شهر">
-      </div>
-      <div class="form-group">
-        <label class="form-label">الفئة</label>
-        <select class="form-control form-select">
-          <option>اشتراكات</option>
-          <option>ألعاب وشحن</option>
-          <option>سوشيال ميديا</option>
-          <option>بطاقات</option>
-          <option>أخرى</option>
+        <select class="form-input" style="width:140px;height:36px;font-size:.82rem;padding:0 10px">
+          <option>كل المستويات</option>
+          <option>VIP</option>
+          <option>موزع</option>
+          <option>عادي</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">وصف الخدمة</label>
-        <textarea class="form-control" rows="2" placeholder="اشرح تفاصيل الخدمة بوضوح..."></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">السعر (جنيه)</label>
-        <input type="number" class="form-control" placeholder="٠٠٠" min="1">
-      </div>
-      <div style="background:var(--orange-light);border:1px solid #fde68a;border-radius:var(--radius-sm);padding:10px 12px;font-size:.78rem;color:#92400e;">
-        <i class="bi bi-info-circle-fill" style="margin-left:5px;"></i>
-        ستُراجع الخدمة من قِبل الأدمن قبل النشر (خلال ٢٤ ساعة)
-      </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline btn-sm" data-modal-close>إلغاء</button>
-      <button class="btn btn-primary btn-sm"><i class="bi bi-send-fill"></i>إرسال للمراجعة</button>
-    </div>
-  </div>
-</div>
 
-<!-- Modal: Upload Video -->
-<div class="modal-overlay" id="uploadVideoModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span class="modal-title">رفع فيديو التوثيق</span>
-      <button class="modal-close" data-modal-close><i class="bi bi-x-lg"></i></button>
+    <div class="px-3 pb-3" style="overflow-x:auto">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" style="accent-color:var(--brand)"></th>
+            <th>التاجر</th>
+            <th>مستوى الخصم</th>
+            <th>إجمالي السحوبات</th>
+            <th>طلبات هذا الشهر</th>
+            <th>تاريخ الانضمام</th>
+            <th>الحالة</th>
+            <th>الإجراء</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--brand)"></td>
+            <td><div class="td-user"><div class="user-av av-blue">ت</div><div><div class="user-name">متجر البركة</div><div class="user-id">#9921</div></div></div></td>
+            <td><span class="badge-custom" style="background:var(--orange-light);color:var(--orange);border:1px solid #fed7aa"><i class="bi bi-star-fill me-1" style="font-size:.65rem"></i>VIP — خصم 15%</span></td>
+            <td class="amount">٥,٠٠٠ج</td>
+            <td style="font-weight:600;color:var(--text-1)">٨٤ طلب</td>
+            <td class="time-col">2025/06/10</td>
+            <td><span class="badge-custom badge-active"><i class="bi bi-circle-fill me-1" style="font-size:.4rem"></i>نشط</span></td>
+            <td><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل الرتبة</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--brand)"></td>
+            <td><div class="td-user"><div class="user-av av-purple">م</div><div><div class="user-name">المصطفى ستور</div><div class="user-id">#8840</div></div></div></td>
+            <td><span class="badge-custom" style="background:var(--brand-light);color:var(--brand);border:1px solid var(--brand-mid)"><i class="bi bi-award me-1" style="font-size:.65rem"></i>موزع — خصم 10%</span></td>
+            <td class="amount">١,٢٠٠ج</td>
+            <td style="font-weight:600;color:var(--text-1)">٢٣ طلب</td>
+            <td class="time-col">2025/09/22</td>
+            <td><span class="badge-custom badge-active"><i class="bi bi-circle-fill me-1" style="font-size:.4rem"></i>نشط</span></td>
+            <td><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل الرتبة</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" style="accent-color:var(--brand)"></td>
+            <td><div class="td-user"><div class="user-av av-green">ج</div><div><div class="user-name">جمال الدين شوب</div><div class="user-id">#7720</div></div></div></td>
+            <td><span class="badge-custom" style="background:var(--surface-3);color:var(--text-2);border:1px solid var(--border)"><i class="bi bi-person me-1" style="font-size:.65rem"></i>عادي — خصم 5%</span></td>
+            <td class="amount">٣٨٠ج</td>
+            <td style="font-weight:600;color:var(--text-1)">٩ طلبات</td>
+            <td class="time-col">2025/12/05</td>
+            <td><span class="badge-custom badge-pending"><i class="bi bi-clock me-1" style="font-size:.6rem"></i>قيد المراجعة</span></td>
+            <td><button class="btn-resolve btn-green"><i class="bi bi-check-circle me-1"></i>تفعيل</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="modal-body">
-      <div style="border:2px dashed var(--border);border-radius:var(--radius);padding:28px;text-align:center;cursor:pointer;transition:border-color .2s;" onmouseenter="this.style.borderColor='var(--green)'" onmouseleave="this.style.borderColor='var(--border)'">
-        <i class="bi bi-cloud-arrow-up-fill" style="font-size:2.5rem;color:var(--text-3);margin-bottom:10px;display:block;"></i>
-        <div style="font-size:.85rem;font-weight:700;color:var(--text-1);margin-bottom:4px;">اسحب الفيديو هنا أو انقر للرفع</div>
-        <div style="font-size:.75rem;color:var(--text-3);">MP4, MOV · حد أقصى ١٠٠MB</div>
-      </div>
-      <div style="margin-top:12px;font-size:.78rem;color:var(--text-3);">
-        <i class="bi bi-shield-check-fill" style="color:var(--green);margin-left:4px;"></i>
-        الفيديو محفوظ بشكل آمن ويُستخدم فقط عند فتح نزاع
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline btn-sm" data-modal-close>لاحقاً</button>
-      <button class="btn btn-primary btn-sm"><i class="bi bi-cloud-upload-fill"></i>رفع الفيديو</button>
-    </div>
-  </div>
-</div>
 
-<!-- Modal: Withdraw -->
-<div class="modal-overlay" id="withdrawModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <span class="modal-title">سحب الأرباح</span>
-      <button class="modal-close" data-modal-close><i class="bi bi-x-lg"></i></button>
-    </div>
-    <div class="modal-body">
-      <div style="background:var(--green-light);border:1px solid #a7f3d0;border-radius:var(--radius-sm);padding:12px;margin-bottom:14px;">
-        <div style="font-size:.82rem;color:var(--text-3);">المبلغ المتاح للسحب</div>
-        <div style="font-size:1.6rem;font-weight:900;color:var(--green);">٣٥٠ج</div>
+    <div class="pagination-bar">
+      <span>عرض <strong>10</strong> من أصل <strong>18</strong> تاجر</span>
+      <div class="d-flex gap-2 align-items-center">
+        <button class="btn-secondary" style="padding:5px 12px;font-size:.78rem"><i class="bi bi-chevron-right"></i></button>
+        <span style="font-size:.82rem;color:var(--text-2);font-weight:600">1 / 2</span>
+        <button class="btn-secondary" style="padding:5px 12px;font-size:.78rem"><i class="bi bi-chevron-left"></i></button>
       </div>
-      <div class="form-group">
-        <label class="form-label">طريقة الاستلام</label>
-        <select class="form-control form-select">
-          <option>فودافون كاش</option>
-          <option>انستا باي</option>
-          <option>بنك مصر</option>
-          <option>تحويل مباشر</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">رقم المحفظة / الحساب</label>
-        <input type="text" class="form-control" placeholder="01XXXXXXXXX">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline btn-sm" data-modal-close>إلغاء</button>
-      <button class="btn btn-success btn-sm"><i class="bi bi-send-fill"></i>تأكيد السحب</button>
     </div>
   </div>
-</div>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/script/script.js"></script>
 </body>
 </html>

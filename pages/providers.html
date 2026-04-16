@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مزودي الخدمات — Elawaady</title>
+  <meta name="description" content="ربط الموقع بمواقع SMM والموردين عبر API">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body { padding: 28px; background: var(--surface-2); }
+    .main-content { max-width: 1140px; margin: 0 auto; animation: fadeInUp .4s ease-out; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .provider-card-inner {
+      text-align: center;
+      padding: 28px 20px;
+    }
+    .provider-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: white;
+      margin: 0 auto 18px;
+      letter-spacing: -1px;
+    }
+    .provider-balance {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--text-1);
+      margin: 4px 0 2px;
+    }
+    .provider-label {
+      font-size: .78rem;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+    .provider-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      font-size: .8rem;
+    }
+    .api-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .8rem;
+    }
+    .api-stat:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+
+<main class="main-content">
+  <div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+      <h1 class="page-title"><i class="bi bi-plug me-2 text-primary"></i>مزودي الخدمات (Providers)</h1>
+      <p class="page-subtitle">ربط الموقع بمواقع الـ SMM والموردين عبر API</p>
+    </div>
+    <button class="btn-primary"><i class="bi bi-plus-lg"></i>إضافة مزود</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="row g-3 mb-4">
+    <div class="col-sm-4">
+      <div class="stat-card blue" style="padding:14px 16px">
+        <div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-plug"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">3</div><div class="stat-label">مزودون مربوطون</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card green" style="padding:14px 16px">
+        <div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-currency-dollar"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">$570.5</div><div class="stat-label">إجمالي الأرصدة</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card purple" style="padding:14px 16px">
+        <div class="stat-icon-wrap purple" style="width:38px;height:38px"><i class="bi bi-arrow-repeat"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">1,240</div><div class="stat-label">طلبات API اليوم</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Provider cards -->
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card provider-card">
+        <div class="provider-card-inner">
+          <div class="provider-logo" style="background:linear-gradient(135deg,#1e40af,#3b82f6)">SMM</div>
+          <div class="provider-balance">$450.00</div>
+          <div class="provider-label">الرصيد الحالي في المحفظة</div>
+          <div class="provider-status-row">
+            <span class="badge-custom badge-active" style="font-size:.7rem"><i class="bi bi-circle-fill me-1" style="font-size:.4rem"></i>متصل بنجاح</span>
+          </div>
+          <div style="text-align:right;margin-bottom:14px">
+            <div class="api-stat"><span style="color:var(--text-3)">الموقع</span><span style="font-weight:700">smm-global.io</span></div>
+            <div class="api-stat"><span style="color:var(--text-3)">الخدمات</span><span style="font-weight:700;color:var(--green)">142 خدمة</span></div>
+            <div class="api-stat"><span style="color:var(--text-3)">آخر مزامنة</span><span style="color:var(--text-2)">منذ 5 دقائق</span></div>
+          </div>
+          <div class="d-flex gap-2 justify-content-center">
+            <button class="btn-primary" style="flex:1;padding:9px 14px;font-size:.82rem"><i class="bi bi-arrow-repeat me-1"></i>تحديث الرصيد</button>
+            <button class="btn-secondary" style="padding:9px 12px;font-size:.82rem"><i class="bi bi-gear"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card provider-card">
+        <div class="provider-card-inner">
+          <div class="provider-logo" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">SPD</div>
+          <div class="provider-balance">$120.50</div>
+          <div class="provider-label">الرصيد الحالي في المحفظة</div>
+          <div class="provider-status-row">
+            <span class="badge-custom badge-active" style="font-size:.7rem"><i class="bi bi-circle-fill me-1" style="font-size:.4rem"></i>متصل بنجاح</span>
+          </div>
+          <div style="text-align:right;margin-bottom:14px">
+            <div class="api-stat"><span style="color:var(--text-3)">الموقع</span><span style="font-weight:700">speedsmm.com</span></div>
+            <div class="api-stat"><span style="color:var(--text-3)">الخدمات</span><span style="font-weight:700;color:var(--green)">98 خدمة</span></div>
+            <div class="api-stat"><span style="color:var(--text-3)">آخر مزامنة</span><span style="color:var(--text-2)">منذ ١٢ دقيقة</span></div>
+          </div>
+          <div class="d-flex gap-2 justify-content-center">
+            <button class="btn-primary" style="flex:1;padding:9px 14px;font-size:.82rem"><i class="bi bi-arrow-repeat me-1"></i>تحديث الرصيد</button>
+            <button class="btn-secondary" style="padding:9px 12px;font-size:.82rem"><i class="bi bi-gear"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card provider-card">
+        <div class="provider-card-inner">
+          <div class="provider-logo" style="background:linear-gradient(135deg,#0891b2,#22d3ee)">PRX</div>
+          <div class="provider-balance">$0.00</div>
+          <div class="provider-label">الرصيد الحالي في المحفظة</div>
+          <div class="provider-status-row">
+            <span class="badge-custom badge-dispute" style="font-size:.7rem"><i class="bi bi-x-circle me-1" style="font-size:.65rem"></i>خطأ في الاتصال</span>
+          </div>
+          <div style="text-align:right;margin-bottom:14px">
+            <div class="api-stat"><span style="color:var(--text-3)">الموقع</span><span style="font-weight:700">proxsmm.net</span></div>
+            <div class="api-stat"><span style="color:var(--text-3)">الخدمات</span><span style="font-weight:700;color:var(--text-3)">— غير متاح</span></div>
+            <div class="api-stat"><span style="color:var(--text-3)">آخر مزامنة</span><span style="color:var(--red)">فشل الاتصال</span></div>
+          </div>
+          <div class="d-flex gap-2 justify-content-center">
+            <button class="btn-danger" style="flex:1;padding:9px 14px;font-size:.82rem"><i class="bi bi-arrow-clockwise me-1"></i>إعادة المحاولة</button>
+            <button class="btn-secondary" style="padding:9px 12px;font-size:.82rem"><i class="bi bi-gear"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

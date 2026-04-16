@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إدارة الوساطات — Elawaady</title>
+  <meta name="description" content="الفصل في النزاعات المعلقة بين الأطراف">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body { padding: 28px; background: var(--surface-2); }
+    .main-content { max-width: 1140px; margin: 0 auto; animation: fadeInUp .4s ease-out; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .escrow-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      background: var(--surface);
+      margin-bottom: 14px;
+      transition: all var(--t-fast);
+      box-shadow: var(--shadow-xs);
+    }
+    .escrow-card:hover { border-color: var(--brand-mid); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+    .escrow-card.urgent { border-right: 4px solid var(--red); }
+    .escrow-card.warning { border-right: 4px solid var(--orange); }
+    .party-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: var(--radius-xs);
+      font-size: .75rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<main class="main-content">
+  <div class="page-header">
+    <h1 class="page-title"><i class="bi bi-shield-check me-2 text-primary"></i>إدارة الوساطات والنزاعات</h1>
+    <p class="page-subtitle">الفصل في النزاعات المعلقة بين الأطراف بشكل عادل</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="row g-3 mb-4">
+    <div class="col-sm-4">
+      <div class="stat-card" style="padding:14px 16px">
+        <div class="stat-icon-wrap" style="background:var(--red-light);color:var(--red);width:38px;height:38px"><i class="bi bi-exclamation-triangle"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">5</div><div class="stat-label">نزاعات معلقة</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card green" style="padding:14px 16px">
+        <div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-check-circle"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">42</div><div class="stat-label">تم حلها</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card blue" style="padding:14px 16px">
+        <div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-cash-coin"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">٤,٢٠٠ج</div><div class="stat-label">قيمة النزاعات</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Escrow cases -->
+  <div class="escrow-card urgent">
+    <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="badge-custom badge-dispute"><i class="bi bi-fire me-1"></i>تحت التحقيق — عاجل</span>
+        </div>
+        <h4 class="user-name" style="font-size:1rem;margin-bottom:6px">
+          <i class="bi bi-instagram text-danger me-1"></i>نزاع على صفقة حساب Instagram
+        </h4>
+        <div class="d-flex gap-3 flex-wrap" style="font-size:.8rem;color:var(--text-2)">
+          <span><i class="bi bi-person-fill text-primary me-1"></i>المشتري: سارة</span>
+          <span><i class="bi bi-shop text-success me-1"></i>البائع: كريم</span>
+          <span><i class="bi bi-currency-exchange text-warning me-1"></i>المبلغ: <strong>500ج</strong></span>
+          <span><i class="bi bi-clock me-1"></i>منذ ٢ ساعات</span>
+        </div>
+        <div style="margin-top:10px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:.8rem;color:var(--text-2);border:1px solid var(--border)">
+          <i class="bi bi-chat-quote me-1"></i>"اشتريت الحساب بس البائع ما سلمهوش..."
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-2" style="flex-shrink:0">
+        <button class="btn-primary" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-arrow-right-circle me-1"></i>تحويل للمشتري</button>
+        <button class="btn-danger" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-arrow-left-circle me-1"></i>تحويل للبائع</button>
+        <button class="btn-secondary" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-chat-dots me-1"></i>فتح النقاش</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="escrow-card warning">
+    <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="badge-custom badge-pending"><i class="bi bi-clock-history me-1"></i>تحت التحقيق</span>
+        </div>
+        <h4 class="user-name" style="font-size:1rem;margin-bottom:6px">
+          <i class="bi bi-controller text-warning me-1"></i>مشكلة في استلام كود شحن
+        </h4>
+        <div class="d-flex gap-3 flex-wrap" style="font-size:.8rem;color:var(--text-2)">
+          <span><i class="bi bi-person-fill text-primary me-1"></i>المشتري: محمد</span>
+          <span><i class="bi bi-shop text-success me-1"></i>البائع: متجر الأوادي</span>
+          <span><i class="bi bi-currency-exchange text-warning me-1"></i>المبلغ: <strong>120ج</strong></span>
+          <span><i class="bi bi-clock me-1"></i>منذ ٥ ساعات</span>
+        </div>
+        <div style="margin-top:10px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:.8rem;color:var(--text-2);border:1px solid var(--border)">
+          <i class="bi bi-chat-quote me-1"></i>"دفعت وما وصلنيش الكود..."
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-2" style="flex-shrink:0">
+        <button class="btn-primary" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-arrow-right-circle me-1"></i>تحويل للمشتري</button>
+        <button class="btn-danger" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-arrow-left-circle me-1"></i>تحويل للبائع</button>
+        <button class="btn-secondary" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-chat-dots me-1"></i>فتح النقاش</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="escrow-card">
+    <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="badge-custom badge-pending"><i class="bi bi-clock-history me-1"></i>قيد المراجعة</span>
+        </div>
+        <h4 class="user-name" style="font-size:1rem;margin-bottom:6px">
+          <i class="bi bi-tv text-danger me-1"></i>خلاف على جودة اشتراك نتفليكس
+        </h4>
+        <div class="d-flex gap-3 flex-wrap" style="font-size:.8rem;color:var(--text-2)">
+          <span><i class="bi bi-person-fill text-primary me-1"></i>المشتري: هند</span>
+          <span><i class="bi bi-shop text-success me-1"></i>البائع: Nflix Provider</span>
+          <span><i class="bi bi-currency-exchange text-warning me-1"></i>المبلغ: <strong>280ج</strong></span>
+          <span><i class="bi bi-clock me-1"></i>منذ يوم</span>
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-2" style="flex-shrink:0">
+        <button class="btn-primary" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-arrow-right-circle me-1"></i>تحويل للمشتري</button>
+        <button class="btn-danger" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-arrow-left-circle me-1"></i>تحويل للبائع</button>
+        <button class="btn-secondary" style="padding:9px 18px;font-size:.82rem"><i class="bi bi-chat-dots me-1"></i>فتح النقاش</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

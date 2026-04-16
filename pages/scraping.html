@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أدوات التسويق — Elawaady</title>
+  <meta name="description" content="جذب العملاء عبر العروض والإشعارات الجماعية">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body { padding: 28px; background: var(--surface-2); }
+    .main-content { max-width: 1140px; margin: 0 auto; animation: fadeInUp .4s ease-out; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .tool-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+    .coupon-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      transition: all var(--t-fast);
+    }
+    .coupon-row:hover { border-color: var(--brand-mid); background: var(--brand-light); }
+  </style>
+</head>
+<body>
+
+<main class="main-content">
+  <div class="page-header">
+    <h1 class="page-title"><i class="bi bi-megaphone me-2 text-primary"></i>أدوات التسويق</h1>
+    <p class="page-subtitle">جذب العملاء عبر العروض والإشعارات الجماعية</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="row g-3 mb-4">
+    <div class="col-sm-4">
+      <div class="stat-card blue" style="padding:14px 16px">
+        <div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-ticket-perforated"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">12</div><div class="stat-label">أكواد خصم نشطة</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card green" style="padding:14px 16px">
+        <div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-bell"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">550</div><div class="stat-label">مستلمو الإشعارات</div></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="stat-card purple" style="padding:14px 16px">
+        <div class="stat-icon-wrap purple" style="width:38px;height:38px"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">+24%</div><div class="stat-label">معدل التحويل</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <!-- Promo code -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-header-custom">
+          <div>
+            <p class="section-title"><i class="bi bi-ticket-perforated me-2 text-primary"></i>إنشاء كود خصم</p>
+            <p class="section-sub">إنشاء أكواد مخصصة للترويج</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">كود الخصم</label>
+              <input type="text" class="form-input" placeholder="مثلاً: EID2026" style="text-transform:uppercase">
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <label class="form-label">نسبة الخصم %</label>
+                <input type="number" class="form-input" placeholder="20" min="1" max="100">
+              </div>
+              <div class="col-6">
+                <label class="form-label">الحد الأقصى للاستخدام</label>
+                <input type="number" class="form-input" placeholder="100">
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">تاريخ الانتهاء</label>
+              <input type="date" class="form-input">
+            </div>
+            <button type="submit" class="btn-primary w-100"><i class="bi bi-plus-circle me-2"></i>تفعيل الكود</button>
+          </form>
+        </div>
+
+        <!-- Existing coupons -->
+        <div class="px-4 pb-4">
+          <div style="font-size:.78rem;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">الأكواد النشطة</div>
+          <div class="coupon-row">
+            <div><div class="user-name" style="font-size:.85rem;font-family:monospace">EID2026</div><div class="user-id">خصم 20% · انتهى: 2026-04-25 · استُخدم 8/100</div></div>
+            <button class="btn-resolve btn-red" style="font-size:.7rem"><i class="bi bi-x-circle me-1"></i>إلغاء</button>
+          </div>
+          <div class="coupon-row">
+            <div><div class="user-name" style="font-size:.85rem;font-family:monospace">SUMMER10</div><div class="user-id">خصم 10% · انتهى: 2026-05-31 · استُخدم 34/200</div></div>
+            <button class="btn-resolve btn-red" style="font-size:.7rem"><i class="bi bi-x-circle me-1"></i>إلغاء</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mass notification -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-header-custom">
+          <div>
+            <p class="section-title"><i class="bi bi-bell-fill me-2 text-warning"></i>إشعار جماعي</p>
+            <p class="section-sub">إرسال رسالة لجميع المستخدمين</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">عنوان الإشعار</label>
+              <input type="text" class="form-input" placeholder="خصم رمضاني حصري!">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">نص الرسالة</label>
+              <textarea class="form-input" rows="4" placeholder="اكتب الرسالة التي ستظهر لكل المستخدمين..."></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">المستهدفون</label>
+              <select class="form-input">
+                <option>جميع المستخدمين (550)</option>
+                <option>التجار فقط (18)</option>
+                <option>العملاء النشطون فقط (512)</option>
+                <option>العملاء الجدد (28)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary w-100"><i class="bi bi-send me-2"></i>إرسال الإشعار الآن</button>
+          </form>
+        </div>
+
+        <!-- History -->
+        <div class="px-4 pb-4">
+          <div style="font-size:.78rem;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">آخر الإشعارات المرسلة</div>
+          <div class="activity-item" style="padding:10px 0">
+            <div class="act-dot act-green" style="width:30px;height:30px;font-size:.8rem"><i class="bi bi-send-check"></i></div>
+            <div class="flex-grow-1"><div class="act-text">إشعار بخصم العيد 20%</div><div class="act-time">منذ ٣ أيام · أُرسل لـ٥٥٠ مستخدم</div></div>
+          </div>
+          <div class="activity-item" style="padding:10px 0">
+            <div class="act-dot act-blue" style="width:30px;height:30px;font-size:.8rem"><i class="bi bi-send-check"></i></div>
+            <div class="flex-grow-1"><div class="act-text">تحديث: خدمات جديدة متاحة</div><div class="act-time">منذ أسبوع · أُرسل لـ٥٣٠ مستخدم</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
