@@ -4,167 +4,169 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>الدعم الفني — Elawaady</title>
-  <meta name="description" content="الرد على استفسارات ومشاكل العملاء">
+  <link rel="icon" href="../assets/img/favicon_1775018842_4158.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <style>
-    body { padding: 28px; background: var(--surface-2); }
-    .main-content { max-width: 1140px; margin: 0 auto; animation: fadeInUp .4s ease-out; }
-    @keyframes fadeInUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-    .ticket-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px;
-      border-bottom: 1px solid var(--border);
-      transition: background var(--t-fast);
-      cursor: pointer;
-    }
-    .ticket-card:last-child { border-bottom: none; }
-    .ticket-card:hover { background: var(--surface-2); }
-    .ticket-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    .ticket-unread-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--brand);
-      border-radius: 50%;
-      flex-shrink: 0;
-      animation: pulse-badge 2s infinite;
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/pages.css">
+  
 </head>
 <body>
-
-<main class="main-content">
-  <div class="page-header d-flex justify-content-between align-items-center">
-    <div>
-      <h1 class="page-title"><i class="bi bi-headset me-2 text-primary"></i>الدعم الفني</h1>
-      <p class="page-subtitle">الرد على استفسارات ومشاكل العملاء</p>
+<div id="overlay"></div>
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><i class="bi bi-controller"></i></div>
+    <span class="brand-name">El<span>awaady</span></span>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-group">
+      <span class="nav-label">الرئيسية</span>
+      <a href="../index.html" class="nav-item" id="nav-dashboard"><i class="bi bi-speedometer2"></i>لوحة التحكم</a>
+      <a href="./admins.html" class="nav-item" id="nav-admins"><i class="bi bi-person-badge"></i>الموظفين</a>
+      <a href="./users.html" class="nav-item" id="nav-users"><i class="bi bi-people"></i>العملاء</a>
+      <a href="./vendors.html" class="nav-item" id="nav-vendors"><i class="bi bi-shop"></i>التجار</a>
     </div>
-    <div class="d-flex gap-2">
-      <div class="live-dot"></div>
-      <span style="font-size:.82rem;color:var(--text-2);font-weight:600">مباشر</span>
+    <div class="nav-group">
+      <span class="nav-label">التسويق والمبيعات</span>
+      <a href="./scraping.html" class="nav-item" id="nav-scraping"><i class="bi bi-megaphone"></i>التسويق</a>
+      <a href="./orders.html" class="nav-item" id="nav-orders"><i class="bi bi-bag-check"></i>الطلبات</a>
+      <a href="./services.html" class="nav-item" id="nav-services"><i class="bi bi-grid-3x3-gap"></i>خدمات الكروت</a>
+      <a href="./providers.html" class="nav-item" id="nav-providers"><i class="bi bi-plug"></i>بروفيدر الخدمات</a>
+      <a href="./smm_compare.html" class="nav-item" id="nav-smm_compare"><i class="bi bi-bar-chart-line"></i>مقارنة الخدمات</a>
+      <a href="./smm_services.html" class="nav-item" id="nav-smm_services"><i class="bi bi-graph-up-arrow"></i>خدمات السوشيال ميديا</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-label">الدعم والتواصل</span>
+      <a href="./chat.html" class="nav-item active" id="nav-chat"><i class="bi bi-headset"></i>الدعم الفني
+        <span id="supportBadge" class="nav-badge" style="display:none">0</span></a>
+      <a href="./escrow_chat.html" class="nav-item" id="nav-escrow_chat"><i class="bi bi-shield-check"></i>الوساطات</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-label">إدارة الموقع</span>
+      <a href="./home_sections.html" class="nav-item" id="nav-home_sections"><i class="bi bi-layout-text-sidebar-reverse"></i>إدارة الموقع</a>
+      <a href="./side_menu.html" class="nav-item" id="nav-side_menu"><i class="bi bi-list-ul"></i>القائمة الجانبية</a>
+      <a href="./social_links.html" class="nav-item" id="nav-social_links"><i class="bi bi-link-45deg"></i>صفحاتنا وجروباتنا</a>
+      <a href="./testimonials.html" class="nav-item" id="nav-testimonials"><i class="bi bi-star-half"></i>آراء العملاء</a>
+      <a href="./settings.html" class="nav-item" id="nav-settings"><i class="bi bi-gear"></i>الإعدادات</a>
     </div>
   </div>
-
-  <!-- Stats -->
-  <div class="row g-3 mb-4">
-    <div class="col-sm-3">
-      <div class="stat-card blue" style="padding:14px 16px">
-        <div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-envelope-open"></i></div>
-        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">3</div><div class="stat-label">تذاكر مفتوحة</div></div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="stat-card green" style="padding:14px 16px">
-        <div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-chat-check"></i></div>
-        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">14</div><div class="stat-label">تم الرد</div></div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="stat-card orange" style="padding:14px 16px">
-        <div class="stat-icon-wrap orange" style="width:38px;height:38px"><i class="bi bi-clock-history"></i></div>
-        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">12 د</div><div class="stat-label">متوسط وقت الرد</div></div>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="stat-card purple" style="padding:14px 16px">
-        <div class="stat-icon-wrap purple" style="width:38px;height:38px"><i class="bi bi-x-circle"></i></div>
-        <div class="stat-body"><div class="stat-value" style="font-size:1.3rem">89</div><div class="stat-label">مغلقة</div></div>
-      </div>
-    </div>
+  <div class="sidebar-footer">
+    <form action="" method="POST">
+      <input type="hidden" name="logout" value="true">
+      <button type="submit" class="logout-btn"><i class="bi bi-box-arrow-left"></i>تسجيل الخروج</button>
+    </form>
   </div>
+</aside>
 
-  <!-- Tickets -->
-  <div class="card">
-    <div class="card-header-custom">
-      <div><p class="section-title">التذاكر والمحادثات</p><p class="section-sub">قائمة استفسارات العملاء</p></div>
-      <div class="d-flex gap-2">
-        <div style="position:relative">
-          <i class="bi bi-search" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:.85rem"></i>
-          <input type="text" class="form-input" placeholder="بحث في التذاكر..." style="width:210px;padding-right:32px;height:36px;font-size:.82rem">
+<div id="mainContent">
+  <header class="topbar">
+    <div class="topbar-start">
+      <button id="toggleSidebarBtn" class="menu-toggle" aria-label="القائمة"><i class="bi bi-list"></i></button>
+      <div class="search-wrapper" id="searchWrapper">
+        <i class="bi bi-search search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="بحث أو اكتب أمر..." autocomplete="off">
+        <span class="search-kbd"><i class="bi bi-command"></i>K</span>
+        <div class="search-dropdown" id="searchDropdown">
+          <div class="search-section-label">الصفحات</div>
+          <a href="../index.html" class="search-result-item"><i class="bi bi-speedometer2"></i>لوحة التحكم</a>
+          <a href="./users.html" class="search-result-item"><i class="bi bi-people"></i>العملاء</a>
+          <a href="./orders.html" class="search-result-item"><i class="bi bi-bag-check"></i>الطلبات</a>
+          <a href="./chat.html" class="search-result-item"><i class="bi bi-headset"></i>الدعم الفني</a>
+          <a href="./settings.html" class="search-result-item"><i class="bi bi-gear"></i>الإعدادات</a>
         </div>
       </div>
     </div>
-
-    <div class="tab-bar">
-      <button class="tab-item active">مفتوحة (3)</button>
-      <button class="tab-item">تم الرد (14)</button>
-      <button class="tab-item">مغلقة (89)</button>
-    </div>
-
-    <!-- Ticket items -->
-    <div class="ticket-card">
-      <div class="ticket-icon" style="background:var(--brand-light);color:var(--brand)">
-        <i class="bi bi-chat-dots"></i>
-      </div>
-      <div class="flex-grow-1">
-        <div class="d-flex align-items-center gap-2 mb-1">
-          <div class="user-name" style="font-size:.88rem">مشكلة في شحن الرصيد</div>
-          <span class="badge-custom badge-dispute" style="font-size:.65rem;padding:2px 8px">عاجل</span>
-          <div class="ticket-unread-dot"></div>
+    <div class="topbar-end">
+      <button class="icon-action-btn" id="themeToggleBtn" title="تبديل الوضع">
+        <i class="bi bi-moon" id="moonIcon"></i><i class="bi bi-sun" id="sunIcon" style="display:none"></i>
+      </button>
+      <div class="dropdown-wrapper">
+        <button class="icon-action-btn pos-rel" id="notifBtn"><i class="bi bi-bell"></i><span class="notif-dot"></span></button>
+        <div class="dropdown-menu notif-menu" id="notifMenu">
+          <div class="dropdown-header">الإشعارات</div>
+          <div class="notif-item unread"><div class="notif-avatar av-blue">ن</div><div class="notif-body"><div class="notif-text"><strong>نورا حسن</strong> شحنت محفظتها بـ ٨٠٠ج</div><div class="notif-time"><i class="bi bi-clock"></i> منذ ٥ دقائق</div></div></div>
+          <div class="notif-item unread"><div class="notif-avatar av-green">ع</div><div class="notif-body"><div class="notif-text"><strong>عمر خالد</strong> أكمل صفقة PUBG</div><div class="notif-time"><i class="bi bi-clock"></i> منذ ٢٠ دقيقة</div></div></div>
+          <div class="dropdown-footer"><a href="#" class="see-all-notif">عرض كل الإشعارات</a></div>
         </div>
-        <div style="font-size:.78rem;color:var(--text-3)"><i class="bi bi-person me-1"></i>عمر خالد <span class="mx-2">·</span><i class="bi bi-clock me-1"></i>منذ ١٠ دقائق <span class="mx-2">·</span><i class="bi bi-tag me-1"></i>#TKT-0082</div>
-        <div style="font-size:.8rem;color:var(--text-2);margin-top:4px">"حاولت أشحن محفظتي بـ 200 جنيه بس ما الرصيد مجاش..."</div>
       </div>
-      <button class="btn-primary" style="padding:7px 16px;font-size:.8rem;white-space:nowrap"><i class="bi bi-chat-text me-1"></i>فتح الدردشة</button>
-    </div>
-
-    <div class="ticket-card">
-      <div class="ticket-icon" style="background:var(--green-light);color:var(--green)">
-        <i class="bi bi-tools"></i>
-      </div>
-      <div class="flex-grow-1">
-        <div class="d-flex align-items-center gap-2 mb-1">
-          <div class="user-name" style="font-size:.88rem">طلب خدمة مخصصة</div>
-          <div class="ticket-unread-dot"></div>
+      <div class="dropdown-wrapper">
+        <button id="licenseBtn" class="topbar-btn"><i class="bi bi-key"></i><span class="license-days">215 يوم</span></button>
+        <div id="licenseMenu" class="dropdown-menu">
+          <div class="dropdown-header">معلومات الترخيص</div>
+          <div class="dropdown-row"><span class="dr-label">الحالة</span><span class="status-pill active"><i class="bi bi-circle-fill" style="font-size:.5rem"></i>مفتوح</span></div>
+          <div class="dropdown-row"><span class="dr-label">تاريخ الانتهاء</span><span class="dr-value">2026-11-16</span></div>
+          <div class="dropdown-row"><span class="dr-label">المتبقي</span><span class="dr-value">215 يوم &bull; 7 ساعة</span></div>
+          <div class="dropdown-footer"><a href="https://mediapanal.com" target="_blank" class="renew-btn">تجديد الاشتراك</a></div>
         </div>
-        <div style="font-size:.78rem;color:var(--text-3)"><i class="bi bi-person me-1"></i>سارة أحمد <span class="mx-2">·</span><i class="bi bi-clock me-1"></i>منذ ساعة <span class="mx-2">·</span><i class="bi bi-tag me-1"></i>#TKT-0081</div>
-        <div style="font-size:.8rem;color:var(--text-2);margin-top:4px">"عايزة خدمة لايكات تيك توك بأسعار الجملة..."</div>
       </div>
-      <button class="btn-primary" style="padding:7px 16px;font-size:.8rem;white-space:nowrap"><i class="bi bi-chat-text me-1"></i>فتح الدردشة</button>
-    </div>
-
-    <div class="ticket-card">
-      <div class="ticket-icon" style="background:var(--orange-light);color:var(--orange)">
-        <i class="bi bi-question-circle"></i>
-      </div>
-      <div class="flex-grow-1">
-        <div class="d-flex align-items-center gap-2 mb-1">
-          <div class="user-name" style="font-size:.88rem">استفسار عن طريقة الدفع</div>
+      <div class="dropdown-wrapper">
+        <button id="profileBtn" class="topbar-profile"><div class="avatar">E</div><span class="profile-name">elawaady</span><i class="bi bi-chevron-down chevron"></i></button>
+        <div id="profileMenu" class="dropdown-menu dropdown-menu-wide">
+          <div class="dropdown-header-profile"><div class="avatar">E</div><div><div class="profile-menu-name">elawaady</div><div class="profile-menu-role">مدير النظام</div></div></div>
+          <a href="profile" class="dropdown-item-link"><i class="bi bi-person"></i>الملف الشخصي</a>
+          <a href="./settings.html" class="dropdown-item-link"><i class="bi bi-gear"></i>الإعدادات</a>
+          <div class="dropdown-divider"></div>
+          <form action="" method="POST"><input type="hidden" name="logout" value="true"><button type="submit" class="dropdown-item-link logout-link"><i class="bi bi-box-arrow-left"></i>تسجيل الخروج</button></form>
         </div>
-        <div style="font-size:.78rem;color:var(--text-3)"><i class="bi bi-person me-1"></i>محمد ربيع <span class="mx-2">·</span><i class="bi bi-clock me-1"></i>منذ ٣ ساعات <span class="mx-2">·</span><i class="bi bi-tag me-1"></i>#TKT-0080</div>
-        <div style="font-size:.8rem;color:var(--text-2);margin-top:4px">"هل تقبلون الدفع بفودافون كاش؟"</div>
       </div>
-      <button class="btn-primary" style="padding:7px 16px;font-size:.8rem;white-space:nowrap"><i class="bi bi-chat-text me-1"></i>فتح الدردشة</button>
     </div>
-  </div>
-</main>
+  </header>
+  <main class="main-content">
 
+    <div class="page-header d-flex justify-content-between align-items-center">
+      <div><h1 class="page-title"><i class="bi bi-headset me-2 text-primary"></i>الدعم الفني</h1><p class="page-subtitle">الرد على استفسارات ومشاكل العملاء</p></div>
+      <div class="d-flex gap-2"><div class="live-dot"></div><span style="font-size:.82rem;color:var(--text-2);font-weight:600">مباشر</span></div>
+    </div>
+    <div class="row g-3 mb-4">
+      <div class="col-sm-3"><div class="stat-card blue h-100"><div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-envelope-open"></i></div><div class="stat-body"><div class="stat-value" style="font-size:1.3rem">3</div><div class="stat-label">تذاكر مفتوحة</div></div></div></div>
+      <div class="col-sm-3"><div class="stat-card green h-100"><div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-chat-check"></i></div><div class="stat-body"><div class="stat-value" style="font-size:1.3rem">14</div><div class="stat-label">تم الرد</div></div></div></div>
+      <div class="col-sm-3"><div class="stat-card orange h-100"><div class="stat-icon-wrap orange" style="width:38px;height:38px"><i class="bi bi-clock-history"></i></div><div class="stat-body"><div class="stat-value" style="font-size:1.3rem">12 د</div><div class="stat-label">متوسط وقت الرد</div></div></div></div>
+      <div class="col-sm-3"><div class="stat-card purple h-100"><div class="stat-icon-wrap purple" style="width:38px;height:38px"><i class="bi bi-x-circle"></i></div><div class="stat-body"><div class="stat-value" style="font-size:1.3rem">89</div><div class="stat-label">مغلقة</div></div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header-custom">
+        <div><p class="section-title">التذاكر والمحادثات</p><p class="section-sub">قائمة استفسارات العملاء</p></div>
+        <div class="d-flex gap-2"><div style="position:relative"><i class="bi bi-search" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:.85rem"></i><input type="text" class="form-input" placeholder="بحث في التذاكر..." style="width:210px;padding-right:32px;height:36px;font-size:.82rem"></div></div>
+      </div>
+      <div class="tab-bar"><button class="tab-item active">مفتوحة (3)</button><button class="tab-item">تم الرد (14)</button><button class="tab-item">مغلقة (89)</button></div>
+      <div style="display:flex;align-items:center;gap:16px;padding:18px;border-bottom:1px solid var(--border);transition:background var(--t-fast);cursor:pointer" onmouseover="this.style.background='var(--surface-2)'" onmouseout="this.style.background=''">
+        <div style="width:46px;height:46px;border-radius:12px;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0"><i class="bi bi-chat-dots"></i></div>
+        <div class="flex-grow-1">
+          <div class="d-flex align-items-center gap-2 mb-1"><div class="user-name" style="font-size:.88rem">مشكلة في شحن الرصيد</div><span class="badge-custom badge-dispute" style="font-size:.65rem;padding:2px 8px">عاجل</span><div style="width:8px;height:8px;background:var(--brand);border-radius:50%;flex-shrink:0;animation:pulse-badge 2s infinite"></div></div>
+          <div style="font-size:.78rem;color:var(--text-3)"><i class="bi bi-person me-1"></i>عمر خالد <span class="mx-2">·</span><i class="bi bi-clock me-1"></i>منذ ١٠ دقائق <span class="mx-2">·</span><i class="bi bi-tag me-1"></i>#TKT-0082</div>
+          <div style="font-size:.8rem;color:var(--text-2);margin-top:4px">"حاولت أشحن محفظتي بـ 200 جنيه بس ما الرصيد مجاش..."</div>
+        </div>
+        <button class="btn-primary" style="padding:7px 16px;font-size:.8rem;white-space:nowrap"><i class="bi bi-chat-text me-1"></i>فتح الدردشة</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:18px;border-bottom:1px solid var(--border);cursor:pointer" onmouseover="this.style.background='var(--surface-2)'" onmouseout="this.style.background=''">
+        <div style="width:46px;height:46px;border-radius:12px;background:var(--green-light);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0"><i class="bi bi-tools"></i></div>
+        <div class="flex-grow-1">
+          <div class="d-flex align-items-center gap-2 mb-1"><div class="user-name" style="font-size:.88rem">طلب خدمة مخصصة</div><div style="width:8px;height:8px;background:var(--brand);border-radius:50%;flex-shrink:0;animation:pulse-badge 2s infinite"></div></div>
+          <div style="font-size:.78rem;color:var(--text-3)"><i class="bi bi-person me-1"></i>سارة أحمد <span class="mx-2">·</span><i class="bi bi-clock me-1"></i>منذ ساعة <span class="mx-2">·</span>#TKT-0081</div>
+          <div style="font-size:.8rem;color:var(--text-2);margin-top:4px">"عايزة خدمة لايكات تيك توك بأسعار الجملة..."</div>
+        </div>
+        <button class="btn-primary" style="padding:7px 16px;font-size:.8rem;white-space:nowrap"><i class="bi bi-chat-text me-1"></i>فتح الدردشة</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;padding:18px;cursor:pointer" onmouseover="this.style.background='var(--surface-2)'" onmouseout="this.style.background=''">
+        <div style="width:46px;height:46px;border-radius:12px;background:var(--orange-light);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0"><i class="bi bi-question-circle"></i></div>
+        <div class="flex-grow-1">
+          <div class="d-flex align-items-center gap-2 mb-1"><div class="user-name" style="font-size:.88rem">استفسار عن طريقة الدفع</div></div>
+          <div style="font-size:.78rem;color:var(--text-3)"><i class="bi bi-person me-1"></i>محمد ربيع <span class="mx-2">·</span><i class="bi bi-clock me-1"></i>منذ ٣ ساعات <span class="mx-2">·</span>#TKT-0080</div>
+          <div style="font-size:.8rem;color:var(--text-2);margin-top:4px">"هل تقبلون الدفع بفودافون كاش؟"</div>
+        </div>
+        <button class="btn-primary" style="padding:7px 16px;font-size:.8rem;white-space:nowrap"><i class="bi bi-chat-text me-1"></i>فتح الدردشة</button>
+      </div>
+    </div>
+
+
+  </main>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  document.querySelectorAll('.tab-bar').forEach(bar => {
-    bar.querySelectorAll('.tab-item').forEach(btn => {
-      btn.addEventListener('click', () => {
-        bar.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-  });
-</script>
+<script src="../assets/script/script.js"></script>
 <script src="../assets/script/pages-script.js"></script>
+<script>document.querySelectorAll(".tab-bar").forEach(b=>{b.querySelectorAll(".tab-item").forEach(btn=>{btn.addEventListener("click",()=>{b.querySelectorAll(".tab-item").forEach(x=>x.classList.remove("active"));btn.classList.add("active");});});});</script>
 </body>
 </html>

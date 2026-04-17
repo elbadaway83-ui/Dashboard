@@ -4,172 +4,142 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تخصيص القائمة — Elawaady</title>
-  <meta name="description" content="ترتيب وإخفاء عناصر القائمة الجانبية">
+  <link rel="icon" href="../assets/img/favicon_1775018842_4158.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <style>
-    body { padding: 28px; background: var(--surface-2); }
-    .main-content { max-width: 860px; margin: 0 auto; animation: fadeInUp .4s ease-out; }
-    @keyframes fadeInUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-    .menu-item { cursor: grab; }
-    .menu-item.dragging { opacity: .5; background: var(--brand-light); }
-    .menu-item-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .95rem;
-      flex-shrink: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/pages.css">
+  
 </head>
 <body>
-
-<main class="main-content">
-  <div class="page-header d-flex justify-content-between align-items-center">
-    <div>
-      <h1 class="page-title"><i class="bi bi-list-ul me-2 text-primary"></i>تخصيص القائمة</h1>
-      <p class="page-subtitle">ترتيب وإخفاء عناصر القائمة الجانبية بالسحب والإفلات</p>
+<div id="overlay"></div>
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><i class="bi bi-controller"></i></div>
+    <span class="brand-name">El<span>awaady</span></span>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-group">
+      <span class="nav-label">الرئيسية</span>
+      <a href="../index.html" class="nav-item" id="nav-dashboard"><i class="bi bi-speedometer2"></i>لوحة التحكم</a>
+      <a href="./admins.html" class="nav-item" id="nav-admins"><i class="bi bi-person-badge"></i>الموظفين</a>
+      <a href="./users.html" class="nav-item" id="nav-users"><i class="bi bi-people"></i>العملاء</a>
+      <a href="./vendors.html" class="nav-item" id="nav-vendors"><i class="bi bi-shop"></i>التجار</a>
     </div>
-    <div class="d-flex gap-2">
-      <button class="btn-secondary"><i class="bi bi-arrow-counterclockwise me-1"></i>إعادة الترتيب الافتراضي</button>
-      <button class="btn-primary"><i class="bi bi-floppy me-1"></i>حفظ الترتيب</button>
+    <div class="nav-group">
+      <span class="nav-label">التسويق والمبيعات</span>
+      <a href="./scraping.html" class="nav-item" id="nav-scraping"><i class="bi bi-megaphone"></i>التسويق</a>
+      <a href="./orders.html" class="nav-item" id="nav-orders"><i class="bi bi-bag-check"></i>الطلبات</a>
+      <a href="./services.html" class="nav-item" id="nav-services"><i class="bi bi-grid-3x3-gap"></i>خدمات الكروت</a>
+      <a href="./providers.html" class="nav-item" id="nav-providers"><i class="bi bi-plug"></i>بروفيدر الخدمات</a>
+      <a href="./smm_compare.html" class="nav-item" id="nav-smm_compare"><i class="bi bi-bar-chart-line"></i>مقارنة الخدمات</a>
+      <a href="./smm_services.html" class="nav-item" id="nav-smm_services"><i class="bi bi-graph-up-arrow"></i>خدمات السوشيال ميديا</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-label">الدعم والتواصل</span>
+      <a href="./chat.html" class="nav-item" id="nav-chat"><i class="bi bi-headset"></i>الدعم الفني
+        <span id="supportBadge" class="nav-badge" style="display:none">0</span></a>
+      <a href="./escrow_chat.html" class="nav-item" id="nav-escrow_chat"><i class="bi bi-shield-check"></i>الوساطات</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-label">إدارة الموقع</span>
+      <a href="./home_sections.html" class="nav-item" id="nav-home_sections"><i class="bi bi-layout-text-sidebar-reverse"></i>إدارة الموقع</a>
+      <a href="./side_menu.html" class="nav-item active" id="nav-side_menu"><i class="bi bi-list-ul"></i>القائمة الجانبية</a>
+      <a href="./social_links.html" class="nav-item" id="nav-social_links"><i class="bi bi-link-45deg"></i>صفحاتنا وجروباتنا</a>
+      <a href="./testimonials.html" class="nav-item" id="nav-testimonials"><i class="bi bi-star-half"></i>آراء العملاء</a>
+      <a href="./settings.html" class="nav-item" id="nav-settings"><i class="bi bi-gear"></i>الإعدادات</a>
     </div>
   </div>
-
-  <!-- Info -->
-  <div class="alert-bar mb-3" style="background:var(--brand-light);border-color:var(--brand-mid);color:var(--brand)">
-    <div class="alert-inner"><i class="bi bi-info-circle-fill"></i>اسحب العناصر لإعادة الترتيب · انقر على الحالة لإظهار/إخفاء العنصر</div>
+  <div class="sidebar-footer">
+    <form action="" method="POST">
+      <input type="hidden" name="logout" value="true">
+      <button type="submit" class="logout-btn"><i class="bi bi-box-arrow-left"></i>تسجيل الخروج</button>
+    </form>
   </div>
+</aside>
 
-  <div class="card" id="menuList">
-    <!-- Group 1 -->
-    <div style="padding:10px 18px;background:var(--surface-2);border-bottom:1px solid var(--border)">
-      <span style="font-size:.67rem;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em">الرئيسية</span>
-    </div>
-
-    <div class="menu-item" draggable="true">
-      <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-grip-vertical drag-handle"></i>
-        <div class="menu-item-icon" style="background:var(--brand-light);color:var(--brand)"><i class="bi bi-speedometer2"></i></div>
-        <div>
-          <div class="user-name" style="font-size:.88rem">لوحة التحكم (Dashboard)</div>
-          <div class="user-id">/dashboard</div>
+<div id="mainContent">
+  <header class="topbar">
+    <div class="topbar-start">
+      <button id="toggleSidebarBtn" class="menu-toggle" aria-label="القائمة"><i class="bi bi-list"></i></button>
+      <div class="search-wrapper" id="searchWrapper">
+        <i class="bi bi-search search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="بحث أو اكتب أمر..." autocomplete="off">
+        <span class="search-kbd"><i class="bi bi-command"></i>K</span>
+        <div class="search-dropdown" id="searchDropdown">
+          <div class="search-section-label">الصفحات</div>
+          <a href="../index.html" class="search-result-item"><i class="bi bi-speedometer2"></i>لوحة التحكم</a>
+          <a href="./users.html" class="search-result-item"><i class="bi bi-people"></i>العملاء</a>
+          <a href="./orders.html" class="search-result-item"><i class="bi bi-bag-check"></i>الطلبات</a>
+          <a href="./chat.html" class="search-result-item"><i class="bi bi-headset"></i>الدعم الفني</a>
+          <a href="./settings.html" class="search-result-item"><i class="bi bi-gear"></i>الإعدادات</a>
         </div>
       </div>
-      <span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span>
     </div>
-
-    <div class="menu-item" draggable="true">
-      <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-grip-vertical drag-handle"></i>
-        <div class="menu-item-icon" style="background:#e0e7ff;color:#3730a3"><i class="bi bi-person-badge"></i></div>
-        <div>
-          <div class="user-name" style="font-size:.88rem">الموظفين (Admins)</div>
-          <div class="user-id">/admins</div>
+    <div class="topbar-end">
+      <button class="icon-action-btn" id="themeToggleBtn" title="تبديل الوضع">
+        <i class="bi bi-moon" id="moonIcon"></i><i class="bi bi-sun" id="sunIcon" style="display:none"></i>
+      </button>
+      <div class="dropdown-wrapper">
+        <button class="icon-action-btn pos-rel" id="notifBtn"><i class="bi bi-bell"></i><span class="notif-dot"></span></button>
+        <div class="dropdown-menu notif-menu" id="notifMenu">
+          <div class="dropdown-header">الإشعارات</div>
+          <div class="notif-item unread"><div class="notif-avatar av-blue">ن</div><div class="notif-body"><div class="notif-text"><strong>نورا حسن</strong> شحنت محفظتها بـ ٨٠٠ج</div><div class="notif-time"><i class="bi bi-clock"></i> منذ ٥ دقائق</div></div></div>
+          <div class="notif-item unread"><div class="notif-avatar av-green">ع</div><div class="notif-body"><div class="notif-text"><strong>عمر خالد</strong> أكمل صفقة PUBG</div><div class="notif-time"><i class="bi bi-clock"></i> منذ ٢٠ دقيقة</div></div></div>
+          <div class="dropdown-footer"><a href="#" class="see-all-notif">عرض كل الإشعارات</a></div>
         </div>
       </div>
-      <span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span>
-    </div>
-
-    <div class="menu-item" draggable="true">
-      <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-grip-vertical drag-handle"></i>
-        <div class="menu-item-icon" style="background:var(--green-light);color:var(--green)"><i class="bi bi-people"></i></div>
-        <div>
-          <div class="user-name" style="font-size:.88rem">العملاء (Users)</div>
-          <div class="user-id">/users</div>
+      <div class="dropdown-wrapper">
+        <button id="licenseBtn" class="topbar-btn"><i class="bi bi-key"></i><span class="license-days">215 يوم</span></button>
+        <div id="licenseMenu" class="dropdown-menu">
+          <div class="dropdown-header">معلومات الترخيص</div>
+          <div class="dropdown-row"><span class="dr-label">الحالة</span><span class="status-pill active"><i class="bi bi-circle-fill" style="font-size:.5rem"></i>مفتوح</span></div>
+          <div class="dropdown-row"><span class="dr-label">تاريخ الانتهاء</span><span class="dr-value">2026-11-16</span></div>
+          <div class="dropdown-row"><span class="dr-label">المتبقي</span><span class="dr-value">215 يوم &bull; 7 ساعة</span></div>
+          <div class="dropdown-footer"><a href="https://mediapanal.com" target="_blank" class="renew-btn">تجديد الاشتراك</a></div>
         </div>
       </div>
-      <span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span>
-    </div>
-
-    <!-- Group 2 -->
-    <div style="padding:10px 18px;background:var(--surface-2);border-bottom:1px solid var(--border);border-top:1px solid var(--border)">
-      <span style="font-size:.67rem;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em">التسويق والمبيعات</span>
-    </div>
-
-    <div class="menu-item" draggable="true">
-      <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-grip-vertical drag-handle"></i>
-        <div class="menu-item-icon" style="background:var(--orange-light);color:var(--orange)"><i class="bi bi-bag-check"></i></div>
-        <div>
-          <div class="user-name" style="font-size:.88rem">الطلبات (Orders)</div>
-          <div class="user-id">/orders</div>
+      <div class="dropdown-wrapper">
+        <button id="profileBtn" class="topbar-profile"><div class="avatar">E</div><span class="profile-name">elawaady</span><i class="bi bi-chevron-down chevron"></i></button>
+        <div id="profileMenu" class="dropdown-menu dropdown-menu-wide">
+          <div class="dropdown-header-profile"><div class="avatar">E</div><div><div class="profile-menu-name">elawaady</div><div class="profile-menu-role">مدير النظام</div></div></div>
+          <a href="profile" class="dropdown-item-link"><i class="bi bi-person"></i>الملف الشخصي</a>
+          <a href="./settings.html" class="dropdown-item-link"><i class="bi bi-gear"></i>الإعدادات</a>
+          <div class="dropdown-divider"></div>
+          <form action="" method="POST"><input type="hidden" name="logout" value="true"><button type="submit" class="dropdown-item-link logout-link"><i class="bi bi-box-arrow-left"></i>تسجيل الخروج</button></form>
         </div>
       </div>
-      <span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span>
+    </div>
+  </header>
+  <main class="main-content">
+
+    <div class="page-header d-flex justify-content-between align-items-center">
+      <div><h1 class="page-title"><i class="bi bi-list-ul me-2 text-primary"></i>تخصيص القائمة</h1><p class="page-subtitle">ترتيب وإخفاء عناصر القائمة الجانبية بالسحب والإفلات</p></div>
+      <div class="d-flex gap-2"><button class="btn-secondary"><i class="bi bi-arrow-counterclockwise me-1"></i>إعادة الترتيب الافتراضي</button><button class="btn-primary"><i class="bi bi-floppy me-1"></i>حفظ الترتيب</button></div>
+    </div>
+    <div class="alert-bar mb-3"><div class="alert-inner"><i class="bi bi-info-circle-fill"></i>اسحب العناصر لإعادة الترتيب · انقر على الحالة لإظهار/إخفاء العنصر</div></div>
+    <div class="card" id="menuList">
+      <div style="padding:10px 18px;background:var(--surface-2);border-bottom:1px solid var(--border)"><span style="font-size:.67rem;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em">الرئيسية</span></div>
+      <div class="menu-item" draggable="true"><div class="d-flex align-items-center gap-3"><i class="bi bi-grip-vertical drag-handle"></i><div style="width:36px;height:36px;border-radius:10px;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0"><i class="bi bi-speedometer2"></i></div><div><div class="user-name" style="font-size:.88rem">لوحة التحكم (Dashboard)</div><div class="user-id">/dashboard</div></div></div><span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span></div>
+      <div class="menu-item" draggable="true"><div class="d-flex align-items-center gap-3"><i class="bi bi-grip-vertical drag-handle"></i><div style="width:36px;height:36px;border-radius:10px;background:#e0e7ff;color:#3730a3;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0"><i class="bi bi-person-badge"></i></div><div><div class="user-name" style="font-size:.88rem">الموظفين (Admins)</div><div class="user-id">/admins</div></div></div><span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span></div>
+      <div class="menu-item" draggable="true"><div class="d-flex align-items-center gap-3"><i class="bi bi-grip-vertical drag-handle"></i><div style="width:36px;height:36px;border-radius:10px;background:var(--green-light);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0"><i class="bi bi-people"></i></div><div><div class="user-name" style="font-size:.88rem">العملاء (Users)</div><div class="user-id">/users</div></div></div><span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span></div>
+      <div style="padding:10px 18px;background:var(--surface-2);border-bottom:1px solid var(--border);border-top:1px solid var(--border)"><span style="font-size:.67rem;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em">التسويق والمبيعات</span></div>
+      <div class="menu-item" draggable="true"><div class="d-flex align-items-center gap-3"><i class="bi bi-grip-vertical drag-handle"></i><div style="width:36px;height:36px;border-radius:10px;background:var(--orange-light);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0"><i class="bi bi-bag-check"></i></div><div><div class="user-name" style="font-size:.88rem">الطلبات (Orders)</div><div class="user-id">/orders</div></div></div><span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span></div>
+      <div class="menu-item" draggable="true"><div class="d-flex align-items-center gap-3"><i class="bi bi-grip-vertical drag-handle"></i><div style="width:36px;height:36px;border-radius:10px;background:var(--purple-light);color:var(--purple);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0"><i class="bi bi-graph-up-arrow"></i></div><div><div class="user-name" style="font-size:.88rem">خدمات السوشيال ميديا</div><div class="user-id">/smm-services</div></div></div><span class="badge-custom" style="background:var(--surface-3);color:var(--text-3);cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye-slash me-1"></i>مخفي</span></div>
+      <div style="margin-top:12px;padding:14px 18px;border-top:1px solid var(--border);text-align:center"><button class="btn-primary"><i class="bi bi-floppy me-2"></i>حفظ جميع التغييرات</button></div>
     </div>
 
-    <div class="menu-item" draggable="true">
-      <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-grip-vertical drag-handle"></i>
-        <div class="menu-item-icon" style="background:var(--purple-light);color:var(--purple)"><i class="bi bi-graph-up-arrow"></i></div>
-        <div>
-          <div class="user-name" style="font-size:.88rem">خدمات السوشيال ميديا</div>
-          <div class="user-id">/smm-services</div>
-        </div>
-      </div>
-      <span class="badge-custom badge-hold" style="cursor:pointer;background:var(--surface-3);color:var(--text-3)" onclick="toggleStatus(this)"><i class="bi bi-eye-slash me-1"></i>مخفي</span>
-    </div>
 
-    <div class="menu-item" draggable="true">
-      <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-grip-vertical drag-handle"></i>
-        <div class="menu-item-icon" style="background:var(--brand-light);color:var(--brand)"><i class="bi bi-megaphone"></i></div>
-        <div>
-          <div class="user-name" style="font-size:.88rem">أدوات التسويق</div>
-          <div class="user-id">/marketing</div>
-        </div>
-      </div>
-      <span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span>
-    </div>
-
-    <!-- Group 3 -->
-    <div style="padding:10px 18px;background:var(--surface-2);border-bottom:1px solid var(--border);border-top:1px solid var(--border)">
-      <span style="font-size:.67rem;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em">إدارة الموقع</span>
-    </div>
-
-    <div class="menu-item" draggable="true" style="border-bottom:none">
-      <div class="d-flex align-items-center gap-3">
-        <i class="bi bi-grip-vertical drag-handle"></i>
-        <div class="menu-item-icon" style="background:var(--surface-3);color:var(--text-2)"><i class="bi bi-gear"></i></div>
-        <div>
-          <div class="user-name" style="font-size:.88rem">الإعدادات (Settings)</div>
-          <div class="user-id">/settings</div>
-        </div>
-      </div>
-      <span class="badge-custom badge-active" style="cursor:pointer" onclick="toggleStatus(this)"><i class="bi bi-eye me-1"></i>نشط</span>
-    </div>
-  </div>
-
-  <div style="margin-top:12px;text-align:center">
-    <button class="btn-primary"><i class="bi bi-floppy me-2"></i>حفظ جميع التغييرات</button>
-  </div>
-</main>
-
+  </main>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  function toggleStatus(el) {
-    if (el.classList.contains('badge-active')) {
-      el.classList.remove('badge-active');
-      el.style.background = 'var(--surface-3)';
-      el.style.color = 'var(--text-3)';
-      el.innerHTML = '<i class="bi bi-eye-slash me-1"></i>مخفي';
-    } else {
-      el.style.background = '';
-      el.style.color = '';
-      el.classList.add('badge-active');
-      el.innerHTML = '<i class="bi bi-eye me-1"></i>نشط';
-    }
-  }
-</script>
+<script src="../assets/script/script.js"></script>
 <script src="../assets/script/pages-script.js"></script>
+<script>
+function toggleStatus(el){if(el.classList.contains('badge-active')){el.classList.remove('badge-active');el.style.background='var(--surface-3)';el.style.color='var(--text-3)';el.innerHTML='<i class="bi bi-eye-slash me-1"></i>مخفي';}else{el.style.background='';el.style.color='';el.classList.add('badge-active');el.innerHTML='<i class="bi bi-eye me-1"></i>نشط';}}
+</script>
 </body>
 </html>
