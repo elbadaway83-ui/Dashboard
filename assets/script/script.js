@@ -76,7 +76,7 @@ function openFormModal({ title = '', body = '', saveLabel = 'حفظ', onSave = n
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
+function initDashboard() {
 
   /* ── Sidebar toggle ── */
   const sidebar   = document.getElementById('sidebar');
@@ -122,6 +122,16 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ── License alert close ── */
   document.getElementById('closeLicenseAlert')?.addEventListener('click', () => {
     document.getElementById('licenseAlert')?.remove();
+  });
+
+  /* ── Renew button — opens mediapanal.com in new tab ── */
+  document.addEventListener("click", function(e) {
+    const renewBtn = e.target.closest(".renew-btn");
+    if (renewBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.open("https://mediapanal.com", "_blank", "noopener,noreferrer");
+    }
   });
 
   /* ── Theme toggle ── */
@@ -331,7 +341,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   setInterval(checkMessages, 5000);
 
-}); // end DOMContentLoaded
+} // end initDashboard
+
+document.addEventListener('DOMContentLoaded', initDashboard);
+document.addEventListener('componentsReady', initDashboard);
 
 /* ================================================================
    Charts
