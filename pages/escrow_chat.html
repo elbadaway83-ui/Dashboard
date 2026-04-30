@@ -8,36 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --brand:#4f46e5; --brand-dark:#3730a3; --brand-light:#eef2ff; --brand-mid:#c7d2fe;
-      --green:#059669; --green-light:#ecfdf5; --orange:#d97706; --orange-light:#fffbeb;
-      --red:#dc2626; --red-light:#fef2f2; --purple:#7c3aed; --purple-light:#f5f3ff;
-      --surface:#ffffff; --surface-2:#f8fafc; --surface-3:#f1f5f9;
-      --border:#e2e8f0; --border-2:#cbd5e1;
-      --text-1:#0f172a; --text-2:#475569; --text-3:#94a3b8;
-      --radius:14px; --radius-sm:10px; --radius-xs:6px;
-      --t-fast:.14s ease; --t-base:.22s ease;
-    }
-    body { font-family:'Cairo',sans-serif; background:var(--surface-2); color:var(--text-1); direction:rtl; }
-    .main-content { padding:28px 24px; }
-    .page-title { font-size:1.5rem; font-weight:900; }
-    .page-subtitle { font-size:.84rem; color:var(--text-3); margin-top:4px; }
     .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; display:flex; align-items:center; gap:16px; transition:all var(--t-base); }
     .stat-card:hover { transform:translateY(-3px); }
-    .stat-icon-wrap { border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem; }
     .badge-custom { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:999px; font-size:.72rem; font-weight:700; }
     .badge-dispute { background:#fee2e2; color:#991b1b; }
     .badge-pending { background:#fef3c7; color:#92400e; }
     .badge-active  { background:#d1fae5; color:#065f46; }
-    .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:9px 18px; border-radius:var(--radius-sm); background:linear-gradient(135deg,var(--brand),var(--brand-dark)); color:white; font-family:'Cairo',sans-serif; font-size:.82rem; font-weight:700; border:none; cursor:pointer; transition:all var(--t-fast); }
-    .btn-primary:hover { opacity:.9; transform:translateY(-1px); }
-    .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:9px 18px; border-radius:var(--radius-sm); background:var(--surface-3); color:var(--text-2); font-family:'Cairo',sans-serif; font-size:.82rem; font-weight:700; border:1px solid var(--border); cursor:pointer; transition:all var(--t-fast); }
-    .btn-secondary:hover { background:var(--surface-2); }
-    .btn-danger { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:9px 18px; border-radius:var(--radius-sm); background:var(--red-light); color:var(--red); font-family:'Cairo',sans-serif; font-size:.82rem; font-weight:700; border:1px solid #fecaca; cursor:pointer; transition:all var(--t-fast); }
-    .btn-danger:hover { background:var(--red); color:white; }
-
     .dispute-card { border:1px solid var(--border); border-radius:var(--radius); padding:20px; background:var(--surface); margin-bottom:14px; transition:all var(--t-fast); }
     .dispute-card:hover { border-color:var(--border-2); }
 
@@ -48,44 +26,42 @@
     .modal-box { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:28px; width:min(92vw,480px); animation:modalIn .22s cubic-bezier(.34,1.56,.64,1); }
     @keyframes modalIn { from{opacity:0;transform:scale(.92) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
     .modal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--border); }
-    .modal-title { font-size:1rem; font-weight:800; color:var(--text-1); margin:0; }
-    .modal-close { width:30px; height:30px; border-radius:8px; border:1px solid var(--border); background:var(--surface-3); cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--text-2); transition:all var(--t-fast); }
+    .modal-title { font-size:1rem; font-weight:800; margin:0; }
+    .modal-close { width:30px; height:30px; border-radius:8px; border:1px solid var(--border); background:var(--surface-3); cursor:pointer; display:flex; align-items:center; justify-content:center; }
     .modal-close:hover { background:var(--red-light); border-color:#fecaca; color:var(--red); }
-    .modal-footer { display:flex; gap:10px; justify-content:flex-start; margin-top:22px; padding-top:16px; border-top:1px solid var(--border); }
-    .form-input { width:100%; background:var(--surface-2); border:1px solid var(--border); padding:11px 14px; border-radius:var(--radius-sm); color:var(--text-1); outline:none; font-family:'Cairo',sans-serif; font-size:.85rem; transition:all var(--t-fast); }
+    .modal-footer { display:flex; gap:10px; margin-top:22px; padding-top:16px; border-top:1px solid var(--border); }
+    .form-input { width:100%; background:var(--surface-2); border:1px solid var(--border); padding:11px 14px; border-radius:var(--radius-sm); outline:none; font-family:'Cairo',sans-serif; font-size:.85rem; }
     .form-input:focus { border-color:var(--brand); background:var(--surface); }
     .form-label { display:block; margin-bottom:7px; font-weight:700; color:var(--text-2); font-size:.83rem; }
     textarea.form-input { resize:vertical; min-height:90px; }
 
-    /* Party selection */
     .party-option { border:2px solid var(--border); border-radius:var(--radius-sm); padding:14px; cursor:pointer; transition:all var(--t-fast); text-align:center; }
     .party-option:hover { border-color:var(--brand-mid); background:var(--brand-light); }
     .party-option.selected { border-color:var(--brand); background:var(--brand-light); }
     .party-option.selected-seller { border-color:var(--red); background:var(--red-light); }
-    .party-name { font-size:.88rem; font-weight:700; color:var(--text-1); }
+    .party-name { font-size:.88rem; font-weight:700; }
     .party-role { font-size:.72rem; color:var(--text-3); margin-top:3px; }
 
-    /* Discussion chat */
-    .disc-messages { background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; max-height:220px; overflow-y:auto; margin-bottom:14px; display:flex; flex-direction:column; gap:10px; scrollbar-width:thin; }
+    .disc-messages { background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; max-height:220px; overflow-y:auto; margin-bottom:14px; display:flex; flex-direction:column; gap:10px; }
     .disc-msg { padding:8px 12px; border-radius:10px; font-size:.83rem; line-height:1.5; }
     .disc-msg.admin { background:linear-gradient(135deg,var(--brand),var(--brand-dark)); color:white; align-self:flex-start; border-radius:4px 10px 10px 10px; }
-    .disc-msg.buyer { background:var(--surface); border:1px solid var(--border); color:var(--text-1); align-self:flex-end; border-radius:10px 4px 10px 10px; }
-    .disc-msg.seller { background:var(--surface); border:1px solid var(--border); color:var(--text-1); align-self:flex-end; border-radius:10px 4px 10px 10px; }
+    .disc-msg.buyer { background:var(--surface); border:1px solid var(--border); align-self:flex-end; border-radius:10px 4px 10px 10px; }
+    .disc-msg.seller { background:var(--surface); border:1px solid var(--border); align-self:flex-end; border-radius:10px 4px 10px 10px; }
     .disc-msg-meta { font-size:.68rem; color:var(--text-3); margin-top:3px; }
 
-    /* Toast */
-    #toast { position:fixed; bottom:24px; left:24px; z-index:9999; display:none; align-items:center; gap:12px; padding:13px 18px; border-radius:var(--radius-sm); background:var(--surface); border:1px solid var(--border); font-size:.84rem; font-weight:600; color:var(--text-1); font-family:'Cairo',sans-serif; min-width:280px; }
+    #toast { position:fixed; bottom:24px; left:24px; z-index:9999; display:none; align-items:center; gap:12px; padding:13px 18px; border-radius:var(--radius-sm); background:var(--surface); border:1px solid var(--border); font-size:.84rem; font-weight:600; min-width:280px; }
     #toast.show { display:flex; animation:toastIn .28s ease; }
     #toast.success { border-right:3px solid var(--green); }
-    #toast.info    { border-right:3px solid var(--brand); }
     @keyframes toastIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-
-    /* Resolved state */
     .dispute-card.resolved { opacity:.6; }
-    .dispute-card.resolved .resolved-badge { display:inline-flex !important; }
   </style>
 </head>
 <body>
+
+<div id="sidebar-container"></div>
+<div id="mainContent">
+<div id="header-container"></div>
+
 <div class="main-content">
   <div class="mb-4">
     <h1 class="page-title"><i class="bi bi-shield-check ms-2 text-primary"></i>إدارة الوساطات والنزاعات</h1>
@@ -95,19 +71,19 @@
   <div class="row g-3 mb-4">
     <div class="col-sm-4">
       <div class="stat-card" style="border-right:3px solid var(--red)">
-        <div class="stat-icon-wrap" style="width:38px;height:38px;background:var(--red-light);color:var(--red)"><i class="bi bi-exclamation-triangle"></i></div>
+        <div class="stat-icon-wrap" style="width:38px;height:38px;background:var(--red-light);color:var(--red);border-radius:12px;display:flex;align-items:center;justify-content:center"><i class="bi bi-exclamation-triangle"></i></div>
         <div><div style="font-size:1.3rem;font-weight:900" id="pendingCount">2</div><div style="font-size:.8rem;font-weight:600;color:var(--text-2)">نزاعات معلقة</div></div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="stat-card">
-        <div class="stat-icon-wrap" style="width:38px;height:38px;background:var(--green-light);color:var(--green)"><i class="bi bi-check-circle"></i></div>
+        <div class="stat-icon-wrap" style="width:38px;height:38px;background:var(--green-light);color:var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center"><i class="bi bi-check-circle"></i></div>
         <div><div style="font-size:1.3rem;font-weight:900" id="resolvedCount">42</div><div style="font-size:.8rem;font-weight:600;color:var(--text-2)">تم حلها</div></div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="stat-card">
-        <div class="stat-icon-wrap blue" style="width:38px;height:38px;background:var(--brand-light);color:var(--brand)"><i class="bi bi-cash-coin"></i></div>
+        <div class="stat-icon-wrap blue" style="width:38px;height:38px;background:var(--brand-light);color:var(--brand);border-radius:12px;display:flex;align-items:center;justify-content:center"><i class="bi bi-cash-coin"></i></div>
         <div><div style="font-size:1.3rem;font-weight:900">٤,٢٠٠ج</div><div style="font-size:.8rem;font-weight:600;color:var(--text-2)">قيمة النزاعات</div></div>
       </div>
     </div>
@@ -121,14 +97,14 @@
           <span class="badge-custom badge-dispute"><i class="bi bi-fire me-1"></i>تحت التحقيق — عاجل</span>
           <span class="resolved-badge badge-custom badge-active" style="display:none"><i class="bi bi-check-circle-fill me-1"></i>تم الحل</span>
         </div>
-        <h4 style="font-size:1rem;font-weight:800;color:var(--text-1);margin-bottom:6px"><i class="bi bi-instagram text-danger me-1"></i>نزاع على صفقة حساب Instagram</h4>
+        <h4 style="font-size:1rem;font-weight:800;margin-bottom:6px"><i class="bi bi-instagram text-danger me-1"></i>نزاع على صفقة حساب Instagram</h4>
         <div class="d-flex gap-3 flex-wrap" style="font-size:.8rem;color:var(--text-2)">
           <span><i class="bi bi-person-fill text-primary me-1"></i>المشتري: سارة</span>
           <span><i class="bi bi-shop text-success me-1"></i>البائع: كريم</span>
           <span><i class="bi bi-currency-exchange text-warning me-1"></i>المبلغ: <strong>500ج</strong></span>
           <span><i class="bi bi-clock me-1"></i>منذ ٢ ساعات</span>
         </div>
-        <div style="margin-top:10px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:.8rem;color:var(--text-2);border:1px solid var(--border)">
+        <div style="margin-top:10px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:.8rem;border:1px solid var(--border)">
           <i class="bi bi-chat-quote me-1"></i>"اشتريت الحساب بس البائع ما سلمهوش..."
         </div>
       </div>
@@ -148,14 +124,14 @@
           <span class="badge-custom badge-pending"><i class="bi bi-clock-history me-1"></i>تحت التحقيق</span>
           <span class="resolved-badge badge-custom badge-active" style="display:none"><i class="bi bi-check-circle-fill me-1"></i>تم الحل</span>
         </div>
-        <h4 style="font-size:1rem;font-weight:800;color:var(--text-1);margin-bottom:6px"><i class="bi bi-controller text-warning me-1"></i>مشكلة في استلام كود شحن</h4>
+        <h4 style="font-size:1rem;font-weight:800;margin-bottom:6px"><i class="bi bi-controller text-warning me-1"></i>مشكلة في استلام كود شحن</h4>
         <div class="d-flex gap-3 flex-wrap" style="font-size:.8rem;color:var(--text-2)">
           <span><i class="bi bi-person-fill text-primary me-1"></i>المشتري: محمد</span>
           <span><i class="bi bi-shop text-success me-1"></i>البائع: متجر الأوادي</span>
           <span><i class="bi bi-currency-exchange text-warning me-1"></i>المبلغ: <strong>120ج</strong></span>
           <span><i class="bi bi-clock me-1"></i>منذ ٥ ساعات</span>
         </div>
-        <div style="margin-top:10px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:.8rem;color:var(--text-2);border:1px solid var(--border)">
+        <div style="margin-top:10px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:.8rem;border:1px solid var(--border)">
           <i class="bi bi-chat-quote me-1"></i>"دفعت وما وصلنيش الكود..."
         </div>
       </div>
@@ -175,7 +151,6 @@
       <h3 class="modal-title" id="transferTitle"><i class="bi bi-arrow-right-circle ms-2 text-primary"></i>تحويل المبلغ</h3>
       <button class="modal-close" onclick="closeModal('transferModal')"><i class="bi bi-x-lg"></i></button>
     </div>
-
     <div style="display:flex;gap:12px;margin-bottom:20px" id="partyOptions">
       <div class="party-option" id="buyerOption" style="flex:1">
         <i class="bi bi-person-fill" style="font-size:1.3rem;color:var(--brand);margin-bottom:6px;display:block"></i>
@@ -188,7 +163,6 @@
         <div class="party-role">يدعي تسليم المنتج</div>
       </div>
     </div>
-
     <div class="mb-3">
       <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px">
         <div style="display:flex;justify-content:space-between;font-size:.83rem;margin-bottom:8px"><span style="color:var(--text-3)">المبلغ المحول</span><strong id="transferAmount">—</strong></div>
@@ -196,16 +170,13 @@
         <div style="display:flex;justify-content:space-between;font-size:.83rem"><span style="color:var(--text-3)">الإجراء</span><span id="actionLabel" class="badge-custom badge-active">—</span></div>
       </div>
     </div>
-
     <div class="mb-3">
       <label class="form-label">سبب القرار *</label>
       <textarea class="form-input" id="transferReason" placeholder="اشرح سبب قرارك بالتفصيل..." rows="3"></textarea>
     </div>
-
     <div style="background:var(--orange-light);border:1px solid #fde68a;border-radius:var(--radius-sm);padding:12px;font-size:.8rem;color:#92400e;margin-bottom:4px">
       <i class="bi bi-exclamation-triangle me-2"></i>هذا القرار نهائي ولا يمكن التراجع عنه بعد التأكيد
     </div>
-
     <div class="modal-footer">
       <button class="btn-primary" id="confirmTransferBtn" onclick="confirmTransfer()"><i class="bi bi-check-circle me-1"></i>تأكيد التحويل</button>
       <button class="btn-secondary" onclick="closeModal('transferModal')">إلغاء</button>
@@ -220,9 +191,7 @@
       <h3 class="modal-title"><i class="bi bi-chat-dots ms-2 text-primary"></i>النقاش بين الأطراف</h3>
       <button class="modal-close" onclick="closeModal('discussionModal')"><i class="bi bi-x-lg"></i></button>
     </div>
-    <div style="font-size:.8rem;color:var(--text-3);margin-bottom:14px">
-      <i class="bi bi-info-circle me-1"></i>يمكنك التواصل مع الأطراف وطلب مزيد من الأدلة قبل اتخاذ القرار
-    </div>
+    <div style="font-size:.8rem;color:var(--text-3);margin-bottom:14px"><i class="bi bi-info-circle me-1"></i>يمكنك التواصل مع الأطراف وطلب مزيد من الأدلة قبل اتخاذ القرار</div>
     <div class="disc-messages" id="discMessages"></div>
     <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
       <button class="btn-secondary" style="padding:6px 12px;font-size:.75rem" onclick="sendDiscMsg('admin','هل بإمكانك إرسال دليل على الشراء؟')">طلب دليل الشراء</button>
@@ -231,7 +200,7 @@
     </div>
     <div style="display:flex;gap:10px">
       <input type="text" class="form-input" id="discInput" placeholder="اكتب رسالة للأطراف..." style="height:40px" onkeydown="if(event.key==='Enter')sendDiscMsg('admin',this.value)">
-      <button class="btn-primary" style="padding:8px 16px;white-space:nowrap" onclick="sendDiscMsg('admin',document.getElementById('discInput').value)"><i class="bi bi-send-fill"></i></button>
+      <button class="btn-primary" style="padding:8px 16px" onclick="sendDiscMsg('admin',document.getElementById('discInput').value)"><i class="bi bi-send-fill"></i></button>
     </div>
     <div class="modal-footer" style="justify-content:space-between">
       <div style="display:flex;gap:8px">
@@ -243,8 +212,13 @@
   </div>
 </div>
 
-<!-- Toast -->
 <div id="toast" class="success"><i class="bi bi-check-circle-fill" style="color:var(--green)"></i><span id="toastText"></span></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/script/components.js"></script>
+<script src="../assets/script/script.js"></script>
 
 <script>
   let ctx = {};
@@ -252,8 +226,7 @@
   function openTransferModal(disputeId, buyer, seller, amount, toWhom) {
     ctx = { disputeId, buyer, seller, amount, toWhom };
     const isBuyer = toWhom === 'buyer';
-    document.getElementById('transferTitle').innerHTML =
-      (isBuyer ? '<i class="bi bi-arrow-right-circle ms-2 text-primary"></i>تحويل للمشتري' : '<i class="bi bi-arrow-left-circle ms-2 text-danger"></i>تحويل للبائع');
+    document.getElementById('transferTitle').innerHTML = isBuyer ? '<i class="bi bi-arrow-right-circle ms-2 text-primary"></i>تحويل للمشتري' : '<i class="bi bi-arrow-left-circle ms-2 text-danger"></i>تحويل للبائع';
     document.getElementById('buyerName').textContent = buyer;
     document.getElementById('sellerName').textContent = seller;
     document.getElementById('transferAmount').textContent = amount;
@@ -263,9 +236,7 @@
     document.getElementById('buyerOption').className = 'party-option' + (isBuyer ? ' selected' : '');
     document.getElementById('sellerOption').className = 'party-option' + (!isBuyer ? ' selected-seller' : '');
     document.getElementById('confirmTransferBtn').className = isBuyer ? 'btn-primary' : 'btn-danger';
-    document.getElementById('confirmTransferBtn').innerHTML = isBuyer
-      ? '<i class="bi bi-check-circle me-1"></i>تأكيد تحويل للمشتري'
-      : '<i class="bi bi-check-circle me-1"></i>تأكيد تحويل للبائع';
+    document.getElementById('confirmTransferBtn').innerHTML = isBuyer ? '<i class="bi bi-check-circle me-1"></i>تأكيد تحويل للمشتري' : '<i class="bi bi-check-circle me-1"></i>تأكيد تحويل للبائع';
     document.getElementById('transferReason').value = '';
     document.getElementById('transferModal').classList.add('show');
   }
@@ -277,10 +248,8 @@
     closeModal('transferModal');
     closeModal('discussionModal');
     resolveDispute(ctx.disputeId);
-    const msg = isBuyer
-      ? `✅ تم تحويل ${ctx.amount} للمشتري ${ctx.buyer} بنجاح`
-      : `✅ تم تحويل ${ctx.amount} للبائع ${ctx.seller} بنجاح`;
-    showToast(msg, 'success');
+    const msg = isBuyer ? `✅ تم تحويل ${ctx.amount} للمشتري ${ctx.buyer} بنجاح` : `✅ تم تحويل ${ctx.amount} للبائع ${ctx.seller} بنجاح`;
+    showToast(msg);
     updateCounts();
   }
 
@@ -306,7 +275,7 @@
 
   function sendDiscMsg(type, text) {
     if (!text || !text.trim()) return;
-    addDiscMsg(type, text);
+    addDiscMsg(type, text.trim());
     document.getElementById('discInput').value = '';
     if (type === 'admin') {
       setTimeout(() => {
@@ -328,7 +297,8 @@
     card.querySelectorAll('.btn-primary,.btn-danger,.btn-secondary').forEach(b => b.disabled = true);
     const badge = card.querySelector('.badge-dispute, .badge-pending');
     if (badge) { badge.className = 'badge-custom badge-active'; badge.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>تم الحل'; }
-    card.querySelector('.resolved-badge').style.display = 'inline-flex';
+    const resolvedBadge = card.querySelector('.resolved-badge');
+    if (resolvedBadge) resolvedBadge.style.display = 'inline-flex';
   }
 
   function updateCounts() {
@@ -342,21 +312,15 @@
     document.getElementById(id).classList.remove('show');
   }
 
-  function showToast(msg, type) {
+  function showToast(msg) {
     const t = document.getElementById('toast');
-    t.className = type || 'success';
     t.classList.add('show');
     document.getElementById('toastText').textContent = msg;
-    t.style.display = 'flex';
-    setTimeout(() => { t.classList.remove('show'); t.style.display = ''; }, 4000);
+    setTimeout(() => t.classList.remove('show'), 4000);
   }
 
-  // Close modals on overlay click
-  ['transferModal','discussionModal'].forEach(id => {
-    document.getElementById(id).addEventListener('click', function(e) {
-      if (e.target === this) closeModal(id);
-    });
-  });
+  document.getElementById('transferModal').addEventListener('click', function(e) { if (e.target === this) closeModal('transferModal'); });
+  document.getElementById('discussionModal').addEventListener('click', function(e) { if (e.target === this) closeModal('discussionModal'); });
 </script>
 </body>
 </html>
