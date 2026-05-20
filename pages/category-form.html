@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إضافة / تعديل قسم | Admin — Elawaady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <meta name="robots" content="noindex,nofollow">
+</head>
+
+<body>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+  <div class="admin-wrap">
+
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <div class="sidebar-brand">
+        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="site-logo-img admin-sidebar-logo"
+          onerror="this.style.display='none'">
+      </div>
+      <nav class="sidebar-nav">
+        <span class="nav-label">الرئيسية</span>
+        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
+        <span class="nav-label">المحتوى</span>
+        <a href="categories.html" class="active"><span class="nav-icon">📁</span> الأقسام</a>
+        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
+        <span class="nav-label">المبيعات</span>
+        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
+        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
+        <span class="nav-label">الإعدادات</span>
+        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
+        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
+        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
+        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+          <div class="topbar-title">إضافة / تعديل قسم</div>
+        </div>
+        <div class="topbar-right">
+          <a href="categories.html" class="btn btn-secondary btn-sm">← رجوع</a>
+        </div>
+      </div>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <h1>📁 إضافة قسم جديد</h1>
+        </div>
+
+        <form id="cat-form" onsubmit="handleSave(event)">
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">معلومات القسم</div>
+            </div>
+            <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
+
+              <div style="display:flex;gap:10px;align-items:center;">
+                <label style="font-size:13px;font-weight:600;">نوع القسم:</label>
+                <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
+                  <input type="radio" name="cat-type" value="main" checked onchange="toggleParent(this)"> رئيسي
+                </label>
+                <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
+                  <input type="radio" name="cat-type" value="sub" onchange="toggleParent(this)"> فرعي
+                </label>
+              </div>
+
+              <div id="parent-group" style="display:none;" class="form-group">
+                <label class="form-label">القسم الرئيسي <span style="color:var(--red)">*</span></label>
+                <select class="form-select" id="parent-cat">
+                  <option value="">-- اختر القسم الرئيسي --</option>
+                  <option>فيسبوك</option>
+                  <option>انستقرام</option>
+                  <option>تيك توك</option>
+                  <option>سناب شات</option>
+                  <option>يوتيوب</option>
+                </select>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">الاسم (عربي) <span style="color:var(--red)">*</span></label>
+                  <input type="text" class="form-control" id="name-ar" placeholder="مثال: فيسبوك" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">الاسم (إنجليزي)</label>
+                  <input type="text" class="form-control" id="name-en" placeholder="e.g. Facebook" dir="ltr">
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">الأيقونة (Emoji)</label>
+                  <input type="text" class="form-control" id="icon" placeholder="📁" style="font-size:20px;">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">الترتيب</label>
+                  <input type="number" class="form-control" id="sort-order" value="1" min="1">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">وصف القسم</label>
+                <textarea class="form-control" id="description" placeholder="وصف مختصر للقسم..."></textarea>
+              </div>
+
+              <div class="toggle-wrap">
+                <label class="toggle">
+                  <input type="checkbox" id="is-visible" checked>
+                  <span class="toggle-track"></span>
+                </label>
+                <label for="is-visible" style="font-size:13px;font-weight:600;cursor:pointer;">مرئي في الموقع</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="flex-gap" style="margin-top:4px;">
+            <button type="submit" class="btn btn-primary">💾 حفظ القسم</button>
+            <a href="categories.html" class="btn btn-secondary">إلغاء</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="../script.js"></script>
+  <script>
+    function toggleParent(radio) {
+      document.getElementById('parent-group').style.display = radio.value === 'sub' ? 'flex' : 'none';
+    }
+    function handleSave(e) {
+      e.preventDefault();
+      showToast('تم حفظ القسم بنجاح ✅', 'success');
+      setTimeout(() => location.href = 'categories.html', 1200);
+    }
+  </script>
+</body>
+
+</html>

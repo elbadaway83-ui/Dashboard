@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الكاروسيل | Admin — Elawaady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    .carousel-manage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .carousel-manage-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+    }
+
+    .carousel-manage-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .carousel-manage-card .card-img-wrap {
+      height: 150px;
+      background: var(--bg2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: var(--text2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-manage-card .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-order-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, .7);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid var(--gold);
+    }
+
+    .carousel-manage-card .card-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .carousel-manage-card .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .carousel-manage-card .card-link {
+      font-size: 11px;
+      color: var(--cyan);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .add-carousel-card {
+      border: 2px dashed var(--border);
+      background: transparent;
+      border-radius: var(--radius);
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+
+    .add-carousel-card:hover {
+      border-color: var(--gold);
+      background: rgba(240, 165, 0, .04);
+    }
+
+    .add-carousel-card span {
+      font-size: 36px;
+    }
+
+    .add-carousel-card p {
+      font-size: 13px;
+      color: var(--text2);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+  <div class="admin-wrap">
+
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <div class="sidebar-brand">
+        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
+          onerror="this.style.display='none'">
+      </div>
+      <nav class="sidebar-nav">
+        <span class="nav-label">الرئيسية</span>
+        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
+        <span class="nav-label">المحتوى</span>
+        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
+        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
+        <span class="nav-label">المبيعات</span>
+        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
+        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
+        <span class="nav-label">الإعدادات</span>
+        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
+        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
+        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
+        <a href="carousel.html" class="active"><span class="nav-icon">🎠</span> الكاروسيل</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+          <div class="topbar-title">الكاروسيل</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary btn-sm" onclick="openModal('add-slide-modal')">➕ إضافة شريحة</button>
+        </div>
+      </div>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <h1>🎠 إدارة الكاروسيل</h1>
+          <button class="btn btn-primary" onclick="openModal('add-slide-modal')">➕ إضافة شريحة جديدة</button>
+        </div>
+
+        <div class="alert alert-info">
+          ℹ️ اسحب الشرائح لإعادة ترتيبها. الحجم الموصى به: 1920×600 بكسل.
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">⚙️ إعدادات الكاروسيل</div>
+          </div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">سرعة التحويل (ثانية)</label>
+                <input type="number" class="form-control" value="5" min="1" max="30" style="width:120px;">
+                <span class="form-hint">الوقت بين كل شريحة وأخرى</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">تأثير الانتقال</label>
+                <select class="form-select" style="width:180px;">
+                  <option>انزلاق (Slide)</option>
+                  <option>تلاشي (Fade)</option>
+                  <option>تكبير (Zoom)</option>
+                </select>
+              </div>
+            </div>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;">
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
+                <span style="font-size:13px;font-weight:600;">تشغيل تلقائي</span>
+              </div>
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
+                <span style="font-size:13px;font-weight:600;">إظهار أزرار التنقل</span>
+              </div>
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
+                <span style="font-size:13px;font-weight:600;">إظهار نقاط التنقل</span>
+              </div>
+              <div class="toggle-wrap">
+                <label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label>
+                <span style="font-size:13px;font-weight:600;">توقف عند التحويم</span>
+              </div>
+            </div>
+            <button class="btn btn-secondary" style="width:fit-content;"
+              onclick="showToast('تم حفظ إعدادات الكاروسيل ✅','success')">💾 حفظ الإعدادات</button>
+          </div>
+        </div>
+
+        <!-- Slides Grid -->
+        <div class="carousel-manage-grid" id="slides-grid">
+
+          <!-- Slide 1 -->
+          <div class="carousel-manage-card" draggable="true">
+            <div class="card-img-wrap">
+              <div class="card-order-badge">#1</div>
+              🎯
+            </div>
+            <div class="card-body">
+              <div class="card-title">عروض خاصة على الخدمات</div>
+              <div class="card-link">#</div>
+              <div class="flex-gap">
+                <span class="badge badge-active">مرئية</span>
+              </div>
+              <div class="flex-gap">
+                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
+                <button class="btn btn-danger btn-sm"
+                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-manage-card" draggable="true">
+            <div class="card-img-wrap">
+              <div class="card-order-badge">#2</div>
+              🛍️
+            </div>
+            <div class="card-body">
+              <div class="card-title">اكتشف خدماتنا الجديدة</div>
+              <div class="card-link">#</div>
+              <div class="flex-gap">
+                <span class="badge badge-active">مرئية</span>
+              </div>
+              <div class="flex-gap">
+                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
+                <button class="btn btn-danger btn-sm"
+                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-manage-card" draggable="true">
+            <div class="card-img-wrap">
+              <div class="card-order-badge">#3</div>
+              🤖
+            </div>
+            <div class="card-body">
+              <div class="card-title">خدمات الذكاء الاصطناعي</div>
+              <div class="card-link">#</div>
+              <div class="flex-gap">
+                <span class="badge badge-pending">مخفية</span>
+              </div>
+              <div class="flex-gap">
+                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
+                <button class="btn btn-danger btn-sm"
+                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add New -->
+          <div class="add-carousel-card" onclick="openModal('add-slide-modal')">
+            <span>➕</span>
+            <p>إضافة شريحة جديدة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Slide Modal -->
+  <div class="modal-backdrop" id="add-slide-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">🎠 إضافة شريحة جديدة</div>
+        <button class="modal-close" onclick="closeModal('add-slide-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">صورة الشريحة <span style="color:var(--red)">*</span></label>
+          <div class="img-upload-box" id="slide-upload-box">
+            <input type="file" accept="image/*" onchange="previewSlide(this)">
+            <div class="upload-icon">🖼️</div>
+            <p>1920×600 موصى به</p>
+            <img id="slide-img-prev" class="img-preview"
+              style="display:none;width:100%;height:100px;object-fit:cover;margin-top:8px;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">العنوان</label>
+          <input type="text" class="form-control" placeholder="عنوان الشريحة">
+        </div>
+        <div class="form-group">
+          <label class="form-label">الوصف</label>
+          <input type="text" class="form-control" placeholder="وصف مختصر">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رابط الزر</label>
+          <input type="text" class="form-control" placeholder="#" dir="ltr">
+        </div>
+        <div class="form-group">
+          <label class="form-label">نص الزر</label>
+          <input type="text" class="form-control" placeholder="اكتشف الآن">
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">الترتيب</label>
+            <input type="number" class="form-control" value="1" min="1">
+          </div>
+          <div class="form-group">
+            <label class="form-label">الحالة</label>
+            <div class="toggle-wrap" style="margin-top:8px;">
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
+              <span style="font-size:13px;">مرئية</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="saveSlide()">💾 حفظ الشريحة</button>
+        <button class="btn btn-secondary" onclick="closeModal('add-slide-modal')">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Slide Modal -->
+  <div class="modal-backdrop" id="edit-slide-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">✏️ تعديل الشريحة</div>
+        <button class="modal-close" onclick="closeModal('edit-slide-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">العنوان</label>
+          <input type="text" class="form-control" value="عروض خاصة على الخدمات">
+        </div>
+        <div class="form-group">
+          <label class="form-label">الوصف</label>
+          <input type="text" class="form-control" value="احصل على أفضل الأسعار">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رابط الزر</label>
+          <input type="text" class="form-control" value="#" dir="ltr">
+        </div>
+        <div class="form-group">
+          <label class="form-label">نص الزر</label>
+          <input type="text" class="form-control" value="اكتشف الآن">
+        </div>
+        <div class="form-group">
+          <label class="form-label">الترتيب</label>
+          <input type="number" class="form-control" value="1" min="1" style="width:120px;">
+        </div>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
+          <span style="font-size:13px;font-weight:600;">مرئية</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary"
+          onclick="closeModal('edit-slide-modal');showToast('تم تحديث الشريحة ✅','success')">💾 حفظ التعديلات</button>
+        <button class="btn btn-secondary" onclick="closeModal('edit-slide-modal')">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+  <script>
+    function saveSlide() {
+      closeModal('add-slide-modal');
+      showToast('تم إضافة الشريحة بنجاح ✅', 'success');
+    }
+    function previewSlide(input) {
+      const prev = document.getElementById('slide-img-prev');
+      if (!input.files[0]) return;
+      const r = new FileReader();
+      r.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
+      r.readAsDataURL(input.files[0]);
+    }
+  </script>
+</body>
+
+</html>

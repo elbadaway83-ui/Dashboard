@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | Admin — Elawaady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    /* Animated background */
+    .login-bg {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .login-bg::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240, 165, 0, .12) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      animation: floatBg 8s ease-in-out infinite;
+    }
+
+    .login-bg::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 200, 255, .07) 0%, transparent 70%);
+      bottom: -80px;
+      left: -80px;
+      animation: floatBg 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatBg {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(30px, 30px) scale(1.05);
+      }
+    }
+
+    /* Grid lines decoration */
+    .grid-lines {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(240, 165, 0, .03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 165, 0, .03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+
+    /* Login Wrapper */
+    .login-page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Card */
+    .login-box {
+      background: rgba(30, 30, 30, .85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(240, 165, 0, .2);
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 60px rgba(240, 165, 0, .08), 0 20px 60px rgba(0, 0, 0, .5);
+      animation: fadeUp .4s ease;
+    }
+
+    /* Logo area */
+    .login-logo-wrap {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .login-logo-wrap img {
+      height: 60px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 16px rgba(240, 165, 0, .3));
+    }
+
+    .login-logo-fallback {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(240, 165, 0, .2), rgba(240, 165, 0, .05));
+      border: 2px solid rgba(240, 165, 0, .3);
+      font-size: 32px;
+      margin-bottom: 4px;
+    }
+
+    .login-brand-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: .02em;
+      margin-top: 8px;
+      display: block;
+    }
+
+    .login-brand-sub {
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* Divider */
+    .login-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(240, 165, 0, .3), transparent);
+      margin: 20px 0;
+    }
+
+    /* Form */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap .input-icon {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--text2);
+      pointer-events: none;
+      transition: color .2s;
+    }
+
+    .input-wrap .form-control {
+      padding-right: 40px;
+    }
+
+    .input-wrap:focus-within .input-icon {
+      color: var(--gold);
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text2);
+      font-size: 15px;
+      cursor: pointer;
+      padding: 0;
+      transition: color .2s;
+    }
+
+    .toggle-password:hover {
+      color: var(--gold);
+    }
+
+    /* Submit btn */
+    .login-submit {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold), #e09200);
+      color: #000;
+      border: none;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all .25s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(240, 165, 0, .3);
+    }
+
+    .login-submit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
+      transition: left .4s;
+    }
+
+    .login-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(240, 165, 0, .4);
+    }
+
+    .login-submit:hover::before {
+      left: 100%;
+    }
+
+    .login-submit:active {
+      transform: translateY(0);
+    }
+
+    .login-submit:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Error box */
+    .login-error {
+      background: rgba(239, 68, 68, .1);
+      border: 1px solid rgba(239, 68, 68, .3);
+      border-radius: 8px;
+      color: #fca5a5;
+      padding: 10px 14px;
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .login-error.show {
+      display: flex;
+    }
+
+    /* Footer note */
+    .login-footer-note {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 20px;
+    }
+
+    .login-footer-note span {
+      color: var(--gold);
+    }
+
+    /* Loading spinner inside btn */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(0, 0, 0, .3);
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-bg"></div>
+  <div class="grid-lines"></div>
+
+  <div class="login-page">
+    <div class="login-box fade-up">
+
+      <!-- Logo -->
+      <div class="login-logo-wrap">
+        <img src="../assets/images/admin-logo.png" alt="Elawaady"
+          style="height:90px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(240,165,0,.35));"
+          onerror="this.outerHTML='<div class=\'login-logo-fallback\'>🛡️</div><span class=\'login-brand-name\'>Elawaady</span>';">
+        <span class="login-brand-sub">لوحة تحكم المتجر</span>
+      </div>
+
+      <div class="login-divider"></div>
+
+      <!-- Error Message -->
+      <div class="login-error" id="login-error">
+        <span>❌</span>
+        <span id="error-text">اسم المستخدم أو كلمة المرور غير صحيحة</span>
+      </div>
+
+      <!-- Form -->
+      <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
+
+        <div class="form-group">
+          <label class="form-label" for="username">اسم المستخدم</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Admin"
+              autocomplete="username" required dir="ltr">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">كلمة المرور</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••"
+              autocomplete="current-password" required dir="ltr">
+            <button type="button" class="toggle-password" id="toggle-pw" onclick="togglePw()"
+              title="إظهار/إخفاء">👁️</button>
+          </div>
+        </div>
+
+        <div class="toggle-wrap" style="justify-content: space-between;">
+          <div class="toggle-wrap" style="gap:8px;">
+            <label class="toggle" style="transform:scale(.85);">
+              <input type="checkbox" id="remember">
+              <span class="toggle-track"></span>
+            </label>
+            <label for="remember" style="font-size:13px;cursor:pointer;color:var(--text2);">تذكرني</label>
+          </div>
+        </div>
+
+        <button type="submit" class="login-submit" id="submit-btn">
+          <span id="btn-text">🔐 تسجيل الدخول</span>
+        </button>
+
+      </form>
+
+      <!-- Footer -->
+      <div class="login-footer-note">
+        نظام إدارة <span>Elawaady</span> — محمي ومشفر
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="../script.js"></script>
+  <script>
+    /* Toggle password visibility */
+    let pwVisible = false;
+    function togglePw() {
+      pwVisible = !pwVisible;
+      const pw = document.getElementById('password');
+      const btn = document.getElementById('toggle-pw');
+      pw.type = pwVisible ? 'text' : 'password';
+      btn.textContent = pwVisible ? '🙈' : '👁️';
+    }
+
+    /* Handle login */
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const errorBox = document.getElementById('login-error');
+      const errorText = document.getElementById('error-text');
+      const btn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+
+      // Show loading
+      btn.disabled = true;
+      btnText.innerHTML = 'جاري التحقق <span class="spinner"></span>';
+      errorBox.classList.remove('show');
+
+      setTimeout(() => {
+        // Demo check — replace with real API call
+        if (username === 'Admin' && password === 'Admin@Elawaady') {
+          btnText.innerHTML = '✅ تم تسجيل الدخول';
+          showToast('مرحبًا بك في لوحة التحكم ✅', 'success');
+          setTimeout(() => { location.href = '../index.html'; }, 900);
+        } else {
+          btn.disabled = false;
+          btnText.innerHTML = '🔐 تسجيل الدخول';
+          errorText.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+          errorBox.classList.add('show');
+          // Shake animation
+          document.querySelector('.login-box').style.animation = 'none';
+          document.querySelector('.login-box').offsetHeight; // reflow
+          document.querySelector('.login-box').style.animation = 'shake .4s ease';
+        }
+      }, 1000);
+    }
+
+    /* Shake keyframe (inject dynamically) */
+    const style = document.createElement('style');
+    style.textContent = `@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-6px)}
+  80%{transform:translateX(6px)}
+}`;
+    document.head.appendChild(style);
+
+    /* Focus first input */
+    document.getElementById('username').focus();
+  </script>
+</body>
+
+</html>

@@ -1,62 +1,254 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>خدمات الكروت — Elawaady</title>
-  <link rel="icon" href="../assets/img/favicon_1775018842_4158.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/pages.css">
-  
+  <title>الخدمات | Admin — Elawaady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <meta name="robots" content="noindex,nofollow">
 </head>
+
 <body>
-<div id="overlay"></div>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+  <div class="admin-wrap">
 
-<!-- ==================== SIDEBAR ==================== -->
-<div id="sidebar-container"></div>
-<div id="mainContent">
-  <!-- Topbar -->
-  <div id="header-container"></div>
-  <main class="main-content">
-
-    <div class="page-header d-flex justify-content-between align-items-center">
-      <div><h1 class="page-title"><i class="bi bi-grid-3x3-gap ms-2 text-primary"></i>خدمات الكروت</h1><p class="page-subtitle">إدارة خدمات الكروت المتاحة وأسعارها للعملاء</p></div>
-      <div class="d-flex gap-2"><button class="btn-secondary"><i class="bi bi-funnel me-1"></i>تصفية</button><button class="btn-primary"><i class="bi bi-plus-lg"></i>إضافة خدمة</button></div>
-    </div>
-    <div class="row g-3 mb-4">
-      <div class="col-sm-4"><div class="stat-card blue h-100"><div class="stat-icon-wrap blue" style="width:38px;height:38px"><i class="bi bi-grid-3x3-gap"></i></div><div class="stat-body"><div class="stat-value" style="font-size:1.3rem">48</div><div class="stat-label">إجمالي الخدمات</div></div></div></div>
-      <div class="col-sm-4"><div class="stat-card green h-100"><div class="stat-icon-wrap green" style="width:38px;height:38px"><i class="bi bi-toggle-on"></i></div><div class="stat-body"><div class="stat-value" style="font-size:1.3rem">42</div><div class="stat-label">نشطة</div></div></div></div>
-      <div class="col-sm-4"><div class="stat-card orange h-100"><div class="stat-icon-wrap orange" style="width:38px;height:38px"><i class="bi bi-toggle-off"></i></div><div class="stat-body"><div class="stat-value" style="font-size:1.3rem">6</div><div class="stat-label">معطلة</div></div></div></div>
-    </div>
-    <div class="card">
-      <div class="card-header-custom">
-        <div><p class="section-title">قائمة الخدمات</p><p class="section-sub">كل خدمات الكروت المتاحة للعملاء</p></div>
-        <div class="d-flex gap-2"><div style="position:relative"><i class="bi bi-search" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:.85rem"></i><input type="text" class="form-input" placeholder="بحث عن خدمة..." style="width:210px;padding-right:32px;height:36px;font-size:.82rem"></div><select class="form-input" style="width:140px;height:36px;font-size:.82rem;padding:0 10px"><option>كل الفئات</option><option>ألعاب</option><option>تطبيقات</option><option>اشتراكات</option></select></div>
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <div class="sidebar-brand">
+        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
+          onerror="this.style.display='none'">
       </div>
-      <div class="px-3 pb-3" style="overflow-x:auto">
-        <table class="custom-table">
-          <thead><tr><th><input type="checkbox" style="accent-color:var(--brand)"></th><th>الخدمة</th><th>الفئة</th><th>السعر الأساسي</th><th>سعر الجملة</th><th>المبيعات</th><th>الحالة</th><th>إجراء</th></tr></thead>
-          <tbody>
-            <tr><td><input type="checkbox" style="accent-color:var(--brand)"></td><td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:var(--orange-light);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-controller"></i></div><div><div class="user-name">PUBG Mobile UC</div><div class="user-id">شحن 60 UC</div></div></div></td><td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">ألعاب</span></td><td class="amount">٤٥ج</td><td style="font-size:.82rem;color:var(--green);font-weight:700">٣٨ج</td><td style="font-size:.82rem;font-weight:600;color:var(--text-1)">٢٤٢ مبيعة</td><td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill me-1"></i>نشط</span></td><td><div class="d-flex gap-2"><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td></tr>
-            <tr><td><input type="checkbox" style="accent-color:var(--brand)"></td><td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:#e0f2fe;color:#0369a1;display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-music-note-beamed"></i></div><div><div class="user-name">Spotify Premium</div><div class="user-id">اشتراك شهري</div></div></div></td><td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">اشتراكات</span></td><td class="amount">١٥٠ج</td><td style="font-size:.82rem;color:var(--green);font-weight:700">١٢٠ج</td><td style="font-size:.82rem;font-weight:600;color:var(--text-1)">١٠٨ مبيعة</td><td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill me-1"></i>نشط</span></td><td><div class="d-flex gap-2"><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td></tr>
-            <tr><td><input type="checkbox" style="accent-color:var(--brand)"></td><td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:var(--red-light);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-film"></i></div><div><div class="user-name">Netflix Premium</div><div class="user-id">اشتراك شهري</div></div></div></td><td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">اشتراكات</span></td><td class="amount">٢٢٠ج</td><td style="font-size:.82rem;color:var(--green);font-weight:700">١٨٠ج</td><td style="font-size:.82rem;font-weight:600;color:var(--text-1)">٨١ مبيعة</td><td><span class="badge-custom badge-active"><i class="bi bi-check-circle-fill me-1"></i>نشط</span></td><td><div class="d-flex gap-2"><button class="btn-resolve btn-blue"><i class="bi bi-pencil me-1"></i>تعديل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td></tr>
-            <tr><td><input type="checkbox" style="accent-color:var(--brand)"></td><td><div class="d-flex align-items-center gap-2"><div style="width:34px;height:34px;border-radius:9px;background:var(--surface-3);color:var(--text-3);display:flex;align-items:center;justify-content:center;font-size:1rem"><i class="bi bi-phone"></i></div><div><div class="user-name">كارت شحن فودافون</div><div class="user-id">قيمة ١٠٠ج</div></div></div></td><td><span style="font-size:.78rem;color:var(--text-2);font-weight:600">شحن رصيد</span></td><td class="amount">١٠٠ج</td><td style="font-size:.82rem;color:var(--green);font-weight:700">٩٥ج</td><td style="font-size:.82rem;font-weight:600;color:var(--text-1)">٣ مبيعة</td><td><span class="badge-custom badge-pending"><i class="bi bi-eye-slash me-1"></i>معطل</span></td><td><div class="d-flex gap-2"><button class="btn-resolve btn-green"><i class="bi bi-check-circle me-1"></i>تفعيل</button><button class="btn-resolve btn-red"><i class="bi bi-trash me-1"></i>حذف</button></div></td></tr>
-          </tbody>
-        </table>
+      <nav class="sidebar-nav">
+        <span class="nav-label">الرئيسية</span>
+        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
+        <span class="nav-label">المحتوى</span>
+        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
+        <a href="services.html" class="active"><span class="nav-icon">🛍️</span> الخدمات</a>
+        <span class="nav-label">المبيعات</span>
+        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
+        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
+        <span class="nav-label">الإعدادات</span>
+        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
+        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
+        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
+        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
       </div>
-      <div class="pagination-bar"><span>عرض <strong>10</strong> من أصل <strong>48</strong> خدمة</span><div class="d-flex gap-2 align-items-center"><button class="btn-secondary" style="padding:5px 12px;font-size:.78rem"><i class="bi bi-chevron-right"></i></button><span style="font-size:.82rem;color:var(--text-2);font-weight:600">1 / 5</span><button class="btn-secondary" style="padding:5px 12px;font-size:.78rem"><i class="bi bi-chevron-left"></i></button></div></div>
-    </div>
-  </main>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/script/components.js"></script>
-<script src="../assets/script/script.js"></script>
-<script src="../assets/script/pages-script.js"></script>
+    </aside>
 
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+          <div class="topbar-title">الخدمات</div>
+        </div>
+        <div class="topbar-right">
+          <a href="service-form.html" class="btn btn-primary btn-sm">➕ إضافة خدمة</a>
+        </div>
+      </div>
+
+      <div class="admin-content">
+        <div class="page-header">
+          <h1>🛍️ إدارة الخدمات</h1>
+          <a href="service-form.html" class="btn btn-primary">➕ إضافة خدمة جديدة</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="panel">
+          <div class="panel-body" style="padding:12px 16px;">
+            <div class="search-bar">
+              <input type="text" class="form-control" id="svc-search" placeholder="🔍 بحث بالاسم...">
+              <select class="form-select" style="width:180px;" id="cat-filter">
+                <option value="">جميع الأقسام</option>
+                <option>فيسبوك</option>
+                <option>انستقرام</option>
+                <option>تيك توك</option>
+                <option>اشتراكات</option>
+                <option>ذكاء اصطناعي</option>
+              </select>
+              <select class="form-select" style="width:140px;" id="status-filter">
+                <option value="">جميع الحالات</option>
+                <option>متاحة</option>
+                <option>غير متاحة</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Table -->
+        <div class="panel">
+          <table class="admin-table" id="svc-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>اسم الخدمة</th>
+                <th>القسم</th>
+                <th>السعر</th>
+                <th>الحالة</th>
+                <th>نشط</th>
+                <th>تاريخ الإضافة</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-muted">20</td>
+                <td>خدمة مقدمة من مورد</td>
+                <td><span class="badge badge-info">عام</span></td>
+                <td class="text-gold" style="font-weight:700;">—</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=20" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">19</td>
+                <td>Netflix</td>
+                <td><span class="badge badge-info">اشتراكات</span></td>
+                <td class="text-gold" style="font-weight:700;">150 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=19" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">18</td>
+                <td>Microsoft 365 Business Standard</td>
+                <td><span class="badge badge-info">اشتراكات</span></td>
+                <td class="text-gold" style="font-weight:700;">200 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=18" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">17</td>
+                <td>Midjourney</td>
+                <td><span class="badge badge-info">ذكاء اصطناعي</span></td>
+                <td class="text-gold" style="font-weight:700;">120 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=17" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">16</td>
+                <td>ChatGPT Plus</td>
+                <td><span class="badge badge-info">ذكاء اصطناعي</span></td>
+                <td class="text-gold" style="font-weight:700;">180 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=16" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">15</td>
+                <td>استرجاع حساب مخترق</td>
+                <td><span class="badge badge-info">حسابات</span></td>
+                <td class="text-gold" style="font-weight:700;">300 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=15" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">14</td>
+                <td>نقل ملكية حساب</td>
+                <td><span class="badge badge-info">حسابات</span></td>
+                <td class="text-gold" style="font-weight:700;">250 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=14" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">13</td>
+                <td>حساب سناب شات جاهز</td>
+                <td><span class="badge badge-info">سناب شات</span></td>
+                <td class="text-gold" style="font-weight:700;">90 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=13" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">12</td>
+                <td>توثيق صفحات فيسبوك</td>
+                <td><span class="badge badge-info">فيسبوك</span></td>
+                <td class="text-gold" style="font-weight:700;">500 ج.م</td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
+                <td class="text-muted">2026-05-19</td>
+                <td>
+                  <div class="flex-gap">
+                    <a href="service-form.html?id=12" class="btn btn-secondary btn-sm">تعديل</a>
+                    <button class="btn btn-danger btn-sm"
+                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../script.js"></script>
+  <script>
+    tableSearch('svc-search', 'svc-table');
+  </script>
 </body>
+
 </html>
