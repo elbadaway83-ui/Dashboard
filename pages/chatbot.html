@@ -1,230 +1,2067 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>معرفة الشات بوت | Admin — Elawaady</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+/* ===== VARIABLES ===== */
+:root {
+  --bg: #0d0d0d;
+  --bg2: #141414;
+  --bg3: #1a1a1a;
+  --card: #1e1e1e;
+  --border: #2a2a2a;
+  --gold: #f0a500;
+  --gold2: #ffc84a;
+  --cyan: #00c8ff;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text: #e8e8e8;
+  --text2: #a0a0a0;
+  --sidebar-w: 240px;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --font: 'Cairo', sans-serif;
+}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الشات بوت | Admin — Elawaady</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <meta name="robots" content="noindex,nofollow">
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ===== LAYOUT ===== */
+.admin-wrap {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.admin-sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 200;
+  transition: transform .3s ease;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 20px 16px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.admin-sidebar-logo {
+  height: 48px;
+  object-fit: contain;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-label {
+  font-size: 10px;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 10px 8px 4px;
+  display: block;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  color: var(--text2);
+  transition: background .2s, color .2s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background: rgba(240, 165, 0, .12);
+  color: var(--gold);
+}
+
+.nav-icon {
+  font-size: 15px;
+}
+
+.sidebar-footer {
+  padding: 14px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  color: var(--red);
+  font-size: 13.5px;
+  transition: background .2s;
+}
+
+.sidebar-footer a:hover {
+  background: rgba(239, 68, 68, .1);
+}
+
+.sidebar-close-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ===== MAIN ===== */
+.admin-main {
+  margin-right: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== TOPBAR ===== */
+.admin-topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-toggle-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 18px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--bg3);
+}
+
+/* ===== CONTENT ===== */
+.admin-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== STAT GRID ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+  transition: border-color .2s, transform .2s;
+}
+
+.stat-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.stat-num {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+.text-green {
+  color: var(--green) !important;
+}
+
+.text-red {
+  color: var(--red) !important;
+}
+
+.text-cyan {
+  color: var(--cyan) !important;
+}
+
+.text-gold {
+  color: var(--gold) !important;
+}
+
+.text-muted {
+  color: var(--text2);
+}
+
+/* ===== PANEL ===== */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.panel-body {
+  padding: 16px;
+}
+
+/* ===== TABLE ===== */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-table th {
+  padding: 10px 12px;
+  text-align: right;
+  color: var(--text2);
+  font-weight: 600;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, .04);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, .02);
+}
+
+/* ===== BADGE ===== */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-active {
+  background: rgba(34, 197, 94, .15);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.badge-pending {
+  background: rgba(240, 165, 0, .15);
+  color: var(--gold);
+  border: 1px solid rgba(240, 165, 0, .3);
+}
+
+.badge-cancelled {
+  background: rgba(239, 68, 68, .15);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.badge-info {
+  background: rgba(0, 200, 255, .15);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 200, 255, .3);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: #000;
+}
+
+.btn-primary:hover {
+  background: var(--gold2);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, .1);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, .2);
+}
+
+.btn-success {
+  background: rgba(34, 197, 94, .1);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ===== FORMS ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-control,
+.form-select,
+textarea.form-control {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  transition: border-color .2s;
+  width: 100%;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+textarea.form-control {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-hint {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.form-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.form-section summary {
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-section[open] summary {
+  color: var(--gold);
+}
+
+.form-section .section-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== ALERTS ===== */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alert-success {
+  background: rgba(34, 197, 94, .1);
+  border: 1px solid rgba(34, 197, 94, .3);
+  color: var(--green);
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, .1);
+  border: 1px solid rgba(239, 68, 68, .3);
+  color: var(--red);
+}
+
+.alert-info {
+  background: rgba(0, 200, 255, .1);
+  border: 1px solid rgba(0, 200, 255, .3);
+  color: var(--cyan);
+}
+
+.alert-warning {
+  background: rgba(240, 165, 0, .1);
+  border: 1px solid rgba(240, 165, 0, .3);
+  color: var(--gold);
+}
+
+/* ===== FLEX UTILS ===== */
+.flex-gap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-bar .form-control {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty-state .empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 14px;
+}
+
+/* ===== COLOR SWATCH ===== */
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ===== TOGGLE SWITCH ===== */
+.toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.toggle input:checked+.toggle-track {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  top: 2px;
+  right: 2px;
+  transition: right .2s;
+}
+
+.toggle input:checked+.toggle-track::after {
+  right: calc(100% - 18px);
+}
+
+/* ===== IMAGE UPLOAD ===== */
+.img-upload-box {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s;
+  position: relative;
+}
+
+.img-upload-box:hover {
+  border-color: var(--gold);
+}
+
+.img-upload-box input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.img-upload-box .upload-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.img-upload-box p {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.img-preview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  margin-top: 8px;
+}
+
+/* ===== THEME PRESETS ===== */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.theme-card {
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .2s, transform .2s;
+}
+
+.theme-card:hover {
+  border-color: var(--gold);
+  transform: scale(1.02);
+}
+
+.theme-card.active {
+  border-color: var(--gold);
+}
+
+.theme-card .theme-preview {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.theme-card .theme-name {
+  padding: 6px 8px;
+  font-size: 11px;
+  text-align: center;
+  background: var(--bg3);
+  color: var(--text2);
+}
+
+/* ===== CHATBOT Q&A ===== */
+.qa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 16px;
+}
+
+.qa-item {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg3);
+  transition: border-color .2s;
+}
+
+.qa-item:hover {
+  border-color: var(--gold);
+}
+
+.qa-q {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.qa-a {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.qa-meta {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+}
+
+.qa-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+/* ===== CAROUSEL GRID ===== */
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.carousel-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+
+.carousel-item:hover {
+  border-color: var(--gold);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.carousel-item-body {
+  padding: 10px;
+}
+
+.carousel-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.carousel-item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* ===== OVERLAY ===== */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .6);
+  z-index: 150;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ===== MODAL ===== */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .7);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 90%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: fadeUp .25s ease;
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+/* ===== LOGIN PAGE ===== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 60% 40%, rgba(240, 165, 0, .08) 0%, transparent 70%), var(--bg);
+}
+
+.login-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-logo img {
+  height: 56px;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.login-sub {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn .3s ease;
+}
+
+.fade-up {
+  animation: fadeUp .3s ease;
+}
+
+/* ===== TOAST ===== */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  animation: fadeUp .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 220px;
+}
+
+.toast-success {
+  background: #166534;
+  color: #bbf7d0;
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.toast-error {
+  background: #7f1d1d;
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.toast-info {
+  background: #0c4a6e;
+  color: #bae6fd;
+  border: 1px solid rgba(0, 200, 255, .3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .admin-sidebar {
+    transform: translateX(100%);
+    box-shadow: var(--shadow);
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: block;
+  }
+
+  .admin-main {
+    margin-right: 0;
+  }
+
+  .sidebar-toggle-btn {
+    display: block;
+  }
+
+  .form-grid,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .qa-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-content {
+    padding: 12px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+/* =====================================================
+   MISSING CLASSES — Added to fix form pages
+   ===================================================== */
+
+/* form-input: styled text input */
+.form-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  transition: border-color .2s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-input::placeholder {
+  color: var(--text2);
+}
+
+/* form-textarea: styled textarea */
+.form-textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color .2s;
+}
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-textarea::placeholder {
+  color: var(--text2);
+}
+
+/* form-select: already in CSS but missing on some elements */
+select.form-select,
+.form-select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.form-select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-select option {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* form-full: span full width inside form-grid */
+.form-full {
+  grid-column: 1 / -1;
+}
+
+/* req: required field asterisk */
+.req {
+  color: var(--red);
+  margin-right: 3px;
+}
+
+/* form-check: checkbox + label row */
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+.form-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ===== IMAGE UPLOAD SECTION ===== */
+
+/* wrapper for each image upload block */
+.img-upload-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* placeholder box shown when no image */
+.img-preview-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  max-height: 140px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text2);
+  font-size: 12px;
+  background: var(--bg3);
+  transition: border-color .2s;
+}
+.img-preview-placeholder:hover {
+  border-color: var(--gold);
+}
+.img-preview-placeholder .upload-icon {
+  font-size: 28px;
+  opacity: .6;
+}
+
+/* row that holds the upload button */
+.file-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* styled label acting as file button */
+.file-input-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+  white-space: nowrap;
+}
+.file-input-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* hide the actual file input */
+.hidden-file {
+  display: none !important;
+}
+
+/* small hint text under upload button */
+.upload-hint {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* image section 3-col grid on desktop */
+@media (min-width: 901px) {
+  .panel .form-grid .img-upload-group {
+    /* images are inside their own inner form-grid — already 2 col */
+  }
+  /* Override the inner image grid to 3 columns */
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* On mobile: image uploads stack */
+@media (max-width: 900px) {
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =====================================================
+   CHATBOT PAGE + ALL MISSING CLASSES — Complete Fix
+   ===================================================== */
+
+:root { --line: var(--border); --muted: var(--text2); }
+
+/* site-logo-img */
+.site-logo-img { max-width:100%; object-fit:contain; }
+
+/* ── form-input ── */
+.form-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 38px;
+  transition: border-color .2s;
+  display: block;
+}
+.form-input:focus { outline: none; border-color: var(--gold); }
+.form-input::placeholder { color: var(--text2); }
+
+/* ── form-textarea ── */
+.form-textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color .2s;
+}
+.form-textarea:focus { outline: none; border-color: var(--gold); }
+.form-textarea::placeholder { color: var(--text2); }
+
+/* ── form-select (override) ── */
+select.form-select, .form-select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 38px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+select.form-select:focus, .form-select:focus { outline:none; border-color:var(--gold); }
+.form-select option { background:var(--bg3); color:var(--text); }
+
+/* ── form-full ── */
+.form-full { grid-column: 1 / -1; }
+
+/* ── req ── */
+.req { color: var(--red); margin-right: 3px; }
+
+/* ── form-check ── */
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+.form-check input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── image upload helpers ── */
+.img-upload-group { display:flex; flex-direction:column; gap:8px; }
+.img-preview-placeholder {
+  width:100%; aspect-ratio:4/3; max-height:140px;
+  border:2px dashed var(--border); border-radius:10px;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:6px; color:var(--text2);
+  font-size:12px; background:var(--bg3); transition:border-color .2s;
+}
+.img-preview-placeholder:hover { border-color:var(--gold); }
+.img-preview-placeholder .upload-icon { font-size:28px; opacity:.6; }
+.file-input-wrap { display:flex; align-items:center; gap:8px; }
+.file-input-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:7px 14px; background:var(--bg3);
+  border:1px solid var(--border); border-radius:8px;
+  font-family:var(--font); font-size:12px; font-weight:600;
+  color:var(--text); cursor:pointer; transition:border-color .2s,color .2s;
+  white-space:nowrap;
+}
+.file-input-btn:hover { border-color:var(--gold); color:var(--gold); }
+.hidden-file { display:none !important; }
+.upload-hint { font-size:11px; color:var(--text2); line-height:1.4; }
+
+/* ── color-row ── */
+.color-row { display:flex; align-items:center; gap:8px; }
+.color-row input[type="color"] {
+  width:38px; height:38px; border:1px solid var(--border);
+  border-radius:6px; background:var(--bg3); cursor:pointer;
+  padding:2px; flex-shrink:0;
+}
+.color-row .form-input { flex:1; }
+
+/* ── img-new-previews ── */
+.img-new-previews { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+.img-new-previews img {
+  width:100px; height:100px; object-fit:cover;
+  border-radius:8px; border:1px solid var(--border);
+}
+
+/* ── form-section details/summary ── */
+.form-section-body { padding:18px 16px; display:flex; flex-direction:column; gap:14px; }
+.form-section > summary {
+  list-style:none; padding:13px 16px; font-size:14px; font-weight:700;
+  cursor:pointer; background:var(--bg3); border-bottom:1px solid var(--border);
+  user-select:none; display:flex; align-items:center; justify-content:space-between;
+}
+.form-section > summary::after { content:'▼'; font-size:10px; color:var(--text2); transition:transform .2s; }
+.form-section[open] > summary::after { transform:rotate(180deg); }
+.form-section > summary::-webkit-details-marker { display:none; }
+.form-section[open] > summary { color:var(--gold); }
+
+/* ── Inline flex forms: inputs/selects should not be 100% wide ── */
+form[style*="display:flex"] .form-input,
+form[style*="display:flex"] .form-select {
+  width: auto;
+}
+/* But inside form-group they should be 100% */
+.form-group .form-input,
+.form-group .form-textarea,
+.form-group .form-select { width:100%; }
+
+/* ── CHATBOT specific ── */
+/* Test bot input row */
+#test-q { flex:1; min-width:0; }
+
+/* Panel body padding for test section */
+.panel > div[style*="display:flex"][style*="gap:8px"] {
+  padding: 12px 16px;
+}
+
+/* chatbot grid — 2 col desktop, 1 col mobile */
+.chatbot-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Also target the inline grid used in chatbot.html */
+@media (max-width: 900px) {
+  /* Override the inline style grid */
+  div[style*="grid-template-columns:1fr 380px"],
+  div[style*="grid-template-columns: 1fr 380px"] {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  /* Sticky sidebar becomes normal flow */
+  div[style*="position:sticky"] {
+    position: static !important;
+  }
+}
+
+/* Filters inline flex fix (orders page too) */
+form[style*="gap:8px"] .form-input,
+form[style*="gap:8px"] .form-select {
+  width: auto;
+  flex-shrink: 0;
+}
+form[style*="gap:8px"] input.form-input[style*="flex:1"],
+form[style*="gap:8px"] #test-q {
+  flex: 1;
+  min-width: 180px;
+  width: auto;
+}
+
+/* badge-inactive */
+.badge-inactive {
+  background: rgba(160,160,160,.15);
+  color: var(--text2);
+  border: 1px solid rgba(160,160,160,.3);
+}
+
+</style>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../uploads/brand/favicon.png" type="image/png">
+<script>
+function toggleSidebar() {
+    const sb = document.getElementById('admin-sidebar');
+    const ov = document.getElementById('sidebar-overlay');
+    sb.classList.toggle('open');
+    ov.classList.toggle('active');
+    document.body.classList.toggle('sidebar-open');
+}
+function closeSidebar() {
+    document.getElementById('admin-sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('active');
+    document.body.classList.remove('sidebar-open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+</script>
 </head>
-
 <body>
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-  <div class="admin-wrap">
 
-    <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
-      <div class="sidebar-brand">
-        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
-          onerror="this.style.display='none'">
-      </div>
-      <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html" class="active"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
-      </nav>
-      <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
-      </div>
-    </aside>
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-    <div class="admin-main">
-      <div class="admin-topbar">
-        <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">الشات بوت</div>
-        </div>
-        <div class="topbar-right">
-          <button class="btn btn-primary btn-sm" onclick="openModal('add-qa-modal')">➕ إضافة سؤال</button>
-        </div>
-      </div>
+<div class="admin-wrap">
 
-      <div class="admin-content">
-        <div class="page-header">
-          <h1>🤖 قاعدة معرفة الشات بوت</h1>
-          <button class="btn btn-primary" onclick="openModal('add-qa-modal')">➕ إضافة سؤال وجواب</button>
-        </div>
-
-        <div class="alert alert-info">
-          ℹ️ أضف الأسئلة الشائعة وإجاباتها لتدريب الشات بوت على الردود التلقائية
-        </div>
-
-        <!-- Search -->
-        <div class="panel">
-          <div class="panel-body" style="padding:12px 16px;">
-            <div class="search-bar">
-              <input type="text" class="form-control" id="qa-search" placeholder="🔍 بحث في الأسئلة...">
-            </div>
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <button class="sidebar-close-btn" onclick="closeSidebar()" aria-label="إغلاق القائمة">✕</button>
+    <div class="sidebar-brand">
+              <img src="../assets/images/admin-logo.png" alt="Elawaady" class="site-logo-img admin-sidebar-logo">
           </div>
-        </div>
 
-        <!-- Q&A Table -->
-        <div class="panel">
-          <table class="admin-table" id="qa-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>السؤال</th>
-                <th>الجواب</th>
-                <th>الأولوية</th>
-                <th>الحالة</th>
-                <th>إجراءات</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-muted">1</td>
-                <td style="font-weight:600;">كيف أطلب خدمة؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">اختر الخدمة المناسبة واضغط "اطلب الآن" ثم
-                  أدخل بياناتك وأكمل الدفع.</td>
-                <td><span class="badge badge-active">عالية</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
-                <td>
-                  <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
-                    <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-muted">2</td>
-                <td style="font-weight:600;">ما هي طرق الدفع المتاحة؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">نقبل فودافون كاش، إنستاباي، والتحويل
-                  البنكي.</td>
-                <td><span class="badge badge-active">عالية</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
-                <td>
-                  <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
-                    <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-muted">3</td>
-                <td style="font-weight:600;">هل الخدمات آمنة؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">نعم، جميع خدماتنا آمنة ومضمونة 100% ونضمن
-                  جودة التنفيذ.</td>
-                <td><span class="badge badge-pending">متوسطة</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
-                <td>
-                  <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
-                    <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-muted">4</td>
-                <td style="font-weight:600;">كم يستغرق تنفيذ الطلب؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">يختلف حسب الخدمة، وعادةً من 24 إلى 72
-                  ساعة.</td>
-                <td><span class="badge badge-pending">متوسطة</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
-                <td>
-                  <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
-                    <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">الرئيسية</span>
+      <a href="../index.html" class="">
+        <span class="nav-icon">🏠</span> لوحة التحكم
+      </a>
 
-        <!-- Chatbot Settings -->
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">⚙️ إعدادات الشات بوت</div>
-          </div>
-          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
-            <div class="form-group">
-              <label class="form-label">رسالة الترحيب</label>
-              <textarea class="form-control"
-                placeholder="مرحبًا! كيف يمكنني مساعدتك؟">مرحبًا! أنا مساعد Elawaady الذكي. كيف يمكنني مساعدتك اليوم؟</textarea>
-            </div>
-            <div class="toggle-wrap">
-              <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;font-weight:600;">تفعيل الشات بوت</span>
-            </div>
-            <div class="toggle-wrap">
-              <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;font-weight:600;">ردود تلقائية على الرسائل</span>
-            </div>
-            <button class="btn btn-primary" style="width:fit-content;"
-              onclick="showToast('تم حفظ إعدادات الشات بوت ✅','success')">💾 حفظ الإعدادات</button>
-          </div>
-        </div>
+      <span class="nav-label">المحتوى</span>
+      <a href="categories.html" class="">
+        <span class="nav-icon">📁</span> الأقسام
+      </a>
+      <a href="services.html" class="">
+        <span class="nav-icon">🛍️</span> الخدمات
+      </a>
+
+      <span class="nav-label">المبيعات</span>
+      <a href="orders.html" class="">
+        <span class="nav-icon">📋</span> الطلبات
+      </a>
+      <a href="chatbot.html" class="active">
+        <span class="nav-icon">🤖</span> الشات بوت
+      </a>
+
+      <span class="nav-label">الإعدادات</span>
+      <a href="homepage-settings.html" class="">
+        <span class="nav-icon">🏠</span> إعدادات الرئيسية
+      </a>
+      <a href="visual-sections.html" class="">
+        <span class="nav-icon">🖼️</span> صور الأقسام والخدمات
+      </a>
+      <a href="brand-settings.html" class="">
+        <span class="nav-icon">🎨</span> الهوية البصرية
+      </a>
+      <a href="carousel.html" class="">
+        <span class="nav-icon">🎠</span> الكاروسيل
+      </a>
+
+      <span class="nav-label">عام</span>
+      <a href="../index.html" target="_blank">
+        <span class="nav-icon">🌐</span> عرض الموقع
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="logout.html">
+        <span class="nav-icon">🚪</span> تسجيل الخروج
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="فتح القائمة">☰</button>
+        <div class="topbar-title">معرفة الشات بوت</div>
       </div>
+      <div class="topbar-right">
+        <span class="text-muted" style="font-size:12px;">مرحبًا، admin</span>
+        <a href="logout.html" class="btn btn-secondary btn-sm" style="display:none;" id="mobile-logout">خروج</a>
+      </div>
+    </div>
+    <div class="admin-content">
+
+
+<div style="display:grid; grid-template-columns:1fr 380px; gap:20px; align-items:start;">
+
+  <!-- ── Left: list ────────────────────────────────────────── -->
+  <div>
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🤖 قاعدة المعرفة
+          <span style="color:var(--muted); font-weight:400; font-size:13px;">(14 سؤال)</span>
+        </div>
+              </div>
+
+            <div style="overflow-x:auto;">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>السؤال / الجواب</th>
+            <th>الفئة</th>
+            <th>الكلمات المفتاحية</th>
+            <th style="text-align:center;">أولوية</th>
+            <th style="text-align:center;">الحالة</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                كيف أطلب خدمة؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                لطلب أي خدمة، افتح صفحة الخدمة واضغط على زر «شراء الآن» ثم أكمل بيانات طلبك. سيصلك كود الط…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              order            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              طلب,كيف,شراء,خدمة            </td>
+            <td style="text-align:center; font-weight:700;">
+              10            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=1" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=1" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=1" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                من أنتم؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                نحن Elawaady XDigital Platform | منصة العوضي، منظومة رقمية متكاملة لخدمات السوشيال ميديا، …
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              general            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              من أنتم,عن المنصة,العوضي,Elawaady,EXP,منصة العوضي            </td>
+            <td style="text-align:center; font-weight:700;">
+              10            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=8" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=8" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=8" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما شروط الوساطة؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                تتم الوساطة فقط عبر القنوات الرسمية:
+1. توضيح بيانات الصفقة والسعر وطريقة التسليم قبل البد…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              mediation            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              شروط الوساطة,قوانين الوساطة,رسوم الوساطة,شروط البي            </td>
+            <td style="text-align:center; font-weight:700;">
+              10            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=10" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=10" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=10" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                كيف أدفع؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                ندعم عدة طرق دفع: واتساب، رابط دفع مباشر، تحويل بنكي. ستجد طريقة الدفع المناسبة في صفحة ال…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              payment            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              دفع,كيف,سداد,فلوس,اشتراك            </td>
+            <td style="text-align:center; font-weight:700;">
+              9            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=2" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=2" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=2" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                متى يُنفَّذ الطلب؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                يبدأ تنفيذ طلبك خلال 24 ساعة من استلام الدفع. بعض الخدمات تُنفَّذ فورًا والبعض يحتاج 3-7 أ…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              delivery            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              تنفيذ,متى,وقت,مدة,سرعة            </td>
+            <td style="text-align:center; font-weight:700;">
+              9            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=3" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=3" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=3" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما هو الجروب الرسمي؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                الجروب الرسمي - الأكبر في الوطن العربي:
+👥 https://facebook.com/groups/556386908691748/…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              general            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              الجروب,جروب فيسبوك,أكبر جروب,الجروب الرسمي,جروب ال            </td>
+            <td style="text-align:center; font-weight:700;">
+              9            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=9" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=9" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=9" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما سياسة الاستخدام؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                قواعد الاستخدام:
+1. الخدمات الرقمية المسموح بها فقط
+2. يمنع الاحتيال والتضليل
+3. لا ترسل ب…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              policy            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              سياسة الاستخدام,الشروط,القواعد,ممنوع,استخدام المنص            </td>
+            <td style="text-align:center; font-weight:700;">
+              9            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=14" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=14" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=14" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                هل يوجد استرداد للمبلغ؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                نعم، إذا لم تُنفَّذ الخدمة يمكنك طلب الاسترداد خلال 7 أيام من تاريخ الطلب عبر واتساب أو نظ…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              refund            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              استرداد,ضمان,رجوع,مبلغ,استرجاع            </td>
+            <td style="text-align:center; font-weight:700;">
+              8            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=4" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=4" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=4" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما هي الوساطة؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                الوساطة هي خدمة حماية للمشتري والبائع. نحتجز المبلغ حتى يتم تسليم الخدمة بشكل صحيح ثم نحرر…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              mediation            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              وساطة,امان,حماية,ضمان,وسيط            </td>
+            <td style="text-align:center; font-weight:700;">
+              8            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=5" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=5" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=5" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما حقوق التاجر؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                التاجر يعرض خدمات رقمية عبر المنصة.
+
+حقوقه: عرض خدماته بعد الموافقة، متابعة طلباته، تعديل …
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              merchant            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              تاجر,التاجر,حقوق التاجر,شروط التاجر            </td>
+            <td style="text-align:center; font-weight:700;">
+              8            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=11" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=11" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=11" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما شروط المورد؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                المورد يوفر الخدمة من الخلفية التشغيلية.
+
+واجباته:
+• تنفيذ الخدمة بالجودة والمدة المتفق عل…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              supplier            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              مورد,المورد,شروط المورد,حقوق المورد            </td>
+            <td style="text-align:center; font-weight:700;">
+              8            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=12" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=12" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=12" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما شروط المسوق؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                المسوق يروج لخدمات المنصة مقابل عمولة.
+
+واجباته:
+• الترويج بمعلومات صحيحة وروابط رسمية فقط…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              marketer            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              مسوق,المسوق,عمولة,تسويق,افلييت,affiliate            </td>
+            <td style="text-align:center; font-weight:700;">
+              8            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=13" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=13" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=13" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                كيف أتواصل مع الدعم؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                يمكنك التواصل معنا عبر واتساب أو عبر صفحة «تواصل» في الموقع. فريقنا متاح طوال اليوم.
+💬 htt…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              support            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              دعم,تواصل,مساعدة,support,مشكلة            </td>
+            <td style="text-align:center; font-weight:700;">
+              7            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=6" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=6" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=6" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                    <tr style="">
+            <td>
+              <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:3px;">
+                ما هي الخدمات المتاحة؟              </div>
+              <div style="font-size:11px; color:var(--muted);">
+                نقدم خدمات التسويق الرقمي كزيادة المتابعين، إعلانات سوشيال ميديا، توثيق الحسابات، اشتراكات…
+              </div>
+            </td>
+            <td style="font-size:12px; color:var(--gold); white-space:nowrap;">
+              general            </td>
+            <td style="font-size:11px; color:var(--muted); max-width:160px;">
+              خدمات,ماذا,انواع,متاح,تقديم            </td>
+            <td style="text-align:center; font-weight:700;">
+              7            </td>
+            <td style="text-align:center;">
+              <a href="chatbot-knowledge.html?toggle=7" class="badge badge-active" style="text-decoration:none; cursor:pointer; min-width:50px; display:inline-block; text-align:center;">
+                نشط              </a>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="chatbot-knowledge.html?edit=7" class="btn btn-secondary btn-sm">تعديل</a>
+                <a href="chatbot-knowledge.html?delete=7" class="btn btn-secondary btn-sm" style="color:var(--red);" onclick="return confirm('حذف هذا السؤال نهائيًا؟')">حذف</a>
+              </div>
+            </td>
+          </tr>
+                  </tbody>
+      </table>
+      </div>
+          </div>
+
+    <!-- Quick test panel -->
+    <div class="panel" style="margin-top:16px;">
+      <div class="panel-header"><div class="panel-title">🔍 اختبار الشات بوت</div></div>
+      <div style="display:flex; gap:8px; padding:4px 0;">
+        <input type="text" id="test-q" class="form-input" placeholder="اكتب سؤالاً لاختبار الرد..." style="flex:1;" onkeydown="if(event.key==='Enter') testBot()">
+        <button class="btn btn-primary btn-sm" onclick="testBot()">اختبار</button>
+      </div>
+      <div id="test-result" style="margin-top:12px; display:none;"></div>
     </div>
   </div>
 
-  <!-- Add Q&A Modal -->
-  <div class="modal-backdrop" id="add-qa-modal">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title">➕ إضافة سؤال وجواب</div>
-        <button class="modal-close" onclick="closeModal('add-qa-modal')">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label">السؤال <span style="color:var(--red)">*</span></label>
-          <input type="text" class="form-control" placeholder="اكتب السؤال هنا..." id="new-question">
-        </div>
-        <div class="form-group">
-          <label class="form-label">الجواب <span style="color:var(--red)">*</span></label>
-          <textarea class="form-control" style="min-height:100px;" placeholder="اكتب الجواب هنا..."
-            id="new-answer"></textarea>
-        </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label">الأولوية</label>
-            <select class="form-select">
-              <option>عالية</option>
-              <option>متوسطة</option>
-              <option>منخفضة</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">الحالة</label>
-            <div class="toggle-wrap" style="margin-top:8px;">
-              <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;">مفعل</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" onclick="saveQA()">💾 حفظ</button>
-        <button class="btn btn-secondary" onclick="closeModal('add-qa-modal')">إلغاء</button>
-      </div>
+  <!-- ── Right: form ──────────────────────────────────────── -->
+  <div class="panel" style="position:sticky; top:20px;">
+    <div class="panel-header">
+      <div class="panel-title">➕ إضافة سؤال جديد</div>
     </div>
+    <form method="post" style="display:flex; flex-direction:column; gap:14px;">
+      
+      <div class="form-group">
+        <label class="form-label">السؤال <span style="color:var(--red);">*</span></label>
+        <textarea name="question" class="form-textarea" rows="3" required="" placeholder="مثال: كيف يمكنني طلب خدمة؟"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">الجواب <span style="color:var(--red);">*</span></label>
+        <textarea name="answer" class="form-textarea" rows="5" required="" placeholder="اكتب الجواب الكامل الذي سيظهر للزائر..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">الفئة</label>
+        <input type="text" name="category" class="form-input" value="" list="cb-cats" placeholder="الطلبات، الدفع، التوثيق...">
+        <datalist id="cb-cats">
+          <option>الطلبات</option><option>الدفع</option><option>التوثيق</option>
+          <option>الاشتراكات</option><option>الوساطة</option><option>الدعم الفني</option>
+          <option>الاسترجاع</option><option>مدة التنفيذ</option>
+        </datalist>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          الكلمات المفتاحية
+          <span style="color:var(--muted); font-weight:400;">(مفصولة بفاصلة)</span>
+        </label>
+        <input type="text" name="keywords" class="form-input" value="" placeholder="طلب, خدمة, كيف, اطلب, شراء">
+        <div style="font-size:11px; color:var(--muted); margin-top:4px;">
+          تحسّن دقة البحث — كلما كانت الكلمات أدق، كانت الإجابة أصح.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          الأولوية
+          <span style="color:var(--muted); font-weight:400;">(0 = عادي — الأعلى يظهر أولاً)</span>
+        </label>
+        <input type="number" name="priority" class="form-input" min="0" max="100" value="0">
+      </div>
+
+      <label class="form-check">
+        <input type="checkbox" name="is_active" value="1" checked="">
+        نشط — يظهر في الشات بوت
+      </label>
+
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+        <button type="submit" class="btn btn-primary" style="flex:1;">
+          ➕ إضافة السؤال        </button>
+              </div>
+    </form>
   </div>
+</div>
 
-  <script src="../assets/script/script.js"></script>
-  <script>
-    tableSearch('qa-search', 'qa-table');
-    function saveQA() {
-      closeModal('add-qa-modal');
-      showToast('تم إضافة السؤال والجواب ✅', 'success');
-    }
-  </script>
-</body>
+<script>
+function testBot() {
+    var q = document.getElementById('test-q').value.trim();
+    if (!q) return;
+    var res = document.getElementById('test-result');
+    res.style.display = 'block';
+    res.innerHTML = '<span style="color:var(--muted); font-size:13px;">⏳ جارٍ البحث...</span>';
+    fetch('../chatbot-search.html?q=' + encodeURIComponent(q))
+        .then(function(r){return r.json();})
+        .then(function(data){
+            if (data.found) {
+                res.innerHTML = '<div style="background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);border-radius:10px;padding:12px;">'
+                    + '<div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:6px;">✅ تم إيجاد إجابة</div>'
+                    + '<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">السؤال المطابق: ' + data.question + '</div>'
+                    + '<div style="font-size:13px;color:#fff;white-space:pre-wrap;">' + data.answer + '</div></div>';
+            } else {
+                res.innerHTML = '<div style="background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.2);border-radius:10px;padding:12px;font-size:13px;color:var(--red);">❌ لم يُعثر على إجابة — سيظهر رابط واتساب للزائر</div>';
+            }
+        })
+        .catch(function(){
+            res.innerHTML = '<div style="color:var(--red);font-size:13px;">خطأ في الاتصال</div>';
+        });
+}
+document.getElementById('test-q').addEventListener('keydown', function(e){ if(e.key==='Enter') testBot(); });
+</script>
 
-</html>
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-wrap -->
+
+
+</body></html>
+
+

@@ -1,273 +1,2681 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إعدادات الرئيسية | Admin — Elawaady</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <meta name="robots" content="noindex,nofollow">
+<html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إعدادات الرئيسية | Admin — Elawaady</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../uploads/brand/favicon.png" type="image/png">
+<script>
+function toggleSidebar() {
+    const sb = document.getElementById('admin-sidebar');
+    const ov = document.getElementById('sidebar-overlay');
+    sb.classList.toggle('open');
+    ov.classList.toggle('active');
+    document.body.classList.toggle('sidebar-open');
+}
+function closeSidebar() {
+    document.getElementById('admin-sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('active');
+    document.body.classList.remove('sidebar-open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+</script>
 </head>
-
 <body>
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-  <div class="admin-wrap">
 
-    <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
-      <div class="sidebar-brand">
-        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
-          onerror="this.style.display='none'">
-      </div>
-      <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html" class="active"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
-      </nav>
-      <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
-      </div>
-    </aside>
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-    <div class="admin-main">
-      <div class="admin-topbar">
-        <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">إعدادات الصفحة الرئيسية</div>
-        </div>
-        <div class="topbar-right">
-          <span class="text-muted" style="font-size:12px;">مرحبًا، admin</span>
-        </div>
-      </div>
+<div class="admin-wrap">
 
-      <div class="admin-content">
-        <div class="page-header">
-          <h1>🏠 إعدادات الصفحة الرئيسية</h1>
-          <button class="btn btn-primary" onclick="saveAll()">💾 حفظ جميع الإعدادات</button>
-        </div>
-
-        <form id="hp-form" onsubmit="e=>e.preventDefault()" style="display:flex;flex-direction:column;gap:14px;">
-
-          <!-- Hero Section -->
-          <details class="form-section" open>
-            <summary>🎯 قسم الهيرو (Hero)</summary>
-            <div class="section-body">
-              <div class="form-group">
-                <label class="form-label">العنوان الرئيسي</label>
-                <input type="text" class="form-control" value="مرحبًا بك في Elawaady" id="hero-title">
-              </div>
-              <div class="form-group">
-                <label class="form-label">العنوان الفرعي</label>
-                <input type="text" class="form-control" value="أفضل خدمات التسويق الرقمي والاشتراكات"
-                  id="hero-subtitle">
-              </div>
-              <div class="form-group">
-                <label class="form-label">نص الزر الرئيسي</label>
-                <input type="text" class="form-control" value="تصفح الخدمات" id="hero-btn">
-              </div>
-              <div class="form-group">
-                <label class="form-label">خلفية الهيرو</label>
-                <div class="img-upload-box">
-                  <input type="file" accept="image/*" onchange="previewHero(this)">
-                  <div class="upload-icon">🖼️</div>
-                  <p>اسحب الصورة أو انقر للرفع</p>
-                  <img id="hero-preview" class="img-preview"
-                    style="display:none;width:100%;height:120px;object-fit:cover;margin-top:8px;">
-                </div>
-              </div>
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار قسم الهيرو</span>
-              </div>
-            </div>
-          </details>
-
-          <!-- Announcement Bar -->
-          <details class="form-section">
-            <summary>📢 شريط الإعلانات</summary>
-            <div class="section-body">
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" id="ann-toggle" checked><span
-                    class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">تفعيل شريط الإعلانات</span>
-              </div>
-              <div class="form-group">
-                <label class="form-label">نص الإعلان</label>
-                <input type="text" class="form-control" value="🎉 عروض خاصة على جميع الخدمات — تواصل معنا الآن!"
-                  id="ann-text">
-              </div>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label class="form-label">لون الخلفية</label>
-                  <div class="flex-gap">
-                    <input type="color" id="ann-bg-picker" value="#f0a500"
-                      style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                    <input type="text" class="form-control" id="ann-bg-text" value="#f0a500">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">لون النص</label>
-                  <div class="flex-gap">
-                    <input type="color" id="ann-txt-picker" value="#000000"
-                      style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                    <input type="text" class="form-control" id="ann-txt-text" value="#000000">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </details>
-
-          <!-- Stats Bar -->
-          <details class="form-section">
-            <summary>📊 شريط الإحصائيات</summary>
-            <div class="section-body">
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار شريط الإحصائيات</span>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;" id="stats-list">
-                <div class="form-grid" style="align-items:center;">
-                  <input type="text" class="form-control" placeholder="العنوان" value="+500">
-                  <input type="text" class="form-control" placeholder="الوصف" value="عميل سعيد">
-                </div>
-                <div class="form-grid" style="align-items:center;">
-                  <input type="text" class="form-control" placeholder="العنوان" value="+200">
-                  <input type="text" class="form-control" placeholder="الوصف" value="خدمة متاحة">
-                </div>
-                <div class="form-grid" style="align-items:center;">
-                  <input type="text" class="form-control" placeholder="العنوان" value="24/7">
-                  <input type="text" class="form-control" placeholder="الوصف" value="دعم فني">
-                </div>
-                <div class="form-grid" style="align-items:center;">
-                  <input type="text" class="form-control" placeholder="العنوان" value="100%">
-                  <input type="text" class="form-control" placeholder="الوصف" value="ضمان الجودة">
-                </div>
-              </div>
-            </div>
-          </details>
-
-          <!-- Featured Categories -->
-          <details class="form-section">
-            <summary>⭐ الأقسام المميزة</summary>
-            <div class="section-body">
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار الأقسام المميزة</span>
-              </div>
-              <div class="form-group" style="margin-top:10px;">
-                <label class="form-label">عنوان القسم</label>
-                <input type="text" class="form-control" value="تصفح الأقسام">
-              </div>
-              <div class="form-group">
-                <label class="form-label">عدد الأقسام الظاهرة</label>
-                <input type="number" class="form-control" value="8" min="1" max="20" style="width:120px;">
-              </div>
-            </div>
-          </details>
-
-          <!-- Featured Services -->
-          <details class="form-section">
-            <summary>🔥 الخدمات المميزة</summary>
-            <div class="section-body">
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار الخدمات المميزة</span>
-              </div>
-              <div class="form-group" style="margin-top:10px;">
-                <label class="form-label">عنوان القسم</label>
-                <input type="text" class="form-control" value="الخدمات المميزة">
-              </div>
-              <div class="form-group">
-                <label class="form-label">عدد الخدمات الظاهرة</label>
-                <input type="number" class="form-control" value="6" min="1" max="20" style="width:120px;">
-              </div>
-            </div>
-          </details>
-
-          <!-- Contact Info -->
-          <details class="form-section">
-            <summary>📞 بيانات التواصل</summary>
-            <div class="section-body">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label class="form-label">واتساب</label>
-                  <input type="text" class="form-control" placeholder="+201xxxxxxxxx" dir="ltr">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">تيليجرام</label>
-                  <input type="text" class="form-control" placeholder="@username" dir="ltr">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">فيسبوك</label>
-                  <input type="url" class="form-control" placeholder="https://facebook.com/..." dir="ltr">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">انستقرام</label>
-                  <input type="url" class="form-control" placeholder="https://instagram.com/..." dir="ltr">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">تيك توك</label>
-                  <input type="url" class="form-control" placeholder="https://tiktok.com/@..." dir="ltr">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">البريد الإلكتروني</label>
-                  <input type="email" class="form-control" placeholder="info@elawaady.com" dir="ltr">
-                </div>
-              </div>
-            </div>
-          </details>
-
-          <!-- SEO -->
-          <details class="form-section">
-            <summary>🔍 إعدادات SEO</summary>
-            <div class="section-body">
-              <div class="form-group">
-                <label class="form-label">عنوان الموقع (Title)</label>
-                <input type="text" class="form-control" value="Elawaady — خدمات التسويق الرقمي">
-              </div>
-              <div class="form-group">
-                <label class="form-label">وصف الموقع (Description)</label>
-                <textarea class="form-control"
-                  placeholder="وصف الموقع لمحركات البحث...">أفضل متجر لخدمات التسويق الرقمي والاشتراكات في مصر والعالم العربي</textarea>
-              </div>
-              <div class="form-group">
-                <label class="form-label">الكلمات المفتاحية</label>
-                <input type="text" class="form-control" value="تسويق رقمي, متابعين, اشتراكات, فيسبوك, انستقرام">
-              </div>
-            </div>
-          </details>
-
-          <div class="flex-gap">
-            <button type="button" class="btn btn-primary" onclick="saveAll()">💾 حفظ جميع الإعدادات</button>
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <button class="sidebar-close-btn" onclick="closeSidebar()" aria-label="إغلاق القائمة">✕</button>
+    <div class="sidebar-brand">
+              <img src="../assets/images/admin-logo.png" alt="Elawaady" class="site-logo-img admin-sidebar-logo">
           </div>
-        </form>
+
+    <nav class="sidebar-nav">
+      <span class="nav-label">الرئيسية</span>
+      <a href="../index.html" class="">
+        <span class="nav-icon">🏠</span> لوحة التحكم
+      </a>
+
+      <span class="nav-label">المحتوى</span>
+      <a href="categories.html" class="">
+        <span class="nav-icon">📁</span> الأقسام
+      </a>
+      <a href="services.html" class="">
+        <span class="nav-icon">🛍️</span> الخدمات
+      </a>
+
+      <span class="nav-label">المبيعات</span>
+      <a href="orders.html" class="">
+        <span class="nav-icon">📋</span> الطلبات
+      </a>
+      <a href="chatbot.html" class="">
+        <span class="nav-icon">🤖</span> الشات بوت
+      </a>
+
+      <span class="nav-label">الإعدادات</span>
+      <a href="homepage-settings.html" class="active">
+        <span class="nav-icon">🏠</span> إعدادات الرئيسية
+      </a>
+      <a href="visual-sections.html" class="">
+        <span class="nav-icon">🖼️</span> صور الأقسام والخدمات
+      </a>
+      <a href="brand-settings.html" class="">
+        <span class="nav-icon">🎨</span> الهوية البصرية
+      </a>
+      <a href="carousel.html" class="">
+        <span class="nav-icon">🎠</span> الكاروسيل
+      </a>
+
+      <span class="nav-label">عام</span>
+      <a href="../index.html" target="_blank">
+        <span class="nav-icon">🌐</span> عرض الموقع
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="logout.html">
+        <span class="nav-icon">🚪</span> تسجيل الخروج
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="فتح القائمة">☰</button>
+        <div class="topbar-title">إعدادات الرئيسية</div>
+      </div>
+      <div class="topbar-right">
+        <span class="text-muted" style="font-size:12px;">مرحبًا، admin</span>
+        <a href="logout.html" class="btn btn-secondary btn-sm" style="display:none;" id="mobile-logout">خروج</a>
       </div>
     </div>
-  </div>
-  <script src="../assets/script/script.js"></script>
-  <script>
-    syncColor('ann-bg-picker', 'ann-bg-text');
-    syncColor('ann-txt-picker', 'ann-txt-text');
-    function saveAll() { showToast('تم حفظ إعدادات الصفحة الرئيسية ✅', 'success'); }
-    function previewHero(input) {
-      const prev = document.getElementById('hero-preview');
-      if (!input.files[0]) return;
-      const r = new FileReader();
-      r.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
-      r.readAsDataURL(input.files[0]);
-    }
-  </script>
-</body>
+    <div class="admin-content">
 
-</html>
+<style>
+.hps-global { display:grid; grid-template-columns:repeat(auto-fill,minmax(175px,1fr)); gap:14px; padding:16px 0 4px; }
+.hps-field  { display:flex; flex-direction:column; gap:5px; }
+.hps-field label { font-size:11px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.4px; }
+.hps-field select, .hps-field input[type=number], .hps-field input[type=text], .hps-field input[type=url] {
+    padding:8px 12px; border-radius:8px; border:1px solid var(--line);
+    background:var(--surface2); color:var(--text); font-size:13px; font-family:inherit; }
+.hps-preview-bar { display:flex; gap:8px; align-items:center; margin-top:10px; padding:10px 14px;
+    background:rgba(255,122,0,.07); border-radius:10px; border:1px solid rgba(255,122,0,.2); font-size:12px; flex-wrap:wrap; }
+.hps-col-dot { width:28px; height:28px; border-radius:6px; background:var(--primary-color); opacity:.18; }
+.hps-stat-row  { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+.hps-stat      { padding:10px 16px; border-radius:12px; background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; gap:8px; flex:1; min-width:110px; }
+.hps-stat-num  { font-size:20px; font-weight:900; }
+.hps-stat-lbl  { font-size:11px; color:var(--muted); }
+.hps-table     { width:100%; border-collapse:collapse; font-size:12px; }
+.hps-table th  { padding:9px 10px; background:rgba(255,255,255,.04); text-align:right; font-weight:700; color:var(--muted); border-bottom:1px solid var(--line); font-size:11px; white-space:nowrap; }
+.hps-table td  { padding:8px 10px; border-bottom:1px solid rgba(255,255,255,.05); vertical-align:middle; }
+.hps-table tr:last-child td { border-bottom:none; }
+.hps-table tr.hps-off td { opacity:.55; }
+.hps-check { width:16px; height:16px; accent-color:var(--primary-color); cursor:pointer; vertical-align:middle; }
+.hps-num   { width:54px; padding:4px 6px; border-radius:6px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:12px; font-family:inherit; text-align:center; }
+.hps-txt   { width:140px; padding:4px 8px; border-radius:6px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:11px; font-family:inherit; }
+.hps-sel   { padding:4px 8px; border-radius:6px; border:1px solid var(--line); background:var(--surface2); color:var(--text); font-size:11px; font-family:inherit; }
+.hps-cat-name  { font-weight:800; font-size:13px; }
+.hps-counts    { font-size:11px; color:var(--muted); white-space:nowrap; }
+.hps-badge-none{ color:#ff6060; font-size:11px; }
+.hps-flash     { padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:13px; font-weight:700; }
+.hps-flash.ok  { background:rgba(0,220,100,.1); border:1px solid rgba(0,220,100,.3); color:#00dc64; }
+.hps-flash.err { background:rgba(255,60,60,.1);  border:1px solid rgba(255,60,60,.3);  color:#ff6060; }
+.hps-info-note { margin-top:14px; padding:11px 14px; border-radius:10px; background:rgba(255,214,0,.07); border:1px solid rgba(255,214,0,.2); font-size:12px; color:var(--muted); line-height:1.6; }
+.hps-info-note strong { color:#ffd600; }
+.hps-vid-preview { max-width:280px; border-radius:12px; margin-top:8px; display:block; }
+.hps-section-sep { margin:20px 0 14px; padding:8px 0; border-top:1px solid var(--line); font-size:11px; font-weight:900; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+</style>
+
+
+<!-- Stats row -->
+<div class="hps-stat-row">
+    <div class="hps-stat">
+    <span style="font-size:18px;">📁</span>
+    <div>
+      <div class="hps-stat-num" style="color:#ff7a00;">43</div>
+      <div class="hps-stat-lbl">قسم إجمالي</div>
+    </div>
+  </div>
+    <div class="hps-stat">
+    <span style="font-size:18px;">✅</span>
+    <div>
+      <div class="hps-stat-num" style="color:#00c864;">43</div>
+      <div class="hps-stat-lbl">ظاهر على الرئيسية</div>
+    </div>
+  </div>
+    <div class="hps-stat">
+    <span style="font-size:18px;">🙈</span>
+    <div>
+      <div class="hps-stat-num" style="color:#ff6060;">0</div>
+      <div class="hps-stat-lbl">مخفي من الرئيسية</div>
+    </div>
+  </div>
+    <div class="hps-stat">
+    <span style="font-size:18px;">💻</span>
+    <div>
+      <div class="hps-stat-num" style="color:#00e5ff;">5 أعمدة</div>
+      <div class="hps-stat-lbl">ديسكتوب</div>
+    </div>
+  </div>
+    <div class="hps-stat">
+    <span style="font-size:18px;">💻</span>
+    <div>
+      <div class="hps-stat-num" style="color:#ffd600;">10 عناصر</div>
+      <div class="hps-stat-lbl">حد الديسكتوب</div>
+    </div>
+  </div>
+    <div class="hps-stat">
+    <span style="font-size:18px;">📱</span>
+    <div>
+      <div class="hps-stat-num" style="color:#00c8ff;">6 عناصر</div>
+      <div class="hps-stat-lbl">حد الموبايل</div>
+    </div>
+  </div>
+    <div class="hps-stat">
+    <span style="font-size:18px;">🎬</span>
+    <div>
+      <div class="hps-stat-num" style="color:#ff00c8;">معطّل</div>
+      <div class="hps-stat-lbl">الفيديو</div>
+    </div>
+  </div>
+  </div>
+
+<!-- ══════════════════════════════════════
+     VIDEO SETTINGS
+     ══════════════════════════════════════ -->
+<div class="panel" style="margin-bottom:18px;">
+  <div class="panel-header">
+    <div class="panel-title">🎬 فيديو الترحيب (Intro Video)</div>
+  </div>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="save_video">
+    <div class="hps-global">
+
+      <div class="hps-field">
+        <label>تفعيل الفيديو</label>
+        <select name="enable_intro_video">
+          <option value="yes">✅ مفعّل</option>
+          <option value="no" selected="">❌ معطّل</option>
+        </select>
+      </div>
+
+      <div class="hps-field">
+        <label>مكان الفيديو</label>
+        <select name="intro_video_position">
+          <option value="hero" selected="">🦸 داخل الهيرو</option>
+          <option value="under_hero">⬇️ تحت الهيرو</option>
+          <option value="section">📋 قسم منفصل</option>
+        </select>
+      </div>
+
+      <div class="hps-field">
+        <label>تشغيل تلقائي</label>
+        <select name="intro_video_autoplay">
+          <option value="yes" selected="">نعم (مكتوم)</option>
+          <option value="no">لا</option>
+        </select>
+      </div>
+
+      <div class="hps-field">
+        <label>كتم الصوت</label>
+        <select name="intro_video_muted">
+          <option value="yes" selected="">نعم</option>
+          <option value="no">لا</option>
+        </select>
+      </div>
+
+      <div class="hps-field">
+        <label>تكرار</label>
+        <select name="intro_video_loop">
+          <option value="yes" selected="">نعم</option>
+          <option value="no">لا</option>
+        </select>
+      </div>
+
+      <div class="hps-field">
+        <label>أزرار التحكم</label>
+        <select name="intro_video_controls">
+          <option value="yes" selected="">تظهر</option>
+          <option value="no">مخفية</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div style="margin-top:14px; display:flex; flex-direction:column; gap:10px;">
+      <div class="hps-field" style="max-width:400px;">
+        <label>رفع ملف الفيديو (mp4 / webm)</label>
+        <input type="file" name="video_upload" accept="video/mp4,video/webm,video/ogg,video/quicktime" style="padding:6px; border-radius:8px; border:1px solid var(--line); background:var(--surface2); color:var(--text);">
+      </div>
+      <div class="hps-field" style="max-width:500px;">
+        <label>أو أدخل مسار الملف يدوياً (مثال: uploads/videos/intro.mp4)</label>
+        <input type="url" name="intro_video_file_manual" value="" placeholder="uploads/videos/intro.mp4">
+      </div>
+            <p class="hps-info-note">⚠️ لم يتم رفع فيديو بعد. ارفع الفيديو من هنا أو ضع المسار يدوياً.</p>
+          </div>
+
+    <div style="margin-top:14px;">
+      <button type="submit" class="btn btn-primary">💾 حفظ إعدادات الفيديو</button>
+    </div>
+  </form>
+</div>
+
+<!-- ══════════════════════════════════════
+     GLOBAL GRID SETTINGS
+     ══════════════════════════════════════ -->
+<div class="panel" style="margin-bottom:18px;">
+  <div class="panel-header">
+    <div class="panel-title">⚙️ إعدادات الشبكة والعناصر</div>
+  </div>
+  <form method="POST">
+    <input type="hidden" name="action" value="save_global">
+    <div class="hps-global">
+
+      <div class="hps-field">
+        <label>أعمدة — سطح المكتب</label>
+        <select name="desktop_cols">
+                    <option value="3">3 أعمدة</option>
+                    <option value="4">4 أعمدة</option>
+                    <option value="5" selected="">5 أعمدة</option>
+                    <option value="6">6 أعمدة</option>
+                  </select>
+      </div>
+
+      <div class="hps-field">
+        <label>أعمدة — الجهاز اللوحي</label>
+        <select name="tablet_cols">
+                    <option value="2">2 أعمدة</option>
+                    <option value="3" selected="">3 أعمدة</option>
+                    <option value="4">4 أعمدة</option>
+                  </select>
+      </div>
+
+      <div class="hps-field">
+        <label>أعمدة — الموبايل</label>
+        <select name="mobile_cols">
+                    <option value="1">عمود</option>
+                    <option value="2" selected="">أعمدة</option>
+                  </select>
+      </div>
+
+      <div class="hps-field">
+        <label>عدد العناصر — ديسكتوب</label>
+        <select name="items_per_category_desktop">
+                    <option value="4">4 عناصر</option>
+                    <option value="6">6 عناصر</option>
+                    <option value="8">8 عناصر</option>
+                    <option value="10" selected="">10 عناصر</option>
+                    <option value="12">12 عناصر</option>
+                    <option value="15">15 عناصر</option>
+                    <option value="20">20 عناصر</option>
+                  </select>
+      </div>
+
+      <div class="hps-field">
+        <label>عدد العناصر — جهاز لوحي</label>
+        <select name="items_per_category_tablet">
+                    <option value="3">3 عناصر</option>
+                    <option value="4">4 عناصر</option>
+                    <option value="6">6 عناصر</option>
+                    <option value="8" selected="">8 عناصر</option>
+                    <option value="10">10 عناصر</option>
+                    <option value="12">12 عناصر</option>
+                  </select>
+      </div>
+
+      <div class="hps-field">
+        <label>عدد العناصر — موبايل</label>
+        <select name="items_per_category_mobile">
+                    <option value="2">2 عناصر</option>
+                    <option value="4">4 عناصر</option>
+                    <option value="6" selected="">6 عناصر</option>
+                    <option value="8">8 عناصر</option>
+                  </select>
+      </div>
+
+      <div class="hps-field">
+        <label>زر "عرض المزيد"</label>
+        <select name="show_more_button">
+          <option value="yes" selected="">✅ مفعّل</option>
+          <option value="no">❌ معطّل</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="hps-preview-bar" id="hps-preview">
+      <span style="color:var(--muted);">معاينة:</span>
+      <div id="hps-prev-dots" style="display:flex;gap:4px;flex-wrap:wrap;">
+        <div class="hps-col-dot"></div><div class="hps-col-dot"></div><div class="hps-col-dot"></div><div class="hps-col-dot"></div><div class="hps-col-dot"></div>      </div>
+      <span id="hps-prev-label" style="font-size:12px;color:var(--muted);">
+        5×desktop · 3×tablet · 2×mobile
+      </span>
+    </div>
+
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button type="submit" class="btn btn-primary">💾 حفظ إعدادات الشبكة</button>
+      <a href="../index.html" target="_blank" class="btn btn-secondary">🌐 معاينة الرئيسية</a>
+    </div>
+  </form>
+</div>
+
+<!-- ══════════════════════════════════════
+     PER-CATEGORY SETTINGS
+     ══════════════════════════════════════ -->
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-title">📁 إعدادات الأقسام على الرئيسية (43 قسم — 43 مفعّل)</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="hpsToggleAll(1)">✅ تفعيل الكل</button>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="hpsToggleAll(0)">🙈 إخفاء الكل</button>
+    </div>
+  </div>
+
+  <p class="hps-info-note" style="margin:0 0 14px;">
+    💡 فقط الأقسام التي تكون <strong>"يظهر = ✅"</strong> تُعرض على الرئيسية.
+    جميع الأقسام تبقى كاملة في صفحة <a href="../categories.html" target="_blank" style="color:var(--primary-color);">categories.php</a>
+    والأدمن لا شيء يُحذف.
+  </p>
+
+  <form method="POST" id="cats-form">
+    <input type="hidden" name="action" value="save_cats">
+    <div style="overflow-x:auto;">
+    <table class="hps-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>القسم</th>
+          <th title="ظهور على الرئيسية">يظهر</th>
+          <th title="أولوية الترتيب (1=أول)">أولوية</th>
+          <th title="ترتيب (0=تلقائي)">ترتيب</th>
+          <th title="حد العناصر (0=افتراضي)">عناصر</th>
+          <th title="طريقة العرض">وضع العرض</th>
+          <th title="موبايل">موبايل</th>
+          <th>فرعي</th>
+          <th>خدمات</th>
+          <th>عنوان القسم</th>
+          <th>المحتوى</th>
+        </tr>
+      </thead>
+      <tbody>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">1</td>
+          <td>
+            <div class="hps-cat-name">📘 خدمات فيسبوك</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[1][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[1][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[1][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[1][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[1][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[1][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[1][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[1][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[1][home_section_title]" value="" class="hps-txt" placeholder="خدمات فيسبوك">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 2            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">2</td>
+          <td>
+            <div class="hps-cat-name">📸 خدمات إنستجرام</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[2][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[2][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[2][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[2][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[2][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[2][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[2][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[2][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[2][home_section_title]" value="" class="hps-txt" placeholder="خدمات إنستجرام">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">3</td>
+          <td>
+            <div class="hps-cat-name">🎵 خدمات تيك توك</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[3][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[3][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[3][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[3][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[3][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[3][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[3][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[3][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[3][home_section_title]" value="" class="hps-txt" placeholder="خدمات تيك توك">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">4</td>
+          <td>
+            <div class="hps-cat-name">👻 خدمات سناب شات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[4][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[4][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[4][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[4][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[4][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[4][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[4][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[4][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[4][home_section_title]" value="" class="hps-txt" placeholder="خدمات سناب شات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 2            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">5</td>
+          <td>
+            <div class="hps-cat-name">▶️ خدمات يوتيوب</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[5][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[5][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[5][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[5][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[5][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[5][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[5][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[5][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[5][home_section_title]" value="" class="hps-txt" placeholder="خدمات يوتيوب">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">6</td>
+          <td>
+            <div class="hps-cat-name">𝕏 خدمات تويتر X</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[6][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[6][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[6][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[6][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[6][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[6][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[6][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[6][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[6][home_section_title]" value="" class="hps-txt" placeholder="خدمات تويتر X">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">7</td>
+          <td>
+            <div class="hps-cat-name">✈️ خدمات تيليجرام</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[7][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[7][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[7][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[7][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[7][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[7][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[7][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[7][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[7][home_section_title]" value="" class="hps-txt" placeholder="خدمات تيليجرام">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">8</td>
+          <td>
+            <div class="hps-cat-name">💬 خدمات واتساب</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[8][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[8][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[8][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[8][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[8][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[8][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[8][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[8][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[8][home_section_title]" value="" class="hps-txt" placeholder="خدمات واتساب">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">9</td>
+          <td>
+            <div class="hps-cat-name">🎮 خدمات ديسكورد</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[9][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[9][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[9][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[9][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[9][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[9][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[9][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[9][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[9][home_section_title]" value="" class="hps-txt" placeholder="خدمات ديسكورد">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">10</td>
+          <td>
+            <div class="hps-cat-name">💼 خدمات لينكدإن</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[10][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[10][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[10][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[10][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[10][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[10][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[10][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[10][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[10][home_section_title]" value="" class="hps-txt" placeholder="خدمات لينكدإن">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">11</td>
+          <td>
+            <div class="hps-cat-name">✅ التوثيق الرسمي</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[11][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[11][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[11][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[11][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[11][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[11][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[11][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[11][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[11][home_section_title]" value="" class="hps-txt" placeholder="التوثيق الرسمي">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">12</td>
+          <td>
+            <div class="hps-cat-name">🧭 إدارة الحسابات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[12][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[12][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[12][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[12][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[12][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[12][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[12][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[12][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[12][home_section_title]" value="" class="hps-txt" placeholder="إدارة الحسابات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">13</td>
+          <td>
+            <div class="hps-cat-name">📣 الميديا باينج والإعلانات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[13][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[13][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[13][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[13][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[13][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[13][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[13][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[13][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[13][home_section_title]" value="" class="hps-txt" placeholder="الميديا باينج والإعلانات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">14</td>
+          <td>
+            <div class="hps-cat-name">🎨 التصميمات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[14][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[14][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[14][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[14][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[14][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[14][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[14][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[14][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[14][home_section_title]" value="" class="hps-txt" placeholder="التصميمات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">15</td>
+          <td>
+            <div class="hps-cat-name">🎬 المونتاج وصناعة المحتوى</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[15][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[15][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[15][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[15][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[15][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[15][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[15][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[15][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[15][home_section_title]" value="" class="hps-txt" placeholder="المونتاج وصناعة المحتوى">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">16</td>
+          <td>
+            <div class="hps-cat-name">🤖 البرمجة والبوتات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[16][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[16][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[16][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[16][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[16][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[16][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[16][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[16][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[16][home_section_title]" value="" class="hps-txt" placeholder="البرمجة والبوتات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">17</td>
+          <td>
+            <div class="hps-cat-name">🌐 المواقع والمتاجر</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[17][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[17][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[17][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[17][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[17][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[17][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[17][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[17][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[17][home_section_title]" value="" class="hps-txt" placeholder="المواقع والمتاجر">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">18</td>
+          <td>
+            <div class="hps-cat-name">🛡️ الدومينات والاستضافة</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[18][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[18][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[18][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[18][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[18][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[18][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[18][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[18][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[18][home_section_title]" value="" class="hps-txt" placeholder="الدومينات والاستضافة">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">19</td>
+          <td>
+            <div class="hps-cat-name">🔎 خدمات جوجل</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[19][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[19][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[19][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[19][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[19][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[19][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[19][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[19][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[19][home_section_title]" value="" class="hps-txt" placeholder="خدمات جوجل">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">20</td>
+          <td>
+            <div class="hps-cat-name">♾️ خدمات ميتا</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[20][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[20][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[20][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[20][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[20][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[20][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[20][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[20][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[20][home_section_title]" value="" class="hps-txt" placeholder="خدمات ميتا">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">21</td>
+          <td>
+            <div class="hps-cat-name">🛒 الحسابات الجاهزة</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[21][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[21][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[21][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[21][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[21][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[21][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[21][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[21][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[21][home_section_title]" value="" class="hps-txt" placeholder="الحسابات الجاهزة">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">22</td>
+          <td>
+            <div class="hps-cat-name">📦 الصفحات والقنوات الجاهزة</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[22][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[22][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[22][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[22][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[22][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[22][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[22][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[22][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[22][home_section_title]" value="" class="hps-txt" placeholder="الصفحات والقنوات الجاهزة">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">23</td>
+          <td>
+            <div class="hps-cat-name">🔐 نقل الملكية والاستلام</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[23][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[23][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[23][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[23][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[23][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[23][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[23][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[23][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[23][home_section_title]" value="" class="hps-txt" placeholder="نقل الملكية والاستلام">
+          </td>
+          <td>
+            <span class="hps-counts">
+              🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">24</td>
+          <td>
+            <div class="hps-cat-name">🧰 الحماية والاسترجاع</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[24][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[24][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[24][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[24][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[24][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[24][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[24][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[24][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[24][home_section_title]" value="" class="hps-txt" placeholder="الحماية والاسترجاع">
+          </td>
+          <td>
+            <span class="hps-counts">
+              🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">25</td>
+          <td>
+            <div class="hps-cat-name">💰 خدمات الربح والمنصات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[25][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[25][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[25][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[25][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[25][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[25][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[25][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[25][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[25][home_section_title]" value="" class="hps-txt" placeholder="خدمات الربح والمنصات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">26</td>
+          <td>
+            <div class="hps-cat-name">🎮 الألعاب والشحن</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[26][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[26][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[26][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[26][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[26][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[26][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[26][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[26][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[26][home_section_title]" value="" class="hps-txt" placeholder="الألعاب والشحن">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">27</td>
+          <td>
+            <div class="hps-cat-name">💳 الكروت والبطاقات الرقمية</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[27][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[27][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[27][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[27][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[27][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[27][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[27][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[27][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[27][home_section_title]" value="" class="hps-txt" placeholder="الكروت والبطاقات الرقمية">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">28</td>
+          <td>
+            <div class="hps-cat-name">🎓 الخدمات التعليمية والكورسات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[28][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[28][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[28][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[28][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[28][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[28][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[28][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[28][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[28][home_section_title]" value="" class="hps-txt" placeholder="الخدمات التعليمية والكورسات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">29</td>
+          <td>
+            <div class="hps-cat-name">🏢 الخدمات التجارية للشركات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[29][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[29][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[29][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[29][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[29][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[29][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[29][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[29][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[29][home_section_title]" value="" class="hps-txt" placeholder="الخدمات التجارية للشركات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">30</td>
+          <td>
+            <div class="hps-cat-name">🎁 العروض والباقات</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[30][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[30][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[30][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[30][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[30][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[30][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[30][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[30][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[30][home_section_title]" value="" class="hps-txt" placeholder="العروض والباقات">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">31</td>
+          <td>
+            <div class="hps-cat-name">⭐ الخدمات الخاصة</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[31][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[31][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[31][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[31][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[31][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[31][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[31][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[31][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[31][home_section_title]" value="" class="hps-txt" placeholder="الخدمات الخاصة">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">32</td>
+          <td>
+            <div class="hps-cat-name">🤝 الوساطة الرقمية</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[32][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[32][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[32][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[32][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[32][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[32][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[32][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[32][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[32][home_section_title]" value="" class="hps-txt" placeholder="الوساطة الرقمية">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">33</td>
+          <td>
+            <div class="hps-cat-name">🧠 حسابات الذكاء الاصطناعي AI</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[33][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[33][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[33][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[33][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[33][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[33][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[33][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[33][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[33][home_section_title]" value="" class="hps-txt" placeholder="حسابات الذكاء الاصطناعي AI">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 8 🛍️ 2            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">34</td>
+          <td>
+            <div class="hps-cat-name">Ⓜ️ Microsoft 365 وخدمات الأعمال</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[34][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[34][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[34][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[34][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[34][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[34][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[34][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[34][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[34][home_section_title]" value="" class="hps-txt" placeholder="Microsoft 365 وخدمات الأعمال">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 8 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">35</td>
+          <td>
+            <div class="hps-cat-name">🎟️ الاشتراكات الرقمية</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[35][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[35][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[35][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[35][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[35][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[35][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[35][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[35][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[35][home_section_title]" value="" class="hps-txt" placeholder="الاشتراكات الرقمية">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 7 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">36</td>
+          <td>
+            <div class="hps-cat-name">🧩 حسابات وبرامج الأعمال</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[36][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[36][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[36][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[36][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[36][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[36][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[36][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[36][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[36][home_section_title]" value="" class="hps-txt" placeholder="حسابات وبرامج الأعمال">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">37</td>
+          <td>
+            <div class="hps-cat-name">🏷️ قسم الموردين والشركاء</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[37][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[37][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[37][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[37][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[37][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[37][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[37][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[37][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[37][home_section_title]" value="" class="hps-txt" placeholder="قسم الموردين والشركاء">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">38</td>
+          <td>
+            <div class="hps-cat-name">📈 قسم التسويق بالعمولة</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[38][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[38][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[38][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[38][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[38][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[38][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[38][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[38][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[38][home_section_title]" value="" class="hps-txt" placeholder="قسم التسويق بالعمولة">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">39</td>
+          <td>
+            <div class="hps-cat-name">🛍️ أفلييت أمازون</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[39][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[39][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[39][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[39][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[39][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[39][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[39][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[39][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[39][home_section_title]" value="" class="hps-txt" placeholder="أفلييت أمازون">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">40</td>
+          <td>
+            <div class="hps-cat-name">🛒 أفلييت نون</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[40][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[40][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[40][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[40][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[40][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[40][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[40][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[40][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[40][home_section_title]" value="" class="hps-txt" placeholder="أفلييت نون">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">41</td>
+          <td>
+            <div class="hps-cat-name">🔁 منتجات بنظام العمولة</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[41][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[41][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[41][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[41][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[41][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[41][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[41][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[41][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[41][home_section_title]" value="" class="hps-txt" placeholder="منتجات بنظام العمولة">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">42</td>
+          <td>
+            <div class="hps-cat-name">🏬 Marketplace</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[42][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[42][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[42][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[42][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[42][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[42][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[42][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[42][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[42][home_section_title]" value="" class="hps-txt" placeholder="Marketplace">
+          </td>
+          <td>
+            <span class="hps-counts">
+              📂 6 🛍️ 1            </span>
+          </td>
+        </tr>
+                <tr class="">
+          <td style="font-size:10px;color:var(--muted);">43</td>
+          <td>
+            <div class="hps-cat-name">🚀 اعرض خدمتك عندنا</div>
+                      </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[43][show_on_home]" value="1" class="hps-check hps-show-toggle" checked="">
+          </td>
+          <td>
+            <input type="number" name="cats[43][featured_priority]" value="0" class="hps-num" min="0" max="999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[43][home_sort]" value="0" class="hps-num" min="0" max="9999" placeholder="0">
+          </td>
+          <td>
+            <input type="number" name="cats[43][home_items_limit]" value="8" class="hps-num" min="1" max="50" placeholder="10">
+          </td>
+          <td>
+            <select name="cats[43][display_mode]" class="hps-sel">
+                            <option value="grid" selected="">📐 شبكة عادية</option>
+                            <option value="horizontal_scroll">↔️ سكرول أفقي</option>
+                            <option value="marquee_strip">▶️ شريط متحرك</option>
+                            <option value="compact_pills">💊 بطاقات صغيرة</option>
+                            <option value="3d_coverflow">🎡 كوفرفلو 3D</option>
+                            <option value="carousel_wheel">🔄 دوّار</option>
+                            <option value="fade_slider">✨ فيد سلايدر</option>
+                            <option value="stacked_slider">📚 مكدّس</option>
+                            <option value="square_flip">🔄 قلب بطاقات</option>
+                            <option value="mixed_layout">🖼️ مختلط</option>
+                          </select>
+          </td>
+          <td>
+            <select name="cats[43][mobile_mode]" class="hps-sel">
+              <option value="horizontal_scroll" selected="">↔️ سكرول</option>
+              <option value="grid">📐 شبكة</option>
+              <option value="compact_pills">💊 بطاقات</option>
+            </select>
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[43][home_show_subs]" value="1" class="hps-check" checked="">
+          </td>
+          <td style="text-align:center;">
+            <input type="checkbox" name="cats[43][home_show_svcs]" value="1" class="hps-check" checked="">
+          </td>
+          <td>
+            <input type="text" name="cats[43][home_section_title]" value="" class="hps-txt" placeholder="اعرض خدمتك عندنا">
+          </td>
+          <td>
+            <span class="hps-counts">
+              <span class="hps-badge-none">فارغ</span>            </span>
+          </td>
+        </tr>
+              </tbody>
+    </table>
+    </div>
+
+    <div style="padding:14px 4px 4px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button type="submit" class="btn btn-primary">💾 حفظ إعدادات جميع الأقسام</button>
+      <span style="font-size:12px;color:var(--muted);">⚡ التغييرات تظهر على الرئيسية فورًا بعد الحفظ</span>
+    </div>
+  </form>
+</div>
+
+<script>
+function hpsToggleAll(state) {
+    document.querySelectorAll('.hps-show-toggle').forEach(cb => cb.checked = !!state);
+}
+(function() {
+    var dc=document.querySelector('[name=desktop_cols]'),tc=document.querySelector('[name=tablet_cols]'),mc=document.querySelector('[name=mobile_cols]');
+    var dots=document.getElementById('hps-prev-dots'),lbl=document.getElementById('hps-prev-label');
+    if(!dc) return;
+    function update(){
+        var d=parseInt(dc.value)||5,t=parseInt(tc.value)||3,m=parseInt(mc.value)||2;
+        dots.innerHTML='';
+        for(var i=0;i<d;i++){var el=document.createElement('div');el.className='hps-col-dot';dots.appendChild(el);}
+        lbl.textContent=d+'×desktop · '+t+'×tablet · '+m+'×mobile';
+    }
+    [dc,tc,mc].forEach(s=>s&&s.addEventListener('change',update));
+})();
+</script>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-wrap -->
+
+
+</body></html>
+
+

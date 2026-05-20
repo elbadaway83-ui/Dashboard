@@ -1,396 +1,2566 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎠 إدارة الكاروسيل | Admin — Elawaady</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+/* ===== VARIABLES ===== */
+:root {
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الكاروسيل | Admin — Elawaady</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <meta name="robots" content="noindex,nofollow">
-  <style>
-    .carousel-manage-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 14px;
-    }
+  /* Bridge variables */
+  --surface: var(--card);
+  --surface2: var(--bg2);
+  --line: var(--border);
+  --muted: var(--text2);
+  --primary-color: var(--gold);
 
-    .carousel-manage-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color .2s, transform .2s;
-      position: relative;
-    }
+  --bg: #0d0d0d;
+  --bg2: #141414;
+  --bg3: #1a1a1a;
+  --card: #1e1e1e;
+  --border: #2a2a2a;
+  --gold: #f0a500;
+  --gold2: #ffc84a;
+  --cyan: #00c8ff;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text: #e8e8e8;
+  --text2: #a0a0a0;
+  --sidebar-w: 240px;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --font: 'Cairo', sans-serif;
+}
 
-    .carousel-manage-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-2px);
-    }
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    .carousel-manage-card .card-img-wrap {
-      height: 150px;
-      background: var(--bg2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      color: var(--text2);
-      position: relative;
-      overflow: hidden;
-    }
+html {
+  font-size: 15px;
+}
 
-    .carousel-manage-card .card-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-    .card-order-badge {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(0, 0, 0, .7);
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 20px;
-      border: 1px solid var(--gold);
-    }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    .carousel-manage-card .card-body {
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+img {
+  max-width: 100%;
+}
 
-    .carousel-manage-card .card-title {
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+/* ===== LAYOUT ===== */
+.admin-wrap {
+  display: flex;
+  min-height: 100vh;
+}
 
-    .carousel-manage-card .card-link {
-      font-size: 11px;
-      color: var(--cyan);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+/* ===== SIDEBAR ===== */
+.admin-sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 200;
+  transition: transform .3s ease;
+  overflow-y: auto;
+}
 
-    .add-carousel-card {
-      border: 2px dashed var(--border);
-      background: transparent;
-      border-radius: var(--radius);
-      height: 250px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: border-color .2s, background .2s;
-    }
+.sidebar-brand {
+  padding: 20px 16px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
 
-    .add-carousel-card:hover {
-      border-color: var(--gold);
-      background: rgba(240, 165, 0, .04);
-    }
+.admin-sidebar-logo {
+  height: 48px;
+  object-fit: contain;
+}
 
-    .add-carousel-card span {
-      font-size: 36px;
-    }
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
-    .add-carousel-card p {
-      font-size: 13px;
-      color: var(--text2);
-    }
-  </style>
+.nav-label {
+  font-size: 10px;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 10px 8px 4px;
+  display: block;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  color: var(--text2);
+  transition: background .2s, color .2s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background: rgba(240, 165, 0, .12);
+  color: var(--gold);
+}
+
+.nav-icon {
+  font-size: 15px;
+}
+
+.sidebar-footer {
+  padding: 14px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  color: var(--red);
+  font-size: 13.5px;
+  transition: background .2s;
+}
+
+.sidebar-footer a:hover {
+  background: rgba(239, 68, 68, .1);
+}
+
+.sidebar-close-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ===== MAIN ===== */
+.admin-main {
+  margin-right: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== TOPBAR ===== */
+.admin-topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-toggle-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 18px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--bg3);
+}
+
+/* ===== CONTENT ===== */
+.admin-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== STAT GRID ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+  transition: border-color .2s, transform .2s;
+}
+
+.stat-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.stat-num {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+.text-green {
+  color: var(--green) !important;
+}
+
+.text-red {
+  color: var(--red) !important;
+}
+
+.text-cyan {
+  color: var(--cyan) !important;
+}
+
+.text-gold {
+  color: var(--gold) !important;
+}
+
+.text-muted {
+  color: var(--text2);
+}
+
+/* ===== PANEL ===== */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.panel-body {
+  padding: 16px;
+}
+
+/* ===== TABLE ===== */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-table th {
+  padding: 10px 12px;
+  text-align: right;
+  color: var(--text2);
+  font-weight: 600;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, .04);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, .02);
+}
+
+/* ===== BADGE ===== */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-active {
+  background: rgba(34, 197, 94, .15);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.badge-pending {
+  background: rgba(240, 165, 0, .15);
+  color: var(--gold);
+  border: 1px solid rgba(240, 165, 0, .3);
+}
+
+.badge-cancelled {
+  background: rgba(239, 68, 68, .15);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.badge-info {
+  background: rgba(0, 200, 255, .15);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 200, 255, .3);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: #000;
+}
+
+.btn-primary:hover {
+  background: var(--gold2);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, .1);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, .2);
+}
+
+.btn-success {
+  background: rgba(34, 197, 94, .1);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ===== FORMS ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-control,
+.form-select,
+textarea.form-control {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  transition: border-color .2s;
+  width: 100%;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+textarea.form-control {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-hint {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.form-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.form-section summary {
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-section[open] summary {
+  color: var(--gold);
+}
+
+.form-section .section-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== ALERTS ===== */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alert-success {
+  background: rgba(34, 197, 94, .1);
+  border: 1px solid rgba(34, 197, 94, .3);
+  color: var(--green);
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, .1);
+  border: 1px solid rgba(239, 68, 68, .3);
+  color: var(--red);
+}
+
+.alert-info {
+  background: rgba(0, 200, 255, .1);
+  border: 1px solid rgba(0, 200, 255, .3);
+  color: var(--cyan);
+}
+
+.alert-warning {
+  background: rgba(240, 165, 0, .1);
+  border: 1px solid rgba(240, 165, 0, .3);
+  color: var(--gold);
+}
+
+/* ===== FLEX UTILS ===== */
+.flex-gap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-bar .form-control {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty-state .empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 14px;
+}
+
+/* ===== COLOR SWATCH ===== */
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ===== TOGGLE SWITCH ===== */
+.toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.toggle input:checked+.toggle-track {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  top: 2px;
+  right: 2px;
+  transition: right .2s;
+}
+
+.toggle input:checked+.toggle-track::after {
+  right: calc(100% - 18px);
+}
+
+/* ===== IMAGE UPLOAD ===== */
+.img-upload-box {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s;
+  position: relative;
+}
+
+.img-upload-box:hover {
+  border-color: var(--gold);
+}
+
+.img-upload-box input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.img-upload-box .upload-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.img-upload-box p {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.img-preview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  margin-top: 8px;
+}
+
+/* ===== THEME PRESETS ===== */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.theme-card {
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .2s, transform .2s;
+}
+
+.theme-card:hover {
+  border-color: var(--gold);
+  transform: scale(1.02);
+}
+
+.theme-card.active {
+  border-color: var(--gold);
+}
+
+.theme-card .theme-preview {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.theme-card .theme-name {
+  padding: 6px 8px;
+  font-size: 11px;
+  text-align: center;
+  background: var(--bg3);
+  color: var(--text2);
+}
+
+/* ===== CHATBOT Q&A ===== */
+.qa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 16px;
+}
+
+.qa-item {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg3);
+  transition: border-color .2s;
+}
+
+.qa-item:hover {
+  border-color: var(--gold);
+}
+
+.qa-q {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.qa-a {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.qa-meta {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+}
+
+.qa-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+/* ===== CAROUSEL GRID ===== */
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.carousel-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+
+.carousel-item:hover {
+  border-color: var(--gold);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.carousel-item-body {
+  padding: 10px;
+}
+
+.carousel-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.carousel-item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* ===== OVERLAY ===== */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .6);
+  z-index: 150;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ===== MODAL ===== */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .7);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 90%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: fadeUp .25s ease;
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+/* ===== LOGIN PAGE ===== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 60% 40%, rgba(240, 165, 0, .08) 0%, transparent 70%), var(--bg);
+}
+
+.login-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-logo img {
+  height: 56px;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.login-sub {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn .3s ease;
+}
+
+.fade-up {
+  animation: fadeUp .3s ease;
+}
+
+/* ===== TOAST ===== */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  animation: fadeUp .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 220px;
+}
+
+.toast-success {
+  background: #166534;
+  color: #bbf7d0;
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.toast-error {
+  background: #7f1d1d;
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.toast-info {
+  background: #0c4a6e;
+  color: #bae6fd;
+  border: 1px solid rgba(0, 200, 255, .3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .admin-sidebar {
+    transform: translateX(100%);
+    box-shadow: var(--shadow);
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: block;
+  }
+
+  .admin-main {
+    margin-right: 0;
+  }
+
+  .sidebar-toggle-btn {
+    display: block;
+  }
+
+  .form-grid,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .qa-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-content {
+    padding: 12px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+/* =====================================================
+   MISSING CLASSES — Added to fix form pages
+   ===================================================== */
+
+/* form-input: styled text input */
+.form-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  transition: border-color .2s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-input::placeholder {
+  color: var(--text2);
+}
+
+/* form-textarea: styled textarea */
+.form-textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color .2s;
+}
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-textarea::placeholder {
+  color: var(--text2);
+}
+
+/* form-select: already in CSS but missing on some elements */
+select.form-select,
+.form-select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.form-select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-select option {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* form-full: span full width inside form-grid */
+.form-full {
+  grid-column: 1 / -1;
+}
+
+/* req: required field asterisk */
+.req {
+  color: var(--red);
+  margin-right: 3px;
+}
+
+/* form-check: checkbox + label row */
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+.form-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ===== IMAGE UPLOAD SECTION ===== */
+
+/* wrapper for each image upload block */
+.img-upload-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* placeholder box shown when no image */
+.img-preview-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  max-height: 140px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text2);
+  font-size: 12px;
+  background: var(--bg3);
+  transition: border-color .2s;
+}
+.img-preview-placeholder:hover {
+  border-color: var(--gold);
+}
+.img-preview-placeholder .upload-icon {
+  font-size: 28px;
+  opacity: .6;
+}
+
+/* row that holds the upload button */
+.file-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* styled label acting as file button */
+.file-input-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+  white-space: nowrap;
+}
+.file-input-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* hide the actual file input */
+.hidden-file {
+  display: none !important;
+}
+
+/* small hint text under upload button */
+.upload-hint {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* image section 3-col grid on desktop */
+@media (min-width: 901px) {
+  .panel .form-grid .img-upload-group {
+    /* images are inside their own inner form-grid — already 2 col */
+  }
+  /* Override the inner image grid to 3 columns */
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* On mobile: image uploads stack */
+@media (max-width: 900px) {
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../uploads/brand/favicon.png" type="image/png">
+<script>
+function toggleSidebar() {
+    const sb = document.getElementById('admin-sidebar');
+    const ov = document.getElementById('sidebar-overlay');
+    sb.classList.toggle('open');
+    ov.classList.toggle('active');
+    document.body.classList.toggle('sidebar-open');
+}
+function closeSidebar() {
+    document.getElementById('admin-sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('active');
+    document.body.classList.remove('sidebar-open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+</script>
 </head>
-
 <body>
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-  <div class="admin-wrap">
 
-    <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
-      <div class="sidebar-brand">
-        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
-          onerror="this.style.display='none'">
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<div class="admin-wrap">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <button class="sidebar-close-btn" onclick="closeSidebar()" aria-label="إغلاق القائمة">✕</button>
+    <div class="sidebar-brand">
+              <img src="../assets/images/admin-logo.png" alt="Elawaady" class="site-logo-img admin-sidebar-logo">
+          </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-label">الرئيسية</span>
+      <a href="../index.html" class="">
+        <span class="nav-icon">🏠</span> لوحة التحكم
+      </a>
+
+      <span class="nav-label">المحتوى</span>
+      <a href="categories.html" class="">
+        <span class="nav-icon">📁</span> الأقسام
+      </a>
+      <a href="services.html" class="">
+        <span class="nav-icon">🛍️</span> الخدمات
+      </a>
+
+      <span class="nav-label">المبيعات</span>
+      <a href="orders.html" class="">
+        <span class="nav-icon">📋</span> الطلبات
+      </a>
+      <a href="chatbot.html" class="">
+        <span class="nav-icon">🤖</span> الشات بوت
+      </a>
+
+      <span class="nav-label">الإعدادات</span>
+      <a href="homepage-settings.html" class="">
+        <span class="nav-icon">🏠</span> إعدادات الرئيسية
+      </a>
+      <a href="visual-sections.html" class="">
+        <span class="nav-icon">🖼️</span> صور الأقسام والخدمات
+      </a>
+      <a href="brand-settings.html" class="">
+        <span class="nav-icon">🎨</span> الهوية البصرية
+      </a>
+      <a href="carousel.html" class="active">
+        <span class="nav-icon">🎠</span> الكاروسيل
+      </a>
+
+      <span class="nav-label">عام</span>
+      <a href="../index.html" target="_blank">
+        <span class="nav-icon">🌐</span> عرض الموقع
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="logout.html">
+        <span class="nav-icon">🚪</span> تسجيل الخروج
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="فتح القائمة">☰</button>
+        <div class="topbar-title">🎠 إدارة الكاروسيل</div>
       </div>
-      <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html" class="active"><span class="nav-icon">🎠</span> الكاروسيل</a>
-      </nav>
-      <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
-      </div>
-    </aside>
-
-    <div class="admin-main">
-      <div class="admin-topbar">
-        <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">الكاروسيل</div>
-        </div>
-        <div class="topbar-right">
-          <button class="btn btn-primary btn-sm" onclick="openModal('add-slide-modal')">➕ إضافة شريحة</button>
-        </div>
-      </div>
-
-      <div class="admin-content">
-        <div class="page-header">
-          <h1>🎠 إدارة الكاروسيل</h1>
-          <button class="btn btn-primary" onclick="openModal('add-slide-modal')">➕ إضافة شريحة جديدة</button>
-        </div>
-
-        <div class="alert alert-info">
-          ℹ️ اسحب الشرائح لإعادة ترتيبها. الحجم الموصى به: 1920×600 بكسل.
-        </div>
-
-        <!-- Settings Panel -->
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">⚙️ إعدادات الكاروسيل</div>
-          </div>
-          <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">سرعة التحويل (ثانية)</label>
-                <input type="number" class="form-control" value="5" min="1" max="30" style="width:120px;">
-                <span class="form-hint">الوقت بين كل شريحة وأخرى</span>
-              </div>
-              <div class="form-group">
-                <label class="form-label">تأثير الانتقال</label>
-                <select class="form-select" style="width:180px;">
-                  <option>انزلاق (Slide)</option>
-                  <option>تلاشي (Fade)</option>
-                  <option>تكبير (Zoom)</option>
-                </select>
-              </div>
-            </div>
-            <div style="display:flex;gap:20px;flex-wrap:wrap;">
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">تشغيل تلقائي</span>
-              </div>
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار أزرار التنقل</span>
-              </div>
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار نقاط التنقل</span>
-              </div>
-              <div class="toggle-wrap">
-                <label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">توقف عند التحويم</span>
-              </div>
-            </div>
-            <button class="btn btn-secondary" style="width:fit-content;"
-              onclick="showToast('تم حفظ إعدادات الكاروسيل ✅','success')">💾 حفظ الإعدادات</button>
-          </div>
-        </div>
-
-        <!-- Slides Grid -->
-        <div class="carousel-manage-grid" id="slides-grid">
-
-          <!-- Slide 1 -->
-          <div class="carousel-manage-card" draggable="true">
-            <div class="card-img-wrap">
-              <div class="card-order-badge">#1</div>
-              🎯
-            </div>
-            <div class="card-body">
-              <div class="card-title">عروض خاصة على الخدمات</div>
-              <div class="card-link">#</div>
-              <div class="flex-gap">
-                <span class="badge badge-active">مرئية</span>
-              </div>
-              <div class="flex-gap">
-                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
-                <button class="btn btn-danger btn-sm"
-                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2 -->
-          <div class="carousel-manage-card" draggable="true">
-            <div class="card-img-wrap">
-              <div class="card-order-badge">#2</div>
-              🛍️
-            </div>
-            <div class="card-body">
-              <div class="card-title">اكتشف خدماتنا الجديدة</div>
-              <div class="card-link">#</div>
-              <div class="flex-gap">
-                <span class="badge badge-active">مرئية</span>
-              </div>
-              <div class="flex-gap">
-                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
-                <button class="btn btn-danger btn-sm"
-                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="carousel-manage-card" draggable="true">
-            <div class="card-img-wrap">
-              <div class="card-order-badge">#3</div>
-              🤖
-            </div>
-            <div class="card-body">
-              <div class="card-title">خدمات الذكاء الاصطناعي</div>
-              <div class="card-link">#</div>
-              <div class="flex-gap">
-                <span class="badge badge-pending">مخفية</span>
-              </div>
-              <div class="flex-gap">
-                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
-                <button class="btn btn-danger btn-sm"
-                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Add New -->
-          <div class="add-carousel-card" onclick="openModal('add-slide-modal')">
-            <span>➕</span>
-            <p>إضافة شريحة جديدة</p>
-          </div>
-        </div>
+      <div class="topbar-right">
+        <span class="text-muted" style="font-size:12px;">مرحبًا، admin</span>
+        <a href="logout.html" class="btn btn-secondary btn-sm" style="display:none;" id="mobile-logout">خروج</a>
       </div>
     </div>
-  </div>
+    <div class="admin-content">
 
-  <!-- Add Slide Modal -->
-  <div class="modal-backdrop" id="add-slide-modal">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title">🎠 إضافة شريحة جديدة</div>
-        <button class="modal-close" onclick="closeModal('add-slide-modal')">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label">صورة الشريحة <span style="color:var(--red)">*</span></label>
-          <div class="img-upload-box" id="slide-upload-box">
-            <input type="file" accept="image/*" onchange="previewSlide(this)">
-            <div class="upload-icon">🖼️</div>
-            <p>1920×600 موصى به</p>
-            <img id="slide-img-prev" class="img-preview"
-              style="display:none;width:100%;height:100px;object-fit:cover;margin-top:8px;">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">العنوان</label>
-          <input type="text" class="form-control" placeholder="عنوان الشريحة">
-        </div>
-        <div class="form-group">
-          <label class="form-label">الوصف</label>
-          <input type="text" class="form-control" placeholder="وصف مختصر">
-        </div>
-        <div class="form-group">
-          <label class="form-label">رابط الزر</label>
-          <input type="text" class="form-control" placeholder="#" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label class="form-label">نص الزر</label>
-          <input type="text" class="form-control" placeholder="اكتشف الآن">
-        </div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label">الترتيب</label>
-            <input type="number" class="form-control" value="1" min="1">
-          </div>
-          <div class="form-group">
-            <label class="form-label">الحالة</label>
-            <div class="toggle-wrap" style="margin-top:8px;">
-              <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;">مرئية</span>
+<style>
+/* ── Carousel admin page styles ── */
+.car-stats { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; }
+.car-stat-card {
+    background: var(--panel); border:1px solid var(--line);
+    border-radius:12px; padding:16px 24px;
+    min-width:120px; text-align:center;
+}
+.car-stat-card .stat-n { font-size:28px; font-weight:900; color:var(--orange); }
+.car-stat-card .stat-l { font-size:11px; color:var(--muted); margin-top:2px; }
+
+.car-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap:16px;
+    margin-bottom:32px;
+}
+.car-card {
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:14px; overflow:hidden;
+    display:flex; flex-direction:column;
+    transition: border-color .2s, box-shadow .2s;
+    position:relative;
+}
+.car-card.inactive { opacity:.55; }
+.car-card:hover { border-color: rgba(255,122,0,.35); box-shadow:0 4px 20px rgba(255,122,0,.12); }
+.car-card-img {
+    width:100%; aspect-ratio:16/9;
+    object-fit:cover; display:block;
+    background:#111;
+}
+.car-card-img-placeholder {
+    width:100%; aspect-ratio:16/9;
+    background:#1a1a1a; display:flex;
+    align-items:center; justify-content:center;
+    font-size:32px; color:#555;
+}
+.car-card-body {
+    padding:10px 12px;
+    flex:1; display:flex; flex-direction:column; gap:4px;
+}
+.car-card-order {
+    position:absolute; top:8px; right:8px;
+    background:rgba(0,0,0,.7); color:#fff;
+    font-size:10px; font-weight:800;
+    border-radius:6px; padding:2px 7px;
+}
+.car-card-status {
+    position:absolute; top:8px; left:8px;
+}
+.car-status-dot {
+    width:10px; height:10px; border-radius:50%;
+    display:inline-block;
+}
+.car-status-dot.active   { background:#22c55e; box-shadow:0 0 6px #22c55e; }
+.car-status-dot.inactive { background:#888; }
+.car-card-title { font-size:12px; font-weight:700; color:#fff; line-height:1.35; }
+.car-card-link  { font-size:10px; color:var(--muted); }
+.car-card-actions {
+    display:flex; gap:6px; padding:8px 12px 12px;
+    border-top:1px solid var(--line);
+}
+.car-card-actions .btn-xs {
+    flex:1; font-size:11px; padding:5px 8px;
+    border-radius:7px; text-align:center;
+    cursor:pointer; border:none; font-weight:700;
+    text-decoration:none;
+}
+.btn-xs-edit   { background:rgba(255,122,0,.15); color:#ff9500; border:1px solid rgba(255,122,0,.25); }
+.btn-xs-toggle { background:rgba(255,255,255,.07); color:#ccc;   border:1px solid rgba(255,255,255,.12); font-size:10px; }
+.btn-xs-del    { background:rgba(220,38,38,.12);  color:#f87171; border:1px solid rgba(220,38,38,.2); }
+.btn-xs-edit:hover   { background:rgba(255,122,0,.28); }
+.btn-xs-toggle:hover { background:rgba(255,255,255,.14); }
+.btn-xs-del:hover    { background:rgba(220,38,38,.24); }
+
+/* form panel */
+.car-form-panel {
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:16px; padding:24px;
+    margin-bottom:28px;
+}
+.car-form-panel h3 {
+    margin:0 0 18px; font-size:16px; font-weight:800; color:#fff;
+}
+.form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.form-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-group label { font-size:12px; font-weight:700; color:var(--muted); }
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background:#111; border:1px solid var(--line);
+    border-radius:8px; padding:8px 12px;
+    color:#fff; font-size:13px;
+    width:100%; box-sizing:border-box;
+    font-family:inherit;
+}
+.form-group input:focus,
+.form-group select:focus { outline:none; border-color:rgba(255,122,0,.5); }
+.img-preview-wrap { width:100%; border-radius:10px; overflow:hidden; background:#0a0a0a; }
+.img-preview-wrap img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+.link-id-row { display:none; }
+.link-id-row.show { display:flex; }
+.toggle-check { display:flex; align-items:center; gap:10px; cursor:pointer; }
+.toggle-check input[type=checkbox] { width:18px; height:18px; accent-color:#ff9500; cursor:pointer; }
+
+/* reorder form */
+.reorder-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+    gap:10px;
+    margin-bottom:16px;
+}
+.reorder-item {
+    background:#111; border:1px solid var(--line);
+    border-radius:10px; padding:8px;
+    display:flex; align-items:center; gap:8px;
+}
+.reorder-item img {
+    width:48px; height:36px;
+    object-fit:cover; border-radius:6px; flex-shrink:0;
+}
+.reorder-item input[type=number] {
+    width:52px; background:#0a0a0a;
+    border:1px solid var(--line);
+    border-radius:6px; color:#fff;
+    padding:4px 6px; font-size:12px;
+}
+.reorder-item-lbl { font-size:11px; color:#ccc; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+@media(max-width:600px) {
+    .form-row-2,
+    .form-row-3 { grid-template-columns:1fr; }
+    .car-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap:10px; }
+}
+</style>
+
+
+<!-- Stats bar -->
+<div class="car-stats">
+    <div class="car-stat-card">
+        <div class="stat-n">21</div>
+        <div class="stat-l">إجمالي البطاقات</div>
+    </div>
+    <div class="car-stat-card">
+        <div class="stat-n" style="color:#22c55e;">21</div>
+        <div class="stat-l">نشطة</div>
+    </div>
+    <div class="car-stat-card">
+        <div class="stat-n" style="color:#888;">0</div>
+        <div class="stat-l">مخفية</div>
+    </div>
+</div>
+
+<!-- Add / Edit form -->
+<div class="car-form-panel">
+    <h3>➕ إضافة بطاقة جديدة</h3>
+    <form method="POST" enctype="multipart/form-data" id="carForm">
+        <input type="hidden" name="action" value="save">
+        
+        <!-- Row 1: image + preview -->
+        <div class="form-row-2" style="margin-bottom:14px; align-items:start;">
+            <div class="form-group">
+                <label>📸 الصورة (مطلوب)</label>
+                <input type="file" name="image" accept="image/*" onchange="previewImg(this)" required="">
+                <small style="color:#666;font-size:11px;">JPG / PNG / WebP — بحد أقصى 5MB</small>
             </div>
-          </div>
+            <div class="form-group">
+                <label>معاينة الصورة</label>
+                <div class="img-preview-wrap" id="imgPreviewWrap">
+                                            <div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#555;font-size:13px;">
+                            لا توجد صورة
+                        </div>
+                                    </div>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" onclick="saveSlide()">💾 حفظ الشريحة</button>
-        <button class="btn btn-secondary" onclick="closeModal('add-slide-modal')">إلغاء</button>
-      </div>
-    </div>
-  </div>
 
-  <!-- Edit Slide Modal -->
-  <div class="modal-backdrop" id="edit-slide-modal">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title">✏️ تعديل الشريحة</div>
-        <button class="modal-close" onclick="closeModal('edit-slide-modal')">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label">العنوان</label>
-          <input type="text" class="form-control" value="عروض خاصة على الخدمات">
+        <!-- Row 2: titles -->
+        <div class="form-row-2" style="margin-bottom:14px;">
+            <div class="form-group">
+                <label>العنوان بالعربي</label>
+                <input type="text" name="title_ar" maxlength="255" value="" placeholder="مثال: خدمات السوشيال ميديا">
+            </div>
+            <div class="form-group">
+                <label>العنوان بالإنجليزي</label>
+                <input type="text" name="title_en" maxlength="255" value="" placeholder="e.g. Social Media Services">
+            </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">الوصف</label>
-          <input type="text" class="form-control" value="احصل على أفضل الأسعار">
-        </div>
-        <div class="form-group">
-          <label class="form-label">رابط الزر</label>
-          <input type="text" class="form-control" value="#" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label class="form-label">نص الزر</label>
-          <input type="text" class="form-control" value="اكتشف الآن">
-        </div>
-        <div class="form-group">
-          <label class="form-label">الترتيب</label>
-          <input type="number" class="form-control" value="1" min="1" style="width:120px;">
-        </div>
-        <div class="toggle-wrap">
-          <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-          <span style="font-size:13px;font-weight:600;">مرئية</span>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary"
-          onclick="closeModal('edit-slide-modal');showToast('تم تحديث الشريحة ✅','success')">💾 حفظ التعديلات</button>
-        <button class="btn btn-secondary" onclick="closeModal('edit-slide-modal')">إلغاء</button>
-      </div>
-    </div>
-  </div>
 
-  <script src="../assets/script/script.js"></script>
-  <script>
-    function saveSlide() {
-      closeModal('add-slide-modal');
-      showToast('تم إضافة الشريحة بنجاح ✅', 'success');
+        <!-- Row 3: link + sort + active -->
+        <div class="form-row-3" style="margin-bottom:14px;">
+            <div class="form-group">
+                <label>نوع الرابط</label>
+                <select name="link_type" id="linkType" onchange="updateLinkId()">
+                                            <option value="none" selected="">بدون رابط</option>
+                                            <option value="service">خدمة</option>
+                                            <option value="category">قسم</option>
+                                            <option value="custom">رابط مخصص</option>
+                                    </select>
+            </div>
+            <div class="form-group">
+                <label>الترتيب</label>
+                <input type="number" name="sort_order" min="0" max="9999" value="22">
+            </div>
+            <div class="form-group" style="justify-content:flex-end;">
+                <label class="toggle-check" style="margin-top:auto;padding-bottom:6px;">
+                    <input type="checkbox" name="is_active" value="1" checked="">
+                    <span style="font-size:13px;color:#fff;">نشط — يظهر في الكاروسيل</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Dynamic: service picker -->
+        <div class="form-row-2 link-id-row" id="svcRow" style="margin-bottom:14px;">
+            <div class="form-group">
+                <label>اختر الخدمة</label>
+                <select name="link_id">
+                    <option value="">-- اختر خدمة --</option>
+                                            <option value="1">
+                            #1 — متابعين فيسبوك                        </option>
+                                            <option value="2">
+                            #2 — توثيق صفحات فيسبوك                        </option>
+                                            <option value="3">
+                            #3 — لايكات إنستجرام                        </option>
+                                            <option value="4">
+                            #4 — مشاهدات تيك توك                        </option>
+                                            <option value="5">
+                            #5 — توثيق سناب شات                        </option>
+                                            <option value="6">
+                            #6 — حسابات سناب شات جاهزة                        </option>
+                                            <option value="7">
+                            #7 — ساعات مشاهدة يوتيوب                        </option>
+                                            <option value="8">
+                            #8 — توثيق إنستجرام                        </option>
+                                            <option value="9">
+                            #9 — إعلانات ممولة Meta                        </option>
+                                            <option value="10">
+                            #10 — تصميم هوية بصرية                        </option>
+                                            <option value="11">
+                            #11 — برمجة بوت تيليجرام                        </option>
+                                            <option value="12">
+                            #12 — برمجة متجر إلكتروني                        </option>
+                                            <option value="13">
+                            #13 — حساب سناب شات جاهز                        </option>
+                                            <option value="14">
+                            #14 — نقل ملكية حساب                        </option>
+                                            <option value="15">
+                            #15 — استرجاع حساب مخترق                        </option>
+                                            <option value="16">
+                            #16 — ChatGPT Plus                        </option>
+                                            <option value="17">
+                            #17 — Midjourney                        </option>
+                                            <option value="18">
+                            #18 — Microsoft 365 Business Standard                        </option>
+                                            <option value="19">
+                            #19 — Netflix                        </option>
+                                            <option value="20">
+                            #20 — خدمة مقدمة من مورد                        </option>
+                                    </select>
+            </div>
+        </div>
+
+        <!-- Dynamic: category picker -->
+        <div class="form-row-2 link-id-row" id="catRow" style="margin-bottom:14px;">
+            <div class="form-group">
+                <label>اختر القسم</label>
+                <select name="link_id">
+                    <option value="">-- اختر قسمًا --</option>
+                                            <option value="1">
+                            #1 — خدمات فيسبوك                        </option>
+                                            <option value="2">
+                            #2 — خدمات إنستجرام                        </option>
+                                            <option value="3">
+                            #3 — خدمات تيك توك                        </option>
+                                            <option value="4">
+                            #4 — خدمات سناب شات                        </option>
+                                            <option value="5">
+                            #5 — خدمات يوتيوب                        </option>
+                                            <option value="6">
+                            #6 — خدمات تويتر X                        </option>
+                                            <option value="7">
+                            #7 — خدمات تيليجرام                        </option>
+                                            <option value="8">
+                            #8 — خدمات واتساب                        </option>
+                                            <option value="9">
+                            #9 — خدمات ديسكورد                        </option>
+                                            <option value="10">
+                            #10 — خدمات لينكدإن                        </option>
+                                            <option value="11">
+                            #11 — التوثيق الرسمي                        </option>
+                                            <option value="12">
+                            #12 — إدارة الحسابات                        </option>
+                                            <option value="13">
+                            #13 — الميديا باينج والإعلانات                        </option>
+                                            <option value="14">
+                            #14 — التصميمات                        </option>
+                                            <option value="15">
+                            #15 — المونتاج وصناعة المحتوى                        </option>
+                                            <option value="16">
+                            #16 — البرمجة والبوتات                        </option>
+                                            <option value="17">
+                            #17 — المواقع والمتاجر                        </option>
+                                            <option value="18">
+                            #18 — الدومينات والاستضافة                        </option>
+                                            <option value="19">
+                            #19 — خدمات جوجل                        </option>
+                                            <option value="20">
+                            #20 — خدمات ميتا                        </option>
+                                            <option value="21">
+                            #21 — الحسابات الجاهزة                        </option>
+                                            <option value="22">
+                            #22 — الصفحات والقنوات الجاهزة                        </option>
+                                            <option value="23">
+                            #23 — نقل الملكية والاستلام                        </option>
+                                            <option value="24">
+                            #24 — الحماية والاسترجاع                        </option>
+                                            <option value="25">
+                            #25 — خدمات الربح والمنصات                        </option>
+                                            <option value="26">
+                            #26 — الألعاب والشحن                        </option>
+                                            <option value="27">
+                            #27 — الكروت والبطاقات الرقمية                        </option>
+                                            <option value="28">
+                            #28 — الخدمات التعليمية والكورسات                        </option>
+                                            <option value="29">
+                            #29 — الخدمات التجارية للشركات                        </option>
+                                            <option value="30">
+                            #30 — العروض والباقات                        </option>
+                                            <option value="31">
+                            #31 — الخدمات الخاصة                        </option>
+                                            <option value="32">
+                            #32 — الوساطة الرقمية                        </option>
+                                            <option value="33">
+                            #33 — حسابات الذكاء الاصطناعي AI                        </option>
+                                            <option value="34">
+                            #34 — Microsoft 365 وخدمات الأعمال                        </option>
+                                            <option value="35">
+                            #35 — الاشتراكات الرقمية                        </option>
+                                            <option value="36">
+                            #36 — حسابات وبرامج الأعمال                        </option>
+                                            <option value="37">
+                            #37 — قسم الموردين والشركاء                        </option>
+                                            <option value="38">
+                            #38 — قسم التسويق بالعمولة                        </option>
+                                            <option value="39">
+                            #39 — أفلييت أمازون                        </option>
+                                            <option value="40">
+                            #40 — أفلييت نون                        </option>
+                                            <option value="41">
+                            #41 — منتجات بنظام العمولة                        </option>
+                                            <option value="42">
+                            #42 — Marketplace                        </option>
+                                            <option value="43">
+                            #43 — اعرض خدمتك عندنا                        </option>
+                                    </select>
+            </div>
+        </div>
+
+        <!-- Dynamic: custom URL -->
+        <div class="form-row-2 link-id-row" id="urlRow" style="margin-bottom:14px;">
+            <div class="form-group">
+                <label>الرابط المخصص</label>
+                <input type="url" name="custom_url" placeholder="https://..." value="">
+            </div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button type="submit" class="btn btn-primary" style="min-width:140px;">
+                ➕ إضافة البطاقة            </button>
+                    </div>
+    </form>
+</div>
+
+<!-- Cards grid -->
+<div class="panel-header" style="margin-bottom:14px;">
+    <div class="panel-title">📋 بطاقات الكاروسيل (21)</div>
+</div>
+
+<div class="car-grid">
+        <div class="car-card ">
+        <span class="car-card-order">0</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-01.jpg" alt="متابعين فيسبوك" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    متابعين فيسبوك                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #1            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=1#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="1">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="1">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">1</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-02.jpg" alt="توثيق صفحات فيسبوك" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    توثيق صفحات فيسبوك                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #2            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=2#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="2">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="2">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">2</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-03.jpg" alt="لايكات إنستجرام" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    لايكات إنستجرام                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #3            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=3#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="3">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="3">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">3</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-04.jpg" alt="مشاهدات تيك توك" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    مشاهدات تيك توك                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #4            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=4#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="4">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="4">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">4</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-05.jpg" alt="توثيق سناب شات" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    توثيق سناب شات                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #5            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=5#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="5">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="5">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">5</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-06.jpg" alt="حسابات سناب شات جاهزة" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    حسابات سناب شات جاهزة                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #6            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=6#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="6">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="6">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">6</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-07.jpg" alt="ساعات مشاهدة يوتيوب" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    ساعات مشاهدة يوتيوب                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #7            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=7#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="7">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="7">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">7</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-08.jpg" alt="توثيق إنستجرام" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    توثيق إنستجرام                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #8            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=8#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="8">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="8">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">8</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-09.jpg" alt="إعلانات ممولة Meta" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    إعلانات ممولة Meta                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #9            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=9#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="9">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="9">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">9</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-10.jpg" alt="تصميم هوية بصرية" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    تصميم هوية بصرية                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #10            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=10#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="10">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="10">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">10</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-11.jpg" alt="برمجة بوت تيليجرام" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    برمجة بوت تيليجرام                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #11            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=11#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="11">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="11">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">11</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-12.jpg" alt="برمجة متجر إلكتروني" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    برمجة متجر إلكتروني                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #12            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=12#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="12">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="12">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">12</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-13.jpg" alt="حساب سناب شات جاهز" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    حساب سناب شات جاهز                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #13            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=13#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="13">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="13">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">13</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-14.jpg" alt="نقل ملكية حساب" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    نقل ملكية حساب                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #14            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=14#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="14">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="14">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">14</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-15.jpg" alt="استرجاع حساب مخترق" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    استرجاع حساب مخترق                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #15            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=15#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="15">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="15">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">15</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-16.jpg" alt="ChatGPT Plus" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    ChatGPT Plus                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #16            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=16#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="16">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="16">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">16</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-17.jpg" alt="Midjourney" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    Midjourney                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #17            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=17#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="17">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="17">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">17</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-18.jpg" alt="Microsoft 365 Business" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    Microsoft 365 Business                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #18            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=18#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="18">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="18">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">18</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-19.jpg" alt="Netflix" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    Netflix                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #19            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=19#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="19">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="19">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">19</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-20.jpg" alt="خدمة مقدمة من مورد" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    خدمة مقدمة من مورد                </div>
+                        <div class="car-card-link">
+                🛍️ خدمة #20            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=20#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="20">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="20">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+        <div class="car-card ">
+        <span class="car-card-order">20</span>
+        <span class="car-card-status">
+            <span class="car-status-dot active"></span>
+        </span>
+                    <img class="car-card-img" src="uploads/carousel/carousel-21.jpg" alt="خدمات فيسبوك" onerror="this.style.display='none'" style="display: none;">
+                <div class="car-card-body">
+                            <div class="car-card-title">
+                    خدمات فيسبوك                </div>
+                        <div class="car-card-link">
+                📁 قسم #1            </div>
+        </div>
+        <div class="car-card-actions">
+            <a href="carousel.html?edit=21#carForm" class="btn-xs btn-xs-edit">✏️ تعديل</a>
+
+            <form method="POST" style="flex:1;margin:0;">
+                <input type="hidden" name="action" value="toggle">
+                <input type="hidden" name="id" value="21">
+                <input type="hidden" name="is_active" value="0">
+                <button type="submit" class="btn-xs btn-xs-toggle" style="width:100%;">
+                    🙈 إخفاء                </button>
+            </form>
+
+            <form method="POST" style="flex:0 0 auto;margin:0;" onsubmit="return confirm('هل تريد حذف هذه البطاقة نهائيًا؟')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="21">
+                <button type="submit" class="btn-xs btn-xs-del">🗑️</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+<!-- Reorder form -->
+<details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-weight:700;color:var(--muted);font-size:13px;margin-bottom:12px;">
+        🔃 إعادة الترتيب اليدوي
+    </summary>
+    <form method="POST" style="margin-top:12px;">
+        <input type="hidden" name="action" value="reorder">
+        <div class="reorder-grid">
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-01.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    متابعين فيسبوك                </span>
+                <input type="number" name="order[1]" value="0" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-02.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    توثيق صفحات فيسبوك                </span>
+                <input type="number" name="order[2]" value="1" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-03.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    لايكات إنستجرام                </span>
+                <input type="number" name="order[3]" value="2" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-04.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    مشاهدات تيك توك                </span>
+                <input type="number" name="order[4]" value="3" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-05.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    توثيق سناب شات                </span>
+                <input type="number" name="order[5]" value="4" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-06.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    حسابات سناب شات جاهزة                </span>
+                <input type="number" name="order[6]" value="5" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-07.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    ساعات مشاهدة يوتيوب                </span>
+                <input type="number" name="order[7]" value="6" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-08.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    توثيق إنستجرام                </span>
+                <input type="number" name="order[8]" value="7" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-09.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    إعلانات ممولة Meta                </span>
+                <input type="number" name="order[9]" value="8" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-10.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    تصميم هوية بصرية                </span>
+                <input type="number" name="order[10]" value="9" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-11.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    برمجة بوت تيليجرام                </span>
+                <input type="number" name="order[11]" value="10" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-12.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    برمجة متجر إلكتروني                </span>
+                <input type="number" name="order[12]" value="11" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-13.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    حساب سناب شات جاهز                </span>
+                <input type="number" name="order[13]" value="12" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-14.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    نقل ملكية حساب                </span>
+                <input type="number" name="order[14]" value="13" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-15.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    استرجاع حساب مخترق                </span>
+                <input type="number" name="order[15]" value="14" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-16.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    ChatGPT Plus                </span>
+                <input type="number" name="order[16]" value="15" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-17.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    Midjourney                </span>
+                <input type="number" name="order[17]" value="16" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-18.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    Microsoft 365 Business                </span>
+                <input type="number" name="order[18]" value="17" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-19.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    Netflix                </span>
+                <input type="number" name="order[19]" value="18" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-20.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    خدمة مقدمة من مورد                </span>
+                <input type="number" name="order[20]" value="19" min="0" max="9999">
+            </div>
+                        <div class="reorder-item">
+                                    <img src="uploads/carousel/carousel-21.jpg" alt="">
+                                <span class="reorder-item-lbl">
+                    خدمات فيسبوك                </span>
+                <input type="number" name="order[21]" value="20" min="0" max="9999">
+            </div>
+                    </div>
+        <button type="submit" class="btn btn-primary" style="min-width:160px;">
+            💾 حفظ الترتيب
+        </button>
+    </form>
+</details>
+
+
+<script>
+function previewImg(input) {
+    const wrap = document.getElementById('imgPreviewWrap');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            wrap.innerHTML = '<img id="imgPreview" src="' + e.target.result + '" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;">';
+        };
+        reader.readAsDataURL(input.files[0]);
     }
-    function previewSlide(input) {
-      const prev = document.getElementById('slide-img-prev');
-      if (!input.files[0]) return;
-      const r = new FileReader();
-      r.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
-      r.readAsDataURL(input.files[0]);
-    }
-  </script>
-</body>
+}
 
-</html>
+function updateLinkId() {
+    const lt = document.getElementById('linkType').value;
+    document.getElementById('svcRow').classList.toggle('show', lt === 'service');
+    document.getElementById('catRow').classList.toggle('show', lt === 'category');
+    document.getElementById('urlRow').classList.toggle('show', lt === 'custom');
+}
+
+// Init on load
+updateLinkId();
+</script>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-wrap -->
+
+
+</body></html>
+
+

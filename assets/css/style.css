@@ -1081,3 +1081,357 @@ textarea.form-control {
     font-size: 12px;
   }
 }
+/* =====================================================
+   MISSING CLASSES — Added to fix form pages
+   ===================================================== */
+
+/* form-input: styled text input */
+.form-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  transition: border-color .2s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-input::placeholder {
+  color: var(--text2);
+}
+
+/* form-textarea: styled textarea */
+.form-textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color .2s;
+}
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-textarea::placeholder {
+  color: var(--text2);
+}
+
+/* form-select: already in CSS but missing on some elements */
+select.form-select,
+.form-select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.form-select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-select option {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* form-full: span full width inside form-grid */
+.form-full {
+  grid-column: 1 / -1;
+}
+
+/* req: required field asterisk */
+.req {
+  color: var(--red);
+  margin-right: 3px;
+}
+
+/* form-check: checkbox + label row */
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+.form-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ===== IMAGE UPLOAD SECTION ===== */
+
+/* wrapper for each image upload block */
+.img-upload-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* placeholder box shown when no image */
+.img-preview-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  max-height: 140px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text2);
+  font-size: 12px;
+  background: var(--bg3);
+  transition: border-color .2s;
+}
+.img-preview-placeholder:hover {
+  border-color: var(--gold);
+}
+.img-preview-placeholder .upload-icon {
+  font-size: 28px;
+  opacity: .6;
+}
+
+/* row that holds the upload button */
+.file-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* styled label acting as file button */
+.file-input-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+  white-space: nowrap;
+}
+.file-input-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* hide the actual file input */
+.hidden-file {
+  display: none !important;
+}
+
+/* small hint text under upload button */
+.upload-hint {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* image section 3-col grid on desktop */
+@media (min-width: 901px) {
+  .panel .form-grid .img-upload-group {
+    /* images are inside their own inner form-grid — already 2 col */
+  }
+  /* Override the inner image grid to 3 columns */
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* On mobile: image uploads stack */
+@media (max-width: 900px) {
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =====================================================
+   ALL PAGES — Complete Missing Classes Fix
+   ===================================================== */
+
+:root { --line: var(--border); --muted: var(--text2); }
+
+.site-logo-img { max-width:100%; object-fit:contain; }
+
+/* ── form-input ── */
+.form-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 38px;
+  transition: border-color .2s;
+  display: block;
+}
+.form-input:focus { outline:none; border-color:var(--gold); }
+.form-input::placeholder { color:var(--text2); }
+
+/* ── form-textarea ── */
+.form-textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color .2s;
+}
+.form-textarea:focus { outline:none; border-color:var(--gold); }
+.form-textarea::placeholder { color:var(--text2); }
+
+/* ── form-select override ── */
+select.form-select,.form-select {
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:var(--text);
+  font-family:var(--font);
+  font-size:13px;
+  padding:9px 12px;
+  width:100%;
+  min-height:38px;
+  cursor:pointer;
+  transition:border-color .2s;
+}
+select.form-select:focus,.form-select:focus { outline:none; border-color:var(--gold); }
+.form-select option { background:var(--bg3); color:var(--text); }
+
+/* Inline flex — don't stretch inputs 100% */
+form[style*="display:flex"] .form-input,
+form[style*="display:flex"] .form-select,
+form[style*="gap"] .form-input,
+form[style*="gap"] .form-select { width:auto; }
+.form-group .form-input,
+.form-group .form-textarea,
+.form-group .form-select { width:100%; }
+
+/* ── form-full ── */
+.form-full { grid-column:1/-1; }
+
+/* ── req ── */
+.req { color:var(--red); margin-right:3px; }
+
+/* ── form-check ── */
+.form-check {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px; color:var(--text); cursor:pointer;
+}
+.form-check input[type="checkbox"] {
+  width:16px; height:16px; accent-color:var(--gold);
+  cursor:pointer; flex-shrink:0;
+}
+
+/* ── image upload helpers ── */
+.img-upload-group { display:flex; flex-direction:column; gap:8px; }
+.img-preview-placeholder {
+  width:100%; aspect-ratio:4/3; max-height:140px;
+  border:2px dashed var(--border); border-radius:10px;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:6px; color:var(--text2);
+  font-size:12px; background:var(--bg3); transition:border-color .2s;
+}
+.img-preview-placeholder:hover { border-color:var(--gold); }
+.img-preview-placeholder .upload-icon { font-size:28px; opacity:.6; }
+.file-input-wrap { display:flex; align-items:center; gap:8px; }
+.file-input-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:7px 14px; background:var(--bg3);
+  border:1px solid var(--border); border-radius:8px;
+  font-family:var(--font); font-size:12px; font-weight:600;
+  color:var(--text); cursor:pointer; transition:border-color .2s,color .2s;
+  white-space:nowrap;
+}
+.file-input-btn:hover { border-color:var(--gold); color:var(--gold); }
+.hidden-file { display:none !important; }
+.upload-hint { font-size:11px; color:var(--text2); line-height:1.4; }
+
+/* ── color-row ── */
+.color-row { display:flex; align-items:center; gap:8px; }
+.color-row input[type="color"] {
+  width:38px; height:38px; border:1px solid var(--border);
+  border-radius:6px; background:var(--bg3); cursor:pointer;
+  padding:2px; flex-shrink:0;
+}
+.color-row .form-input { flex:1; }
+
+/* ── img-new-previews ── */
+.img-new-previews { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+.img-new-previews img {
+  width:100px; height:100px; object-fit:cover;
+  border-radius:8px; border:1px solid var(--border);
+}
+
+/* ── form-section details/summary ── */
+.form-section-body { padding:18px 16px; display:flex; flex-direction:column; gap:14px; }
+.form-section > summary {
+  list-style:none; padding:13px 16px; font-size:14px; font-weight:700;
+  cursor:pointer; background:var(--bg3); border-bottom:1px solid var(--border);
+  user-select:none; display:flex; align-items:center; justify-content:space-between;
+}
+.form-section > summary::after { content:'▼'; font-size:10px; color:var(--text2); transition:transform .2s; }
+.form-section[open] > summary::after { transform:rotate(180deg); }
+.form-section > summary::-webkit-details-marker { display:none; }
+.form-section[open] > summary { color:var(--gold); }
+
+/* ── Orders & Search bar filter row fix ── */
+.search-bar input[type="text"],
+.search-bar input[type="search"] {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:8px; color:var(--text); font-family:var(--font);
+  font-size:13px; padding:9px 12px; min-height:38px;
+  transition:border-color .2s; outline:none;
+}
+.search-bar input:focus { border-color:var(--gold); }
+.search-bar input::placeholder { color:var(--text2); }
+.search-bar .form-select { width:auto; min-width:140px; }
+
+/* ── Chatbot mobile grid fix ── */
+@media (max-width:900px) {
+  div[style*="grid-template-columns:1fr 380px"],
+  div[style*="grid-template-columns: 1fr 380px"] {
+    display:flex !important; flex-direction:column !important;
+  }
+  div[style*="position:sticky"] { position:static !important; }
+}
+
+/* ── Status badges ── */
+.badge-new        { background:rgba(0,200,255,.15); color:var(--cyan);  border:1px solid rgba(0,200,255,.3); }
+.badge-progress   { background:rgba(240,165,0,.15); color:var(--gold);  border:1px solid rgba(240,165,0,.3); }
+.badge-completed  { background:rgba(34,197,94,.15);  color:var(--green); border:1px solid rgba(34,197,94,.3); }
+.badge-cancelled  { background:rgba(239,68,68,.15);  color:var(--red);   border:1px solid rgba(239,68,68,.3); }
+.badge-dispute    { background:rgba(239,68,68,.25);  color:#ff8080;      border:1px solid rgba(239,68,68,.5); }
+.badge-waiting    { background:rgba(240,165,0,.1);   color:var(--gold);  border:1px solid rgba(240,165,0,.25);}
+.badge-inactive   { background:rgba(160,160,160,.15); color:var(--text2); border:1px solid rgba(160,160,160,.3); }

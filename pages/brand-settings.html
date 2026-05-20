@@ -1,295 +1,2975 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الهوية البصرية والثيم | Admin — Elawaady</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+/* ===== VARIABLES ===== */
+:root {
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الهوية البصرية | Admin — Elawaady</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <meta name="robots" content="noindex,nofollow">
+  /* Bridge variables */
+  --surface: var(--card);
+  --surface2: var(--bg2);
+  --line: var(--border);
+  --muted: var(--text2);
+  --primary-color: var(--gold);
+
+  --bg: #0d0d0d;
+  --bg2: #141414;
+  --bg3: #1a1a1a;
+  --card: #1e1e1e;
+  --border: #2a2a2a;
+  --gold: #f0a500;
+  --gold2: #ffc84a;
+  --cyan: #00c8ff;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text: #e8e8e8;
+  --text2: #a0a0a0;
+  --sidebar-w: 240px;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --font: 'Cairo', sans-serif;
+}
+
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ===== LAYOUT ===== */
+.admin-wrap {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.admin-sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 200;
+  transition: transform .3s ease;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 20px 16px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.admin-sidebar-logo {
+  height: 48px;
+  object-fit: contain;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-label {
+  font-size: 10px;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 10px 8px 4px;
+  display: block;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  color: var(--text2);
+  transition: background .2s, color .2s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background: rgba(240, 165, 0, .12);
+  color: var(--gold);
+}
+
+.nav-icon {
+  font-size: 15px;
+}
+
+.sidebar-footer {
+  padding: 14px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  color: var(--red);
+  font-size: 13.5px;
+  transition: background .2s;
+}
+
+.sidebar-footer a:hover {
+  background: rgba(239, 68, 68, .1);
+}
+
+.sidebar-close-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ===== MAIN ===== */
+.admin-main {
+  margin-right: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== TOPBAR ===== */
+.admin-topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-toggle-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 18px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--bg3);
+}
+
+/* ===== CONTENT ===== */
+.admin-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== STAT GRID ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+  transition: border-color .2s, transform .2s;
+}
+
+.stat-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.stat-num {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+.text-green {
+  color: var(--green) !important;
+}
+
+.text-red {
+  color: var(--red) !important;
+}
+
+.text-cyan {
+  color: var(--cyan) !important;
+}
+
+.text-gold {
+  color: var(--gold) !important;
+}
+
+.text-muted {
+  color: var(--text2);
+}
+
+/* ===== PANEL ===== */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.panel-body {
+  padding: 16px;
+}
+
+/* ===== TABLE ===== */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-table th {
+  padding: 10px 12px;
+  text-align: right;
+  color: var(--text2);
+  font-weight: 600;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, .04);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, .02);
+}
+
+/* ===== BADGE ===== */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-active {
+  background: rgba(34, 197, 94, .15);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.badge-pending {
+  background: rgba(240, 165, 0, .15);
+  color: var(--gold);
+  border: 1px solid rgba(240, 165, 0, .3);
+}
+
+.badge-cancelled {
+  background: rgba(239, 68, 68, .15);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.badge-info {
+  background: rgba(0, 200, 255, .15);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 200, 255, .3);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: #000;
+}
+
+.btn-primary:hover {
+  background: var(--gold2);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, .1);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, .2);
+}
+
+.btn-success {
+  background: rgba(34, 197, 94, .1);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ===== FORMS ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-control,
+.form-select,
+textarea.form-control {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  transition: border-color .2s;
+  width: 100%;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+textarea.form-control {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-hint {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.form-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.form-section summary {
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-section[open] summary {
+  color: var(--gold);
+}
+
+.form-section .section-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== ALERTS ===== */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alert-success {
+  background: rgba(34, 197, 94, .1);
+  border: 1px solid rgba(34, 197, 94, .3);
+  color: var(--green);
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, .1);
+  border: 1px solid rgba(239, 68, 68, .3);
+  color: var(--red);
+}
+
+.alert-info {
+  background: rgba(0, 200, 255, .1);
+  border: 1px solid rgba(0, 200, 255, .3);
+  color: var(--cyan);
+}
+
+.alert-warning {
+  background: rgba(240, 165, 0, .1);
+  border: 1px solid rgba(240, 165, 0, .3);
+  color: var(--gold);
+}
+
+/* ===== FLEX UTILS ===== */
+.flex-gap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-bar .form-control {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text2);
+}
+
+.empty-state .empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 14px;
+}
+
+/* ===== COLOR SWATCH ===== */
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ===== TOGGLE SWITCH ===== */
+.toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.toggle input:checked+.toggle-track {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  top: 2px;
+  right: 2px;
+  transition: right .2s;
+}
+
+.toggle input:checked+.toggle-track::after {
+  right: calc(100% - 18px);
+}
+
+/* ===== IMAGE UPLOAD ===== */
+.img-upload-box {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s;
+  position: relative;
+}
+
+.img-upload-box:hover {
+  border-color: var(--gold);
+}
+
+.img-upload-box input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.img-upload-box .upload-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.img-upload-box p {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.img-preview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  margin-top: 8px;
+}
+
+/* ===== THEME PRESETS ===== */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.theme-card {
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .2s, transform .2s;
+}
+
+.theme-card:hover {
+  border-color: var(--gold);
+  transform: scale(1.02);
+}
+
+.theme-card.active {
+  border-color: var(--gold);
+}
+
+.theme-card .theme-preview {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.theme-card .theme-name {
+  padding: 6px 8px;
+  font-size: 11px;
+  text-align: center;
+  background: var(--bg3);
+  color: var(--text2);
+}
+
+/* ===== CHATBOT Q&A ===== */
+.qa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 16px;
+}
+
+.qa-item {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg3);
+  transition: border-color .2s;
+}
+
+.qa-item:hover {
+  border-color: var(--gold);
+}
+
+.qa-q {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.qa-a {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.qa-meta {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+}
+
+.qa-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+/* ===== CAROUSEL GRID ===== */
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.carousel-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+
+.carousel-item:hover {
+  border-color: var(--gold);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.carousel-item-body {
+  padding: 10px;
+}
+
+.carousel-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.carousel-item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* ===== OVERLAY ===== */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .6);
+  z-index: 150;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ===== MODAL ===== */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .7);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 90%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: fadeUp .25s ease;
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+/* ===== LOGIN PAGE ===== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 60% 40%, rgba(240, 165, 0, .08) 0%, transparent 70%), var(--bg);
+}
+
+.login-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-logo img {
+  height: 56px;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.login-sub {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn .3s ease;
+}
+
+.fade-up {
+  animation: fadeUp .3s ease;
+}
+
+/* ===== TOAST ===== */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  animation: fadeUp .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 220px;
+}
+
+.toast-success {
+  background: #166534;
+  color: #bbf7d0;
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.toast-error {
+  background: #7f1d1d;
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.toast-info {
+  background: #0c4a6e;
+  color: #bae6fd;
+  border: 1px solid rgba(0, 200, 255, .3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .admin-sidebar {
+    transform: translateX(100%);
+    box-shadow: var(--shadow);
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: block;
+  }
+
+  .admin-main {
+    margin-right: 0;
+  }
+
+  .sidebar-toggle-btn {
+    display: block;
+  }
+
+  .form-grid,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .qa-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-content {
+    padding: 12px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+/* =====================================================
+   MISSING CLASSES — Added to fix form pages
+   ===================================================== */
+
+/* form-input: styled text input */
+.form-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  transition: border-color .2s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-input::placeholder {
+  color: var(--text2);
+}
+
+/* form-textarea: styled textarea */
+.form-textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color .2s;
+}
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-textarea::placeholder {
+  color: var(--text2);
+}
+
+/* form-select: already in CSS but missing on some elements */
+select.form-select,
+.form-select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 9px 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.form-select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.form-select option {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* form-full: span full width inside form-grid */
+.form-full {
+  grid-column: 1 / -1;
+}
+
+/* req: required field asterisk */
+.req {
+  color: var(--red);
+  margin-right: 3px;
+}
+
+/* form-check: checkbox + label row */
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+.form-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ===== IMAGE UPLOAD SECTION ===== */
+
+/* wrapper for each image upload block */
+.img-upload-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* placeholder box shown when no image */
+.img-preview-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  max-height: 140px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text2);
+  font-size: 12px;
+  background: var(--bg3);
+  transition: border-color .2s;
+}
+.img-preview-placeholder:hover {
+  border-color: var(--gold);
+}
+.img-preview-placeholder .upload-icon {
+  font-size: 28px;
+  opacity: .6;
+}
+
+/* row that holds the upload button */
+.file-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* styled label acting as file button */
+.file-input-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+  white-space: nowrap;
+}
+.file-input-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* hide the actual file input */
+.hidden-file {
+  display: none !important;
+}
+
+/* small hint text under upload button */
+.upload-hint {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* image section 3-col grid on desktop */
+@media (min-width: 901px) {
+  .panel .form-grid .img-upload-group {
+    /* images are inside their own inner form-grid — already 2 col */
+  }
+  /* Override the inner image grid to 3 columns */
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* On mobile: image uploads stack */
+@media (max-width: 900px) {
+  .panel [style*="border-top"] .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../uploads/brand/favicon.png" type="image/png">
+<script>
+function toggleSidebar() {
+    const sb = document.getElementById('admin-sidebar');
+    const ov = document.getElementById('sidebar-overlay');
+    sb.classList.toggle('open');
+    ov.classList.toggle('active');
+    document.body.classList.toggle('sidebar-open');
+}
+function closeSidebar() {
+    document.getElementById('admin-sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('active');
+    document.body.classList.remove('sidebar-open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+</script>
 </head>
-
 <body>
-  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-  <div class="admin-wrap">
 
-    <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
-      <div class="sidebar-brand">
-        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
-          onerror="this.style.display='none'">
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<div class="admin-wrap">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <button class="sidebar-close-btn" onclick="closeSidebar()" aria-label="إغلاق القائمة">✕</button>
+    <div class="sidebar-brand">
+              <img src="../assets/images/admin-logo.png" alt="Elawaady" class="site-logo-img admin-sidebar-logo">
+          </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-label">الرئيسية</span>
+      <a href="../index.html" class="">
+        <span class="nav-icon">🏠</span> لوحة التحكم
+      </a>
+
+      <span class="nav-label">المحتوى</span>
+      <a href="categories.html" class="">
+        <span class="nav-icon">📁</span> الأقسام
+      </a>
+      <a href="services.html" class="">
+        <span class="nav-icon">🛍️</span> الخدمات
+      </a>
+
+      <span class="nav-label">المبيعات</span>
+      <a href="orders.html" class="">
+        <span class="nav-icon">📋</span> الطلبات
+      </a>
+      <a href="chatbot.html" class="">
+        <span class="nav-icon">🤖</span> الشات بوت
+      </a>
+
+      <span class="nav-label">الإعدادات</span>
+      <a href="homepage-settings.html" class="">
+        <span class="nav-icon">🏠</span> إعدادات الرئيسية
+      </a>
+      <a href="visual-sections.html" class="">
+        <span class="nav-icon">🖼️</span> صور الأقسام والخدمات
+      </a>
+      <a href="brand-settings.html" class="active">
+        <span class="nav-icon">🎨</span> الهوية البصرية
+      </a>
+      <a href="carousel.html" class="">
+        <span class="nav-icon">🎠</span> الكاروسيل
+      </a>
+
+      <span class="nav-label">عام</span>
+      <a href="../index.html" target="_blank">
+        <span class="nav-icon">🌐</span> عرض الموقع
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="logout.html">
+        <span class="nav-icon">🚪</span> تسجيل الخروج
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="فتح القائمة">☰</button>
+        <div class="topbar-title">الهوية البصرية والثيم</div>
       </div>
-      <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html" class="active"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
-      </nav>
-      <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+      <div class="topbar-right">
+        <span class="text-muted" style="font-size:12px;">مرحبًا، admin</span>
+        <a href="logout.html" class="btn btn-secondary btn-sm" style="display:none;" id="mobile-logout">خروج</a>
       </div>
-    </aside>
+    </div>
+    <div class="admin-content">
 
-    <div class="admin-main">
-      <div class="admin-topbar">
-        <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">الهوية البصرية</div>
+<style>
+/* ── Admin-scoped styles for this page only ── */
+.ts-grid { display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:start; }
+.ts-sections { display:flex; flex-direction:column; gap:16px; }
+.ts-preview-col { position:sticky; top:76px; }
+.clr-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.clr-pick { width:40px; height:36px; border:none; border-radius:8px; cursor:pointer; background:none; padding:0; flex-shrink:0; }
+.clr-disp { width:88px; font-family:monospace; font-size:12px; background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:8px; padding:6px 8px; color:var(--muted); }
+.toggle-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.toggle-lbl { display:flex; align-items:center; gap:8px; cursor:pointer; font-size:13px; font-weight:700; }
+.range-row { display:flex; align-items:center; gap:10px; }
+.range-row input[type=range] { flex:1; }
+.range-val { width:42px; font-size:12px; font-family:monospace; text-align:center; background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:6px; padding:4px; color:var(--muted); }
+.field-label { font-size:12px; color:var(--muted); margin-bottom:6px; font-weight:700; }
+.field-hint  { font-size:11px; color:var(--muted); margin-top:4px; opacity:.7; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.four-col { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; }
+.section-subtitle { font-size:11px; color:var(--muted); margin-bottom:14px; opacity:.8; }
+/* Radio mode buttons */
+.bg-mode-row { display:flex; gap:8px; margin-bottom:16px; }
+.bg-mode-btn { flex:1; padding:8px 4px; text-align:center; border-radius:10px; border:2px solid var(--line); cursor:pointer; font-size:12px; font-weight:700; color:var(--muted); background:rgba(255,255,255,.03); transition:all .2s; }
+.bg-mode-btn:has(input:checked) { border-color:var(--gold); color:var(--gold); background:rgba(255,149,0,.08); }
+.bg-mode-btn input { display:none; }
+/* Generated CSS display */
+.css-preview-box { font-family:monospace; font-size:10px; line-height:1.7; color:var(--muted); background:rgba(0,0,0,.4); border:1px solid var(--line); border-radius:10px; padding:12px; margin-top:12px; white-space:pre-wrap; word-break:break-all; }
+/* Live preview widget */
+#pv-wrap { border-radius:14px; padding:18px; min-height:300px; position:relative; overflow:hidden; transition:background .3s; }
+#pv-glow { position:absolute; inset:0; pointer-events:none; display:none; border-radius:14px; }
+#pv-header { border-radius:7px; padding:7px 10px; margin-bottom:10px; display:flex; align-items:center; gap:7px; font-size:11px; font-weight:700; position:relative; }
+.pv-xd { border-radius:5px; width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:8px; color:#000; font-weight:900; flex-shrink:0; }
+#pv-sections { border-radius:8px; padding:8px 10px; margin-bottom:8px; font-size:10px; color:rgba(255,255,255,.5); }
+#pv-card,#pv-card2 { border-radius:10px; padding:12px; margin-bottom:8px; position:relative; transition:background .3s, border .3s; }
+#pv-btn { display:inline-flex; align-items:center; border-radius:999px; padding:5px 13px; font-size:10px; font-weight:900; cursor:default; transition:background .3s; }
+#pv-footer { border-radius:7px; padding:6px 10px; font-size:10px; text-align:center; color:rgba(255,255,255,.4); transition:background .3s; }
+/* Var display table */
+.var-table { display:grid; grid-template-columns:auto 1fr; gap:2px 8px; font-size:10px; line-height:1.8; }
+.var-name { color:var(--muted); font-family:monospace; }
+.var-val  { font-family:monospace; font-weight:700; }
+/* ── Theme Preset Cards ── */
+.presets-panel { border:1px solid rgba(255,149,0,.22) !important; }
+.preset-group-lbl { font-size:10px; font-weight:900; color:rgba(255,255,255,.28); letter-spacing:.09em; text-transform:uppercase; padding:4px 0 8px; }
+.preset-grid-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin-bottom:18px; }
+.preset-card { border:2px solid var(--line); border-radius:12px; overflow:hidden; transition:border-color .2s, transform .15s; }
+.preset-card:hover { border-color:var(--gold); transform:translateY(-2px); }
+.preset-swatch { height:44px; position:relative; }
+.preset-swatch-glow { position:absolute; inset:0; }
+.preset-info { padding:8px 10px 10px; }
+.preset-name { font-size:11px; font-weight:800; margin-bottom:7px; color:#fff; line-height:1.3; }
+.preset-btns { display:flex; gap:5px; }
+.preset-btns button { flex:1; font-size:10px; min-height:26px; padding:0 4px; border-radius:7px; cursor:pointer; font-family:inherit; font-weight:700; transition:.15s; border:1px solid var(--line); }
+.preset-btn-preview { background:rgba(255,255,255,.06); color:var(--muted); }
+.preset-btn-preview:hover { background:rgba(255,255,255,.13); color:#fff; }
+.preset-btn-apply { background:linear-gradient(90deg,var(--gold),var(--cyan)); color:#000; border-color:transparent; }
+.preset-btn-apply:hover { opacity:.85; }
+@media(max-width:768px) { .preset-grid-cards { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); } }
+@media(max-width:480px) { .preset-grid-cards { grid-template-columns:repeat(2,1fr); gap:8px; } }
+@media(max-width:1024px) {
+    .ts-grid { grid-template-columns:1fr; }
+    .ts-preview-col { position:static; }
+    .four-col { grid-template-columns:1fr 1fr; }
+    .three-col { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:768px) {
+    .three-col { grid-template-columns:1fr; }
+    .two-col   { grid-template-columns:1fr; }
+    .css-preview-box { font-size:9px; }
+    #pv-wrap { min-height:200px; }
+    .bg-mode-row { flex-wrap:wrap; }
+}
+@media(max-width:480px) {
+    .four-col  { grid-template-columns:1fr 1fr; }
+    .two-col   { grid-template-columns:1fr; }
+}
+</style>
+
+
+<form method="post" enctype="multipart/form-data">
+
+<!-- ══════════════════════════════════════════════════════════════
+     THEME PRESETS — helper section above manual controls
+     Fills fields only. Manual controls remain the master source.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="panel presets-panel" style="margin-bottom:20px;">
+  <div class="panel-header">
+    <div class="panel-title">🎨 ثيمات جاهزة — Theme Presets</div>
+    <span style="font-size:11px; color:var(--muted);">مساعد فقط — الحقول اليدوية تبقى كما هي</span>
+  </div>
+  <p class="section-subtitle" style="margin-bottom:16px; line-height:1.75;">
+    اختر ثيمًا لملء جميع حقول الإعدادات تلقائيًا. يمكنك تعديل أي حقل يدويًا بعد الاختيار.<br>
+    <strong style="color:var(--gold);">👁 معاينة</strong> → يملأ الحقول ويحدث المعاينة الحية <em>دون حفظ</em>&nbsp;&nbsp;
+    <strong style="color:var(--gold);">💾 تطبيق وحفظ</strong> → يملأ الحقول ويحفظ على الموقع فورًا
+  </p>
+
+  <!-- Group 1: Dark -->
+  <div class="preset-group-lbl">⬛ ثيمات داكنة — Dark Themes</div>
+  <div class="preset-grid-cards" id="preset-grp-dark"><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#1A0D00,#050505);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#ff7a0055 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🔥 EXP Orange+Black</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('exp')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('exp')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#111,#080808);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#00e5ff55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌑 الأسود الصافي</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('dark')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('dark')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#0a0320,#03001a);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#7c3aed55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌌 الفضاء العميق</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('space')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('space')">💾 تطبيق</button>
+                    </div>
+                </div></div></div>
+
+  <!-- Group 2: Color -->
+  <div class="preset-group-lbl">🌈 ثيمات ملونة — Color Themes</div>
+  <div class="preset-grid-cards" id="preset-grp-color"><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#0f1f3a,#050d1a);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#3b9eff55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌊 الأزرق الداكن</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('navy')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('navy')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#130a28,#0a0515);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#a855f755 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">💜 البنفسجي الغامق</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('purple')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('purple')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#051a0d,#020f07);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#22c55e55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌿 الأخضر الرقمي</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('green')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('green')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#1a0505,#0f0303);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#ef444455 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🔴 النار الحمراء</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('red')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('red')">💾 تطبيق</button>
+                    </div>
+                </div></div></div>
+
+  <!-- Group 3: Premium Night -->
+  <div class="preset-group-lbl">✨ ثيمات ليلية متميزة — Premium Night</div>
+  <div class="preset-grid-cards" id="preset-grp-premium"><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#04181a,#020d0e);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#14b8a655 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌀 التيل الرقمي</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('teal')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('teal')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#1a1200,#0f0b00);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#f59e0b55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">✨ الذهب الملكي</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('gold')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('gold')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#1a1a2e,#0f0f1a);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#6366f155 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🔩 الفولاذ الليلي</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('steel')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('steel')">💾 تطبيق</button>
+                    </div>
+                </div></div></div>
+
+  <!-- Group 4: Warm Tones -->
+  <div class="preset-group-lbl">🏜️ ثيمات دافئة — Warm Tones</div>
+  <div class="preset-grid-cards" id="preset-grp-warm"><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#D6C0A8,#F5F0E8);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#D6A86B55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🏜️ Cream Sand Luxe</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('cream_sand')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('cream_sand')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#5A3722,#120D09);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#A66A3F55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🟤 Camel Tobacco</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('camel_tobacco')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('camel_tobacco')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#3B241C,#0D0806);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#7A4B3355 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">☕ Chocolate Espresso</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('chocolate_espresso')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('chocolate_espresso')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#A33D17,#140805);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#D96A2B55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🔥 Rust Copper Heat</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('rust_copper')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('rust_copper')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#5E6B2F,#0E100A);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#8A944755 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌿 Olive Moss Heritage</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('olive_moss')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('olive_moss')">💾 تطبيق</button>
+                    </div>
+                </div></div></div>
+
+  <!-- Group 5: Editorial -->
+  <div class="preset-group-lbl">📰 ثيمات افتتاحية — Editorial</div>
+  <div class="preset-grid-cards" id="preset-grp-editorial"><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#39444D,#07111D);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#DB994155 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">⭐ Deep Navy Gold</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('deep_navy_gold')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('deep_navy_gold')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#AE2C11,#07111D);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#D94B2455 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🔴 Navy Ember Red</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('navy_ember')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('navy_ember')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#E5E5DF,#2F3640);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#B6B6B055 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🪨 Slate Stone Modern</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('slate_stone')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('slate_stone')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#B7E117,#0D1208);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#D9FF5755 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">⚡ Lime Graphite</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('lime_graphite')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('lime_graphite')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#B8EA21,#F5FFE8);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#89C61C55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌱 Neon Creative Cloud</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('neon_creative')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('neon_creative')">💾 تطبيق</button>
+                    </div>
+                </div></div></div>
+
+  <!-- Group 6: Rich & Luxe -->
+  <div class="preset-group-lbl">💎 ثيمات راقية — Rich &amp; Luxe</div>
+  <div class="preset-grid-cards" id="preset-grp-rich"><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#0E6B73,#04191B);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#25B8C355 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌊 Teal Ocean Pro</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('teal_ocean')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('teal_ocean')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#6C1E45,#150811);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#A43E7555 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🍷 Burgundy Plum Luxe</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('burgundy_plum')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('burgundy_plum')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#B8860B,#171006);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#D7A22A55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🟡 Mustard Bronze</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('mustard_bronze')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('mustard_bronze')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#7C1D24,#120606);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#C4423555 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🔴 Brick Oxblood</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('brick_oxblood')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('brick_oxblood')">💾 تطبيق</button>
+                    </div>
+                </div></div><div class="preset-card">
+                <div class="preset-swatch" style="background:linear-gradient(135deg,#0D5B5B,#07110C);">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,#1C8E8455 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">🌲 Forest Deep Teal</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('forest_teal')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply" onclick="applyAndSave('forest_teal')">💾 تطبيق</button>
+                    </div>
+                </div></div></div>
+</div>
+
+<div class="ts-grid">
+
+  <!-- ════════════════ LEFT: SETTINGS ════════════════ -->
+  <div class="ts-sections">
+
+    <!-- ── Brand Identity ────────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">🏷️ هوية العلامة التجارية</div></div>
+      <div class="three-col" style="padding-top:4px;">
+        <div class="form-group">
+          <label class="form-label">الاسم بالعربية</label>
+          <input type="text" name="brand_name_ar" class="form-input" value="منصة العوضي" placeholder="Elawaady">
         </div>
-        <div class="topbar-right">
-          <span class="text-muted" style="font-size:12px;">مرحبًا، admin</span>
+        <div class="form-group">
+          <label class="form-label">الاسم بالإنجليزية</label>
+          <input type="text" name="brand_name_en" class="form-input" value="Elawaady" placeholder="Elawaady">
         </div>
-      </div>
-
-      <div class="admin-content">
-        <div class="page-header">
-          <h1>🎨 الهوية البصرية</h1>
-          <button class="btn btn-primary" onclick="saveAll()">💾 حفظ الكل</button>
-        </div>
-
-        <!-- Logos -->
-        <details class="form-section" open>
-          <summary>🖼️ الشعارات</summary>
-          <div class="section-body">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
-              <div class="form-group">
-                <label class="form-label">شعار الموقع الرئيسي</label>
-                <div class="img-upload-box" id="logo-main-box">
-                  <input type="file" accept="image/*" onchange="previewLogo(this,'logo-main-box','logo-main-prev')">
-                  <div class="upload-icon">🖼️</div>
-                  <p>PNG موصى به — شفاف</p>
-                  <img id="logo-main-prev" class="img-preview" style="display:none;">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">شعار لوحة التحكم</label>
-                <div class="img-upload-box" id="logo-admin-box">
-                  <input type="file" accept="image/*" onchange="previewLogo(this,'logo-admin-box','logo-admin-prev')">
-                  <div class="upload-icon">🛡️</div>
-                  <p>شعار الأدمن</p>
-                  <img id="logo-admin-prev" class="img-preview" style="display:none;">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">الفافيكون (Favicon)</label>
-                <div class="img-upload-box" id="favicon-box">
-                  <input type="file" accept="image/*" onchange="previewLogo(this,'favicon-box','favicon-prev')">
-                  <div class="upload-icon">⭐</div>
-                  <p>32×32 أو 64×64 بكسل</p>
-                  <img id="favicon-prev" class="img-preview" style="display:none;">
-                </div>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <!-- Colors -->
-        <details class="form-section" open>
-          <summary>🎨 ألوان الموقع</summary>
-          <div class="section-body">
-            <div class="form-grid-3">
-              <div class="form-group">
-                <label class="form-label">اللون الرئيسي (Gold)</label>
-                <div class="flex-gap">
-                  <input type="color" id="c1-pick" value="#f0a500"
-                    style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                  <input type="text" class="form-control" id="c1-txt" value="#f0a500">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">اللون الثانوي (Cyan)</label>
-                <div class="flex-gap">
-                  <input type="color" id="c2-pick" value="#00c8ff"
-                    style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                  <input type="text" class="form-control" id="c2-txt" value="#00c8ff">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">لون الخلفية</label>
-                <div class="flex-gap">
-                  <input type="color" id="c3-pick" value="#0d0d0d"
-                    style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                  <input type="text" class="form-control" id="c3-txt" value="#0d0d0d">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">لون النص</label>
-                <div class="flex-gap">
-                  <input type="color" id="c4-pick" value="#e8e8e8"
-                    style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                  <input type="text" class="form-control" id="c4-txt" value="#e8e8e8">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">لون الأزرار</label>
-                <div class="flex-gap">
-                  <input type="color" id="c5-pick" value="#f0a500"
-                    style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                  <input type="text" class="form-control" id="c5-txt" value="#f0a500">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">لون الكروت</label>
-                <div class="flex-gap">
-                  <input type="color" id="c6-pick" value="#1e1e1e"
-                    style="width:42px;height:38px;border:none;border-radius:6px;cursor:pointer;">
-                  <input type="text" class="form-control" id="c6-txt" value="#1e1e1e">
-                </div>
-              </div>
-            </div>
-            <!-- Live preview -->
-            <div
-              style="margin-top:12px;padding:16px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);">
-              <div style="font-size:12px;color:var(--text2);margin-bottom:8px;">معاينة مباشرة:</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <button id="preview-btn" class="btn btn-primary">زر رئيسي</button>
-                <button class="btn btn-secondary">زر ثانوي</button>
-                <span class="badge badge-active">شارة نشطة</span>
-                <span style="color:var(--cyan);font-weight:700;">نص ثانوي</span>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <!-- Theme Presets -->
-        <details class="form-section">
-          <summary>🎭 قوالب جاهزة</summary>
-          <div class="section-body">
-            <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">اختر قالب جاهز وسيتم تطبيق الألوان
-              تلقائيًا:</p>
-            <div class="theme-grid">
-              <div class="theme-card active" onclick="applyPreset('black-orange',this)">
-                <div class="theme-preview" style="background:linear-gradient(135deg,#0d0d0d,#1e1e1e);">🔥</div>
-                <div class="theme-name">Black & Gold</div>
-              </div>
-              <div class="theme-card" onclick="applyPreset('deep-space',this)">
-                <div class="theme-preview" style="background:linear-gradient(135deg,#080c14,#1a1a3e);">🌌</div>
-                <div class="theme-name">Deep Space</div>
-              </div>
-              <div class="theme-card" onclick="applyPreset('dark-blue',this)">
-                <div class="theme-preview" style="background:linear-gradient(135deg,#050d1f,#0d2040);">💙</div>
-                <div class="theme-name">Dark Blue</div>
-              </div>
-              <div class="theme-card" onclick="applyPreset('dark-purple',this)">
-                <div class="theme-preview" style="background:linear-gradient(135deg,#0d0514,#1a0b2e);">💜</div>
-                <div class="theme-name">Dark Purple</div>
-              </div>
-              <div class="theme-card" onclick="applyPreset('digital-green',this)">
-                <div class="theme-preview" style="background:linear-gradient(135deg,#030f08,#07211a);">💚</div>
-                <div class="theme-name">Digital Green</div>
-              </div>
-              <div class="theme-card" onclick="applyPreset('red-fire',this)">
-                <div class="theme-preview" style="background:linear-gradient(135deg,#120202,#260606);">❤️‍🔥</div>
-                <div class="theme-name">Red Fire</div>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <!-- Typography -->
-        <details class="form-section">
-          <summary>🔤 الخطوط</summary>
-          <div class="section-body">
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">خط الموقع الرئيسي</label>
-                <select class="form-select" id="font-select" onchange="updateFont(this.value)">
-                  <option value="Cairo" selected>Cairo (الافتراضي)</option>
-                  <option value="Tajawal">Tajawal</option>
-                  <option value="Almarai">Almarai</option>
-                  <option value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</option>
-                  <option value="Noto Kufi Arabic">Noto Kufi Arabic</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">حجم النص الأساسي</label>
-                <select class="form-select">
-                  <option>14px</option>
-                  <option selected>15px</option>
-                  <option>16px</option>
-                  <option>17px</option>
-                </select>
-              </div>
-            </div>
-            <div
-              style="padding:14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);margin-top:4px;">
-              <p id="font-preview" style="font-size:18px;font-weight:700;margin-bottom:4px;">معاينة الخط: Elawaady —
-                أفضل الخدمات</p>
-              <p style="font-size:13px;color:var(--text2);">نص تجريبي عادي: خدمات التسويق الرقمي والاشتراكات</p>
-            </div>
-          </div>
-        </details>
-
-        <!-- Admin Settings -->
-        <details class="form-section">
-          <summary>🔧 إعدادات الأدمن</summary>
-          <div class="section-body">
-            <div class="form-group">
-              <label class="form-label">اسم المتجر</label>
-              <input type="text" class="form-control" value="Elawaady">
-            </div>
-            <div class="form-group">
-              <label class="form-label">اسم المستخدم</label>
-              <input type="text" class="form-control" value="Admin" dir="ltr">
-            </div>
-            <div class="form-group">
-              <label class="form-label">كلمة المرور الجديدة</label>
-              <input type="password" class="form-control" placeholder="اتركها فارغة إذا لم تريد التغيير" dir="ltr">
-            </div>
-            <div class="form-group">
-              <label class="form-label">تأكيد كلمة المرور</label>
-              <input type="password" class="form-control" placeholder="أعد كتابة كلمة المرور" dir="ltr">
-            </div>
-          </div>
-        </details>
-
-        <div class="flex-gap">
-          <button class="btn btn-primary" onclick="saveAll()">💾 حفظ الهوية البصرية</button>
+        <div class="form-group">
+          <label class="form-label">الوصف المختصر</label>
+          <input type="text" name="brand_subtitle" class="form-input" value="XDigital Platform" placeholder="XDigital Platform">
         </div>
       </div>
     </div>
+
+    <!-- ── Logo Uploads ──────────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">🖼️ الشعارات</div></div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding-top:4px; align-items:start;">
+        <div style="grid-column:1/-1; font-size:11px; color:var(--muted); padding:6px 8px; background:rgba(255,107,0,.06); border-radius:8px; border:1px solid rgba(255,107,0,.15);">
+          💡 <strong>هيدر عريض</strong> = الشعار الأفقي يظهر في الهيدر على الديسكتوب &nbsp;|&nbsp; <strong>أيقونة موبايل</strong> = الأيقونة المربعة تظهر على الجوال تلقائيًا
+        </div>
+                <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="field-label">هيدر — عريض</div>
+          <div class="field-hint">ديسكتوب — أفقي عريض</div>
+                                <div style="padding:8px; background:var(--bg); border-radius:8px; text-align:center;">
+              <img src="../uploads/brand/header-logo.png" alt="" style="max-height:50px; max-width:100%; object-fit:contain;">
+            </div>
+            <label style="display:flex; align-items:center; gap:5px; font-size:11px; cursor:pointer;">
+              <input type="checkbox" name="clear_logo_header" value="1">
+              <span style="color:var(--muted);">حذف</span>
+            </label>
+                    <input type="file" name="logo_header" accept="image/*" style="font-size:10px; color:var(--muted);">
+        </div>
+                <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="field-label">أيقونة موبايل</div>
+          <div class="field-hint">مربع — هيدر الجوال</div>
+                                <div style="padding:8px; background:var(--bg); border-radius:8px; text-align:center;">
+              <img src="../uploads/brand/brand-icon.png" alt="" style="max-height:50px; max-width:100%; object-fit:contain;">
+            </div>
+            <label style="display:flex; align-items:center; gap:5px; font-size:11px; cursor:pointer;">
+              <input type="checkbox" name="clear_logo_icon" value="1">
+              <span style="color:var(--muted);">حذف</span>
+            </label>
+                    <input type="file" name="logo_icon" accept="image/*" style="font-size:10px; color:var(--muted);">
+        </div>
+                <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="field-label">الشعار الرئيسي</div>
+          <div class="field-hint">هيرو الرئيسية</div>
+                                <div style="padding:8px; background:var(--bg); border-radius:8px; text-align:center;">
+              <img src="../uploads/brand/main-logo.png" alt="" style="max-height:50px; max-width:100%; object-fit:contain;">
+            </div>
+            <label style="display:flex; align-items:center; gap:5px; font-size:11px; cursor:pointer;">
+              <input type="checkbox" name="clear_logo_main" value="1">
+              <span style="color:var(--muted);">حذف</span>
+            </label>
+                    <input type="file" name="logo_main" accept="image/*" style="font-size:10px; color:var(--muted);">
+        </div>
+                <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="field-label">شعار الفوتر</div>
+          <div class="field-hint">أسفل الصفحة</div>
+                                <div style="padding:8px; background:var(--bg); border-radius:8px; text-align:center;">
+              <img src="../uploads/brand/footer-logo.png" alt="" style="max-height:50px; max-width:100%; object-fit:contain;">
+            </div>
+            <label style="display:flex; align-items:center; gap:5px; font-size:11px; cursor:pointer;">
+              <input type="checkbox" name="clear_logo_footer" value="1">
+              <span style="color:var(--muted);">حذف</span>
+            </label>
+                    <input type="file" name="logo_footer" accept="image/*" style="font-size:10px; color:var(--muted);">
+        </div>
+                <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="field-label">شعار الإدارة</div>
+          <div class="field-hint">sidebar الأدمن</div>
+                                <div style="padding:8px; background:var(--bg); border-radius:8px; text-align:center;">
+              <img src="../assets/images/admin-logo.png" alt="" style="max-height:50px; max-width:100%; object-fit:contain;">
+            </div>
+            <label style="display:flex; align-items:center; gap:5px; font-size:11px; cursor:pointer;">
+              <input type="checkbox" name="clear_logo_admin" value="1">
+              <span style="color:var(--muted);">حذف</span>
+            </label>
+                    <input type="file" name="logo_admin" accept="image/*" style="font-size:10px; color:var(--muted);">
+        </div>
+                <div style="display:flex; flex-direction:column; gap:7px;">
+          <div class="field-label">Favicon</div>
+          <div class="field-hint">32×32 ICO/PNG</div>
+                                <div style="padding:8px; background:var(--bg); border-radius:8px; text-align:center;">
+              <img src="../uploads/brand/favicon.png" alt="" style="max-height:50px; max-width:100%; object-fit:contain;">
+            </div>
+            <label style="display:flex; align-items:center; gap:5px; font-size:11px; cursor:pointer;">
+              <input type="checkbox" name="clear_favicon" value="1">
+              <span style="color:var(--muted);">حذف</span>
+            </label>
+                    <input type="file" name="favicon" accept="image/*" style="font-size:10px; color:var(--muted);">
+        </div>
+              </div>
+      <div class="field-hint" style="margin-top:10px;">PNG شفاف · JPG · WebP · SVG · ICO — الحجم الأقصى 3MB</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         STOREFRONT BACKGROUND SETTINGS
+         ══════════════════════════════════════════════════════ -->
+    <div class="panel" style="border:1px solid rgba(255,149,0,.25);">
+      <div class="panel-header">
+        <div class="panel-title">🌆 Storefront Background Settings</div>
+      </div>
+      <div class="section-subtitle">
+        تحكم كامل في خلفية الموقع من لوحة التحكم — تُطبَّق فور الحفظ على جميع الصفحات دون تعديل الكود
+      </div>
+
+      <!-- 1. Background Mode -->
+      <div class="field-label">1. Main Background Mode</div>
+      <div class="bg-mode-row">
+        <label class="bg-mode-btn ti-mode">
+          <input type="radio" name="bg_mode" value="solid" class="ti">
+          ▪ Solid<br><span style="font-size:10px; opacity:.6;">لون واحد</span>
+        </label>
+        <label class="bg-mode-btn ti-mode">
+          <input type="radio" name="bg_mode" value="linear" class="ti" checked="">
+          ↕ Linear<br><span style="font-size:10px; opacity:.6;">تدرج خطي</span>
+        </label>
+        <label class="bg-mode-btn ti-mode">
+          <input type="radio" name="bg_mode" value="radial" class="ti">
+          ◎ Radial<br><span style="font-size:10px; opacity:.6;">تدرج دائري</span>
+        </label>
+      </div>
+
+      <!-- 2-5. Background Colors -->
+      <div class="field-label" style="margin-bottom:10px;">2–5. Background Colors (Stop 1→4)</div>
+      <div class="four-col" style="margin-bottom:14px;">
+        <div>
+          <div class="field-label" style="font-size:10px;">Color 1 — أساسي *</div>
+          <div class="clr-row">
+            <input type="color" name="background_color_1" class="clr-pick ti" value="#0a0515">
+            <input type="text" class="clr-disp" value="#0a0515" maxlength="7" readonly="">
+          </div>
+        </div>
+        <div>
+          <div class="field-label" style="font-size:10px;">Color 2 — ثانوي</div>
+          <div class="clr-row">
+            <input type="color" name="background_color_2" class="clr-pick ti" value="#130a28">
+            <input type="text" class="clr-disp" value="#130a28" maxlength="7" readonly="">
+          </div>
+        </div>
+        <div>
+          <div class="field-label" style="font-size:10px;">Color 3 — اختياري</div>
+          <div class="clr-row">
+            <input type="color" name="background_color_3" class="clr-pick ti" value="#000000">
+            <input type="text" class="clr-disp" value="#000000" maxlength="7" readonly="">
+          </div>
+        </div>
+        <div>
+          <div class="field-label" style="font-size:10px;">Color 4 — اختياري</div>
+          <div class="clr-row">
+            <input type="color" name="background_color_4" class="clr-pick ti" value="#000000">
+            <input type="text" class="clr-disp" value="#000000" maxlength="7" readonly="">
+          </div>
+          <div class="field-hint">اتركه فارغًا لتجاهله</div>
+        </div>
+      </div>
+
+      <!-- 6. Gradient Angle -->
+      <div class="two-col" style="margin-bottom: 16px; opacity: 1;" id="gradient-angle-row">
+        <div class="form-group">
+          <label class="form-label">6. Gradient Angle (Linear فقط)</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="number" name="gradient_angle" class="form-input ti" id="gradient_angle_inp" value="135" min="0" max="360" style="width:80px;">
+            <span style="font-size:12px; color:var(--muted);">deg (0–360) — مثال: 180° / 135° / 90°</span>
+          </div>
+        </div>
+        <div style="align-self:end; padding-bottom:2px;">
+          <div class="field-hint" style="margin:0;">
+            تلميح سريع: 180° = أعلى→أسفل · 135° = قطري · 90° = يسار→يمين
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Glow Overlay -->
+      <div style="padding:14px; background:rgba(255,122,0,.04); border:1px solid rgba(255,122,0,.15); border-radius:12px; margin-bottom:14px;">
+        <div class="toggle-row" style="margin-bottom:12px;">
+          <label class="toggle-lbl">
+            <input type="checkbox" name="enable_background_glow" class="ti" value="1" checked="">
+            <span>7. Enable Glow Overlay — تفعيل هالة التوهج</span>
+          </label>
+        </div>
+
+        <div class="two-col" style="margin-bottom:12px;">
+          <div>
+            <div class="field-label">8. Glow Color</div>
+            <div class="clr-row">
+              <input type="color" name="glow_color" class="clr-pick ti" value="#a855f7">
+              <input type="text" class="clr-disp" value="#a855f7" maxlength="7" readonly="">
+            </div>
+          </div>
+          <div>
+            <div class="field-label">9. Glow Opacity (0–1)</div>
+            <div class="range-row">
+              <input type="range" name="glow_opacity" class="ti" min="0" max="1" step="0.01" value="0.25">
+              <input type="text" class="range-val ti" id="glow_opacity_disp" value="0.25">
+            </div>
+            <div class="field-hint">0 = شفاف · 1 = كثيف</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">10. Glow Position</label>
+          <select name="glow_position" class="form-input ti" style="max-width:240px;">
+                        <option value="top right">Top Right (أعلى يمين)</option>
+                        <option value="top left">Top Left (أعلى يسار)</option>
+                        <option value="center" selected="">Center (وسط)</option>
+                        <option value="bottom">Bottom (أسفل)</option>
+                      </select>
+        </div>
+      </div>
+
+      <!-- 11-13. Page-specific backgrounds -->
+      <div class="field-label" style="margin-bottom:6px;">11–13. Page-specific Backgrounds</div>
+      <div class="field-hint" style="margin-bottom:10px;">يدعم #hex · rgba() · transparent — اتركه فارغًا لاستخدام الخلفية الرئيسية</div>
+      <div class="three-col" style="margin-bottom:8px;">
+        <div class="form-group">
+          <label class="form-label">11. Homepage Section Background</label>
+          <input type="text" name="homepage_section_bg" class="form-input ti" value="transparent" placeholder="transparent">
+          <div class="field-hint">خلفية أقسام الصفحة الرئيسية (.section-beige)</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">12. Category Section Background</label>
+          <input type="text" name="category_section_bg" class="form-input ti" value="#130a28" placeholder="#0b0b0f">
+          <div class="field-hint">خلفية صناديق الأقسام (.cat-section)</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">13. Service Page Background</label>
+          <input type="text" name="service_page_bg" class="form-input ti" value="transparent" placeholder="transparent">
+          <div class="field-hint">خلفية صفحات تفاصيل الخدمات</div>
+        </div>
+      </div>
+
+      <!-- Generated CSS display -->
+      <div class="field-label" style="margin-top:10px;">14. Admin Preview — Generated CSS</div>
+      <div class="css-preview-box" id="generated-css-display">:root {
+  --site-bg-color-1: #0a0515;
+  --site-bg-color-2: #130a28;
+  --site-bg-color-3: #000000;
+  --site-bg-color-4: #000000;
+  --site-bg-gradient: linear-gradient(135deg, #0a0515, #130a28, #000000, #000000);
+  --site-glow-color: #a855f7;
+  --site-glow-opacity: 0.25;
+  --section-bg: #130a28;
+}
+
+body { background: linear-gradient(135deg, #0a0515, #130a28, #000000, #000000) !important; }
+body::before {
+  background: radial-gradient(circle at 50% 50%,
+    rgba(168,85,247,0.25) 0%, transparent 55%);
+}
+.cat-section { background: #130a28 !important; }
+</div>
+    </div>
+
+    <!-- ── Card Theme ─────────────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">🃏 البطاقات (Cards)</div></div>
+      <div class="section-subtitle">خلفية وحدود بطاقات الخدمات والمنتجات</div>
+
+      <div class="toggle-row">
+        <label class="toggle-lbl">
+          <input type="checkbox" name="card_gradient_enabled" class="ti" value="1" checked="">
+          <span>تفعيل تدرج لوني للبطاقات</span>
+        </label>
+      </div>
+
+      <div class="two-col" style="margin-bottom:12px;">
+        <div>
+          <div class="field-label">خلفية البطاقة من</div>
+          <div class="clr-row">
+            <input type="color" name="card_gradient_from" class="clr-pick ti" value="#130a28">
+            <input type="text" class="clr-disp" value="#130a28" maxlength="7" readonly="">
+          </div>
+        </div>
+        <div>
+          <div class="field-label">خلفية البطاقة إلى</div>
+          <div class="clr-row">
+            <input type="color" name="card_gradient_to" class="clr-pick ti" value="#1e1040">
+            <input type="text" class="clr-disp" value="#1e1040" maxlength="7" readonly="">
+          </div>
+        </div>
+      </div>
+
+      <div class="field-label" style="margin-bottom:8px;">خلفية البطاقة (بدون تدرج) — يدعم rgba()</div>
+      <div class="two-col" style="margin-bottom:12px;">
+        <div class="form-group">
+          <label class="form-label">--panel (بطاقة خفيفة)</label>
+          <input type="text" name="card_bg_1" class="form-input ti" value="rgba(168,85,247,0.07)" placeholder="rgba(255,255,255,0.07)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">--panel-2 (بطاقة أكثف)</label>
+          <input type="text" name="card_bg_2" class="form-input ti" value="rgba(168,85,247,0.12)" placeholder="rgba(255,255,255,0.12)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">حدود البطاقة</label>
+          <input type="text" name="card_border" class="form-input ti" value="rgba(168,85,247,0.20)" placeholder="rgba(255,255,255,0.09)">
+        </div>
+        <div>
+          <div class="field-label">لون النص في البطاقة</div>
+          <div class="clr-row">
+            <input type="color" name="card_text" class="clr-pick ti" value="#ffffff">
+            <input type="text" class="clr-disp" value="#ffffff" maxlength="7" readonly="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Button Theme ──────────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">🔘 الأزرار (Buttons)</div></div>
+      <div class="section-subtitle">ألوان الأزرار الرئيسية — تُطبَّق على btn-primary وأزرار الطلب</div>
+
+      <div class="toggle-row">
+        <label class="toggle-lbl">
+          <input type="checkbox" name="button_gradient_enabled" class="ti" value="1" checked="">
+          <span>تفعيل تدرج للأزرار الرئيسية</span>
+        </label>
+      </div>
+
+      <div class="three-col">
+        <div>
+          <div class="field-label">🎨 بداية التدرج (--cyan / أساسي)</div>
+          <div class="clr-row">
+            <input type="color" name="button_color_1" class="clr-pick ti" value="#a855f7">
+            <input type="text" class="clr-disp" value="#a855f7" maxlength="7" readonly="">
+          </div>
+          <div class="field-hint">بداية gradient الأزرار</div>
+        </div>
+        <div>
+          <div class="field-label">🎨 منتصف التدرج (--gold / ثانوي)</div>
+          <div class="clr-row">
+            <input type="color" name="button_color_2" class="clr-pick ti" value="#ec4899">
+            <input type="text" class="clr-disp" value="#ec4899" maxlength="7" readonly="">
+          </div>
+          <div class="field-hint">وسط gradient الأزرار</div>
+        </div>
+        <div>
+          <div class="field-label">🎨 نهاية التدرج (--magenta / تمييز)</div>
+          <div class="clr-row">
+            <input type="color" name="button_color_3" class="clr-pick ti" value="#ffd600">
+            <input type="text" class="clr-disp" value="#ffd600" maxlength="7" readonly="">
+          </div>
+          <div class="field-hint">نهاية gradient + وسوم المنتجات</div>
+        </div>
+      </div>
+      <div class="field-hint" style="margin-top:8px;">
+        التدرج المُولَّد: <code style="font-size:10px; color:var(--gold);">linear-gradient(90deg, color1 0%, color2 45%, color3 100%)</code>
+        — يُطبَّق على جميع الأزرار الرئيسية والـ badges تلقائيًا
+      </div>
+    </div>
+
+    <!-- ── Header & Footer ───────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">🏠 الهيدر والفوتر + الألوان الدلالية</div></div>
+      <div class="section-subtitle">يدعم rgba() للتحكم في الشفافية</div>
+      <div class="two-col" style="margin-bottom:14px;">
+        <div class="form-group">
+          <label class="form-label">خلفية الهيدر</label>
+          <input type="text" name="header_background" class="form-input ti" value="rgba(10,5,21,0.95)" placeholder="rgba(5,5,5,0.92)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">خلفية الفوتر</label>
+          <input type="text" name="footer_background" class="form-input ti" value="#0a0515" placeholder="#050505">
+        </div>
+      </div>
+      <div class="two-col" style="margin-bottom:14px;">
+        <div>
+          <div class="field-label">لون نص ثانوي (--text-secondary / muted)</div>
+          <div class="clr-row">
+            <input type="color" name="text_secondary" class="clr-pick ti" value="#d8b4fe">
+            <input type="text" class="clr-disp" value="#d8b4fe" maxlength="7" readonly="">
+          </div>
+          <div class="field-hint">لون النصوص الثانوية والتلميحات</div>
+        </div>
+        <div>
+          <div class="field-label">توهج الأقسام (--section-glow)</div>
+          <input type="text" name="section_glow_color" class="form-input ti" value="rgba(168,85,247,0.18)" placeholder="rgba(255,122,0,0.18)">
+          <div class="field-hint">يدعم rgba() — التوهج خلف أقسام الموقع</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Footer & Contact ──────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">📞 الفوتر والتواصل</div></div>
+      <div style="display:flex; flex-direction:column; gap:12px; padding-top:4px;">
+        <div class="form-group">
+          <label class="form-label">نص وصف الفوتر</label>
+          <textarea name="footer_text" class="form-textarea" rows="2">Elawaady Platform | منصة العوضي
+منظومة رقمية متكاملة لخدمات السوشيال ميديا، الاشتراكات الرقمية، شحن الألعاب، الحلول التقنية، والوساطة الرقمية الآمنة.
+
+جميع الخدمات تُقدَّم أونلاين من خلال نشاط: الوسيط لخدمات السوشيال ميديا</textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">نص حقوق النشر</label>
+          <input type="text" name="footer_copy" class="form-input" value="جميع الحقوق محفوظة لــ Elawaady XDigital Platform">
+        </div>
+        <div class="form-group">
+          <label class="form-label">وصف الفوتر (يظهر تحت الشعار)</label>
+          <textarea name="footer_desc" class="form-textarea" rows="2">منصة EXP للخدمات الرقمية المتكاملة — توثيق الحسابات، اشتراكات رقمية، سوشيال ميديا، ذكاء اصطناعي، وساطة آمنة، وأكثر.</textarea>
+          <div class="field-hint">النص الوصفي الذي يظهر في الفوتر تحت شعار المنصة</div>
+        </div>
+        <div class="two-col">
+          <div class="form-group">
+            <label class="form-label">واتساب الرسمي</label>
+            <input type="text" name="whatsapp" class="form-input" value="201055578777" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label class="form-label">واتساب إضافي</label>
+            <input type="text" name="whatsapp_extra" class="form-input" value="201008002333" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label class="form-label">البريد الإلكتروني</label>
+            <input type="email" name="support_email" class="form-input" value="support@elawaady.com" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label class="form-label">تليجرام (بدون @)</label>
+            <input type="text" name="telegram" class="form-input" value="elawaadyofficial" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label class="form-label">رابط فيسبوك/مسنجر</label>
+            <input type="url" name="facebook_link" class="form-input" value="https://m.me/eIawaady.official" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label class="form-label">رابط جروب فيسبوك</label>
+            <input type="url" name="facebook_group" class="form-input" value="https://facebook.com/groups/556386908691748/" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label class="form-label">رابط المتجر الرسمي</label>
+            <input type="url" name="store_url" class="form-input" value="https://elawaady.com" dir="ltr">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Social Media Accounts ──────────────────────── -->
+    <div class="panel" style="border:1px solid rgba(255,107,0,.20);">
+      <div class="panel-header">
+        <div class="panel-title">📱 حسابات السوشيال ميديا</div>
+        <span style="font-size:11px; color:var(--muted);">تظهر في الفوتر كأيقونات + روابط</span>
+      </div>
+      <p class="section-subtitle">الأيقونات تظهر تلقائيًا في الفوتر مع اسم المستخدم. اتركه فارغًا لإخفاء المنصة.</p>
+      <div class="three-col">
+        <div class="form-group">
+          <label class="form-label">📸 Instagram</label>
+          <div style="position:relative;">
+            <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:13px; user-select:none;">@</span>
+            <input type="text" name="instagram" class="form-input" value="eIawaady.official" dir="ltr" style="padding-right:28px;" placeholder="eIawaady.official">
+          </div>
+          <div class="field-hint">اسم الحساب بدون @</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">🎵 TikTok</label>
+          <div style="position:relative;">
+            <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:13px; user-select:none;">@</span>
+            <input type="text" name="tiktok" class="form-input" value="eIawaady.official" dir="ltr" style="padding-right:28px;" placeholder="eIawaady.official">
+          </div>
+          <div class="field-hint">اسم الحساب بدون @</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">👻 Snapchat</label>
+          <div style="position:relative;">
+            <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:13px; user-select:none;">@</span>
+            <input type="text" name="snapchat" class="form-input" value="eIawaady.official" dir="ltr" style="padding-right:28px;" placeholder="eIawaady.official">
+          </div>
+          <div class="field-hint">اسم الحساب بدون @</div>
+        </div>
+      </div>
+      <div style="margin-top:10px; padding:10px 12px; background:rgba(255,107,0,.05); border-radius:10px; border:1px solid rgba(255,107,0,.15); font-size:12px; color:var(--muted);">
+        💡 الاسم الموحد لجميع المنصات: <strong style="color:var(--gold);">eIawaady.official</strong>
+        (الحرف الثاني I كبير — ليس L صغيرة)
+      </div>
+    </div>
+
+    <!-- ── Storefront Display Settings ───────────────── -->
+    <div class="panel" style="border:1px solid rgba(0,229,255,.18);">
+      <div class="panel-header">
+        <div class="panel-title">🖥️ إعدادات عرض المتجر</div>
+        <span style="font-size:11px; color:var(--muted);">تحكم في الأقسام والشبكة</span>
+      </div>
+      <p class="section-subtitle">تحكم في ما يظهر على صفحات المتجر وكيفية عرض الخدمات.</p>
+
+      <!-- Toggle rows -->
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px;">
+                <div class="toggle-row" style="padding:10px 12px; background:rgba(255,255,255,.03); border-radius:10px; border:1px solid var(--line);">
+          <label class="toggle-lbl" style="flex:1;">
+            <input type="checkbox" name="show_reviews_ticker" value="1" checked="">
+            <span>⭐ شريط تقييمات العملاء</span>
+          </label>
+          <span style="font-size:11px; color:var(--muted);">عرض شريط مراجعات العملاء المتحرك على الرئيسية وصفحات الخدمات</span>
+        </div>
+                <div class="toggle-row" style="padding:10px 12px; background:rgba(255,255,255,.03); border-radius:10px; border:1px solid var(--line);">
+          <label class="toggle-lbl" style="flex:1;">
+            <input type="checkbox" name="show_trust_stats" value="1" checked="">
+            <span>📊 بادجات الإحصائيات</span>
+          </label>
+          <span style="font-size:11px; color:var(--muted);">عرض قسم الأرقام والإحصائيات (العملاء، التقييم، الدعم...)</span>
+        </div>
+                <div class="toggle-row" style="padding:10px 12px; background:rgba(255,255,255,.03); border-radius:10px; border:1px solid var(--line);">
+          <label class="toggle-lbl" style="flex:1;">
+            <input type="checkbox" name="show_faq_section" value="1" checked="">
+            <span>❓ الأسئلة الشائعة</span>
+          </label>
+          <span style="font-size:11px; color:var(--muted);">عرض قسم الأسئلة الشائعة على الرئيسية وصفحات الخدمات</span>
+        </div>
+                <div class="toggle-row" style="padding:10px 12px; background:rgba(255,255,255,.03); border-radius:10px; border:1px solid var(--line);">
+          <label class="toggle-lbl" style="flex:1;">
+            <input type="checkbox" name="show_service_rating" value="1" checked="">
+            <span>⭐ تقييم الخدمة</span>
+          </label>
+          <span style="font-size:11px; color:var(--muted);">عرض نجوم التقييم على صفحة تفاصيل كل خدمة</span>
+        </div>
+              </div>
+
+      <!-- Grid columns -->
+      <div class="two-col">
+        <div class="form-group">
+          <label class="form-label">أعمدة شبكة الخدمات</label>
+          <select name="product_grid_cols" class="form-input">
+                          <option value="auto" selected="">تلقائي (4 ديسكتوب)</option>
+                          <option value="2">2 أعمدة</option>
+                          <option value="3">3 أعمدة</option>
+                          <option value="4">4 أعمدة</option>
+                      </select>
+          <div class="field-hint">التلقائي = 4 ديسكتوب، 3 تابلت، 2 موبايل</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">نمط بطاقة الخدمة</label>
+          <select name="service_card_style" class="form-input">
+            <option value="connected" selected="">متصل (صورة + معلومات)</option>
+            <option value="classic">كلاسيك</option>
+          </select>
+          <div class="field-hint">نمط عرض بطاقات الخدمات في الشبكة</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div style="display:flex; gap:10px; justify-content:flex-end; padding-bottom:32px;">
+      <a href="../index.html" class="btn btn-secondary">إلغاء</a>
+      <button type="submit" class="btn btn-primary" style="min-width:200px; font-size:15px;">
+        💾 حفظ وتطبيق الثيم على الموقع
+      </button>
+    </div>
+
+  </div><!-- /ts-sections -->
+
+  <!-- ════════════════ RIGHT: LIVE PREVIEW ════════════ -->
+  <div class="ts-preview-col">
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">👁️ معاينة مباشرة</div></div>
+      <p style="font-size:11px; color:var(--muted); margin-bottom:12px; line-height:1.6;">
+        تتحدث المعاينة فور تغيير أي لون أو إعداد.
+        التغييرات تُطبَّق على الموقع فعليًا بعد الحفظ.
+      </p>
+
+      <div id="pv-wrap" style="background: linear-gradient(135deg, rgb(10, 5, 21), rgb(19, 10, 40), rgb(0, 0, 0), rgb(0, 0, 0));">
+        <div id="pv-glow" style="display: block; background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, transparent 55%);"></div>
+        <!-- Header strip -->
+        <div id="pv-header" style="background: rgba(10, 5, 21, 0.95);">
+          <div class="pv-xd">XD</div>
+          <span style="font-size:11px; font-weight:900;">Elawaady EXP</span>
+          <span style="margin-right:auto; font-size:10px; opacity:.45;">الرئيسية | أقسام</span>
+        </div>
+        <!-- Category section strip -->
+        <div id="pv-sections" style="background: rgb(19, 10, 40);">
+          📁 قسم: خدمات سوشيال ميديا
+        </div>
+        <!-- Card 1 -->
+        <div id="pv-card" style="background: linear-gradient(135deg, rgb(19, 10, 40), rgb(30, 16, 64)); border: 1px solid rgba(168, 85, 247, 0.2);">
+          <div style="font-size:12px; font-weight:800; color:#fff; margin-bottom:4px;">متابعين فيسبوك</div>
+          <div style="font-size:10px; color:rgba(255,255,255,.55); margin-bottom:9px;">1000 متابع حقيقي — توصيل سريع</div>
+          <div id="pv-btn" style="background: linear-gradient(90deg, rgb(168, 85, 247) 0%, rgb(236, 72, 153) 45%, rgb(255, 214, 0) 100%); color: rgb(0, 0, 0);">طلب الخدمة</div>
+        </div>
+        <!-- Card 2 -->
+        <div id="pv-card2" style="background: linear-gradient(135deg, rgb(19, 10, 40), rgb(30, 16, 64)); border: 1px solid rgba(168, 85, 247, 0.2);">
+          <div style="font-size:10px; color:rgba(255,255,255,.5);">⭐ خدمة أخرى مميزة</div>
+        </div>
+        <!-- Footer strip -->
+        <div id="pv-footer" style="background: rgb(10, 5, 21);">© Elawaady XDigital Platform | EXP</div>
+      </div>
+
+      <!-- CSS Variables display -->
+      <div style="margin-top:14px;">
+        <div style="font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px;">CSS Vars Generated:</div>
+        <div class="var-table" id="pv-vars-display">
+          <span class="var-name">--site-bg-gradient:</span><span class="var-val" id="dv-bg-grad" style="color:#ff9500;">linear-gradient(135deg, #0a0515, #130a28, #000000, #000000)</span>
+          <span class="var-name">--site-bg-color-1:</span><span class="var-val" id="dv-bg1">#0a0515</span>
+          <span class="var-name">--site-bg-color-2:</span><span class="var-val" id="dv-bg2">#130a28</span>
+          <span class="var-name">--site-bg-color-3:</span><span class="var-val" id="dv-bg3">#000000</span>
+          <span class="var-name">--site-glow-color:</span><span class="var-val" id="dv-glow-c">#a855f7</span>
+          <span class="var-name">--site-glow-opacity:</span><span class="var-val" id="dv-glow-o">0.25</span>
+          <span class="var-name">--homepage-bg:</span><span class="var-val" id="dv-hpbg">transparent</span>
+          <span class="var-name">--section-bg:</span><span class="var-val" id="dv-catbg">#130a28</span>
+          <span class="var-name">--service-page-bg:</span><span class="var-val" id="dv-svcbg">transparent</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick presets -->
+    <div class="panel" style="margin-top:14px;">
+      <div class="panel-header"><div class="panel-title">⚡ ثيمات جاهزة</div></div>
+      <div style="display:flex; flex-direction:column; gap:8px; padding-top:4px;">
+        <button type="button" class="btn btn-secondary" style="font-size:12px; text-align:right;" onclick="applyPreset('exp')">🔥 EXP الافتراضي (Orange+Black)</button>
+        <button type="button" class="btn btn-secondary" style="font-size:12px; text-align:right;" onclick="applyPreset('dark')">🌑 الأسود الصافي</button>
+        <button type="button" class="btn btn-secondary" style="font-size:12px; text-align:right;" onclick="applyPreset('navy')">🌊 الأزرق الداكن</button>
+        <button type="button" class="btn btn-secondary" style="font-size:12px; text-align:right;" onclick="applyPreset('purple')">💜 البنفسجي الغامق</button>
+        <button type="button" class="btn btn-secondary" style="font-size:12px; text-align:right;" onclick="applyPreset('green')">🌿 الأخضر الرقمي</button>
+      </div>
+    </div>
   </div>
-  <script src="../assets/script/script.js"></script>
-  <script>
-    ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'].forEach(id => syncColor(id + '-pick', id + '-txt'));
 
-    function applyPreset(key, card) {
-      applyTheme(key);
-      document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      showToast('تم تطبيق القالب ✅', 'success');
+</div><!-- /ts-grid -->
+</form>
+
+<script>
+/* ────────────────────────────────────────────────────────────────
+   Live Preview · Color Sync · Generated CSS · Theme Presets
+──────────────────────────────────────────────────────────────── */
+
+function hexToRgba(hex, a) {
+    if (!hex || !/^#[0-9a-fA-F]{6}$/.test(hex)) return `rgba(255,122,0,${a})`;
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `rgba(${r},${g},${b},${a})`;
+}
+function $v(n) { return (document.querySelector(`[name="${n}"]`)?.value || '').trim(); }
+function $c(n) { return document.querySelector(`[name="${n}"]`)?.checked || false; }
+function $r(n) { return document.querySelector(`[name="${n}"]:checked`)?.value || ''; }
+
+function setV(n, val) {
+    document.querySelectorAll(`[name="${n}"]`).forEach(el => {
+        if (el.type === 'radio')    el.checked = (el.value === val);
+        else if (el.type === 'checkbox') { /* handled by setCheck */ }
+        else el.value = val;
+    });
+}
+function setCheck(n, bool) {
+    const el = document.querySelector(`[name="${n}"]`);
+    if (el) el.checked = !!bool;
+}
+
+const GLOW_POS_MAP = {
+    'top right': '100% 0%',
+    'top left':  '0% 0%',
+    'center':    '50% 50%',
+    'bottom':    '50% 100%'
+};
+
+function buildBgGradient(mode, bg1, bg2, bg3, bg4, angle) {
+    const stops = [bg1, bg2, bg3, bg4].filter(Boolean);
+    if (mode === 'solid' || stops.length < 2) return bg1 || '#050505';
+    if (mode === 'radial') return `radial-gradient(ellipse at center, ${stops.join(', ')})`;
+    return `linear-gradient(${angle}deg, ${stops.join(', ')})`;
+}
+
+function updatePreview() {
+    const mode  = $r('bg_mode') || 'linear';
+    const bg1   = $v('background_color_1') || '#050505';
+    const bg2   = $v('background_color_2') || '#0b0b0f';
+    const bg3   = $v('background_color_3') || '';
+    const bg4   = $v('background_color_4') || '';
+    const angle = parseInt($v('gradient_angle') || '180', 10);
+    const eGlow = $c('enable_background_glow');
+    const glowC = $v('glow_color') || '#ff7a00';
+    const glowO = parseFloat($v('glow_opacity') || '0.25');
+    const glowP = $v('glow_position') || 'top right';
+
+    const hpbg  = $v('homepage_section_bg') || 'transparent';
+    const catbg = $v('category_section_bg') || '#0b0b0f';
+    const svcbg = $v('service_page_bg')     || 'transparent';
+
+    const crdFrom = $v('card_gradient_from') || '#0b0b0f';
+    const crdTo   = $v('card_gradient_to')   || '#111111';
+    const crd1    = $v('card_bg_1')  || 'rgba(255,255,255,0.05)';
+    const crdBord = $v('card_border')|| 'rgba(255,255,255,0.09)';
+    const eCardG  = $c('card_gradient_enabled');
+
+    const btn1  = $v('button_color_1') || '#ffb347';
+    const btn2  = $v('button_color_2') || '#ff9500';
+    const btn3  = $v('button_color_3') || '#ff7a00';
+    const eBtnG = $c('button_gradient_enabled');
+
+    const hdrBg = $v('header_background') || 'rgba(5,5,5,0.92)';
+    const ftrBg = $v('footer_background') || '#050505';
+
+    const siteBg = buildBgGradient(mode, bg1, bg2, bg3, bg4, angle);
+
+    // ── Preview widget ──────────────────────────────────────────
+    const wrap = document.getElementById('pv-wrap');
+    if (wrap) wrap.style.background = siteBg;
+
+    const gl = document.getElementById('pv-glow');
+    if (gl) {
+        if (eGlow) {
+            const pos = GLOW_POS_MAP[glowP] || '100% 0%';
+            gl.style.display    = 'block';
+            gl.style.background = `radial-gradient(circle at ${pos}, ${hexToRgba(glowC, glowO)} 0%, transparent 55%)`;
+        } else {
+            gl.style.display = 'none';
+        }
     }
 
-    function saveAll() {
-      showToast('تم حفظ الهوية البصرية بنجاح ✅', 'success');
+    const hdr = document.getElementById('pv-header');
+    if (hdr) hdr.style.background = hdrBg;
+
+    const sects = document.getElementById('pv-sections');
+    if (sects) sects.style.background = (catbg === 'transparent' || !catbg) ? 'rgba(255,255,255,0.04)' : catbg;
+
+    ['pv-card','pv-card2'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.background = eCardG ? `linear-gradient(135deg,${crdFrom},${crdTo})` : crd1;
+        el.style.border      = `1px solid ${crdBord}`;
+    });
+
+    const btn = document.getElementById('pv-btn');
+    if (btn) {
+        btn.style.background = eBtnG && btn1 && btn2
+            ? `linear-gradient(90deg,${btn1} 0%,${btn2} 45%,${btn3} 100%)` : btn1;
+        btn.style.color = '#000';
     }
 
-    function updateFont(fontName) {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;700&display=swap`;
-      document.head.appendChild(link);
-      document.getElementById('font-preview').style.fontFamily = fontName;
-    }
+    const ftr = document.getElementById('pv-footer');
+    if (ftr) ftr.style.background = ftrBg;
 
-    function previewLogo(input, boxId, prevId) {
-      const prev = document.getElementById(prevId);
-      if (!input.files[0]) return;
-      const r = new FileReader();
-      r.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
-      r.readAsDataURL(input.files[0]);
-    }
-  </script>
-</body>
+    document.querySelectorAll('.clr-pick').forEach(cp => {
+        const td = cp.nextElementSibling;
+        if (td && td.classList.contains('clr-disp')) td.value = cp.value;
+    });
 
-</html>
+    const angRow = document.getElementById('gradient-angle-row');
+    if (angRow) angRow.style.opacity = (mode === 'radial') ? '0.4' : '1';
+
+    // ── CSS vars display ────────────────────────────────────────
+    const setText = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+    setText('dv-bg-grad', siteBg);
+    setText('dv-bg1',     bg1);
+    setText('dv-bg2',     bg2);
+    setText('dv-bg3',     bg3 || '(empty)');
+    setText('dv-glow-c',  eGlow ? glowC : '(disabled)');
+    setText('dv-glow-o',  eGlow ? glowO.toFixed(2) : '(disabled)');
+    setText('dv-hpbg',    hpbg  || 'transparent');
+    setText('dv-catbg',   catbg || '#0b0b0f');
+    setText('dv-svcbg',   svcbg || 'transparent');
+
+    // ── Generated CSS box ───────────────────────────────────────
+    const glowPosCSS = GLOW_POS_MAP[glowP] || '100% 0%';
+    let css = `:root {\n`;
+    css += `  --site-bg-color-1: ${bg1};\n`;
+    if (bg2) css += `  --site-bg-color-2: ${bg2};\n`;
+    if (bg3) css += `  --site-bg-color-3: ${bg3};\n`;
+    if (bg4) css += `  --site-bg-color-4: ${bg4};\n`;
+    css += `  --site-bg-gradient: ${siteBg};\n`;
+    if (eGlow) {
+        css += `  --site-glow-color: ${glowC};\n`;
+        css += `  --site-glow-opacity: ${glowO.toFixed(2)};\n`;
+    }
+    if (hpbg && hpbg !== 'transparent') css += `  --homepage-bg: ${hpbg};\n`;
+    if (catbg)                           css += `  --section-bg: ${catbg};\n`;
+    if (svcbg && svcbg !== 'transparent') css += `  --service-page-bg: ${svcbg};\n`;
+    css += `}\n\nbody { background: ${siteBg} !important; }\n`;
+    if (eGlow) css += `body::before {\n  background: radial-gradient(circle at ${glowPosCSS},\n    ${hexToRgba(glowC,glowO)} 0%, transparent 55%);\n}\n`;
+    if (catbg && catbg !== 'transparent') css += `.cat-section { background: ${catbg} !important; }\n`;
+
+    const cssBox = document.getElementById('generated-css-display');
+    if (cssBox) cssBox.textContent = css;
+}
+
+// Glow opacity range ↔ text sync
+const glowRange = document.querySelector('[name="glow_opacity"]');
+const glowDisp  = document.getElementById('glow_opacity_disp');
+if (glowRange && glowDisp) {
+    glowRange.addEventListener('input', () => { glowDisp.value = parseFloat(glowRange.value).toFixed(2); updatePreview(); });
+    glowDisp.addEventListener('input',  () => {
+        const v = parseFloat(glowDisp.value);
+        if (!isNaN(v)) { glowRange.value = Math.max(0,Math.min(1,v)); updatePreview(); }
+    });
+}
+
+document.querySelectorAll('.ti').forEach(el => {
+    el.addEventListener('input',  updatePreview);
+    el.addEventListener('change', updatePreview);
+});
+updatePreview();
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME PRESETS — full field coverage
+   Each preset fills ALL form fields. Manual editing still works.
+   ═══════════════════════════════════════════════════════════════ */
+const PRESETS = {
+    // ── Dark Themes ─────────────────────────────────────────────
+    exp: {
+        label:'🔥 EXP Orange+Black', group:'dark',
+        swatch:'linear-gradient(135deg,#1A0D00,#050505)', accent:'#ff7a00',
+        bg_mode:'linear', bg1:'#050505', bg2:'#0B0B0F', bg3:'#1A0D00', bg4:'', angle:180,
+        glow:true,  glow_color:'#ff7a00', glow_opacity:0.25, glow_pos:'top right',
+        btn_grad:true,  btn1:'#ffb347', btn2:'#ff9500', btn3:'#ff7a00',
+        card_grad:true, card_from:'#0d0800', card_to:'#1a0d00',
+        card_bg1:'rgba(255,255,255,0.05)', card_bg2:'rgba(255,255,255,0.09)',
+        card_border:'rgba(255,122,0,0.15)', card_text:'#ffffff',
+        header_bg:'rgba(5,5,5,0.95)', footer_bg:'#050505',
+        text_secondary:'#c9c9c9', section_glow:'rgba(255,122,0,0.18)',
+        hp_bg:'transparent', cat_bg:'#0b0b0f', svc_bg:'transparent',
+    },
+    dark: {
+        label:'🌑 الأسود الصافي', group:'dark',
+        swatch:'linear-gradient(135deg,#111,#080808)', accent:'#00e5ff',
+        bg_mode:'linear', bg1:'#080808', bg2:'#0d0d0d', bg3:'', bg4:'', angle:180,
+        glow:true,  glow_color:'#00e5ff', glow_opacity:0.18, glow_pos:'top left',
+        btn_grad:true,  btn1:'#00e5ff', btn2:'#ffd600', btn3:'#ff00c8',
+        card_grad:false, card_from:'#111111', card_to:'#1a1a1a',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(255,255,255,0.09)', card_text:'#ffffff',
+        header_bg:'rgba(8,8,8,0.95)', footer_bg:'#080808',
+        text_secondary:'#b0b0b0', section_glow:'rgba(0,229,255,0.12)',
+        hp_bg:'transparent', cat_bg:'#0d0d0d', svc_bg:'transparent',
+    },
+    space: {
+        label:'🌌 الفضاء العميق', group:'dark',
+        swatch:'linear-gradient(135deg,#0a0320,#03001a)', accent:'#7c3aed',
+        bg_mode:'radial', bg1:'#03001a', bg2:'#0a0320', bg3:'#0d0530', bg4:'', angle:180,
+        glow:true,  glow_color:'#4c1d95', glow_opacity:0.30, glow_pos:'center',
+        btn_grad:true,  btn1:'#7c3aed', btn2:'#a855f7', btn3:'#ec4899',
+        card_grad:true, card_from:'#0d0530', card_to:'#1a0d40',
+        card_bg1:'rgba(124,58,237,0.08)', card_bg2:'rgba(124,58,237,0.14)',
+        card_border:'rgba(124,58,237,0.20)', card_text:'#ffffff',
+        header_bg:'rgba(3,0,26,0.95)', footer_bg:'#03001a',
+        text_secondary:'#c4b5fd', section_glow:'rgba(124,58,237,0.18)',
+        hp_bg:'transparent', cat_bg:'#0a0320', svc_bg:'transparent',
+    },
+    // ── Color Themes ─────────────────────────────────────────────
+    navy: {
+        label:'🌊 الأزرق الداكن', group:'color',
+        swatch:'linear-gradient(135deg,#0f1f3a,#050d1a)', accent:'#3b9eff',
+        bg_mode:'linear', bg1:'#050d1a', bg2:'#0a1628', bg3:'#0f1f3a', bg4:'', angle:180,
+        glow:true,  glow_color:'#3b9eff', glow_opacity:0.22, glow_pos:'top right',
+        btn_grad:true,  btn1:'#3b9eff', btn2:'#00e5ff', btn3:'#ff6bff',
+        card_grad:true, card_from:'#0a1628', card_to:'#0f2040',
+        card_bg1:'rgba(59,158,255,0.06)', card_bg2:'rgba(59,158,255,0.11)',
+        card_border:'rgba(59,158,255,0.18)', card_text:'#ffffff',
+        header_bg:'rgba(5,13,26,0.95)', footer_bg:'#050d1a',
+        text_secondary:'#93c5fd', section_glow:'rgba(59,158,255,0.15)',
+        hp_bg:'transparent', cat_bg:'#0a1628', svc_bg:'transparent',
+    },
+    purple: {
+        label:'💜 البنفسجي الغامق', group:'color',
+        swatch:'linear-gradient(135deg,#130a28,#0a0515)', accent:'#a855f7',
+        bg_mode:'linear', bg1:'#0a0515', bg2:'#130a28', bg3:'', bg4:'', angle:135,
+        glow:true,  glow_color:'#a855f7', glow_opacity:0.25, glow_pos:'center',
+        btn_grad:true,  btn1:'#a855f7', btn2:'#ec4899', btn3:'#ffd600',
+        card_grad:true, card_from:'#130a28', card_to:'#1e1040',
+        card_bg1:'rgba(168,85,247,0.07)', card_bg2:'rgba(168,85,247,0.12)',
+        card_border:'rgba(168,85,247,0.20)', card_text:'#ffffff',
+        header_bg:'rgba(10,5,21,0.95)', footer_bg:'#0a0515',
+        text_secondary:'#d8b4fe', section_glow:'rgba(168,85,247,0.18)',
+        hp_bg:'transparent', cat_bg:'#130a28', svc_bg:'transparent',
+    },
+    green: {
+        label:'🌿 الأخضر الرقمي', group:'color',
+        swatch:'linear-gradient(135deg,#051a0d,#020f07)', accent:'#22c55e',
+        bg_mode:'linear', bg1:'#020f07', bg2:'#051a0d', bg3:'', bg4:'', angle:180,
+        glow:true,  glow_color:'#22c55e', glow_opacity:0.22, glow_pos:'top left',
+        btn_grad:true,  btn1:'#22c55e', btn2:'#00e5ff', btn3:'#ffd600',
+        card_grad:true, card_from:'#051a0d', card_to:'#082012',
+        card_bg1:'rgba(34,197,94,0.06)', card_bg2:'rgba(34,197,94,0.11)',
+        card_border:'rgba(34,197,94,0.18)', card_text:'#ffffff',
+        header_bg:'rgba(2,15,7,0.95)', footer_bg:'#020f07',
+        text_secondary:'#86efac', section_glow:'rgba(34,197,94,0.15)',
+        hp_bg:'transparent', cat_bg:'#051a0d', svc_bg:'transparent',
+    },
+    red: {
+        label:'🔴 النار الحمراء', group:'color',
+        swatch:'linear-gradient(135deg,#1a0505,#0f0303)', accent:'#ef4444',
+        bg_mode:'linear', bg1:'#0f0303', bg2:'#1a0505', bg3:'', bg4:'', angle:180,
+        glow:true,  glow_color:'#ef4444', glow_opacity:0.22, glow_pos:'top right',
+        btn_grad:true,  btn1:'#ef4444', btn2:'#f97316', btn3:'#fbbf24',
+        card_grad:true, card_from:'#1a0505', card_to:'#220a0a',
+        card_bg1:'rgba(239,68,68,0.06)', card_bg2:'rgba(239,68,68,0.11)',
+        card_border:'rgba(239,68,68,0.18)', card_text:'#ffffff',
+        header_bg:'rgba(15,3,3,0.95)', footer_bg:'#0f0303',
+        text_secondary:'#fca5a5', section_glow:'rgba(239,68,68,0.15)',
+        hp_bg:'transparent', cat_bg:'#1a0505', svc_bg:'transparent',
+    },
+    // ── Premium Night ────────────────────────────────────────────
+    teal: {
+        label:'🌀 التيل الرقمي', group:'premium',
+        swatch:'linear-gradient(135deg,#04181a,#020d0e)', accent:'#14b8a6',
+        bg_mode:'linear', bg1:'#020d0e', bg2:'#04181a', bg3:'', bg4:'', angle:180,
+        glow:true,  glow_color:'#14b8a6', glow_opacity:0.22, glow_pos:'top right',
+        btn_grad:true,  btn1:'#14b8a6', btn2:'#06b6d4', btn3:'#8b5cf6',
+        card_grad:true, card_from:'#04181a', card_to:'#061f22',
+        card_bg1:'rgba(20,184,166,0.06)', card_bg2:'rgba(20,184,166,0.11)',
+        card_border:'rgba(20,184,166,0.18)', card_text:'#ffffff',
+        header_bg:'rgba(2,13,14,0.95)', footer_bg:'#020d0e',
+        text_secondary:'#99f6e4', section_glow:'rgba(20,184,166,0.15)',
+        hp_bg:'transparent', cat_bg:'#04181a', svc_bg:'transparent',
+    },
+    gold: {
+        label:'✨ الذهب الملكي', group:'premium',
+        swatch:'linear-gradient(135deg,#1a1200,#0f0b00)', accent:'#f59e0b',
+        bg_mode:'linear', bg1:'#0f0b00', bg2:'#1a1200', bg3:'', bg4:'', angle:180,
+        glow:true,  glow_color:'#f59e0b', glow_opacity:0.25, glow_pos:'top right',
+        btn_grad:true,  btn1:'#f59e0b', btn2:'#fbbf24', btn3:'#fcd34d',
+        card_grad:true, card_from:'#1a1200', card_to:'#221800',
+        card_bg1:'rgba(245,158,11,0.06)', card_bg2:'rgba(245,158,11,0.11)',
+        card_border:'rgba(245,158,11,0.20)', card_text:'#ffffff',
+        header_bg:'rgba(15,11,0,0.95)', footer_bg:'#0f0b00',
+        text_secondary:'#fde68a', section_glow:'rgba(245,158,11,0.18)',
+        hp_bg:'transparent', cat_bg:'#1a1200', svc_bg:'transparent',
+    },
+    steel: {
+        label:'🔩 الفولاذ الليلي', group:'premium',
+        swatch:'linear-gradient(135deg,#1a1a2e,#0f0f1a)', accent:'#6366f1',
+        bg_mode:'linear', bg1:'#0f0f1a', bg2:'#1a1a2e', bg3:'', bg4:'', angle:180,
+        glow:true,  glow_color:'#6366f1', glow_opacity:0.20, glow_pos:'top left',
+        btn_grad:true,  btn1:'#6366f1', btn2:'#8b5cf6', btn3:'#ec4899',
+        card_grad:true, card_from:'#1a1a2e', card_to:'#1e1e38',
+        card_bg1:'rgba(99,102,241,0.07)', card_bg2:'rgba(99,102,241,0.12)',
+        card_border:'rgba(99,102,241,0.18)', card_text:'#ffffff',
+        header_bg:'rgba(15,15,26,0.95)', footer_bg:'#0f0f1a',
+        text_secondary:'#c7d2fe', section_glow:'rgba(99,102,241,0.15)',
+        hp_bg:'transparent', cat_bg:'#1a1a2e', svc_bg:'transparent',
+    },
+    // ── Warm Tones ───────────────────────────────────────────────
+    cream_sand: {
+        label:'🏜️ Cream Sand Luxe', group:'warm',
+        swatch:'linear-gradient(135deg,#D6C0A8,#F5F0E8)', accent:'#D6A86B',
+        bg_mode:'linear', bg1:'#F5F0E8', bg2:'#E8DCCB', bg3:'#D6C0A8', bg4:'#B8916B', angle:180,
+        glow:true,  glow_color:'#D6A86B', glow_opacity:0.20, glow_pos:'top right',
+        btn_grad:true,  btn1:'#E8C59A', btn2:'#D6A86B', btn3:'#B57A3F',
+        card_grad:false, card_from:'#F5F0E8', card_to:'#E8DCCB',
+        card_bg1:'rgba(255,255,255,0.65)', card_bg2:'rgba(255,255,255,0.80)',
+        card_border:'rgba(214,168,107,0.30)', card_text:'#2E241C',
+        header_bg:'rgba(245,240,232,0.95)', footer_bg:'#E8DCCB',
+        text_secondary:'#6D5A49', section_glow:'rgba(214,168,107,0.20)',
+        hp_bg:'transparent', cat_bg:'rgba(214,192,168,0.18)', svc_bg:'transparent',
+    },
+    camel_tobacco: {
+        label:'🟤 Camel Tobacco', group:'warm',
+        swatch:'linear-gradient(135deg,#5A3722,#120D09)', accent:'#A66A3F',
+        bg_mode:'linear', bg1:'#120D09', bg2:'#2A1A12', bg3:'#5A3722', bg4:'#8A5A34', angle:180,
+        glow:true,  glow_color:'#A66A3F', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#A66A3F', btn2:'#8B4F2D', btn3:'#5C321D',
+        card_grad:false, card_from:'#2A1A12', card_to:'#3D2415',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(138,90,52,0.25)', card_text:'#F8EBDD',
+        header_bg:'rgba(18,13,9,0.95)', footer_bg:'#120D09',
+        text_secondary:'#D0B59B', section_glow:'rgba(166,106,63,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(138,90,52,0.16)', svc_bg:'transparent',
+    },
+    chocolate_espresso: {
+        label:'☕ Chocolate Espresso', group:'warm',
+        swatch:'linear-gradient(135deg,#3B241C,#0D0806)', accent:'#7A4B33',
+        bg_mode:'linear', bg1:'#0D0806', bg2:'#1A110E', bg3:'#3B241C', bg4:'#5A3B2C', angle:180,
+        glow:true,  glow_color:'#7A4B33', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#7A4B33', btn2:'#5F3725', btn3:'#3D2218',
+        card_grad:false, card_from:'#1A110E', card_to:'#2A1A13',
+        card_bg1:'rgba(255,255,255,0.05)', card_bg2:'rgba(255,255,255,0.09)',
+        card_border:'rgba(90,59,44,0.25)', card_text:'#FFF3E8',
+        header_bg:'rgba(13,8,6,0.95)', footer_bg:'#0D0806',
+        text_secondary:'#C7A894', section_glow:'rgba(122,75,51,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(90,59,44,0.14)', svc_bg:'transparent',
+    },
+    rust_copper: {
+        label:'🔥 Rust Copper Heat', group:'warm',
+        swatch:'linear-gradient(135deg,#A33D17,#140805)', accent:'#D96A2B',
+        bg_mode:'linear', bg1:'#140805', bg2:'#3A120B', bg3:'#A33D17', bg4:'#C56A2D', angle:180,
+        glow:true,  glow_color:'#D96A2B', glow_opacity:0.20, glow_pos:'top right',
+        btn_grad:true,  btn1:'#D96A2B', btn2:'#B84B1A', btn3:'#7A2D12',
+        card_grad:false, card_from:'#3A120B', card_to:'#5A1E0E',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(197,106,45,0.25)', card_text:'#FFF1E8',
+        header_bg:'rgba(20,8,5,0.95)', footer_bg:'#140805',
+        text_secondary:'#E1B79F', section_glow:'rgba(217,106,43,0.20)',
+        hp_bg:'transparent', cat_bg:'rgba(197,106,45,0.15)', svc_bg:'transparent',
+    },
+    olive_moss: {
+        label:'🌿 Olive Moss Heritage', group:'warm',
+        swatch:'linear-gradient(135deg,#5E6B2F,#0E100A)', accent:'#8A9447',
+        bg_mode:'linear', bg1:'#0E100A', bg2:'#232818', bg3:'#5E6B2F', bg4:'#87954A', angle:180,
+        glow:true,  glow_color:'#8A9447', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#8A9447', btn2:'#66702F', btn3:'#40471D',
+        card_grad:false, card_from:'#232818', card_to:'#2E3520',
+        card_bg1:'rgba(255,255,255,0.05)', card_bg2:'rgba(255,255,255,0.09)',
+        card_border:'rgba(135,149,74,0.25)', card_text:'#F5F6EE',
+        header_bg:'rgba(14,16,10,0.95)', footer_bg:'#0E100A',
+        text_secondary:'#C7CEAE', section_glow:'rgba(138,148,71,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(135,149,74,0.15)', svc_bg:'transparent',
+    },
+    // ── Editorial ────────────────────────────────────────────────
+    deep_navy_gold: {
+        label:'⭐ Deep Navy Gold', group:'editorial',
+        swatch:'linear-gradient(135deg,#39444D,#07111D)', accent:'#DB9941',
+        bg_mode:'linear', bg1:'#07111D', bg2:'#1A2433', bg3:'#39444D', bg4:'#DB9941', angle:180,
+        glow:true,  glow_color:'#DB9941', glow_opacity:0.20, glow_pos:'top right',
+        btn_grad:true,  btn1:'#DB9941', btn2:'#B97A2A', btn3:'#8E541A',
+        card_grad:false, card_from:'#1A2433', card_to:'#232E40',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(219,153,65,0.25)', card_text:'#E5E5DF',
+        header_bg:'rgba(7,17,29,0.95)', footer_bg:'#07111D',
+        text_secondary:'#BFC3C6', section_glow:'rgba(219,153,65,0.20)',
+        hp_bg:'transparent', cat_bg:'rgba(219,153,65,0.14)', svc_bg:'transparent',
+    },
+    navy_ember: {
+        label:'🔴 Navy Ember Red', group:'editorial',
+        swatch:'linear-gradient(135deg,#AE2C11,#07111D)', accent:'#D94B24',
+        bg_mode:'linear', bg1:'#07111D', bg2:'#39444D', bg3:'#AE2C11', bg4:'#E5E5DF', angle:180,
+        glow:true,  glow_color:'#D94B24', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#D94B24', btn2:'#AE2C11', btn3:'#6D1808',
+        card_grad:false, card_from:'#39444D', card_to:'#444F58',
+        card_bg1:'rgba(255,255,255,0.07)', card_bg2:'rgba(255,255,255,0.12)',
+        card_border:'rgba(174,44,17,0.25)', card_text:'#F3F1EC',
+        header_bg:'rgba(7,17,29,0.95)', footer_bg:'#07111D',
+        text_secondary:'#C4C3BE', section_glow:'rgba(174,44,17,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(174,44,17,0.14)', svc_bg:'transparent',
+    },
+    slate_stone: {
+        label:'🪨 Slate Stone Modern', group:'editorial',
+        swatch:'linear-gradient(135deg,#E5E5DF,#2F3640)', accent:'#B6B6B0',
+        bg_mode:'linear', bg1:'#2F3640', bg2:'#5D5D5D', bg3:'#E5E5DF', bg4:'#FFFFFF', angle:180,
+        glow:false, glow_color:'#ffffff', glow_opacity:0.10, glow_pos:'top right',
+        btn_grad:true,  btn1:'#B6B6B0', btn2:'#8B8B85', btn3:'#5C5C59',
+        card_grad:false, card_from:'#5D5D5D', card_to:'#6A6A6A',
+        card_bg1:'rgba(255,255,255,0.10)', card_bg2:'rgba(255,255,255,0.18)',
+        card_border:'rgba(255,255,255,0.20)', card_text:'#FFFFFF',
+        header_bg:'rgba(47,54,64,0.95)', footer_bg:'#2F3640',
+        text_secondary:'#D8D8D8', section_glow:'rgba(255,255,255,0.10)',
+        hp_bg:'transparent', cat_bg:'rgba(255,255,255,0.10)', svc_bg:'transparent',
+    },
+    lime_graphite: {
+        label:'⚡ Lime Graphite', group:'editorial',
+        swatch:'linear-gradient(135deg,#B7E117,#0D1208)', accent:'#D9FF57',
+        bg_mode:'linear', bg1:'#0D1208', bg2:'#1E2A10', bg3:'#B7E117', bg4:'#D9FF57', angle:180,
+        glow:true,  glow_color:'#B7E117', glow_opacity:0.22, glow_pos:'top right',
+        btn_grad:true,  btn1:'#D9FF57', btn2:'#B7E117', btn3:'#7CA30F',
+        card_grad:false, card_from:'#1E2A10', card_to:'#263514',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(183,225,23,0.25)', card_text:'#F7FCEB',
+        header_bg:'rgba(13,18,8,0.95)', footer_bg:'#0D1208',
+        text_secondary:'#D6E3AE', section_glow:'rgba(183,225,23,0.22)',
+        hp_bg:'transparent', cat_bg:'rgba(183,225,23,0.14)', svc_bg:'transparent',
+    },
+    neon_creative: {
+        label:'🌱 Neon Creative Cloud', group:'editorial',
+        swatch:'linear-gradient(135deg,#B8EA21,#F5FFE8)', accent:'#89C61C',
+        bg_mode:'linear', bg1:'#F5FFE8', bg2:'#E8F7C1', bg3:'#B8EA21', bg4:'#111111', angle:180,
+        glow:true,  glow_color:'#89C61C', glow_opacity:0.20, glow_pos:'top right',
+        btn_grad:true,  btn1:'#B8EA21', btn2:'#89C61C', btn3:'#4D7E0E',
+        card_grad:false, card_from:'#E8F7C1', card_to:'#F5FFE8',
+        card_bg1:'rgba(255,255,255,0.72)', card_bg2:'rgba(255,255,255,0.85)',
+        card_border:'rgba(184,234,33,0.35)', card_text:'#111111',
+        header_bg:'rgba(245,255,232,0.95)', footer_bg:'#E8F7C1',
+        text_secondary:'#4B4B4B', section_glow:'rgba(184,234,33,0.20)',
+        hp_bg:'transparent', cat_bg:'rgba(184,234,33,0.14)', svc_bg:'transparent',
+    },
+    // ── Rich & Luxe ──────────────────────────────────────────────
+    teal_ocean: {
+        label:'🌊 Teal Ocean Pro', group:'rich',
+        swatch:'linear-gradient(135deg,#0E6B73,#04191B)', accent:'#25B8C3',
+        bg_mode:'linear', bg1:'#04191B', bg2:'#0A2A2D', bg3:'#0E6B73', bg4:'#25B8C3', angle:180,
+        glow:true,  glow_color:'#25B8C3', glow_opacity:0.20, glow_pos:'top right',
+        btn_grad:true,  btn1:'#25B8C3', btn2:'#178D96', btn3:'#0B5C63',
+        card_grad:false, card_from:'#0A2A2D', card_to:'#0D3538',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(37,184,195,0.25)', card_text:'#ECFFFF',
+        header_bg:'rgba(4,25,27,0.95)', footer_bg:'#04191B',
+        text_secondary:'#B7E6EA', section_glow:'rgba(37,184,195,0.20)',
+        hp_bg:'transparent', cat_bg:'rgba(37,184,195,0.14)', svc_bg:'transparent',
+    },
+    burgundy_plum: {
+        label:'🍷 Burgundy Plum Luxe', group:'rich',
+        swatch:'linear-gradient(135deg,#6C1E45,#150811)', accent:'#A43E75',
+        bg_mode:'linear', bg1:'#150811', bg2:'#341226', bg3:'#6C1E45', bg4:'#A43E75', angle:180,
+        glow:true,  glow_color:'#A43E75', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#A43E75', btn2:'#7E2D58', btn3:'#551B3A',
+        card_grad:false, card_from:'#341226', card_to:'#421830',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(164,62,117,0.25)', card_text:'#FCEEF6',
+        header_bg:'rgba(21,8,17,0.95)', footer_bg:'#150811',
+        text_secondary:'#D9B6C9', section_glow:'rgba(164,62,117,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(164,62,117,0.14)', svc_bg:'transparent',
+    },
+    mustard_bronze: {
+        label:'🟡 Mustard Bronze', group:'rich',
+        swatch:'linear-gradient(135deg,#B8860B,#171006)', accent:'#D7A22A',
+        bg_mode:'linear', bg1:'#171006', bg2:'#48310C', bg3:'#B8860B', bg4:'#D7A22A', angle:180,
+        glow:true,  glow_color:'#D7A22A', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#D7A22A', btn2:'#B8860B', btn3:'#7A5807',
+        card_grad:false, card_from:'#48310C', card_to:'#5A3D10',
+        card_bg1:'rgba(255,255,255,0.06)', card_bg2:'rgba(255,255,255,0.10)',
+        card_border:'rgba(215,162,42,0.25)', card_text:'#FFF7E3',
+        header_bg:'rgba(23,16,6,0.95)', footer_bg:'#171006',
+        text_secondary:'#E2D0A1', section_glow:'rgba(215,162,42,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(215,162,42,0.14)', svc_bg:'transparent',
+    },
+    brick_oxblood: {
+        label:'🔴 Brick Oxblood', group:'rich',
+        swatch:'linear-gradient(135deg,#7C1D24,#120606)', accent:'#C44235',
+        bg_mode:'linear', bg1:'#120606', bg2:'#3A0F12', bg3:'#7C1D24', bg4:'#B53A40', angle:180,
+        glow:true,  glow_color:'#C44235', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#C44235', btn2:'#9F2F2C', btn3:'#6C1B1E',
+        card_grad:false, card_from:'#3A0F12', card_to:'#4A1418',
+        card_bg1:'rgba(255,255,255,0.05)', card_bg2:'rgba(255,255,255,0.09)',
+        card_border:'rgba(181,58,64,0.25)', card_text:'#FFF0F0',
+        header_bg:'rgba(18,6,6,0.95)', footer_bg:'#120606',
+        text_secondary:'#DAB6B8', section_glow:'rgba(196,66,53,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(181,58,64,0.14)', svc_bg:'transparent',
+    },
+    forest_teal: {
+        label:'🌲 Forest Deep Teal', group:'rich',
+        swatch:'linear-gradient(135deg,#0D5B5B,#07110C)', accent:'#1C8E84',
+        bg_mode:'linear', bg1:'#07110C', bg2:'#123027', bg3:'#0D5B5B', bg4:'#1C8E84', angle:180,
+        glow:true,  glow_color:'#1C8E84', glow_opacity:0.18, glow_pos:'top right',
+        btn_grad:true,  btn1:'#1C8E84', btn2:'#166C64', btn3:'#0D4742',
+        card_grad:false, card_from:'#123027', card_to:'#163A30',
+        card_bg1:'rgba(255,255,255,0.05)', card_bg2:'rgba(255,255,255,0.09)',
+        card_border:'rgba(28,142,132,0.25)', card_text:'#F0FFFB',
+        header_bg:'rgba(7,17,12,0.95)', footer_bg:'#07110C',
+        text_secondary:'#B7D8D1', section_glow:'rgba(28,142,132,0.18)',
+        hp_bg:'transparent', cat_bg:'rgba(28,142,132,0.14)', svc_bg:'transparent',
+    },
+};
+
+/* ── applyPreset: fills ALL form fields, updates live preview ── */
+function applyPreset(key) {
+    const p = PRESETS[key];
+    if (!p) return;
+    // Background
+    setV('bg_mode',             p.bg_mode  || 'linear');
+    setV('background_color_1',  p.bg1      || '#050505');
+    setV('background_color_2',  p.bg2      || '');
+    setV('background_color_3',  p.bg3      || '');
+    setV('background_color_4',  p.bg4      || '');
+    setV('gradient_angle',      String(p.angle ?? 180));
+    // Glow
+    setCheck('enable_background_glow', p.glow);
+    setV('glow_color',          p.glow_color  || '#ff7a00');
+    setV('glow_opacity',        String(p.glow_opacity ?? 0.25));
+    setV('glow_position',       p.glow_pos    || 'top right');
+    const go = document.getElementById('glow_opacity_disp');
+    if (go) go.value = String(p.glow_opacity ?? 0.25);
+    // Buttons
+    setCheck('button_gradient_enabled', p.btn_grad);
+    setV('button_color_1',      p.btn1 || '');
+    setV('button_color_2',      p.btn2 || '');
+    setV('button_color_3',      p.btn3 || '');
+    // Cards
+    setCheck('card_gradient_enabled', p.card_grad);
+    setV('card_gradient_from',  p.card_from   || '');
+    setV('card_gradient_to',    p.card_to     || '');
+    setV('card_bg_1',           p.card_bg1    || '');
+    setV('card_bg_2',           p.card_bg2    || '');
+    setV('card_border',         p.card_border || '');
+    setV('card_text',           p.card_text   || '#ffffff');
+    // Header / Footer
+    setV('header_background',   p.header_bg   || '');
+    setV('footer_background',   p.footer_bg   || '');
+    // Text / Section glow
+    setV('text_secondary',      p.text_secondary || '');
+    setV('section_glow_color',  p.section_glow   || '');
+    // Page backgrounds
+    setV('homepage_section_bg', p.hp_bg  || 'transparent');
+    setV('category_section_bg', p.cat_bg || '');
+    setV('service_page_bg',     p.svc_bg || 'transparent');
+    // Sync color picker displays
+    document.querySelectorAll('.clr-pick').forEach(cp => {
+        const td = cp.nextElementSibling;
+        if (td && td.classList.contains('clr-disp')) td.value = cp.value;
+    });
+    updatePreview();
+    // Scroll to live preview so user sees the change
+    document.getElementById('pv-wrap')?.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+/* ── applyAndSave: fills fields then submits the form ── */
+function applyAndSave(key) {
+    applyPreset(key);
+    setTimeout(() => document.querySelector('form[method="post"]').submit(), 120);
+}
+
+/* ── renderPresets: builds preset cards into the three group containers ── */
+function renderPresets() {
+    const groups = { dark:'preset-grp-dark', color:'preset-grp-color', premium:'preset-grp-premium', warm:'preset-grp-warm', editorial:'preset-grp-editorial', rich:'preset-grp-rich' };
+    Object.entries(groups).forEach(([grp, id]) => {
+        const container = document.getElementById(id);
+        if (!container) return;
+        Object.entries(PRESETS).forEach(([key, p]) => {
+            if (p.group !== grp) return;
+            const card = document.createElement('div');
+            card.className = 'preset-card';
+            card.innerHTML = `
+                <div class="preset-swatch" style="background:${p.swatch};">
+                    <div class="preset-swatch-glow" style="background:radial-gradient(circle at 80% 20%,${p.accent}55 0%,transparent 65%);"></div>
+                </div>
+                <div class="preset-info">
+                    <div class="preset-name">${p.label}</div>
+                    <div class="preset-btns">
+                        <button type="button" class="preset-btn-preview" onclick="applyPreset('${key}')">👁 معاينة</button>
+                        <button type="button" class="preset-btn-apply"   onclick="applyAndSave('${key}')">💾 تطبيق</button>
+                    </div>
+                </div>`;
+            container.appendChild(card);
+        });
+    });
+}
+renderPresets();
+</script>
+</div></div></div></body></html>
+
+
