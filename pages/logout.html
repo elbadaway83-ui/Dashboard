@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬ | Admin â€” Elawaady</title>
+  <title>تسجيل الخروج | Admin — Elawaady</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../style.css">
   <meta name="robots" content="noindex,nofollow">
   <style>
     /* Same animated background as login */
@@ -270,15 +270,15 @@
           style="width:auto;height:auto;background:none;border:none;animation:none;padding:0;">
           <img src="../assets/images/admin-logo.png" alt="Elawaady"
             style="height:90px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(240,165,0,.35));"
-            onerror="this.outerHTML='<div class=\'logout-icon-wrap\'>ðŸšª</div>';">
+            onerror="this.outerHTML='<div class=\'logout-icon-wrap\'>🚪</div>';">
         </div>
-        <div class="logout-title">ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</div>
-        <div class="logout-sub">Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ø£Ù†Ùƒ ØªØ±ÙŠØ¯ Ø§Ù„Ø®Ø±ÙˆØ¬ Ù…Ù† Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…ØŸ<br>Ø³ÙŠØªÙ… Ø¥Ù†Ù‡Ø§Ø¡ Ø¬Ù„Ø³ØªÙƒ Ø§Ù„Ø­Ø§Ù„ÙŠØ©.</div>
+        <div class="logout-title">تسجيل الخروج</div>
+        <div class="logout-sub">هل أنت متأكد أنك تريد الخروج من لوحة التحكم؟<br>سيتم إنهاء جلستك الحالية.</div>
 
         <div class="logout-divider"></div>
 
         <!-- Countdown -->
-        <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Ø³ÙŠØªÙ… Ø§Ù„Ø®Ø±ÙˆØ¬ ØªÙ„Ù‚Ø§Ø¦ÙŠÙ‹Ø§ Ø®Ù„Ø§Ù„</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">سيتم الخروج تلقائيًا خلال</div>
         <div class="countdown-wrap">
           <svg class="countdown-ring" viewBox="0 0 70 70">
             <circle class="bg-ring" cx="35" cy="35" r="30"></circle>
@@ -289,45 +289,45 @@
 
         <div class="logout-actions">
           <button class="btn-logout-confirm" id="confirm-btn" onclick="doLogout()">
-            ðŸšª Ù†Ø¹Ù…ØŒ Ø³Ø¬Ù‘Ù„ Ø®Ø±ÙˆØ¬ÙŠ
+            🚪 نعم، سجّل خروجي
           </button>
           <button class="btn-cancel" onclick="cancelLogout()">
-            â† Ø¥Ù„ØºØ§Ø¡ ÙˆØ§Ù„Ø¹ÙˆØ¯Ø© Ù„Ù„ÙˆØ­Ø©
+            ← إلغاء والعودة للوحة
           </button>
         </div>
 
-        <div class="logout-brand">Ù†Ø¸Ø§Ù… Ø¥Ø¯Ø§Ø±Ø© <span>Elawaady</span></div>
+        <div class="logout-brand">نظام إدارة <span>Elawaady</span></div>
       </div>
 
       <!-- Success State -->
       <div class="logout-success" id="logout-success">
         <div class="logout-icon-wrap"
           style="border-color:rgba(34,197,94,.25);background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(34,197,94,.05));animation:none;">
-          âœ…</div>
-        <div class="logout-title" style="color:var(--green);">ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</div>
-        <div class="logout-sub">ØªÙ… Ø¥Ù†Ù‡Ø§Ø¡ Ø¬Ù„Ø³ØªÙƒ Ø¨Ù†Ø¬Ø§Ø­.<br>Ø³ÙŠØªÙ… ØªÙˆØ¬ÙŠÙ‡Ùƒ Ù„ØµÙØ­Ø© ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„...</div>
+          ✅</div>
+        <div class="logout-title" style="color:var(--green);">تم تسجيل الخروج</div>
+        <div class="logout-sub">تم إنهاء جلستك بنجاح.<br>سيتم توجيهك لصفحة تسجيل الدخول...</div>
         <div style="margin-top:16px;">
           <div style="height:3px;background:var(--bg3);border-radius:3px;overflow:hidden;">
             <div id="redirect-bar"
               style="height:100%;width:0%;background:var(--green);border-radius:3px;transition:width 2s linear;"></div>
           </div>
         </div>
-        <a href="login.html" class="btn btn-secondary" style="margin-top:16px;display:inline-flex;">ðŸ” Ø§Ù„Ø°Ù‡Ø§Ø¨ Ù„ØªØ³Ø¬ÙŠÙ„
-          Ø§Ù„Ø¯Ø®ÙˆÙ„</a>
+        <a href="login.html" class="btn btn-secondary" style="margin-top:16px;display:inline-flex;">🔐 الذهاب لتسجيل
+          الدخول</a>
       </div>
 
     </div>
   </div>
 
   <div id="toast-container" class="toast-container"></div>
-  <script src="../assets/script/script.js"></script>
+  <script src="../script.js"></script>
   <script>
     const TOTAL = 5;
     let remaining = TOTAL;
     let timer = null;
     let cancelled = false;
 
-    const circumference = 2 * Math.PI * 30; // â‰ˆ 188.5
+    const circumference = 2 * Math.PI * 30; // ≈ 188.5
     const ring = document.getElementById('progress-ring');
     ring.style.strokeDasharray = circumference;
     ring.style.strokeDashoffset = 0;
@@ -369,7 +369,7 @@
     function cancelLogout() {
       cancelled = true;
       clearInterval(timer);
-      showToast('ØªÙ… Ø¥Ù„ØºØ§Ø¡ ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬', 'info');
+      showToast('تم إلغاء تسجيل الخروج', 'info');
       setTimeout(() => { history.back(); }, 800);
     }
 

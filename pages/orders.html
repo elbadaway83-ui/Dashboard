@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ø§Ù„Ø·Ù„Ø¨Ø§Øª | Admin â€” Elawaady</title>
+  <title>الطلبات | Admin — Elawaady</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../style.css">
   <meta name="robots" content="noindex,nofollow">
 </head>
 
@@ -15,64 +15,64 @@
   <div class="admin-wrap">
 
     <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">âœ•</button>
+      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
       <div class="sidebar-brand">
         <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
           onerror="this.style.display='none'">
       </div>
       <nav class="sidebar-nav">
-        <span class="nav-label">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
-        <a href="../index.html"><span class="nav-icon">ðŸ </span> Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…</a>
-        <span class="nav-label">Ø§Ù„Ù…Ø­ØªÙˆÙ‰</span>
-        <a href="categories.html"><span class="nav-icon">ðŸ“</span> Ø§Ù„Ø£Ù‚Ø³Ø§Ù…</a>
-        <a href="services.html"><span class="nav-icon">ðŸ›ï¸</span> Ø§Ù„Ø®Ø¯Ù…Ø§Øª</a>
-        <span class="nav-label">Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</span>
-        <a href="orders.html" class="active"><span class="nav-icon">ðŸ“‹</span> Ø§Ù„Ø·Ù„Ø¨Ø§Øª</a>
-        <a href="chatbot.html"><span class="nav-icon">ðŸ¤–</span> Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</a>
-        <span class="nav-label">Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</span>
-        <a href="homepage-settings.html"><span class="nav-icon">ðŸ </span> Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</a>
-        <a href="visual-sections.html"><span class="nav-icon">ðŸ–¼ï¸</span> ØµÙˆØ± Ø§Ù„Ø£Ù‚Ø³Ø§Ù… ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª</a>
-        <a href="brand-settings.html"><span class="nav-icon">ðŸŽ¨</span> Ø§Ù„Ù‡ÙˆÙŠØ© Ø§Ù„Ø¨ØµØ±ÙŠØ©</a>
-        <a href="carousel.html"><span class="nav-icon">ðŸŽ </span> Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</a>
+        <span class="nav-label">الرئيسية</span>
+        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
+        <span class="nav-label">المحتوى</span>
+        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
+        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
+        <span class="nav-label">المبيعات</span>
+        <a href="orders.html" class="active"><span class="nav-icon">📋</span> الطلبات</a>
+        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
+        <span class="nav-label">الإعدادات</span>
+        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
+        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
+        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
+        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
       </nav>
       <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">ðŸšª</span> ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</a>
+        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
       </div>
     </aside>
 
     <div class="admin-main">
       <div class="admin-topbar">
         <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">â˜°</button>
-          <div class="topbar-title">Ø§Ù„Ø·Ù„Ø¨Ø§Øª</div>
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+          <div class="topbar-title">الطلبات</div>
         </div>
         <div class="topbar-right">
-          <span class="badge badge-pending" style="font-size:12px;">1 Ø·Ù„Ø¨ Ø¬Ø¯ÙŠØ¯</span>
+          <span class="badge badge-pending" style="font-size:12px;">1 طلب جديد</span>
         </div>
       </div>
 
       <div class="admin-content">
         <div class="page-header">
-          <h1>ðŸ“‹ Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø·Ù„Ø¨Ø§Øª</h1>
+          <h1>📋 إدارة الطلبات</h1>
         </div>
 
         <!-- Stats -->
         <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
           <div class="stat-card">
             <span class="stat-num">1</span>
-            <div class="stat-label">ðŸ“‹ Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø·Ù„Ø¨Ø§Øª</div>
+            <div class="stat-label">📋 إجمالي الطلبات</div>
           </div>
           <div class="stat-card">
             <span class="stat-num" style="color:var(--gold);">1</span>
-            <div class="stat-label">ðŸ†• Ø·Ù„Ø¨Ø§Øª Ø¬Ø¯ÙŠØ¯Ø©</div>
+            <div class="stat-label">🆕 طلبات جديدة</div>
           </div>
           <div class="stat-card">
             <span class="stat-num text-green">0</span>
-            <div class="stat-label">âœ… Ù…ÙƒØªÙ…Ù„Ø©</div>
+            <div class="stat-label">✅ مكتملة</div>
           </div>
           <div class="stat-card">
             <span class="stat-num text-red">0</span>
-            <div class="stat-label">âŒ Ù…Ù„ØºÙŠØ©</div>
+            <div class="stat-label">❌ ملغية</div>
           </div>
         </div>
 
@@ -80,13 +80,13 @@
         <div class="panel">
           <div class="panel-body" style="padding:12px 16px;">
             <div class="search-bar">
-              <input type="text" class="form-control" id="order-search" placeholder="ðŸ” Ø¨Ø­Ø« Ø¨ÙƒÙˆØ¯ Ø§Ù„Ø·Ù„Ø¨...">
+              <input type="text" class="form-control" id="order-search" placeholder="🔍 بحث بكود الطلب...">
               <select class="form-select" style="width:160px;">
-                <option>Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ø§Ù„Ø§Øª</option>
-                <option>Ø¬Ø¯ÙŠØ¯</option>
-                <option>Ù‚ÙŠØ¯ Ø§Ù„ØªÙ†ÙÙŠØ°</option>
-                <option>Ù…ÙƒØªÙ…Ù„</option>
-                <option>Ù…Ù„ØºÙŠ</option>
+                <option>جميع الحالات</option>
+                <option>جديد</option>
+                <option>قيد التنفيذ</option>
+                <option>مكتمل</option>
+                <option>ملغي</option>
               </select>
               <input type="date" class="form-control" style="width:160px;">
             </div>
@@ -98,13 +98,13 @@
           <table class="admin-table" id="orders-table">
             <thead>
               <tr>
-                <th>Ø§Ù„ÙƒÙˆØ¯</th>
-                <th>Ø§Ù„Ø®Ø¯Ù…Ø©</th>
-                <th>Ø§Ù„Ø¹Ù…ÙŠÙ„ / Ø§Ù„Ù‡Ø§ØªÙ</th>
-                <th>Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ</th>
-                <th>Ø§Ù„Ø­Ø§Ù„Ø©</th>
-                <th>Ø§Ù„ØªØ§Ø±ÙŠØ®</th>
-                <th>Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
+                <th>الكود</th>
+                <th>الخدمة</th>
+                <th>العميل / الهاتف</th>
+                <th>الإجمالي</th>
+                <th>الحالة</th>
+                <th>التاريخ</th>
+                <th>إجراءات</th>
               </tr>
             </thead>
             <tbody>
@@ -113,14 +113,14 @@
                   <a href="order-view.html?id=1"
                     style="color:var(--gold);font-family:monospace;font-size:12px;">ORD-20260519-0001</a>
                 </td>
-                <td>ØªÙˆØ«ÙŠÙ‚ ØµÙØ­Ø§Øª ÙÙŠØ³Ø¨ÙˆÙƒ</td>
-                <td style="color:var(--cyan);font-size:12px;">â€”</td>
-                <td style="font-weight:700;color:var(--gold);">â€”</td>
-                <td><span class="badge badge-pending">Ø¬Ø¯ÙŠØ¯</span></td>
+                <td>توثيق صفحات فيسبوك</td>
+                <td style="color:var(--cyan);font-size:12px;">—</td>
+                <td style="font-weight:700;color:var(--gold);">—</td>
+                <td><span class="badge badge-pending">جديد</span></td>
                 <td class="text-muted" style="font-size:12px;">05-19 20:04</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="order-view.html?id=1" class="btn btn-secondary btn-sm">Ø¹Ø±Ø¶</a>
+                    <a href="order-view.html?id=1" class="btn btn-secondary btn-sm">عرض</a>
                   </div>
                 </td>
               </tr>
@@ -130,7 +130,7 @@
       </div>
     </div>
   </div>
-  <script src="../assets/script/script.js"></script>
+  <script src="../script.js"></script>
   <script>tableSearch('order-search', 'orders-table');</script>
 </body>
 
