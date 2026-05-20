@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الشات بوت | Admin — Elawaady</title>
+  <title>Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª | Admin â€” Elawaady</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <meta name="robots" content="noindex,nofollow">
 </head>
 
@@ -15,57 +15,57 @@
   <div class="admin-wrap">
 
     <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <button class="sidebar-close-btn" onclick="closeSidebar()">âœ•</button>
       <div class="sidebar-brand">
         <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
           onerror="this.style.display='none'">
       </div>
       <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html" class="active"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
+        <span class="nav-label">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+        <a href="../index.html"><span class="nav-icon">ðŸ </span> Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø­ØªÙˆÙ‰</span>
+        <a href="categories.html"><span class="nav-icon">ðŸ“</span> Ø§Ù„Ø£Ù‚Ø³Ø§Ù…</a>
+        <a href="services.html"><span class="nav-icon">ðŸ›ï¸</span> Ø§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</span>
+        <a href="orders.html"><span class="nav-icon">ðŸ“‹</span> Ø§Ù„Ø·Ù„Ø¨Ø§Øª</a>
+        <a href="chatbot.html" class="active"><span class="nav-icon">ðŸ¤–</span> Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</a>
+        <span class="nav-label">Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</span>
+        <a href="homepage-settings.html"><span class="nav-icon">ðŸ </span> Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</a>
+        <a href="visual-sections.html"><span class="nav-icon">ðŸ–¼ï¸</span> ØµÙˆØ± Ø§Ù„Ø£Ù‚Ø³Ø§Ù… ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <a href="brand-settings.html"><span class="nav-icon">ðŸŽ¨</span> Ø§Ù„Ù‡ÙˆÙŠØ© Ø§Ù„Ø¨ØµØ±ÙŠØ©</a>
+        <a href="carousel.html"><span class="nav-icon">ðŸŽ </span> Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</a>
       </nav>
       <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+        <a href="logout.html"><span class="nav-icon">ðŸšª</span> ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</a>
       </div>
     </aside>
 
     <div class="admin-main">
       <div class="admin-topbar">
         <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">الشات بوت</div>
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">â˜°</button>
+          <div class="topbar-title">Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</div>
         </div>
         <div class="topbar-right">
-          <button class="btn btn-primary btn-sm" onclick="openModal('add-qa-modal')">➕ إضافة سؤال</button>
+          <button class="btn btn-primary btn-sm" onclick="openModal('add-qa-modal')">âž• Ø¥Ø¶Ø§ÙØ© Ø³Ø¤Ø§Ù„</button>
         </div>
       </div>
 
       <div class="admin-content">
         <div class="page-header">
-          <h1>🤖 قاعدة معرفة الشات بوت</h1>
-          <button class="btn btn-primary" onclick="openModal('add-qa-modal')">➕ إضافة سؤال وجواب</button>
+          <h1>ðŸ¤– Ù‚Ø§Ø¹Ø¯Ø© Ù…Ø¹Ø±ÙØ© Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</h1>
+          <button class="btn btn-primary" onclick="openModal('add-qa-modal')">âž• Ø¥Ø¶Ø§ÙØ© Ø³Ø¤Ø§Ù„ ÙˆØ¬ÙˆØ§Ø¨</button>
         </div>
 
         <div class="alert alert-info">
-          ℹ️ أضف الأسئلة الشائعة وإجاباتها لتدريب الشات بوت على الردود التلقائية
+          â„¹ï¸ Ø£Ø¶Ù Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø© ÙˆØ¥Ø¬Ø§Ø¨Ø§ØªÙ‡Ø§ Ù„ØªØ¯Ø±ÙŠØ¨ Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª Ø¹Ù„Ù‰ Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©
         </div>
 
         <!-- Search -->
         <div class="panel">
           <div class="panel-body" style="padding:12px 16px;">
             <div class="search-bar">
-              <input type="text" class="form-control" id="qa-search" placeholder="🔍 بحث في الأسئلة...">
+              <input type="text" class="form-control" id="qa-search" placeholder="ðŸ” Ø¨Ø­Ø« ÙÙŠ Ø§Ù„Ø£Ø³Ø¦Ù„Ø©...">
             </div>
           </div>
         </div>
@@ -76,71 +76,71 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>السؤال</th>
-                <th>الجواب</th>
-                <th>الأولوية</th>
-                <th>الحالة</th>
-                <th>إجراءات</th>
+                <th>Ø§Ù„Ø³Ø¤Ø§Ù„</th>
+                <th>Ø§Ù„Ø¬ÙˆØ§Ø¨</th>
+                <th>Ø§Ù„Ø£ÙˆÙ„ÙˆÙŠØ©</th>
+                <th>Ø§Ù„Ø­Ø§Ù„Ø©</th>
+                <th>Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="text-muted">1</td>
-                <td style="font-weight:600;">كيف أطلب خدمة؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">اختر الخدمة المناسبة واضغط "اطلب الآن" ثم
-                  أدخل بياناتك وأكمل الدفع.</td>
-                <td><span class="badge badge-active">عالية</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
+                <td style="font-weight:600;">ÙƒÙŠÙ Ø£Ø·Ù„Ø¨ Ø®Ø¯Ù…Ø©ØŸ</td>
+                <td class="text-muted" style="max-width:300px;font-size:12px;">Ø§Ø®ØªØ± Ø§Ù„Ø®Ø¯Ù…Ø© Ø§Ù„Ù…Ù†Ø§Ø³Ø¨Ø© ÙˆØ§Ø¶ØºØ· "Ø§Ø·Ù„Ø¨ Ø§Ù„Ø¢Ù†" Ø«Ù…
+                  Ø£Ø¯Ø®Ù„ Ø¨ÙŠØ§Ù†Ø§ØªÙƒ ÙˆØ£ÙƒÙ…Ù„ Ø§Ù„Ø¯ÙØ¹.</td>
+                <td><span class="badge badge-active">Ø¹Ø§Ù„ÙŠØ©</span></td>
+                <td><span class="badge badge-active">Ù…ÙØ¹Ù„</span></td>
                 <td>
                   <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">ØªØ¹Ø¯ÙŠÙ„</button>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø³Ø¤Ø§Ù„ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">2</td>
-                <td style="font-weight:600;">ما هي طرق الدفع المتاحة؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">نقبل فودافون كاش، إنستاباي، والتحويل
-                  البنكي.</td>
-                <td><span class="badge badge-active">عالية</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
+                <td style="font-weight:600;">Ù…Ø§ Ù‡ÙŠ Ø·Ø±Ù‚ Ø§Ù„Ø¯ÙØ¹ Ø§Ù„Ù…ØªØ§Ø­Ø©ØŸ</td>
+                <td class="text-muted" style="max-width:300px;font-size:12px;">Ù†Ù‚Ø¨Ù„ ÙÙˆØ¯Ø§ÙÙˆÙ† ÙƒØ§Ø´ØŒ Ø¥Ù†Ø³ØªØ§Ø¨Ø§ÙŠØŒ ÙˆØ§Ù„ØªØ­ÙˆÙŠÙ„
+                  Ø§Ù„Ø¨Ù†ÙƒÙŠ.</td>
+                <td><span class="badge badge-active">Ø¹Ø§Ù„ÙŠØ©</span></td>
+                <td><span class="badge badge-active">Ù…ÙØ¹Ù„</span></td>
                 <td>
                   <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">ØªØ¹Ø¯ÙŠÙ„</button>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø³Ø¤Ø§Ù„ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">3</td>
-                <td style="font-weight:600;">هل الخدمات آمنة؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">نعم، جميع خدماتنا آمنة ومضمونة 100% ونضمن
-                  جودة التنفيذ.</td>
-                <td><span class="badge badge-pending">متوسطة</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
+                <td style="font-weight:600;">Ù‡Ù„ Ø§Ù„Ø®Ø¯Ù…Ø§Øª Ø¢Ù…Ù†Ø©ØŸ</td>
+                <td class="text-muted" style="max-width:300px;font-size:12px;">Ù†Ø¹Ù…ØŒ Ø¬Ù…ÙŠØ¹ Ø®Ø¯Ù…Ø§ØªÙ†Ø§ Ø¢Ù…Ù†Ø© ÙˆÙ…Ø¶Ù…ÙˆÙ†Ø© 100% ÙˆÙ†Ø¶Ù…Ù†
+                  Ø¬ÙˆØ¯Ø© Ø§Ù„ØªÙ†ÙÙŠØ°.</td>
+                <td><span class="badge badge-pending">Ù…ØªÙˆØ³Ø·Ø©</span></td>
+                <td><span class="badge badge-active">Ù…ÙØ¹Ù„</span></td>
                 <td>
                   <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">ØªØ¹Ø¯ÙŠÙ„</button>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø³Ø¤Ø§Ù„ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">4</td>
-                <td style="font-weight:600;">كم يستغرق تنفيذ الطلب؟</td>
-                <td class="text-muted" style="max-width:300px;font-size:12px;">يختلف حسب الخدمة، وعادةً من 24 إلى 72
-                  ساعة.</td>
-                <td><span class="badge badge-pending">متوسطة</span></td>
-                <td><span class="badge badge-active">مفعل</span></td>
+                <td style="font-weight:600;">ÙƒÙ… ÙŠØ³ØªØºØ±Ù‚ ØªÙ†ÙÙŠØ° Ø§Ù„Ø·Ù„Ø¨ØŸ</td>
+                <td class="text-muted" style="max-width:300px;font-size:12px;">ÙŠØ®ØªÙ„Ù Ø­Ø³Ø¨ Ø§Ù„Ø®Ø¯Ù…Ø©ØŒ ÙˆØ¹Ø§Ø¯Ø©Ù‹ Ù…Ù† 24 Ø¥Ù„Ù‰ 72
+                  Ø³Ø§Ø¹Ø©.</td>
+                <td><span class="badge badge-pending">Ù…ØªÙˆØ³Ø·Ø©</span></td>
+                <td><span class="badge badge-active">Ù…ÙØ¹Ù„</span></td>
                 <td>
                   <div class="flex-gap">
-                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">تعديل</button>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('edit-qa-modal')">ØªØ¹Ø¯ÙŠÙ„</button>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذا السؤال؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø³Ø¤Ø§Ù„ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
@@ -151,24 +151,24 @@
         <!-- Chatbot Settings -->
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">⚙️ إعدادات الشات بوت</div>
+            <div class="panel-title">âš™ï¸ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</div>
           </div>
           <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
             <div class="form-group">
-              <label class="form-label">رسالة الترحيب</label>
+              <label class="form-label">Ø±Ø³Ø§Ù„Ø© Ø§Ù„ØªØ±Ø­ÙŠØ¨</label>
               <textarea class="form-control"
-                placeholder="مرحبًا! كيف يمكنني مساعدتك؟">مرحبًا! أنا مساعد Elawaady الذكي. كيف يمكنني مساعدتك اليوم؟</textarea>
+                placeholder="Ù…Ø±Ø­Ø¨Ù‹Ø§! ÙƒÙŠÙ ÙŠÙ…ÙƒÙ†Ù†ÙŠ Ù…Ø³Ø§Ø¹Ø¯ØªÙƒØŸ">Ù…Ø±Ø­Ø¨Ù‹Ø§! Ø£Ù†Ø§ Ù…Ø³Ø§Ø¹Ø¯ Elawaady Ø§Ù„Ø°ÙƒÙŠ. ÙƒÙŠÙ ÙŠÙ…ÙƒÙ†Ù†ÙŠ Ù…Ø³Ø§Ø¹Ø¯ØªÙƒ Ø§Ù„ÙŠÙˆÙ…ØŸ</textarea>
             </div>
             <div class="toggle-wrap">
               <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;font-weight:600;">تفعيل الشات بوت</span>
+              <span style="font-size:13px;font-weight:600;">ØªÙØ¹ÙŠÙ„ Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</span>
             </div>
             <div class="toggle-wrap">
               <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;font-weight:600;">ردود تلقائية على الرسائل</span>
+              <span style="font-size:13px;font-weight:600;">Ø±Ø¯ÙˆØ¯ ØªÙ„Ù‚Ø§Ø¦ÙŠØ© Ø¹Ù„Ù‰ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„</span>
             </div>
             <button class="btn btn-primary" style="width:fit-content;"
-              onclick="showToast('تم حفظ إعدادات الشات بوت ✅','success')">💾 حفظ الإعدادات</button>
+              onclick="showToast('ØªÙ… Ø­ÙØ¸ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª âœ…','success')">ðŸ’¾ Ø­ÙØ¸ Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</button>
           </div>
         </div>
       </div>
@@ -179,50 +179,50 @@
   <div class="modal-backdrop" id="add-qa-modal">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title">➕ إضافة سؤال وجواب</div>
-        <button class="modal-close" onclick="closeModal('add-qa-modal')">✕</button>
+        <div class="modal-title">âž• Ø¥Ø¶Ø§ÙØ© Ø³Ø¤Ø§Ù„ ÙˆØ¬ÙˆØ§Ø¨</div>
+        <button class="modal-close" onclick="closeModal('add-qa-modal')">âœ•</button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">السؤال <span style="color:var(--red)">*</span></label>
-          <input type="text" class="form-control" placeholder="اكتب السؤال هنا..." id="new-question">
+          <label class="form-label">Ø§Ù„Ø³Ø¤Ø§Ù„ <span style="color:var(--red)">*</span></label>
+          <input type="text" class="form-control" placeholder="Ø§ÙƒØªØ¨ Ø§Ù„Ø³Ø¤Ø§Ù„ Ù‡Ù†Ø§..." id="new-question">
         </div>
         <div class="form-group">
-          <label class="form-label">الجواب <span style="color:var(--red)">*</span></label>
-          <textarea class="form-control" style="min-height:100px;" placeholder="اكتب الجواب هنا..."
+          <label class="form-label">Ø§Ù„Ø¬ÙˆØ§Ø¨ <span style="color:var(--red)">*</span></label>
+          <textarea class="form-control" style="min-height:100px;" placeholder="Ø§ÙƒØªØ¨ Ø§Ù„Ø¬ÙˆØ§Ø¨ Ù‡Ù†Ø§..."
             id="new-answer"></textarea>
         </div>
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label">الأولوية</label>
+            <label class="form-label">Ø§Ù„Ø£ÙˆÙ„ÙˆÙŠØ©</label>
             <select class="form-select">
-              <option>عالية</option>
-              <option>متوسطة</option>
-              <option>منخفضة</option>
+              <option>Ø¹Ø§Ù„ÙŠØ©</option>
+              <option>Ù…ØªÙˆØ³Ø·Ø©</option>
+              <option>Ù…Ù†Ø®ÙØ¶Ø©</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">الحالة</label>
+            <label class="form-label">Ø§Ù„Ø­Ø§Ù„Ø©</label>
             <div class="toggle-wrap" style="margin-top:8px;">
               <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;">مفعل</span>
+              <span style="font-size:13px;">Ù…ÙØ¹Ù„</span>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" onclick="saveQA()">💾 حفظ</button>
-        <button class="btn btn-secondary" onclick="closeModal('add-qa-modal')">إلغاء</button>
+        <button class="btn btn-primary" onclick="saveQA()">ðŸ’¾ Ø­ÙØ¸</button>
+        <button class="btn btn-secondary" onclick="closeModal('add-qa-modal')">Ø¥Ù„ØºØ§Ø¡</button>
       </div>
     </div>
   </div>
 
-  <script src="../script.js"></script>
+  <script src="../assets/script/script.js"></script>
   <script>
     tableSearch('qa-search', 'qa-table');
     function saveQA() {
       closeModal('add-qa-modal');
-      showToast('تم إضافة السؤال والجواب ✅', 'success');
+      showToast('ØªÙ… Ø¥Ø¶Ø§ÙØ© Ø§Ù„Ø³Ø¤Ø§Ù„ ÙˆØ§Ù„Ø¬ÙˆØ§Ø¨ âœ…', 'success');
     }
   </script>
 </body>

@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تفاصيل الطلب | Admin — Elawaady</title>
+  <title>ØªÙØ§ØµÙŠÙ„ Ø§Ù„Ø·Ù„Ø¨ | Admin â€” Elawaady</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <meta name="robots" content="noindex,nofollow">
 </head>
 
@@ -15,79 +15,79 @@
   <div class="admin-wrap">
 
     <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <button class="sidebar-close-btn" onclick="closeSidebar()">âœ•</button>
       <div class="sidebar-brand">
         <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
           onerror="this.style.display='none'">
       </div>
       <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html" class="active"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
+        <span class="nav-label">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+        <a href="../index.html"><span class="nav-icon">ðŸ </span> Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø­ØªÙˆÙ‰</span>
+        <a href="categories.html"><span class="nav-icon">ðŸ“</span> Ø§Ù„Ø£Ù‚Ø³Ø§Ù…</a>
+        <a href="services.html"><span class="nav-icon">ðŸ›ï¸</span> Ø§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</span>
+        <a href="orders.html" class="active"><span class="nav-icon">ðŸ“‹</span> Ø§Ù„Ø·Ù„Ø¨Ø§Øª</a>
+        <a href="chatbot.html"><span class="nav-icon">ðŸ¤–</span> Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</a>
+        <span class="nav-label">Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</span>
+        <a href="homepage-settings.html"><span class="nav-icon">ðŸ </span> Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</a>
+        <a href="visual-sections.html"><span class="nav-icon">ðŸ–¼ï¸</span> ØµÙˆØ± Ø§Ù„Ø£Ù‚Ø³Ø§Ù… ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <a href="brand-settings.html"><span class="nav-icon">ðŸŽ¨</span> Ø§Ù„Ù‡ÙˆÙŠØ© Ø§Ù„Ø¨ØµØ±ÙŠØ©</a>
+        <a href="carousel.html"><span class="nav-icon">ðŸŽ </span> Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</a>
       </nav>
       <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+        <a href="logout.html"><span class="nav-icon">ðŸšª</span> ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</a>
       </div>
     </aside>
 
     <div class="admin-main">
       <div class="admin-topbar">
         <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">تفاصيل الطلب</div>
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">â˜°</button>
+          <div class="topbar-title">ØªÙØ§ØµÙŠÙ„ Ø§Ù„Ø·Ù„Ø¨</div>
         </div>
         <div class="topbar-right">
-          <a href="orders.html" class="btn btn-secondary btn-sm">← رجوع</a>
+          <a href="orders.html" class="btn btn-secondary btn-sm">â† Ø±Ø¬ÙˆØ¹</a>
         </div>
       </div>
 
       <div class="admin-content">
         <div class="page-header">
-          <h1>📦 طلب #ORD-20260519-0001</h1>
-          <span class="badge badge-pending" style="font-size:13px;padding:6px 16px;">جديد</span>
+          <h1>ðŸ“¦ Ø·Ù„Ø¨ #ORD-20260519-0001</h1>
+          <span class="badge badge-pending" style="font-size:13px;padding:6px 16px;">Ø¬Ø¯ÙŠØ¯</span>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
           <!-- Order Details -->
           <div class="panel">
             <div class="panel-header">
-              <div class="panel-title">📋 تفاصيل الطلب</div>
+              <div class="panel-title">ðŸ“‹ ØªÙØ§ØµÙŠÙ„ Ø§Ù„Ø·Ù„Ø¨</div>
             </div>
             <table class="admin-table">
               <tbody>
                 <tr>
-                  <td class="text-muted">كود الطلب</td>
+                  <td class="text-muted">ÙƒÙˆØ¯ Ø§Ù„Ø·Ù„Ø¨</td>
                   <td style="font-family:monospace;color:var(--gold);">ORD-20260519-0001</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">الخدمة</td>
-                  <td>توثيق صفحات فيسبوك</td>
+                  <td class="text-muted">Ø§Ù„Ø®Ø¯Ù…Ø©</td>
+                  <td>ØªÙˆØ«ÙŠÙ‚ ØµÙØ­Ø§Øª ÙÙŠØ³Ø¨ÙˆÙƒ</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">الكمية</td>
+                  <td class="text-muted">Ø§Ù„ÙƒÙ…ÙŠØ©</td>
                   <td>1</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">الإجمالي</td>
-                  <td style="color:var(--gold);font-weight:700;">—</td>
+                  <td class="text-muted">Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ</td>
+                  <td style="color:var(--gold);font-weight:700;">â€”</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">تاريخ الطلب</td>
+                  <td class="text-muted">ØªØ§Ø±ÙŠØ® Ø§Ù„Ø·Ù„Ø¨</td>
                   <td>2026-05-19 20:04</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">الحالة</td>
-                  <td><span class="badge badge-pending">جديد</span></td>
+                  <td class="text-muted">Ø§Ù„Ø­Ø§Ù„Ø©</td>
+                  <td><span class="badge badge-pending">Ø¬Ø¯ÙŠØ¯</span></td>
                 </tr>
               </tbody>
             </table>
@@ -96,25 +96,25 @@
           <!-- Customer Details -->
           <div class="panel">
             <div class="panel-header">
-              <div class="panel-title">👤 بيانات العميل</div>
+              <div class="panel-title">ðŸ‘¤ Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø¹Ù…ÙŠÙ„</div>
             </div>
             <table class="admin-table">
               <tbody>
                 <tr>
-                  <td class="text-muted">الاسم</td>
-                  <td>—</td>
+                  <td class="text-muted">Ø§Ù„Ø§Ø³Ù…</td>
+                  <td>â€”</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">الهاتف</td>
-                  <td style="color:var(--cyan);">—</td>
+                  <td class="text-muted">Ø§Ù„Ù‡Ø§ØªÙ</td>
+                  <td style="color:var(--cyan);">â€”</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">البريد</td>
-                  <td>—</td>
+                  <td class="text-muted">Ø§Ù„Ø¨Ø±ÙŠØ¯</td>
+                  <td>â€”</td>
                 </tr>
                 <tr>
-                  <td class="text-muted">الملاحظات</td>
-                  <td>—</td>
+                  <td class="text-muted">Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª</td>
+                  <td>â€”</td>
                 </tr>
               </tbody>
             </table>
@@ -124,39 +124,39 @@
         <!-- Status Update -->
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">🔄 تحديث الحالة</div>
+            <div class="panel-title">ðŸ”„ ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø­Ø§Ù„Ø©</div>
           </div>
           <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
             <div class="form-group">
-              <label class="form-label">الحالة الجديدة</label>
+              <label class="form-label">Ø§Ù„Ø­Ø§Ù„Ø© Ø§Ù„Ø¬Ø¯ÙŠØ¯Ø©</label>
               <select class="form-select" id="order-status" style="width:220px;">
-                <option value="new" selected>جديد</option>
-                <option value="processing">قيد التنفيذ</option>
-                <option value="completed">مكتمل</option>
-                <option value="cancelled">ملغي</option>
+                <option value="new" selected>Ø¬Ø¯ÙŠØ¯</option>
+                <option value="processing">Ù‚ÙŠØ¯ Ø§Ù„ØªÙ†ÙÙŠØ°</option>
+                <option value="completed">Ù…ÙƒØªÙ…Ù„</option>
+                <option value="cancelled">Ù…Ù„ØºÙŠ</option>
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">ملاحظات الأدمن</label>
-              <textarea class="form-control" placeholder="أضف ملاحظة داخلية..."></textarea>
+              <label class="form-label">Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø£Ø¯Ù…Ù†</label>
+              <textarea class="form-control" placeholder="Ø£Ø¶Ù Ù…Ù„Ø§Ø­Ø¸Ø© Ø¯Ø§Ø®Ù„ÙŠØ©..."></textarea>
             </div>
             <div class="flex-gap">
-              <button class="btn btn-primary" onclick="updateStatus()">💾 حفظ التحديث</button>
+              <button class="btn btn-primary" onclick="updateStatus()">ðŸ’¾ Ø­ÙØ¸ Ø§Ù„ØªØ­Ø¯ÙŠØ«</button>
               <button class="btn btn-danger"
-                onclick="confirmDelete('إلغاء هذا الطلب؟',()=>showToast('تم إلغاء الطلب','error'))">❌ إلغاء
-                الطلب</button>
+                onclick="confirmDelete('Ø¥Ù„ØºØ§Ø¡ Ù‡Ø°Ø§ Ø§Ù„Ø·Ù„Ø¨ØŸ',()=>showToast('ØªÙ… Ø¥Ù„ØºØ§Ø¡ Ø§Ù„Ø·Ù„Ø¨','error'))">âŒ Ø¥Ù„ØºØ§Ø¡
+                Ø§Ù„Ø·Ù„Ø¨</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="../script.js"></script>
+  <script src="../assets/script/script.js"></script>
   <script>
     function updateStatus() {
       const status = document.getElementById('order-status').value;
-      const labels = { new: 'جديد', processing: 'قيد التنفيذ', completed: 'مكتمل', cancelled: 'ملغي' };
-      showToast(`تم تحديث الحالة إلى: ${labels[status]}`, 'success');
+      const labels = { new: 'Ø¬Ø¯ÙŠØ¯', processing: 'Ù‚ÙŠØ¯ Ø§Ù„ØªÙ†ÙÙŠØ°', completed: 'Ù…ÙƒØªÙ…Ù„', cancelled: 'Ù…Ù„ØºÙŠ' };
+      showToast(`ØªÙ… ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø­Ø§Ù„Ø© Ø¥Ù„Ù‰: ${labels[status]}`, 'success');
     }
   </script>
 </body>

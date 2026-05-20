@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل الدخول | Admin — Elawaady</title>
+  <title>ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„ | Admin â€” Elawaady</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <meta name="robots" content="noindex,nofollow">
   <style>
     /* Animated background */
@@ -295,38 +295,38 @@
       <div class="login-logo-wrap">
         <img src="../assets/images/admin-logo.png" alt="Elawaady"
           style="height:90px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(240,165,0,.35));"
-          onerror="this.outerHTML='<div class=\'login-logo-fallback\'>🛡️</div><span class=\'login-brand-name\'>Elawaady</span>';">
-        <span class="login-brand-sub">لوحة تحكم المتجر</span>
+          onerror="this.outerHTML='<div class=\'login-logo-fallback\'>ðŸ›¡ï¸</div><span class=\'login-brand-name\'>Elawaady</span>';">
+        <span class="login-brand-sub">Ù„ÙˆØ­Ø© ØªØ­ÙƒÙ… Ø§Ù„Ù…ØªØ¬Ø±</span>
       </div>
 
       <div class="login-divider"></div>
 
       <!-- Error Message -->
       <div class="login-error" id="login-error">
-        <span>❌</span>
-        <span id="error-text">اسم المستخدم أو كلمة المرور غير صحيحة</span>
+        <span>âŒ</span>
+        <span id="error-text">Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø£Ùˆ ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± ØºÙŠØ± ØµØ­ÙŠØ­Ø©</span>
       </div>
 
       <!-- Form -->
       <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
 
         <div class="form-group">
-          <label class="form-label" for="username">اسم المستخدم</label>
+          <label class="form-label" for="username">Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…</label>
           <div class="input-wrap">
-            <span class="input-icon">👤</span>
+            <span class="input-icon">ðŸ‘¤</span>
             <input type="text" class="form-control" id="username" name="username" placeholder="Admin"
               autocomplete="username" required dir="ltr">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="password">كلمة المرور</label>
+          <label class="form-label" for="password">ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±</label>
           <div class="input-wrap">
-            <span class="input-icon">🔒</span>
-            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••"
+            <span class="input-icon">ðŸ”’</span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               autocomplete="current-password" required dir="ltr">
             <button type="button" class="toggle-password" id="toggle-pw" onclick="togglePw()"
-              title="إظهار/إخفاء">👁️</button>
+              title="Ø¥Ø¸Ù‡Ø§Ø±/Ø¥Ø®ÙØ§Ø¡">ðŸ‘ï¸</button>
           </div>
         </div>
 
@@ -336,19 +336,19 @@
               <input type="checkbox" id="remember">
               <span class="toggle-track"></span>
             </label>
-            <label for="remember" style="font-size:13px;cursor:pointer;color:var(--text2);">تذكرني</label>
+            <label for="remember" style="font-size:13px;cursor:pointer;color:var(--text2);">ØªØ°ÙƒØ±Ù†ÙŠ</label>
           </div>
         </div>
 
         <button type="submit" class="login-submit" id="submit-btn">
-          <span id="btn-text">🔐 تسجيل الدخول</span>
+          <span id="btn-text">ðŸ” ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„</span>
         </button>
 
       </form>
 
       <!-- Footer -->
       <div class="login-footer-note">
-        نظام إدارة <span>Elawaady</span> — محمي ومشفر
+        Ù†Ø¸Ø§Ù… Ø¥Ø¯Ø§Ø±Ø© <span>Elawaady</span> â€” Ù…Ø­Ù…ÙŠ ÙˆÙ…Ø´ÙØ±
       </div>
 
     </div>
@@ -356,7 +356,7 @@
 
   <div id="toast-container" class="toast-container"></div>
 
-  <script src="../script.js"></script>
+  <script src="../assets/script/script.js"></script>
   <script>
     /* Toggle password visibility */
     let pwVisible = false;
@@ -365,7 +365,7 @@
       const pw = document.getElementById('password');
       const btn = document.getElementById('toggle-pw');
       pw.type = pwVisible ? 'text' : 'password';
-      btn.textContent = pwVisible ? '🙈' : '👁️';
+      btn.textContent = pwVisible ? 'ðŸ™ˆ' : 'ðŸ‘ï¸';
     }
 
     /* Handle login */
@@ -380,19 +380,19 @@
 
       // Show loading
       btn.disabled = true;
-      btnText.innerHTML = 'جاري التحقق <span class="spinner"></span>';
+      btnText.innerHTML = 'Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ­Ù‚Ù‚ <span class="spinner"></span>';
       errorBox.classList.remove('show');
 
       setTimeout(() => {
-        // Demo check — replace with real API call
+        // Demo check â€” replace with real API call
         if (username === 'Admin' && password === 'Admin@Elawaady') {
-          btnText.innerHTML = '✅ تم تسجيل الدخول';
-          showToast('مرحبًا بك في لوحة التحكم ✅', 'success');
+          btnText.innerHTML = 'âœ… ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„';
+          showToast('Ù…Ø±Ø­Ø¨Ù‹Ø§ Ø¨Ùƒ ÙÙŠ Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ… âœ…', 'success');
           setTimeout(() => { location.href = '../index.html'; }, 900);
         } else {
           btn.disabled = false;
-          btnText.innerHTML = '🔐 تسجيل الدخول';
-          errorText.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+          btnText.innerHTML = 'ðŸ” ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„';
+          errorText.textContent = 'Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø£Ùˆ ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± ØºÙŠØ± ØµØ­ÙŠØ­Ø©';
           errorBox.classList.add('show');
           // Shake animation
           document.querySelector('.login-box').style.animation = 'none';

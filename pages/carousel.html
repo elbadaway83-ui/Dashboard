@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الكاروسيل | Admin — Elawaady</title>
+  <title>Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„ | Admin â€” Elawaady</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <meta name="robots" content="noindex,nofollow">
   <style>
     .carousel-manage-grid {
@@ -118,93 +118,93 @@
   <div class="admin-wrap">
 
     <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <button class="sidebar-close-btn" onclick="closeSidebar()">âœ•</button>
       <div class="sidebar-brand">
         <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
           onerror="this.style.display='none'">
       </div>
       <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html" class="active"><span class="nav-icon">🎠</span> الكاروسيل</a>
+        <span class="nav-label">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+        <a href="../index.html"><span class="nav-icon">ðŸ </span> Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø­ØªÙˆÙ‰</span>
+        <a href="categories.html"><span class="nav-icon">ðŸ“</span> Ø§Ù„Ø£Ù‚Ø³Ø§Ù…</a>
+        <a href="services.html"><span class="nav-icon">ðŸ›ï¸</span> Ø§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</span>
+        <a href="orders.html"><span class="nav-icon">ðŸ“‹</span> Ø§Ù„Ø·Ù„Ø¨Ø§Øª</a>
+        <a href="chatbot.html"><span class="nav-icon">ðŸ¤–</span> Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</a>
+        <span class="nav-label">Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</span>
+        <a href="homepage-settings.html"><span class="nav-icon">ðŸ </span> Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</a>
+        <a href="visual-sections.html"><span class="nav-icon">ðŸ–¼ï¸</span> ØµÙˆØ± Ø§Ù„Ø£Ù‚Ø³Ø§Ù… ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <a href="brand-settings.html"><span class="nav-icon">ðŸŽ¨</span> Ø§Ù„Ù‡ÙˆÙŠØ© Ø§Ù„Ø¨ØµØ±ÙŠØ©</a>
+        <a href="carousel.html" class="active"><span class="nav-icon">ðŸŽ </span> Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</a>
       </nav>
       <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+        <a href="logout.html"><span class="nav-icon">ðŸšª</span> ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</a>
       </div>
     </aside>
 
     <div class="admin-main">
       <div class="admin-topbar">
         <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">الكاروسيل</div>
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">â˜°</button>
+          <div class="topbar-title">Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</div>
         </div>
         <div class="topbar-right">
-          <button class="btn btn-primary btn-sm" onclick="openModal('add-slide-modal')">➕ إضافة شريحة</button>
+          <button class="btn btn-primary btn-sm" onclick="openModal('add-slide-modal')">âž• Ø¥Ø¶Ø§ÙØ© Ø´Ø±ÙŠØ­Ø©</button>
         </div>
       </div>
 
       <div class="admin-content">
         <div class="page-header">
-          <h1>🎠 إدارة الكاروسيل</h1>
-          <button class="btn btn-primary" onclick="openModal('add-slide-modal')">➕ إضافة شريحة جديدة</button>
+          <h1>ðŸŽ  Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</h1>
+          <button class="btn btn-primary" onclick="openModal('add-slide-modal')">âž• Ø¥Ø¶Ø§ÙØ© Ø´Ø±ÙŠØ­Ø© Ø¬Ø¯ÙŠØ¯Ø©</button>
         </div>
 
         <div class="alert alert-info">
-          ℹ️ اسحب الشرائح لإعادة ترتيبها. الحجم الموصى به: 1920×600 بكسل.
+          â„¹ï¸ Ø§Ø³Ø­Ø¨ Ø§Ù„Ø´Ø±Ø§Ø¦Ø­ Ù„Ø¥Ø¹Ø§Ø¯Ø© ØªØ±ØªÙŠØ¨Ù‡Ø§. Ø§Ù„Ø­Ø¬Ù… Ø§Ù„Ù…ÙˆØµÙ‰ Ø¨Ù‡: 1920Ã—600 Ø¨ÙƒØ³Ù„.
         </div>
 
         <!-- Settings Panel -->
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">⚙️ إعدادات الكاروسيل</div>
+            <div class="panel-title">âš™ï¸ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</div>
           </div>
           <div class="panel-body" style="display:flex;flex-direction:column;gap:14px;">
             <div class="form-grid">
               <div class="form-group">
-                <label class="form-label">سرعة التحويل (ثانية)</label>
+                <label class="form-label">Ø³Ø±Ø¹Ø© Ø§Ù„ØªØ­ÙˆÙŠÙ„ (Ø«Ø§Ù†ÙŠØ©)</label>
                 <input type="number" class="form-control" value="5" min="1" max="30" style="width:120px;">
-                <span class="form-hint">الوقت بين كل شريحة وأخرى</span>
+                <span class="form-hint">Ø§Ù„ÙˆÙ‚Øª Ø¨ÙŠÙ† ÙƒÙ„ Ø´Ø±ÙŠØ­Ø© ÙˆØ£Ø®Ø±Ù‰</span>
               </div>
               <div class="form-group">
-                <label class="form-label">تأثير الانتقال</label>
+                <label class="form-label">ØªØ£Ø«ÙŠØ± Ø§Ù„Ø§Ù†ØªÙ‚Ø§Ù„</label>
                 <select class="form-select" style="width:180px;">
-                  <option>انزلاق (Slide)</option>
-                  <option>تلاشي (Fade)</option>
-                  <option>تكبير (Zoom)</option>
+                  <option>Ø§Ù†Ø²Ù„Ø§Ù‚ (Slide)</option>
+                  <option>ØªÙ„Ø§Ø´ÙŠ (Fade)</option>
+                  <option>ØªÙƒØ¨ÙŠØ± (Zoom)</option>
                 </select>
               </div>
             </div>
             <div style="display:flex;gap:20px;flex-wrap:wrap;">
               <div class="toggle-wrap">
                 <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">تشغيل تلقائي</span>
+                <span style="font-size:13px;font-weight:600;">ØªØ´ØºÙŠÙ„ ØªÙ„Ù‚Ø§Ø¦ÙŠ</span>
               </div>
               <div class="toggle-wrap">
                 <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار أزرار التنقل</span>
+                <span style="font-size:13px;font-weight:600;">Ø¥Ø¸Ù‡Ø§Ø± Ø£Ø²Ø±Ø§Ø± Ø§Ù„ØªÙ†Ù‚Ù„</span>
               </div>
               <div class="toggle-wrap">
                 <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">إظهار نقاط التنقل</span>
+                <span style="font-size:13px;font-weight:600;">Ø¥Ø¸Ù‡Ø§Ø± Ù†Ù‚Ø§Ø· Ø§Ù„ØªÙ†Ù‚Ù„</span>
               </div>
               <div class="toggle-wrap">
                 <label class="toggle"><input type="checkbox"><span class="toggle-track"></span></label>
-                <span style="font-size:13px;font-weight:600;">توقف عند التحويم</span>
+                <span style="font-size:13px;font-weight:600;">ØªÙˆÙ‚Ù Ø¹Ù†Ø¯ Ø§Ù„ØªØ­ÙˆÙŠÙ…</span>
               </div>
             </div>
             <button class="btn btn-secondary" style="width:fit-content;"
-              onclick="showToast('تم حفظ إعدادات الكاروسيل ✅','success')">💾 حفظ الإعدادات</button>
+              onclick="showToast('ØªÙ… Ø­ÙØ¸ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„ âœ…','success')">ðŸ’¾ Ø­ÙØ¸ Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</button>
           </div>
         </div>
 
@@ -215,18 +215,18 @@
           <div class="carousel-manage-card" draggable="true">
             <div class="card-img-wrap">
               <div class="card-order-badge">#1</div>
-              🎯
+              ðŸŽ¯
             </div>
             <div class="card-body">
-              <div class="card-title">عروض خاصة على الخدمات</div>
+              <div class="card-title">Ø¹Ø±ÙˆØ¶ Ø®Ø§ØµØ© Ø¹Ù„Ù‰ Ø§Ù„Ø®Ø¯Ù…Ø§Øª</div>
               <div class="card-link">#</div>
               <div class="flex-gap">
-                <span class="badge badge-active">مرئية</span>
+                <span class="badge badge-active">Ù…Ø±Ø¦ÙŠØ©</span>
               </div>
               <div class="flex-gap">
-                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
+                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">âœï¸ ØªØ¹Ø¯ÙŠÙ„</button>
                 <button class="btn btn-danger btn-sm"
-                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
+                  onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø´Ø±ÙŠØ­Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">ðŸ—‘ï¸ Ø­Ø°Ù</button>
               </div>
             </div>
           </div>
@@ -235,18 +235,18 @@
           <div class="carousel-manage-card" draggable="true">
             <div class="card-img-wrap">
               <div class="card-order-badge">#2</div>
-              🛍️
+              ðŸ›ï¸
             </div>
             <div class="card-body">
-              <div class="card-title">اكتشف خدماتنا الجديدة</div>
+              <div class="card-title">Ø§ÙƒØªØ´Ù Ø®Ø¯Ù…Ø§ØªÙ†Ø§ Ø§Ù„Ø¬Ø¯ÙŠØ¯Ø©</div>
               <div class="card-link">#</div>
               <div class="flex-gap">
-                <span class="badge badge-active">مرئية</span>
+                <span class="badge badge-active">Ù…Ø±Ø¦ÙŠØ©</span>
               </div>
               <div class="flex-gap">
-                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
+                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">âœï¸ ØªØ¹Ø¯ÙŠÙ„</button>
                 <button class="btn btn-danger btn-sm"
-                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
+                  onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø´Ø±ÙŠØ­Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">ðŸ—‘ï¸ Ø­Ø°Ù</button>
               </div>
             </div>
           </div>
@@ -255,26 +255,26 @@
           <div class="carousel-manage-card" draggable="true">
             <div class="card-img-wrap">
               <div class="card-order-badge">#3</div>
-              🤖
+              ðŸ¤–
             </div>
             <div class="card-body">
-              <div class="card-title">خدمات الذكاء الاصطناعي</div>
+              <div class="card-title">Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</div>
               <div class="card-link">#</div>
               <div class="flex-gap">
-                <span class="badge badge-pending">مخفية</span>
+                <span class="badge badge-pending">Ù…Ø®ÙÙŠØ©</span>
               </div>
               <div class="flex-gap">
-                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">✏️ تعديل</button>
+                <button class="btn btn-secondary btn-sm" onclick="openModal('edit-slide-modal')">âœï¸ ØªØ¹Ø¯ÙŠÙ„</button>
                 <button class="btn btn-danger btn-sm"
-                  onclick="confirmDelete('حذف هذه الشريحة؟',()=>showToast('تم الحذف','success'))">🗑️ حذف</button>
+                  onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø´Ø±ÙŠØ­Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">ðŸ—‘ï¸ Ø­Ø°Ù</button>
               </div>
             </div>
           </div>
 
           <!-- Add New -->
           <div class="add-carousel-card" onclick="openModal('add-slide-modal')">
-            <span>➕</span>
-            <p>إضافة شريحة جديدة</p>
+            <span>âž•</span>
+            <p>Ø¥Ø¶Ø§ÙØ© Ø´Ø±ÙŠØ­Ø© Ø¬Ø¯ÙŠØ¯Ø©</p>
           </div>
         </div>
       </div>
@@ -285,53 +285,53 @@
   <div class="modal-backdrop" id="add-slide-modal">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title">🎠 إضافة شريحة جديدة</div>
-        <button class="modal-close" onclick="closeModal('add-slide-modal')">✕</button>
+        <div class="modal-title">ðŸŽ  Ø¥Ø¶Ø§ÙØ© Ø´Ø±ÙŠØ­Ø© Ø¬Ø¯ÙŠØ¯Ø©</div>
+        <button class="modal-close" onclick="closeModal('add-slide-modal')">âœ•</button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">صورة الشريحة <span style="color:var(--red)">*</span></label>
+          <label class="form-label">ØµÙˆØ±Ø© Ø§Ù„Ø´Ø±ÙŠØ­Ø© <span style="color:var(--red)">*</span></label>
           <div class="img-upload-box" id="slide-upload-box">
             <input type="file" accept="image/*" onchange="previewSlide(this)">
-            <div class="upload-icon">🖼️</div>
-            <p>1920×600 موصى به</p>
+            <div class="upload-icon">ðŸ–¼ï¸</div>
+            <p>1920Ã—600 Ù…ÙˆØµÙ‰ Ø¨Ù‡</p>
             <img id="slide-img-prev" class="img-preview"
               style="display:none;width:100%;height:100px;object-fit:cover;margin-top:8px;">
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">العنوان</label>
-          <input type="text" class="form-control" placeholder="عنوان الشريحة">
+          <label class="form-label">Ø§Ù„Ø¹Ù†ÙˆØ§Ù†</label>
+          <input type="text" class="form-control" placeholder="Ø¹Ù†ÙˆØ§Ù† Ø§Ù„Ø´Ø±ÙŠØ­Ø©">
         </div>
         <div class="form-group">
-          <label class="form-label">الوصف</label>
-          <input type="text" class="form-control" placeholder="وصف مختصر">
+          <label class="form-label">Ø§Ù„ÙˆØµÙ</label>
+          <input type="text" class="form-control" placeholder="ÙˆØµÙ Ù…Ø®ØªØµØ±">
         </div>
         <div class="form-group">
-          <label class="form-label">رابط الزر</label>
+          <label class="form-label">Ø±Ø§Ø¨Ø· Ø§Ù„Ø²Ø±</label>
           <input type="text" class="form-control" placeholder="#" dir="ltr">
         </div>
         <div class="form-group">
-          <label class="form-label">نص الزر</label>
-          <input type="text" class="form-control" placeholder="اكتشف الآن">
+          <label class="form-label">Ù†Øµ Ø§Ù„Ø²Ø±</label>
+          <input type="text" class="form-control" placeholder="Ø§ÙƒØªØ´Ù Ø§Ù„Ø¢Ù†">
         </div>
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label">الترتيب</label>
+            <label class="form-label">Ø§Ù„ØªØ±ØªÙŠØ¨</label>
             <input type="number" class="form-control" value="1" min="1">
           </div>
           <div class="form-group">
-            <label class="form-label">الحالة</label>
+            <label class="form-label">Ø§Ù„Ø­Ø§Ù„Ø©</label>
             <div class="toggle-wrap" style="margin-top:8px;">
               <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-              <span style="font-size:13px;">مرئية</span>
+              <span style="font-size:13px;">Ù…Ø±Ø¦ÙŠØ©</span>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" onclick="saveSlide()">💾 حفظ الشريحة</button>
-        <button class="btn btn-secondary" onclick="closeModal('add-slide-modal')">إلغاء</button>
+        <button class="btn btn-primary" onclick="saveSlide()">ðŸ’¾ Ø­ÙØ¸ Ø§Ù„Ø´Ø±ÙŠØ­Ø©</button>
+        <button class="btn btn-secondary" onclick="closeModal('add-slide-modal')">Ø¥Ù„ØºØ§Ø¡</button>
       </div>
     </div>
   </div>
@@ -340,48 +340,48 @@
   <div class="modal-backdrop" id="edit-slide-modal">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title">✏️ تعديل الشريحة</div>
-        <button class="modal-close" onclick="closeModal('edit-slide-modal')">✕</button>
+        <div class="modal-title">âœï¸ ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø´Ø±ÙŠØ­Ø©</div>
+        <button class="modal-close" onclick="closeModal('edit-slide-modal')">âœ•</button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">العنوان</label>
-          <input type="text" class="form-control" value="عروض خاصة على الخدمات">
+          <label class="form-label">Ø§Ù„Ø¹Ù†ÙˆØ§Ù†</label>
+          <input type="text" class="form-control" value="Ø¹Ø±ÙˆØ¶ Ø®Ø§ØµØ© Ø¹Ù„Ù‰ Ø§Ù„Ø®Ø¯Ù…Ø§Øª">
         </div>
         <div class="form-group">
-          <label class="form-label">الوصف</label>
-          <input type="text" class="form-control" value="احصل على أفضل الأسعار">
+          <label class="form-label">Ø§Ù„ÙˆØµÙ</label>
+          <input type="text" class="form-control" value="Ø§Ø­ØµÙ„ Ø¹Ù„Ù‰ Ø£ÙØ¶Ù„ Ø§Ù„Ø£Ø³Ø¹Ø§Ø±">
         </div>
         <div class="form-group">
-          <label class="form-label">رابط الزر</label>
+          <label class="form-label">Ø±Ø§Ø¨Ø· Ø§Ù„Ø²Ø±</label>
           <input type="text" class="form-control" value="#" dir="ltr">
         </div>
         <div class="form-group">
-          <label class="form-label">نص الزر</label>
-          <input type="text" class="form-control" value="اكتشف الآن">
+          <label class="form-label">Ù†Øµ Ø§Ù„Ø²Ø±</label>
+          <input type="text" class="form-control" value="Ø§ÙƒØªØ´Ù Ø§Ù„Ø¢Ù†">
         </div>
         <div class="form-group">
-          <label class="form-label">الترتيب</label>
+          <label class="form-label">Ø§Ù„ØªØ±ØªÙŠØ¨</label>
           <input type="number" class="form-control" value="1" min="1" style="width:120px;">
         </div>
         <div class="toggle-wrap">
           <label class="toggle"><input type="checkbox" checked><span class="toggle-track"></span></label>
-          <span style="font-size:13px;font-weight:600;">مرئية</span>
+          <span style="font-size:13px;font-weight:600;">Ù…Ø±Ø¦ÙŠØ©</span>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary"
-          onclick="closeModal('edit-slide-modal');showToast('تم تحديث الشريحة ✅','success')">💾 حفظ التعديلات</button>
-        <button class="btn btn-secondary" onclick="closeModal('edit-slide-modal')">إلغاء</button>
+          onclick="closeModal('edit-slide-modal');showToast('ØªÙ… ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø´Ø±ÙŠØ­Ø© âœ…','success')">ðŸ’¾ Ø­ÙØ¸ Ø§Ù„ØªØ¹Ø¯ÙŠÙ„Ø§Øª</button>
+        <button class="btn btn-secondary" onclick="closeModal('edit-slide-modal')">Ø¥Ù„ØºØ§Ø¡</button>
       </div>
     </div>
   </div>
 
-  <script src="../script.js"></script>
+  <script src="../assets/script/script.js"></script>
   <script>
     function saveSlide() {
       closeModal('add-slide-modal');
-      showToast('تم إضافة الشريحة بنجاح ✅', 'success');
+      showToast('ØªÙ… Ø¥Ø¶Ø§ÙØ© Ø§Ù„Ø´Ø±ÙŠØ­Ø© Ø¨Ù†Ø¬Ø§Ø­ âœ…', 'success');
     }
     function previewSlide(input) {
       const prev = document.getElementById('slide-img-prev');

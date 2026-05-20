@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الخدمات | Admin — Elawaady</title>
+  <title>Ø§Ù„Ø®Ø¯Ù…Ø§Øª | Admin â€” Elawaady</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
   <meta name="robots" content="noindex,nofollow">
 </head>
 
@@ -15,65 +15,65 @@
   <div class="admin-wrap">
 
     <aside class="admin-sidebar" id="admin-sidebar">
-      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <button class="sidebar-close-btn" onclick="closeSidebar()">âœ•</button>
       <div class="sidebar-brand">
         <img src="../assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo"
           onerror="this.style.display='none'">
       </div>
       <nav class="sidebar-nav">
-        <span class="nav-label">الرئيسية</span>
-        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
-        <span class="nav-label">المحتوى</span>
-        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
-        <a href="services.html" class="active"><span class="nav-icon">🛍️</span> الخدمات</a>
-        <span class="nav-label">المبيعات</span>
-        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
-        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
-        <span class="nav-label">الإعدادات</span>
-        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
-        <a href="visual-sections.html"><span class="nav-icon">🖼️</span> صور الأقسام والخدمات</a>
-        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
-        <a href="carousel.html"><span class="nav-icon">🎠</span> الكاروسيل</a>
+        <span class="nav-label">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+        <a href="../index.html"><span class="nav-icon">ðŸ </span> Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø­ØªÙˆÙ‰</span>
+        <a href="categories.html"><span class="nav-icon">ðŸ“</span> Ø§Ù„Ø£Ù‚Ø³Ø§Ù…</a>
+        <a href="services.html" class="active"><span class="nav-icon">ðŸ›ï¸</span> Ø§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <span class="nav-label">Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª</span>
+        <a href="orders.html"><span class="nav-icon">ðŸ“‹</span> Ø§Ù„Ø·Ù„Ø¨Ø§Øª</a>
+        <a href="chatbot.html"><span class="nav-icon">ðŸ¤–</span> Ø§Ù„Ø´Ø§Øª Ø¨ÙˆØª</a>
+        <span class="nav-label">Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</span>
+        <a href="homepage-settings.html"><span class="nav-icon">ðŸ </span> Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</a>
+        <a href="visual-sections.html"><span class="nav-icon">ðŸ–¼ï¸</span> ØµÙˆØ± Ø§Ù„Ø£Ù‚Ø³Ø§Ù… ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª</a>
+        <a href="brand-settings.html"><span class="nav-icon">ðŸŽ¨</span> Ø§Ù„Ù‡ÙˆÙŠØ© Ø§Ù„Ø¨ØµØ±ÙŠØ©</a>
+        <a href="carousel.html"><span class="nav-icon">ðŸŽ </span> Ø§Ù„ÙƒØ§Ø±ÙˆØ³ÙŠÙ„</a>
       </nav>
       <div class="sidebar-footer">
-        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+        <a href="logout.html"><span class="nav-icon">ðŸšª</span> ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬</a>
       </div>
     </aside>
 
     <div class="admin-main">
       <div class="admin-topbar">
         <div class="topbar-left">
-          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
-          <div class="topbar-title">الخدمات</div>
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">â˜°</button>
+          <div class="topbar-title">Ø§Ù„Ø®Ø¯Ù…Ø§Øª</div>
         </div>
         <div class="topbar-right">
-          <a href="service-form.html" class="btn btn-primary btn-sm">➕ إضافة خدمة</a>
+          <a href="service-form.html" class="btn btn-primary btn-sm">âž• Ø¥Ø¶Ø§ÙØ© Ø®Ø¯Ù…Ø©</a>
         </div>
       </div>
 
       <div class="admin-content">
         <div class="page-header">
-          <h1>🛍️ إدارة الخدمات</h1>
-          <a href="service-form.html" class="btn btn-primary">➕ إضافة خدمة جديدة</a>
+          <h1>ðŸ›ï¸ Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø®Ø¯Ù…Ø§Øª</h1>
+          <a href="service-form.html" class="btn btn-primary">âž• Ø¥Ø¶Ø§ÙØ© Ø®Ø¯Ù…Ø© Ø¬Ø¯ÙŠØ¯Ø©</a>
         </div>
 
         <!-- Search Bar -->
         <div class="panel">
           <div class="panel-body" style="padding:12px 16px;">
             <div class="search-bar">
-              <input type="text" class="form-control" id="svc-search" placeholder="🔍 بحث بالاسم...">
+              <input type="text" class="form-control" id="svc-search" placeholder="ðŸ” Ø¨Ø­Ø« Ø¨Ø§Ù„Ø§Ø³Ù…...">
               <select class="form-select" style="width:180px;" id="cat-filter">
-                <option value="">جميع الأقسام</option>
-                <option>فيسبوك</option>
-                <option>انستقرام</option>
-                <option>تيك توك</option>
-                <option>اشتراكات</option>
-                <option>ذكاء اصطناعي</option>
+                <option value="">Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ù‚Ø³Ø§Ù…</option>
+                <option>ÙÙŠØ³Ø¨ÙˆÙƒ</option>
+                <option>Ø§Ù†Ø³ØªÙ‚Ø±Ø§Ù…</option>
+                <option>ØªÙŠÙƒ ØªÙˆÙƒ</option>
+                <option>Ø§Ø´ØªØ±Ø§ÙƒØ§Øª</option>
+                <option>Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</option>
               </select>
               <select class="form-select" style="width:140px;" id="status-filter">
-                <option value="">جميع الحالات</option>
-                <option>متاحة</option>
-                <option>غير متاحة</option>
+                <option value="">Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ø§Ù„Ø§Øª</option>
+                <option>Ù…ØªØ§Ø­Ø©</option>
+                <option>ØºÙŠØ± Ù…ØªØ§Ø­Ø©</option>
               </select>
             </div>
           </div>
@@ -85,157 +85,157 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>اسم الخدمة</th>
-                <th>القسم</th>
-                <th>السعر</th>
-                <th>الحالة</th>
-                <th>نشط</th>
-                <th>تاريخ الإضافة</th>
-                <th>إجراءات</th>
+                <th>Ø§Ø³Ù… Ø§Ù„Ø®Ø¯Ù…Ø©</th>
+                <th>Ø§Ù„Ù‚Ø³Ù…</th>
+                <th>Ø§Ù„Ø³Ø¹Ø±</th>
+                <th>Ø§Ù„Ø­Ø§Ù„Ø©</th>
+                <th>Ù†Ø´Ø·</th>
+                <th>ØªØ§Ø±ÙŠØ® Ø§Ù„Ø¥Ø¶Ø§ÙØ©</th>
+                <th>Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="text-muted">20</td>
-                <td>خدمة مقدمة من مورد</td>
-                <td><span class="badge badge-info">عام</span></td>
-                <td class="text-gold" style="font-weight:700;">—</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td>Ø®Ø¯Ù…Ø© Ù…Ù‚Ø¯Ù…Ø© Ù…Ù† Ù…ÙˆØ±Ø¯</td>
+                <td><span class="badge badge-info">Ø¹Ø§Ù…</span></td>
+                <td class="text-gold" style="font-weight:700;">â€”</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=20" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=20" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">19</td>
                 <td>Netflix</td>
-                <td><span class="badge badge-info">اشتراكات</span></td>
-                <td class="text-gold" style="font-weight:700;">150 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td><span class="badge badge-info">Ø§Ø´ØªØ±Ø§ÙƒØ§Øª</span></td>
+                <td class="text-gold" style="font-weight:700;">150 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=19" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=19" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">18</td>
                 <td>Microsoft 365 Business Standard</td>
-                <td><span class="badge badge-info">اشتراكات</span></td>
-                <td class="text-gold" style="font-weight:700;">200 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td><span class="badge badge-info">Ø§Ø´ØªØ±Ø§ÙƒØ§Øª</span></td>
+                <td class="text-gold" style="font-weight:700;">200 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=18" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=18" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">17</td>
                 <td>Midjourney</td>
-                <td><span class="badge badge-info">ذكاء اصطناعي</span></td>
-                <td class="text-gold" style="font-weight:700;">120 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td><span class="badge badge-info">Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span></td>
+                <td class="text-gold" style="font-weight:700;">120 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=17" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=17" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">16</td>
                 <td>ChatGPT Plus</td>
-                <td><span class="badge badge-info">ذكاء اصطناعي</span></td>
-                <td class="text-gold" style="font-weight:700;">180 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td><span class="badge badge-info">Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span></td>
+                <td class="text-gold" style="font-weight:700;">180 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=16" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=16" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">15</td>
-                <td>استرجاع حساب مخترق</td>
-                <td><span class="badge badge-info">حسابات</span></td>
-                <td class="text-gold" style="font-weight:700;">300 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td>Ø§Ø³ØªØ±Ø¬Ø§Ø¹ Ø­Ø³Ø§Ø¨ Ù…Ø®ØªØ±Ù‚</td>
+                <td><span class="badge badge-info">Ø­Ø³Ø§Ø¨Ø§Øª</span></td>
+                <td class="text-gold" style="font-weight:700;">300 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=15" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=15" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">14</td>
-                <td>نقل ملكية حساب</td>
-                <td><span class="badge badge-info">حسابات</span></td>
-                <td class="text-gold" style="font-weight:700;">250 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td>Ù†Ù‚Ù„ Ù…Ù„ÙƒÙŠØ© Ø­Ø³Ø§Ø¨</td>
+                <td><span class="badge badge-info">Ø­Ø³Ø§Ø¨Ø§Øª</span></td>
+                <td class="text-gold" style="font-weight:700;">250 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=14" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=14" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">13</td>
-                <td>حساب سناب شات جاهز</td>
-                <td><span class="badge badge-info">سناب شات</span></td>
-                <td class="text-gold" style="font-weight:700;">90 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td>Ø­Ø³Ø§Ø¨ Ø³Ù†Ø§Ø¨ Ø´Ø§Øª Ø¬Ø§Ù‡Ø²</td>
+                <td><span class="badge badge-info">Ø³Ù†Ø§Ø¨ Ø´Ø§Øª</span></td>
+                <td class="text-gold" style="font-weight:700;">90 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=13" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=13" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td class="text-muted">12</td>
-                <td>توثيق صفحات فيسبوك</td>
-                <td><span class="badge badge-info">فيسبوك</span></td>
-                <td class="text-gold" style="font-weight:700;">500 ج.م</td>
-                <td><span class="badge badge-active">متاحة</span></td>
-                <td><span class="badge badge-active">نشط</span></td>
+                <td>ØªÙˆØ«ÙŠÙ‚ ØµÙØ­Ø§Øª ÙÙŠØ³Ø¨ÙˆÙƒ</td>
+                <td><span class="badge badge-info">ÙÙŠØ³Ø¨ÙˆÙƒ</span></td>
+                <td class="text-gold" style="font-weight:700;">500 Ø¬.Ù…</td>
+                <td><span class="badge badge-active">Ù…ØªØ§Ø­Ø©</span></td>
+                <td><span class="badge badge-active">Ù†Ø´Ø·</span></td>
                 <td class="text-muted">2026-05-19</td>
                 <td>
                   <div class="flex-gap">
-                    <a href="service-form.html?id=12" class="btn btn-secondary btn-sm">تعديل</a>
+                    <a href="service-form.html?id=12" class="btn btn-secondary btn-sm">ØªØ¹Ø¯ÙŠÙ„</a>
                     <button class="btn btn-danger btn-sm"
-                      onclick="confirmDelete('حذف هذه الخدمة؟',()=>showToast('تم الحذف','success'))">حذف</button>
+                      onclick="confirmDelete('Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø¯Ù…Ø©ØŸ',()=>showToast('ØªÙ… Ø§Ù„Ø­Ø°Ù','success'))">Ø­Ø°Ù</button>
                   </div>
                 </td>
               </tr>
@@ -245,7 +245,7 @@
       </div>
     </div>
   </div>
-  <script src="../script.js"></script>
+  <script src="../assets/script/script.js"></script>
   <script>
     tableSearch('svc-search', 'svc-table');
   </script>
