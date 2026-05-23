@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة التحكم | Admin — Elawaady</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/script/script.js" defer></script>
   <meta name="robots" content="noindex,nofollow">
@@ -26,6 +25,51 @@
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
   </script>
+  <style>
+    /* Extra styles for the new dashboard links */
+    .nav-dashboards {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Supplier link accent */
+    .sidebar-nav a.link-supplier {
+      border-right: 3px solid rgba(0, 200, 255, .4);
+    }
+    .sidebar-nav a.link-supplier:hover,
+    .sidebar-nav a.link-supplier.active {
+      background: rgba(0, 200, 255, .09);
+      border-right-color: #00c8ff;
+      color: #00c8ff;
+    }
+
+    /* Merchant link accent */
+    .sidebar-nav a.link-merchant {
+      border-right: 3px solid rgba(72, 199, 120, .4);
+    }
+    .sidebar-nav a.link-merchant:hover,
+    .sidebar-nav a.link-merchant.active {
+      background: rgba(72, 199, 120, .09);
+      border-right-color: #48c778;
+      color: #48c778;
+    }
+
+    .badge-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      background: rgba(240,165,0,.25);
+      color: #f0a500;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 0 5px;
+      margin-right: auto;
+    }
+  </style>
 </head>
 
 <body>
@@ -46,6 +90,24 @@
         <span class="nav-label">الرئيسية</span>
         <a href="index.html" class="active">
           <span class="nav-icon">🏠</span> لوحة التحكم
+        </a>
+
+        <!-- ===== المستخدمون ===== -->
+        <span class="nav-label">المستخدمون</span>
+        <a href="pages/suppliers.html">
+          <span class="nav-icon">🏭</span> الموردون
+        </a>
+        <a href="pages/merchants.html">
+          <span class="nav-icon">🏪</span> التجار
+        </a>
+
+        <!-- ===== لوحات المستخدمين ===== -->
+        <span class="nav-label">لوحات المستخدمين</span>
+        <a href="pages/supplier-dashboard.html" class="link-supplier">
+          <span class="nav-icon">📊</span> لوحة المورد
+        </a>
+        <a href="pages/merchant-dashboard.html" class="link-merchant">
+          <span class="nav-icon">📊</span> لوحة التجار
         </a>
 
         <span class="nav-label">المحتوى</span>
@@ -132,6 +194,28 @@
           </div>
         </div>
 
+        <!-- Quick access to user dashboards -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+          <a href="pages/supplier-dashboard.html" style="text-decoration:none;">
+            <div class="panel" style="border-right: 3px solid #00c8ff; cursor:pointer; transition:transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+              <div class="panel-header" style="border-bottom:none; padding-bottom:0;">
+                <div class="panel-title" style="color:#00c8ff;">🏭 لوحة المورد</div>
+                <span style="font-size:11px; color:var(--text2);">عرض ←</span>
+              </div>
+              <p style="font-size:12px; color:var(--text2); margin:8px 0 0;">إدارة الخدمات المقدمة من الموردين ومتابعة أرباحهم</p>
+            </div>
+          </a>
+          <a href="pages/merchant-dashboard.html" style="text-decoration:none;">
+            <div class="panel" style="border-right: 3px solid #48c778; cursor:pointer; transition:transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+              <div class="panel-header" style="border-bottom:none; padding-bottom:0;">
+                <div class="panel-title" style="color:#48c778;">🏪 لوحة التجار</div>
+                <span style="font-size:11px; color:var(--text2);">عرض ←</span>
+              </div>
+              <p style="font-size:12px; color:var(--text2); margin:8px 0 0;">إدارة حسابات التجار ومتابعة مبيعاتهم وطلباتهم</p>
+            </div>
+          </a>
+        </div>
+
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title">📋 آخر الطلبات</div>
@@ -151,12 +235,10 @@
             </thead>
             <tbody>
               <tr>
-                <td><a href="pages/order-view.html?id=1" style="color:var(--gold); font-family:monospace; font-size:12px; text-decoration:none;">
-                    ORD-20260519-0001</a></td>
+                <td><a href="pages/order-view.html?id=1" style="color:var(--gold); font-family:monospace; font-size:12px; text-decoration:none;">ORD-20260519-0001</a></td>
                 <td style="font-size:13px;">توثيق صفحات فيسبوك</td>
                 <td style="font-size:12px; color:var(--cyan);">—</td>
-                <td style="font-weight:700; color:var(--gold);">
-                  — </td>
+                <td style="font-weight:700; color:var(--gold);">—</td>
                 <td><span class="badge badge-active">جديد</span></td>
                 <td class="text-muted" style="font-size:12px;">05-19 20:04</td>
                 <td><a href="pages/order-view.html?id=1" class="btn btn-secondary btn-sm">عرض</a></td>
@@ -185,130 +267,66 @@
               <tr>
                 <td class="text-muted">20</td>
                 <td>خدمة مقدمة من مورد</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=20" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=20" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
               <tr>
                 <td class="text-muted">19</td>
                 <td>Netflix</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=19" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=19" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
               <tr>
                 <td class="text-muted">18</td>
                 <td>Microsoft 365 Business Standard</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=18" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=18" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
               <tr>
                 <td class="text-muted">17</td>
                 <td>Midjourney</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=17" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=17" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
               <tr>
                 <td class="text-muted">16</td>
                 <td>ChatGPT Plus</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=16" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=16" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
               <tr>
                 <td class="text-muted">15</td>
                 <td>استرجاع حساب مخترق</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=15" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=15" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
               <tr>
                 <td class="text-muted">14</td>
                 <td>نقل ملكية حساب</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=14" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=14" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
               <tr>
                 <td class="text-muted">13</td>
                 <td>حساب سناب شات جاهز</td>
-                <td>
-                  <span class="badge badge-active">متاحة</span>
-                </td>
-                <td>
-                  <span class="badge badge-active">نشط</span>
-                </td>
+                <td><span class="badge badge-active">متاحة</span></td>
+                <td><span class="badge badge-active">نشط</span></td>
                 <td class="text-muted">2026-05-19</td>
-                <td>
-                  <div class="flex-gap">
-                    <a href="pages/service-form.html?id=13" class="btn btn-secondary btn-sm">تعديل</a>
-                  </div>
-                </td>
+                <td><div class="flex-gap"><a href="pages/service-form.html?id=13" class="btn btn-secondary btn-sm">تعديل</a></div></td>
               </tr>
             </tbody>
           </table>
@@ -321,8 +339,9 @@
             </div>
             <div style="display:flex; flex-direction:column; gap:8px;">
               <a href="pages/service-form.html" class="btn btn-primary">➕ إضافة خدمة جديدة</a>
-      <a href="pages/category-form.html" class="btn btn-secondary">➕ إضافة قسم جديد</a>
-      <a href="#" class="btn btn-secondary">🔧 إعداد قاعدة البيانات</a>
+              <a href="pages/category-form.html" class="btn btn-secondary">➕ إضافة قسم جديد</a>
+              <a href="pages/suppliers.html" class="btn btn-secondary" style="border-color:rgba(0,200,255,.3); color:#00c8ff;">🏭 إدارة الموردين</a>
+              <a href="pages/merchants.html" class="btn btn-secondary" style="border-color:rgba(72,199,120,.3); color:#48c778;">🏪 إدارة التجار</a>
             </div>
           </div>
           <div class="panel">
@@ -331,18 +350,9 @@
             </div>
             <table class="admin-table">
               <tbody>
-                <tr>
-                  <td class="text-muted">PHP</td>
-                  <td>8.2.23</td>
-                </tr>
-                <tr>
-                  <td class="text-muted">MySQL</td>
-                  <td>8.0.42</td>
-                </tr>
-                <tr>
-                  <td class="text-muted">التاريخ</td>
-                  <td>2026-05-19 20:06</td>
-                </tr>
+                <tr><td class="text-muted">PHP</td><td>8.2.23</td></tr>
+                <tr><td class="text-muted">MySQL</td><td>8.0.42</td></tr>
+                <tr><td class="text-muted">التاريخ</td><td>2026-05-19 20:06</td></tr>
               </tbody>
             </table>
           </div>
@@ -350,10 +360,8 @@
 
       </div><!-- /admin-content -->
     </div><!-- /admin-main -->
-<div id="toast-container" class="toast-container"></div>
+    <div id="toast-container" class="toast-container"></div>
   </div><!-- /admin-wrap -->
 
-
 </body>
-
 </html>

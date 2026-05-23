@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلباتي | Elawaady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root{--bg:#0d0d0d;--bg2:#141414;--bg3:#1a1a1a;--card:#1e1e1e;--border:#2a2a2a;--gold:#f0a500;--gold2:#ffc84a;--cyan:#00c8ff;--green:#22c55e;--red:#ef4444;--text:#e8e8e8;--text2:#a0a0a0;--sidebar-w:240px;--radius:10px;--shadow:0 4px 24px rgba(0,0,0,.4);--font:'Cairo',sans-serif;--accent:#00c8ff;--accent-bg:rgba(0,200,255,.08);--accent-border:rgba(0,200,255,.25)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);direction:rtl;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.admin-wrap{display:flex;min-height:100vh}
+.admin-sidebar{width:var(--sidebar-w);background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;right:0;top:0;bottom:0;z-index:200;transition:transform .3s ease;overflow-y:auto}
+.sidebar-brand{padding:20px 16px 14px;border-bottom:1px solid var(--border);text-align:center}
+.admin-sidebar-logo{height:48px;object-fit:contain}
+.sidebar-nav{flex:1;padding:12px 10px;display:flex;flex-direction:column;gap:2px}
+.nav-label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;padding:10px 8px 4px;display:block}
+.sidebar-nav a{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius);font-size:13.5px;color:var(--text2);transition:background .2s,color .2s}
+.sidebar-nav a:hover,.sidebar-nav a.active{background:rgba(0,200,255,.12);color:var(--accent)}
+.nav-icon{font-size:15px}
+.sidebar-footer{padding:14px 10px;border-top:1px solid var(--border)}
+.sidebar-footer a{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius);color:var(--red);font-size:13.5px;transition:background .2s}
+.sidebar-footer a:hover{background:rgba(239,68,68,.1)}
+.sidebar-close-btn{display:none;position:absolute;top:10px;left:10px;background:none;border:none;color:var(--text2);font-size:18px;cursor:pointer;padding:4px 8px}
+.admin-main{margin-right:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh}
+.admin-topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-title{font-size:15px;font-weight:700;color:var(--accent)}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.sidebar-toggle-btn{display:none;background:none;border:1px solid var(--border);color:var(--text);font-size:18px;padding:4px 10px;border-radius:6px;cursor:pointer;transition:background .2s}
+.admin-content{padding:20px;flex:1;display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);background:var(--bg3)}
+.panel-title{font-size:14px;font-weight:700;color:var(--accent)}
+.admin-table{width:100%;border-collapse:collapse;font-size:13px}
+.admin-table th{padding:10px 12px;text-align:right;color:var(--text2);font-weight:600;font-size:12px;border-bottom:1px solid var(--border);white-space:nowrap}
+.admin-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.admin-table tbody tr:last-child td{border-bottom:none}
+.admin-table tbody tr:hover{background:rgba(255,255,255,.02)}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.badge-active{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3)}
+.badge-pending{background:rgba(240,165,0,.15);color:var(--gold);border:1px solid rgba(240,165,0,.3)}
+.badge-cancelled{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.badge-info{background:rgba(0,200,255,.15);color:var(--cyan);border:1px solid rgba(0,200,255,.3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 16px;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:#33d4ff}
+.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.btn-success{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.3)}
+.btn-sm{padding:5px 12px;font-size:12px}
+.form-control,.form-select{background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font);font-size:13px;padding:9px 12px;transition:border-color .2s}
+.form-control:focus,.form-select:focus{outline:none;border-color:var(--accent)}
+.page-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.page-header h1{font-size:18px;font-weight:800}
+.search-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:14px;width:90%;max-width:560px;max-height:90vh;overflow-y:auto;animation:fadeUp .25s ease}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:15px;font-weight:700}
+.modal-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer}
+.modal-body{padding:20px;display:flex;flex-direction:column;gap:14px}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px}
+.toast-container{position:fixed;bottom:20px;left:20px;z-index:500;display:flex;flex-direction:column;gap:8px}
+.toast{padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:var(--shadow);animation:fadeUp .3s ease;display:flex;align-items:center;gap:8px;min-width:220px}
+.toast-success{background:#166534;color:#bbf7d0;border:1px solid rgba(34,197,94,.3)}
+.toast-error{background:#7f1d1d;color:#fecaca;border:1px solid rgba(239,68,68,.3)}
+.toast-info{background:#0c4a6e;color:#bae6fd;border:1px solid rgba(0,200,255,.3)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150}
+.sidebar-overlay.active{display:block}
+.role-badge-topbar{display:inline-flex;align-items:center;gap:5px;background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700}
+.text-muted{color:var(--text2)}
+.order-detail-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.order-detail-row:last-child{border-bottom:none}
+.order-detail-label{font-size:12px;color:var(--text2)}
+.order-detail-val{font-size:13px;font-weight:600}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.admin-sidebar{transform:translateX(100%)}.admin-sidebar.open{transform:translateX(0)}.sidebar-close-btn{display:block}.admin-main{margin-right:0}.sidebar-toggle-btn{display:block}}
+@media(max-width:600px){.admin-content{padding:12px}.admin-table th:nth-child(3),.admin-table td:nth-child(3){display:none}}
+  </style>
+</head>
+<body>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="admin-wrap">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+    <div class="sidebar-brand">
+      <img src="assets/images/admin-logo.png" alt="Elawaady" class="admin-sidebar-logo">
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">لوحة المورد</span>
+      <a href="supplier-dashboard.html"><span class="nav-icon">🏠</span> الرئيسية</a>
+      <a href="supplier-services.html"><span class="nav-icon">🛍️</span> خدماتي</a>
+      <a href="supplier-orders.html" class="active"><span class="nav-icon">📋</span> طلباتي</a>
+      <a href="supplier-earnings.html"><span class="nav-icon">💰</span> أرباحي</a>
+      <a href="supplier-profile.html"><span class="nav-icon">👤</span> الملف الشخصي</a>
+      <span class="nav-label">عام</span>
+      <a href="../index.html" target="_blank"><span class="nav-icon">🌐</span> عرض الموقع</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title">📋 طلباتي</div>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge-topbar">🏭 مورد</span>
+        <span class="text-muted" id="supplier-name" style="font-size:12px;">مرحبًا، المورد</span>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="page-header">
+        <h1>📋 سجل الطلبات</h1>
+        <div style="font-size:12px;color:var(--text2)">إجمالي: <strong style="color:var(--accent)">24</strong> طلب</div>
+      </div>
+
+      <!-- Stats Row -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px">
+        <div style="background:var(--card);border:1px solid var(--accent-border);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-size:24px;font-weight:900;color:var(--cyan)">3</div>
+          <div style="font-size:11px;color:var(--text2)">🆕 جديدة</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-size:24px;font-weight:900;color:var(--gold)">4</div>
+          <div style="font-size:11px;color:var(--text2)">⏳ قيد التنفيذ</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-size:24px;font-weight:900;color:var(--green)">16</div>
+          <div style="font-size:11px;color:var(--text2)">✅ مكتملة</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-size:24px;font-weight:900;color:var(--red)">1</div>
+          <div style="font-size:11px;color:var(--text2)">❌ ملغاة</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="search-bar">
+        <input type="text" class="form-control" id="orderSearch" placeholder="🔍 ابحث بكود الطلب أو اسم التاجر..." oninput="filterOrders()" style="max-width:320px">
+        <select class="form-select" id="orderStatus" onchange="filterOrders()" style="max-width:160px">
+          <option value="">كل الحالات</option>
+          <option value="new">جديد</option>
+          <option value="pending">قيد التنفيذ</option>
+          <option value="done">مكتمل</option>
+          <option value="cancelled">ملغي</option>
+        </select>
+      </div>
+
+      <!-- Orders Table -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">📋 قائمة الطلبات</div>
+        </div>
+        <table class="admin-table" id="ordersTable">
+          <thead>
+            <tr>
+              <th>الكود</th>
+              <th>الخدمة</th>
+              <th>التاجر</th>
+              <th>المبلغ</th>
+              <th>الحالة</th>
+              <th>التاريخ</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody">
+            <tr data-status="new" data-search="ord-0024 التاجر الأول">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0024</td>
+              <td>خدمة مورد</td>
+              <td style="font-size:12px">التاجر الأول</td>
+              <td style="font-weight:700;color:var(--accent)">150 ج</td>
+              <td><span class="badge badge-info">جديد</span></td>
+              <td class="text-muted" style="font-size:12px">23-05 10:30</td>
+              <td><button class="btn btn-primary btn-sm" onclick="viewOrder('ORD-0024','خدمة مورد','التاجر الأول','150','جديد','23-05-2025 10:30')">عرض</button></td>
+            </tr>
+            <tr data-status="done" data-search="ord-0023 التاجر الثاني">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0023</td>
+              <td>Netflix</td>
+              <td style="font-size:12px">التاجر الثاني</td>
+              <td style="font-weight:700;color:var(--accent)">200 ج</td>
+              <td><span class="badge badge-active">مكتمل</span></td>
+              <td class="text-muted" style="font-size:12px">22-05 15:20</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="viewOrder('ORD-0023','Netflix','التاجر الثاني','200','مكتمل','22-05-2025 15:20')">عرض</button></td>
+            </tr>
+            <tr data-status="pending" data-search="ord-0022 التاجر الأول">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0022</td>
+              <td>ChatGPT Plus</td>
+              <td style="font-size:12px">التاجر الأول</td>
+              <td style="font-weight:700;color:var(--accent)">120 ج</td>
+              <td><span class="badge badge-pending">قيد التنفيذ</span></td>
+              <td class="text-muted" style="font-size:12px">21-05 09:45</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="viewOrder('ORD-0022','ChatGPT Plus','التاجر الأول','120','قيد التنفيذ','21-05-2025 09:45')">عرض</button></td>
+            </tr>
+            <tr data-status="done" data-search="ord-0021 التاجر الثالث">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0021</td>
+              <td>Spotify Premium</td>
+              <td style="font-size:12px">التاجر الثالث</td>
+              <td style="font-weight:700;color:var(--accent)">80 ج</td>
+              <td><span class="badge badge-active">مكتمل</span></td>
+              <td class="text-muted" style="font-size:12px">20-05 14:00</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="viewOrder('ORD-0021','Spotify Premium','التاجر الثالث','80','مكتمل','20-05-2025 14:00')">عرض</button></td>
+            </tr>
+            <tr data-status="done" data-search="ord-0020 التاجر الثاني">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0020</td>
+              <td>Canva Pro</td>
+              <td style="font-size:12px">التاجر الثاني</td>
+              <td style="font-weight:700;color:var(--accent)">150 ج</td>
+              <td><span class="badge badge-active">مكتمل</span></td>
+              <td class="text-muted" style="font-size:12px">19-05 11:30</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="viewOrder('ORD-0020','Canva Pro','التاجر الثاني','150','مكتمل','19-05-2025 11:30')">عرض</button></td>
+            </tr>
+            <tr data-status="cancelled" data-search="ord-0019 التاجر الأول">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0019</td>
+              <td>YouTube Premium</td>
+              <td style="font-size:12px">التاجر الأول</td>
+              <td style="font-weight:700;color:var(--accent)">90 ج</td>
+              <td><span class="badge badge-cancelled">ملغي</span></td>
+              <td class="text-muted" style="font-size:12px">18-05 08:15</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="viewOrder('ORD-0019','YouTube Premium','التاجر الأول','90','ملغي','18-05-2025 08:15')">عرض</button></td>
+            </tr>
+            <tr data-status="new" data-search="ord-0018 التاجر الثالث">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0018</td>
+              <td>Netflix</td>
+              <td style="font-size:12px">التاجر الثالث</td>
+              <td style="font-weight:700;color:var(--accent)">200 ج</td>
+              <td><span class="badge badge-info">جديد</span></td>
+              <td class="text-muted" style="font-size:12px">17-05 16:40</td>
+              <td><button class="btn btn-primary btn-sm" onclick="viewOrder('ORD-0018','Netflix','التاجر الثالث','200','جديد','17-05-2025 16:40')">عرض</button></td>
+            </tr>
+            <tr data-status="pending" data-search="ord-0017 التاجر الثاني">
+              <td style="font-family:monospace;font-size:11px;color:var(--accent)">ORD-0017</td>
+              <td>ChatGPT Plus</td>
+              <td style="font-size:12px">التاجر الثاني</td>
+              <td style="font-weight:700;color:var(--accent)">120 ج</td>
+              <td><span class="badge badge-pending">قيد التنفيذ</span></td>
+              <td class="text-muted" style="font-size:12px">16-05 13:25</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="viewOrder('ORD-0017','ChatGPT Plus','التاجر الثاني','120','قيد التنفيذ','16-05-2025 13:25')">عرض</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="modal-backdrop" id="orderModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">📋 تفاصيل الطلب — <span id="mOrderCode"></span></div>
+      <button class="modal-close" onclick="closeOrderModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-detail-row"><span class="order-detail-label">🛍️ الخدمة</span><span class="order-detail-val" id="mService"></span></div>
+      <div class="order-detail-row"><span class="order-detail-label">🏪 التاجر</span><span class="order-detail-val" id="mMerchant"></span></div>
+      <div class="order-detail-row"><span class="order-detail-label">💰 المبلغ</span><span class="order-detail-val" id="mAmount" style="color:var(--accent)"></span></div>
+      <div class="order-detail-row"><span class="order-detail-label">📊 الحالة</span><span class="order-detail-val" id="mStatus"></span></div>
+      <div class="order-detail-row"><span class="order-detail-label">📅 التاريخ</span><span class="order-detail-val" id="mDate"></span></div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:4px">
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">تحديث الحالة:</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn btn-success btn-sm" onclick="updateStatus('مكتمل')">✅ مكتمل</button>
+          <button class="btn btn-sm" style="background:rgba(240,165,0,.1);color:var(--gold);border:1px solid rgba(240,165,0,.3)" onclick="updateStatus('قيد التنفيذ')">⏳ قيد التنفيذ</button>
+          <button class="btn btn-danger btn-sm" onclick="updateStatus('ملغي')">❌ إلغاء</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeOrderModal()">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script>
+function toggleSidebar(){document.getElementById('admin-sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').classList.toggle('active')}
+function closeSidebar(){document.getElementById('admin-sidebar').classList.remove('open');document.getElementById('sidebar-overlay').classList.remove('active')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSidebar();closeOrderModal()}});
+try{const u=JSON.parse(sessionStorage.getItem('elawaady_user')||'{}');if(u.name)document.getElementById('supplier-name').textContent='مرحبًا، '+u.name}catch(e){}
+
+function viewOrder(code,service,merchant,amount,status,date){
+  document.getElementById('mOrderCode').textContent=code;
+  document.getElementById('mService').textContent=service;
+  document.getElementById('mMerchant').textContent=merchant;
+  document.getElementById('mAmount').textContent=amount+' ج';
+  document.getElementById('mStatus').textContent=status;
+  document.getElementById('mDate').textContent=date;
+  document.getElementById('orderModal').classList.add('open');
+}
+function closeOrderModal(){document.getElementById('orderModal').classList.remove('open')}
+function updateStatus(s){showToast('✅ تم تحديث الحالة إلى: '+s,'success');closeOrderModal()}
+
+function filterOrders(){
+  const q=document.getElementById('orderSearch').value.toLowerCase();
+  const st=document.getElementById('orderStatus').value;
+  document.querySelectorAll('#ordersBody tr').forEach(row=>{
+    const search=row.dataset.search||'';
+    const status=row.dataset.status||'';
+    row.style.display=(!q||search.includes(q))&&(!st||status===st)?'':'none';
+  });
+}
+
+window.showToast=function(msg,type='info'){
+  const c=document.getElementById('toast-container');
+  const t=document.createElement('div');
+  t.className='toast toast-'+type;
+  t.textContent=msg;
+  c.appendChild(t);
+  setTimeout(()=>t.remove(),3500);
+};
+</script>
+</body>
+</html>

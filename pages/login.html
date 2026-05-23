@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <meta name="robots" content="noindex,nofollow">
   <style>
-    /* Animated background */
     .login-bg {
       position: fixed;
       inset: 0;
@@ -43,18 +42,10 @@
     }
 
     @keyframes floatBg {
-
-      0%,
-      100% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      50% {
-        transform: translate(30px, 30px) scale(1.05);
-      }
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, 30px) scale(1.05); }
     }
 
-    /* Grid lines decoration */
     .grid-lines {
       position: fixed;
       inset: 0;
@@ -65,7 +56,6 @@
       z-index: 0;
     }
 
-    /* Login Wrapper */
     .login-page {
       position: relative;
       z-index: 1;
@@ -76,7 +66,6 @@
       padding: 20px;
     }
 
-    /* Card */
     .login-box {
       background: rgba(30, 30, 30, .85);
       backdrop-filter: blur(20px);
@@ -89,7 +78,6 @@
       animation: fadeUp .4s ease;
     }
 
-    /* Logo area */
     .login-logo-wrap {
       text-align: center;
       margin-bottom: 28px;
@@ -130,14 +118,51 @@
       display: block;
     }
 
-    /* Divider */
     .login-divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(240, 165, 0, .3), transparent);
       margin: 20px 0;
     }
 
-    /* Form */
+    /* Role selector tabs */
+    .role-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,.04);
+      border-radius: 12px;
+      padding: 4px;
+    }
+
+    .role-tab {
+      flex: 1;
+      padding: 8px 6px;
+      border: none;
+      border-radius: 9px;
+      background: transparent;
+      color: var(--text2, #888);
+      font-family: 'Cairo', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .role-tab.active {
+      background: rgba(240,165,0,.18);
+      color: #f0a500;
+      box-shadow: 0 0 0 1px rgba(240,165,0,.3);
+    }
+
+    .role-tab:hover:not(.active) {
+      background: rgba(255,255,255,.06);
+      color: #ccc;
+    }
+
     .login-form {
       display: flex;
       flex-direction: column;
@@ -181,11 +206,8 @@
       transition: color .2s;
     }
 
-    .toggle-password:hover {
-      color: var(--gold);
-    }
+    .toggle-password:hover { color: var(--gold); }
 
-    /* Submit btn */
     .login-submit {
       width: 100%;
       padding: 12px;
@@ -214,26 +236,11 @@
       transition: left .4s;
     }
 
-    .login-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(240, 165, 0, .4);
-    }
+    .login-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(240, 165, 0, .4); }
+    .login-submit:hover::before { left: 100%; }
+    .login-submit:active { transform: translateY(0); }
+    .login-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
-    .login-submit:hover::before {
-      left: 100%;
-    }
-
-    .login-submit:active {
-      transform: translateY(0);
-    }
-
-    .login-submit:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Error box */
     .login-error {
       background: rgba(239, 68, 68, .1);
       border: 1px solid rgba(239, 68, 68, .3);
@@ -246,11 +253,8 @@
       gap: 8px;
     }
 
-    .login-error.show {
-      display: flex;
-    }
+    .login-error.show { display: flex; }
 
-    /* Footer note */
     .login-footer-note {
       text-align: center;
       font-size: 11px;
@@ -258,16 +262,9 @@
       margin-top: 20px;
     }
 
-    .login-footer-note span {
-      color: var(--gold);
-    }
+    .login-footer-note span { color: var(--gold); }
 
-    /* Loading spinner inside btn */
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .spinner {
       width: 16px;
@@ -280,6 +277,22 @@
       vertical-align: middle;
       margin-left: 6px;
     }
+
+    /* Role badge shown after selection */
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .role-badge.admin  { background: rgba(240,165,0,.15); color: #f0a500; border: 1px solid rgba(240,165,0,.3); }
+    .role-badge.supplier { background: rgba(0,200,255,.12); color: #00c8ff; border: 1px solid rgba(0,200,255,.3); }
+    .role-badge.merchant { background: rgba(72,199,120,.12); color: #48c778; border: 1px solid rgba(72,199,120,.3); }
   </style>
 </head>
 
@@ -295,11 +308,24 @@
       <div class="login-logo-wrap">
         <img src="../assets/images/admin-logo.png" alt="Elawaady"
           style="height:90px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(240,165,0,.35));"
-          onerror="this.outerHTML='<div class=\'login-logo-fallback\'>🛡️</div><span class=\'login-brand-name\'>Elawaady</span>';">
-        <span class="login-brand-sub">لوحة تحكم المتجر</span>
+          onerror="this.outerHTML='<div class=\'login-logo-fallback\'>🛡️</div>';">
+        <span class="login-brand-sub">بوابة الدخول الموحدة</span>
       </div>
 
       <div class="login-divider"></div>
+
+      <!-- Role Tabs -->
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="setRole('admin')" id="tab-admin">
+          🛡️ أدمن
+        </button>
+        <button class="role-tab" onclick="setRole('supplier')" id="tab-supplier">
+          🏭 مورد
+        </button>
+        <button class="role-tab" onclick="setRole('merchant')" id="tab-merchant">
+          🏪 تاجر
+        </button>
+      </div>
 
       <!-- Error Message -->
       <div class="login-error" id="login-error">
@@ -314,7 +340,7 @@
           <label class="form-label" for="username">اسم المستخدم</label>
           <div class="input-wrap">
             <span class="input-icon">👤</span>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Admin"
+            <input type="text" class="form-control" id="username" name="username" placeholder="أدخل اسم المستخدم"
               autocomplete="username" required dir="ltr">
           </div>
         </div>
@@ -325,8 +351,7 @@
             <span class="input-icon">🔒</span>
             <input type="password" class="form-control" id="password" name="password" placeholder="••••••••"
               autocomplete="current-password" required dir="ltr">
-            <button type="button" class="toggle-password" id="toggle-pw" onclick="togglePw()"
-              title="إظهار/إخفاء">👁️</button>
+            <button type="button" class="toggle-password" id="toggle-pw" onclick="togglePw()" title="إظهار/إخفاء">👁️</button>
           </div>
         </div>
 
@@ -358,14 +383,44 @@
 
   <script src="../assets/script/script.js"></script>
   <script>
-    /* Toggle password visibility */
+
+    /* ========== ACCOUNTS CONFIG ==========
+       استبدل هذا بـ API call حقيقي في الإنتاج
+       ======================================= */
+    const ACCOUNTS = [
+      { username: 'Admin',    password: 'Admin@Elawaady', role: 'admin',    name: 'المدير العام',  redirect: 'admin/index.html' },
+      { username: 'supplier1', password: 'Supplier@123',  role: 'supplier', name: 'مورد الخدمات', redirect: 'admin/supplier-dashboard.html' },
+      { username: 'merchant1', password: 'Merchant@123',  role: 'merchant', name: 'التاجر الأول', redirect: 'admin/merchant-dashboard.html' },
+    ];
+
+    const ROLE_LABELS = {
+      admin:    { label: '🛡️ أدمن',  cls: 'admin' },
+      supplier: { label: '🏭 مورد',  cls: 'supplier' },
+      merchant: { label: '🏪 تاجر', cls: 'merchant' },
+    };
+
+    let currentRole = 'admin';
+
+    function setRole(role) {
+      currentRole = role;
+      // Update tabs
+      document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tab-' + role).classList.add('active');
+      // Update placeholder hints
+      const hints = {
+        admin:    'Admin',
+        supplier: 'supplier1',
+        merchant: 'merchant1',
+      };
+      document.getElementById('username').placeholder = hints[role];
+    }
+
+    /* Toggle password */
     let pwVisible = false;
     function togglePw() {
       pwVisible = !pwVisible;
-      const pw = document.getElementById('password');
-      const btn = document.getElementById('toggle-pw');
-      pw.type = pwVisible ? 'text' : 'password';
-      btn.textContent = pwVisible ? '🙈' : '👁️';
+      document.getElementById('password').type = pwVisible ? 'text' : 'password';
+      document.getElementById('toggle-pw').textContent = pwVisible ? '🙈' : '👁️';
     }
 
     /* Handle login */
@@ -374,50 +429,75 @@
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
       const errorBox = document.getElementById('login-error');
-      const errorText = document.getElementById('error-text');
-      const btn = document.getElementById('submit-btn');
-      const btnText = document.getElementById('btn-text');
+      const btn      = document.getElementById('submit-btn');
+      const btnText  = document.getElementById('btn-text');
 
-      // Show loading
       btn.disabled = true;
       btnText.innerHTML = 'جاري التحقق <span class="spinner"></span>';
       errorBox.classList.remove('show');
 
       setTimeout(() => {
-        // Demo check — replace with real API call
-        if (username === 'Admin' && password === 'Admin@Elawaady') {
+        // Find matching account
+        const account = ACCOUNTS.find(a =>
+          a.username === username &&
+          a.password === password &&
+          a.role === currentRole
+        );
+
+        if (account) {
+          // Store session info
+          sessionStorage.setItem('elawaady_user', JSON.stringify({
+            username: account.username,
+            name: account.name,
+            role: account.role,
+          }));
+
+          const roleLabel = ROLE_LABELS[account.role];
           btnText.innerHTML = '✅ تم تسجيل الدخول';
-          showToast('مرحبًا بك في لوحة التحكم ✅', 'success');
-          setTimeout(() => { location.href = '../index.html'; }, 900);
+
+          // Show toast if available
+          if (typeof showToast === 'function') {
+            showToast(`مرحبًا ${account.name} ✅`, 'success');
+          }
+
+          setTimeout(() => {
+            location.href = account.redirect;
+          }, 900);
+
         } else {
           btn.disabled = false;
           btnText.innerHTML = '🔐 تسجيل الدخول';
-          errorText.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+
+          // Check if user/pass correct but wrong role tab
+          const wrongRole = ACCOUNTS.find(a => a.username === username && a.password === password);
+          if (wrongRole) {
+            document.getElementById('error-text').textContent =
+              `هذا الحساب من نوع "${ROLE_LABELS[wrongRole.role].label}" — يرجى اختيار التبويب الصحيح`;
+          } else {
+            document.getElementById('error-text').textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+          }
+
           errorBox.classList.add('show');
-          // Shake animation
-          document.querySelector('.login-box').style.animation = 'none';
-          document.querySelector('.login-box').offsetHeight; // reflow
-          document.querySelector('.login-box').style.animation = 'shake .4s ease';
+          const box = document.querySelector('.login-box');
+          box.style.animation = 'none';
+          box.offsetHeight;
+          box.style.animation = 'shake .4s ease';
         }
       }, 1000);
     }
 
-    /* Shake keyframe (inject dynamically) */
+    /* Shake */
     const style = document.createElement('style');
     style.textContent = `@keyframes shake {
-  0%,100%{transform:translateX(0)}
-  20%{transform:translateX(-8px)}
-  40%{transform:translateX(8px)}
-  60%{transform:translateX(-6px)}
-  80%{transform:translateX(6px)}
-}`;
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-8px)}
+      40%{transform:translateX(8px)}
+      60%{transform:translateX(-6px)}
+      80%{transform:translateX(6px)}
+    }`;
     document.head.appendChild(style);
 
-    /* Focus first input */
     document.getElementById('username').focus();
   </script>
 </body>
-
 </html>
-
-

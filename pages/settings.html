@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإعدادات العامة | Admin — Elawaady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    /* ── Setting row ── */
+    .setting-row {
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:20px; padding:18px 0; border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .setting-row:last-child { border-bottom:none; padding-bottom:0; }
+    .setting-info { flex:1; }
+    .setting-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .setting-desc  { font-size:12px; color:var(--text2); line-height:1.6; }
+    .setting-badge {
+      display:inline-block; margin-top:6px; font-size:10px; font-weight:700;
+      padding:2px 8px; border-radius:20px;
+      background:rgba(240,165,0,.12); color:var(--gold); border:1px solid rgba(240,165,0,.2);
+    }
+
+    /* ── Custom Toggle Switch ── */
+    .toggle-switch { position:relative; flex-shrink:0; }
+    .toggle-switch input { position:absolute; opacity:0; width:0; height:0; }
+    .toggle-track {
+      display:block; width:52px; height:28px; background:var(--bg3);
+      border:1px solid var(--border); border-radius:14px; cursor:pointer;
+      transition:background .3s, border-color .3s; position:relative;
+    }
+    .toggle-track::after {
+      content:''; position:absolute; top:3px; right:3px;
+      width:20px; height:20px; border-radius:50%; background:var(--text2);
+      transition:transform .3s, background .3s; box-shadow:0 2px 6px rgba(0,0,0,.4);
+    }
+    .toggle-switch input:checked ~ .toggle-track { background:rgba(240,165,0,.2); border-color:var(--gold); }
+    .toggle-switch input:checked ~ .toggle-track::after { transform:translateX(-24px); background:var(--gold); }
+    /* Featured / important toggle — green */
+    .toggle-switch.green input:checked ~ .toggle-track { background:rgba(34,197,94,.2); border-color:var(--green); }
+    .toggle-switch.green input:checked ~ .toggle-track::after { background:var(--green); }
+    /* Danger toggle — red */
+    .toggle-switch.red input:checked ~ .toggle-track { background:rgba(239,68,68,.15); border-color:var(--red); }
+    .toggle-switch.red input:checked ~ .toggle-track::after { background:var(--red); }
+
+    /* ── Setting section card ── */
+    .setting-section { display:flex; flex-direction:column; }
+    .setting-section-title { font-size:13px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:2px; }
+
+    /* ── Save bar ── */
+    .save-bar {
+      position:sticky; bottom:0; background:var(--bg2); border-top:1px solid var(--border);
+      padding:12px 20px; display:flex; align-items:center; justify-content:space-between; z-index:50;
+    }
+    .save-indicator { font-size:12px; color:var(--text2); display:flex; align-items:center; gap:6px; }
+    .save-dot { width:8px; height:8px; border-radius:50%; background:var(--green); }
+    .save-dot.dirty { background:var(--gold); animation:blink 1s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* Input fields inside settings */
+    .setting-input {
+      background:var(--bg3); border:1px solid var(--border); border-radius:8px;
+      color:var(--text); font-family:var(--font); font-size:13px;
+      padding:8px 12px; width:100%; max-width:280px; outline:none; transition:border-color .2s;
+    }
+    .setting-input:focus { border-color:var(--gold); }
+    .setting-input::placeholder { color:var(--text2); }
+
+    /* Number input */
+    .setting-number {
+      background:var(--bg3); border:1px solid var(--border); border-radius:8px;
+      color:var(--text); font-family:var(--font); font-size:13px;
+      padding:8px 12px; width:90px; outline:none; transition:border-color .2s; text-align:center;
+    }
+    .setting-number:focus { border-color:var(--gold); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+    .panel { animation:fadeUp .3s ease; }
+  </style>
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+  <div class="admin-wrap">
+
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+      <div class="sidebar-brand">
+        <img src="../assets/images/admin-logo.png" alt="Elawaady" class="site-logo-img admin-sidebar-logo"
+          onerror="this.outerHTML='<div style=\'font-size:22px;font-weight:900;color:var(--gold)\'>🛡️ Elawaady</div>'">
+      </div>
+      <nav class="sidebar-nav">
+        <span class="nav-label">الرئيسية</span>
+        <a href="../index.html"><span class="nav-icon">🏠</span> لوحة التحكم</a>
+        <span class="nav-label">المحتوى</span>
+        <a href="categories.html"><span class="nav-icon">📁</span> الأقسام</a>
+        <a href="services.html"><span class="nav-icon">🛍️</span> الخدمات</a>
+        <span class="nav-label">المبيعات</span>
+        <a href="orders.html"><span class="nav-icon">📋</span> الطلبات</a>
+        <a href="chatbot.html"><span class="nav-icon">🤖</span> الشات بوت</a>
+        <span class="nav-label">المستخدمون</span>
+        <a href="suppliers.html"><span class="nav-icon">🏭</span> الموردون</a>
+        <a href="merchants.html"><span class="nav-icon">🏪</span> التجار</a>
+        <span class="nav-label">الإعدادات</span>
+        <a href="homepage-settings.html"><span class="nav-icon">🏠</span> إعدادات الرئيسية</a>
+        <a href="settings.html" class="active"><span class="nav-icon">⚙️</span> الإعدادات العامة</a>
+        <a href="brand-settings.html"><span class="nav-icon">🎨</span> الهوية البصرية</a>
+        <span class="nav-label">عام</span>
+        <a href="../../index.html" target="_blank"><span class="nav-icon">🌐</span> عرض الموقع</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="logout.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+          <div class="topbar-title">⚙️ الإعدادات العامة</div>
+        </div>
+        <div class="topbar-right">
+          <span class="text-muted" style="font-size:12px;">مرحبًا، admin</span>
+        </div>
+      </div>
+
+      <div class="admin-content">
+
+        <!-- ── Supplier & Order Automation ── -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">🔄 أتمتة الطلبات والموردين</div>
+          </div>
+          <div class="panel-body">
+            <div class="setting-section">
+
+              <!-- ★ FEATURED SETTING ★ -->
+              <div class="setting-row" style="background:rgba(240,165,0,.04);margin:0 -16px;padding:18px 16px;border-radius:8px;border:1px solid rgba(240,165,0,.15);margin-bottom:8px;">
+                <div class="setting-info">
+                  <div class="setting-title">⚡ تحويل الخدمات تلقائياً إلى المورد</div>
+                  <div class="setting-desc">عند تفعيل هذا الخيار، سيتم تحويل أي طلب خدمة إلى المورد المناسب فور استلامه دون الحاجة لتدخل يدوي من الأدمن. يُنصح بتفعيله عند ارتفاع حجم الطلبات.</div>
+                  <span class="setting-badge">⭐ مُوصى به</span>
+                </div>
+                <label class="toggle-switch" title="تحويل الخدمات تلقائياً">
+                  <input type="checkbox" id="toggle-auto-assign" onchange="onToggle(this,'toggle-auto-assign','تحويل الطلبات تلقائياً للمورد')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">📩 إشعار المورد عند وصول طلب جديد</div>
+                  <div class="setting-desc">إرسال بريد إلكتروني أو إشعار للمورد فور اختياره لتنفيذ الطلب.</div>
+                </div>
+                <label class="toggle-switch green">
+                  <input type="checkbox" checked onchange="onToggle(this,'','إشعار المورد بالطلب')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">⏱️ مهلة الاستجابة للمورد (بالساعات)</div>
+                  <div class="setting-desc">إذا لم يستجب المورد خلال هذه المدة، يُعاد توزيع الطلب تلقائياً على مورد آخر.</div>
+                </div>
+                <input type="number" class="setting-number" value="24" min="1" max="168" onchange="markDirty()">
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">🔁 إعادة التوزيع التلقائي عند رفض المورد</div>
+                  <div class="setting-desc">في حال رفض المورد الطلب، يتم تلقائياً اختيار مورد بديل من القائمة.</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" onchange="onToggle(this,'','إعادة التوزيع التلقائي')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Registration & Accounts ── -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">👥 إعدادات التسجيل والحسابات</div>
+          </div>
+          <div class="panel-body">
+            <div class="setting-section">
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">✅ قبول الموردين تلقائياً</div>
+                  <div class="setting-desc">عند التفعيل، يُقبل أي مورد جديد فور تسجيله دون مراجعة يدوية. غير موصى به للمنصات الحساسة.</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" onchange="onToggle(this,'','قبول الموردين تلقائياً')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">✅ قبول التجار تلقائياً</div>
+                  <div class="setting-desc">قبول التجار الجدد تلقائياً دون الحاجة لمراجعة من الأدمن.</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" onchange="onToggle(this,'','قبول التجار تلقائياً')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">📧 تفعيل التحقق من البريد الإلكتروني</div>
+                  <div class="setting-desc">يُلزم المستخدمين الجدد بالتحقق من بريدهم الإلكتروني قبل تفعيل الحساب.</div>
+                </div>
+                <label class="toggle-switch green">
+                  <input type="checkbox" checked onchange="onToggle(this,'','التحقق من البريد')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Notifications ── -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">🔔 إعدادات الإشعارات</div>
+          </div>
+          <div class="panel-body">
+            <div class="setting-section">
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">🆕 إشعار الأدمن عند تسجيل مستخدم جديد</div>
+                  <div class="setting-desc">إرسال بريد للأدمن كلما سجّل مورد أو تاجر جديد ويحتاج للمراجعة.</div>
+                </div>
+                <label class="toggle-switch green">
+                  <input type="checkbox" checked onchange="onToggle(this,'','إشعار الأدمن بمستخدم جديد')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">📬 بريد الإشعارات</div>
+                  <div class="setting-desc">الحساب الذي تصله إشعارات الأدمن والتنبيهات.</div>
+                </div>
+                <input type="email" class="setting-input" value="admin@elawaady.com" placeholder="admin@example.com" dir="ltr" onchange="markDirty()">
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">🚨 تنبيه عند حظر مستخدم</div>
+                  <div class="setting-desc">إرسال سجل بعمليات الحظر إلى بريد الأدمن.</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked onchange="onToggle(this,'','تنبيه عند الحظر')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Danger zone ── -->
+        <div class="panel" style="border-color:rgba(239,68,68,.25);">
+          <div class="panel-header" style="background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2);">
+            <div class="panel-title" style="color:var(--red);">⚠️ المنطقة الحساسة</div>
+          </div>
+          <div class="panel-body">
+            <div class="setting-section">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">🔒 وضع الصيانة</div>
+                  <div class="setting-desc">تعطيل الموقع للزوار وعرض صفحة صيانة. الأدمن يمكنه الدخول بشكل طبيعي.</div>
+                </div>
+                <label class="toggle-switch red">
+                  <input type="checkbox" onchange="onToggle(this,'','وضع الصيانة')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <div class="setting-title">🚫 إيقاف التسجيل الجديد</div>
+                  <div class="setting-desc">منع أي مستخدم جديد من التسجيل كمورد أو تاجر مؤقتاً.</div>
+                </div>
+                <label class="toggle-switch red">
+                  <input type="checkbox" onchange="onToggle(this,'','إيقاف التسجيل الجديد')">
+                  <span class="toggle-track"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /admin-content -->
+
+      <!-- Sticky save bar -->
+      <div class="save-bar">
+        <div class="save-indicator">
+          <div class="save-dot" id="save-dot"></div>
+          <span id="save-status">جميع الإعدادات محفوظة</span>
+        </div>
+        <button class="btn btn-primary" id="save-btn" onclick="saveSettings()" disabled style="opacity:.5;">💾 حفظ التغييرات</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+  <script src="../assets/script/script.js"></script>
+  <script>
+    function toggleSidebar(){ document.getElementById('admin-sidebar').classList.toggle('open'); document.getElementById('sidebar-overlay').classList.toggle('active'); }
+    function closeSidebar(){ document.getElementById('admin-sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('active'); }
+
+    let isDirty = false;
+
+    function markDirty(){
+      isDirty = true;
+      document.getElementById('save-dot').classList.add('dirty');
+      document.getElementById('save-status').textContent = 'لديك تغييرات غير محفوظة';
+      const btn = document.getElementById('save-btn');
+      btn.disabled = false; btn.style.opacity = '1';
+    }
+
+    function onToggle(el, id, label){
+      markDirty();
+      const state = el.checked ? 'مفعّل' : 'معطّل';
+      showToast(`${label}: ${state}`, el.checked ? 'success' : 'info');
+    }
+
+    function saveSettings(){
+      const btn = document.getElementById('save-btn');
+      btn.textContent = '⏳ جاري الحفظ...'; btn.disabled = true;
+      setTimeout(() => {
+        isDirty = false;
+        document.getElementById('save-dot').classList.remove('dirty');
+        document.getElementById('save-status').textContent = 'جميع الإعدادات محفوظة';
+        btn.textContent = '💾 حفظ التغييرات'; btn.style.opacity = '.5';
+        showToast('✅ تم حفظ الإعدادات بنجاح', 'success');
+      }, 900);
+    }
+
+    if(typeof showToast !== 'function'){
+      window.showToast = function(msg, type='info'){
+        const c=document.getElementById('toast-container'); const t=document.createElement('div');
+        t.className=`toast toast-${type}`; t.textContent=msg; c.appendChild(t); setTimeout(()=>t.remove(),3500);
+      };
+    }
+  </script>
+</body>
+</html>

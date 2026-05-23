@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب | Elawaady</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0d0d0d; --bg2:#141414; --bg3:#1a1a1a; --card:#1e1e1e;
+      --border:#2a2a2a; --gold:#f0a500; --gold2:#ffc84a; --cyan:#00c8ff;
+      --green:#22c55e; --red:#ef4444; --purple:#c084fc;
+      --text:#e8e8e8; --text2:#a0a0a0; --radius:10px;
+      --font:'Cairo',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{ font-family:var(--font); background:var(--bg); color:var(--text); min-height:100vh; direction:rtl; overflow-x:hidden; }
+
+    /* ── Animated background ── */
+    .reg-bg{ position:fixed; inset:0; background:var(--bg); z-index:0; overflow:hidden; }
+    .reg-bg::before{ content:''; position:absolute; width:700px; height:700px; border-radius:50%; background:radial-gradient(circle,rgba(240,165,0,.09) 0%,transparent 65%); top:-200px; right:-150px; animation:floatBg 10s ease-in-out infinite; }
+    .reg-bg::after { content:''; position:absolute; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(192,132,252,.06) 0%,transparent 65%); bottom:-120px; left:-120px; animation:floatBg 14s ease-in-out infinite reverse; }
+    @keyframes floatBg{ 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(30px,20px) scale(1.04)} }
+    .grid-lines{ position:fixed; inset:0; background-image:linear-gradient(rgba(240,165,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.025) 1px,transparent 1px); background-size:40px 40px; z-index:0; }
+
+    /* ── Layout ── */
+    .reg-page{ position:relative; z-index:1; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px; }
+
+    /* ── Card ── */
+    .reg-box{
+      background:rgba(30,30,30,.88); backdrop-filter:blur(20px);
+      border:1px solid rgba(240,165,0,.18); border-radius:20px;
+      padding:36px 32px; width:100%; max-width:480px;
+      box-shadow:0 0 80px rgba(240,165,0,.07), 0 24px 64px rgba(0,0,0,.55);
+      animation:fadeUp .4s ease;
+    }
+    @keyframes fadeUp{ from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+
+    /* ── Brand ── */
+    .reg-brand{ text-align:center; margin-bottom:24px; }
+    .reg-brand-icon{ font-size:40px; display:block; margin-bottom:6px; }
+    .reg-brand-name{ font-size:20px; font-weight:900; color:var(--gold); display:block; }
+    .reg-brand-sub{ font-size:12px; color:var(--text2); display:block; margin-top:2px; }
+    .reg-divider{ height:1px; background:linear-gradient(90deg,transparent,rgba(240,165,0,.28),transparent); margin:18px 0; }
+
+    /* ── Step indicator ── */
+    .step-indicator{ display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:22px; }
+    .step-dot{ width:8px; height:8px; border-radius:50%; background:var(--border); transition:all .3s; }
+    .step-dot.active{ background:var(--gold); box-shadow:0 0 8px rgba(240,165,0,.5); width:24px; border-radius:4px; }
+    .step-dot.done  { background:var(--green); }
+
+    /* ── Section title ── */
+    .reg-section-title{ font-size:15px; font-weight:800; color:var(--text); margin-bottom:16px; }
+
+    /* ── Account type selector ── */
+    .account-type-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+    .account-type-card{
+      border:2px solid var(--border); border-radius:12px; padding:16px 12px;
+      cursor:pointer; transition:all .25s; text-align:center; position:relative; background:var(--bg3);
+    }
+    .account-type-card:hover{ border-color:rgba(240,165,0,.4); background:rgba(240,165,0,.05); }
+    .account-type-card.selected-supplier{ border-color:var(--cyan); background:rgba(0,200,255,.07); }
+    .account-type-card.selected-merchant{ border-color:var(--purple); background:rgba(192,132,252,.07); }
+    .account-type-card input[type="radio"]{ position:absolute; opacity:0; width:0; height:0; }
+    .type-icon{ font-size:30px; display:block; margin-bottom:8px; }
+    .type-name{ font-size:14px; font-weight:800; color:var(--text); display:block; margin-bottom:4px; }
+    .type-desc{ font-size:11px; color:var(--text2); line-height:1.5; }
+    .type-check{ position:absolute; top:8px; left:8px; width:18px; height:18px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:10px; transition:all .2s; }
+    .account-type-card.selected-supplier .type-check{ border-color:var(--cyan); background:var(--cyan); }
+    .account-type-card.selected-merchant .type-check{ border-color:var(--purple); background:var(--purple); }
+
+    /* ── Form elements ── */
+    .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .form-full{ grid-column:1/-1; }
+    .form-group{ display:flex; flex-direction:column; gap:5px; }
+    .form-label{ font-size:12px; font-weight:700; color:var(--text2); }
+    .form-control{
+      background:var(--bg3); border:1px solid var(--border); border-radius:8px;
+      color:var(--text); font-family:var(--font); font-size:13px;
+      padding:9px 12px; width:100%; outline:none; transition:border-color .2s;
+    }
+    .form-control:focus{ border-color:var(--gold); }
+    .form-control::placeholder{ color:var(--text2); }
+    .form-control.error{ border-color:var(--red); }
+    .form-error{ font-size:11px; color:var(--red); margin-top:2px; display:none; }
+    .form-error.show{ display:block; }
+
+    /* ── Password strength ── */
+    .pw-strength{ height:3px; border-radius:2px; margin-top:4px; transition:all .3s; background:var(--border); }
+    .pw-strength.weak   { background:var(--red);   width:33%; }
+    .pw-strength.medium { background:var(--gold);  width:66%; }
+    .pw-strength.strong { background:var(--green); width:100%; }
+    .pw-hint{ font-size:11px; color:var(--text2); margin-top:2px; }
+
+    /* ── Terms ── */
+    .terms-row{ display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--text2); }
+    .terms-row input[type="checkbox"]{ width:15px; height:15px; accent-color:var(--gold); cursor:pointer; margin-top:2px; flex-shrink:0; }
+    .terms-row a{ color:var(--gold); text-decoration:underline; cursor:pointer; }
+
+    /* ── Submit ── */
+    .reg-submit{
+      width:100%; padding:13px; font-size:15px; font-weight:800; border-radius:10px;
+      background:linear-gradient(135deg,var(--gold),#e09200); color:#000;
+      border:none; font-family:var(--font); cursor:pointer; transition:all .25s;
+      box-shadow:0 4px 20px rgba(240,165,0,.3); position:relative; overflow:hidden;
+    }
+    .reg-submit::before{ content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent); transition:left .4s; }
+    .reg-submit:hover{ transform:translateY(-2px); box-shadow:0 8px 28px rgba(240,165,0,.4); }
+    .reg-submit:hover::before{ left:100%; }
+    .reg-submit:disabled{ opacity:.55; cursor:not-allowed; transform:none; }
+    @keyframes spin{ to{transform:rotate(360deg)} }
+    .spinner{ width:15px; height:15px; border:2px solid rgba(0,0,0,.3); border-top-color:#000; border-radius:50%; animation:spin .6s linear infinite; display:inline-block; vertical-align:middle; margin-right:6px; }
+
+    /* ── Error alert ── */
+    .reg-error{ background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:8px; color:#fca5a5; padding:10px 14px; font-size:13px; display:none; align-items:center; gap:8px; margin-bottom:12px; }
+    .reg-error.show{ display:flex; }
+
+    /* ── Login link ── */
+    .reg-login-link{ text-align:center; font-size:12px; color:var(--text2); margin-top:16px; }
+    .reg-login-link a{ color:var(--gold); font-weight:700; }
+
+    /* ──────────── PENDING PAGE ────────────── */
+    .pending-box{
+      background:rgba(30,30,30,.88); backdrop-filter:blur(20px);
+      border:1px solid rgba(240,165,0,.18); border-radius:20px;
+      padding:48px 36px; width:100%; max-width:460px; text-align:center;
+      box-shadow:0 0 80px rgba(240,165,0,.07), 0 24px 64px rgba(0,0,0,.55);
+      animation:fadeUp .4s ease; display:none;
+    }
+    .pending-icon{ font-size:64px; display:block; margin-bottom:16px; animation:pendingFloat 3s ease-in-out infinite; }
+    @keyframes pendingFloat{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .pending-badge{
+      display:inline-flex; align-items:center; gap:6px; padding:5px 14px; border-radius:20px;
+      background:rgba(240,165,0,.12); border:1px solid rgba(240,165,0,.3); color:var(--gold);
+      font-size:12px; font-weight:700; margin-bottom:16px;
+    }
+    .pending-dot{ width:7px; height:7px; border-radius:50%; background:var(--gold); animation:blink 1.2s infinite; }
+    @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:.2} }
+    .pending-title{ font-size:22px; font-weight:900; color:var(--text); margin-bottom:10px; }
+    .pending-sub{ font-size:13px; color:var(--text2); line-height:1.75; margin-bottom:24px; }
+    .pending-info-cards{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:24px; }
+    .pending-info-card{ background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:12px 8px; }
+    .pending-info-card .pic{ font-size:22px; margin-bottom:4px; }
+    .pending-info-card .ptitle{ font-size:11px; color:var(--text2); }
+    .pending-divider{ height:1px; background:linear-gradient(90deg,transparent,rgba(240,165,0,.2),transparent); margin:0 0 20px; }
+    .pending-actions{ display:flex; flex-direction:column; gap:8px; }
+    .pending-go-login{ display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px; font-size:14px; font-weight:700; border-radius:10px; background:var(--bg3); color:var(--text2); border:1px solid var(--border); font-family:var(--font); cursor:pointer; transition:all .25s; text-decoration:none; }
+    .pending-go-login:hover{ border-color:var(--gold); color:var(--gold); }
+    .pending-support{ font-size:11px; color:var(--text2); margin-top:12px; }
+    .pending-support a{ color:var(--gold); }
+
+    /* ── user-type chip on pending ── */
+    .account-chip{ display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; margin-bottom:16px; }
+    .chip-supplier{ background:rgba(0,200,255,.12); color:var(--cyan); border:1px solid rgba(0,200,255,.3); }
+    .chip-merchant{ background:rgba(192,132,252,.12); color:var(--purple); border:1px solid rgba(192,132,252,.3); }
+  </style>
+</head>
+<body>
+  <div class="reg-bg"></div>
+  <div class="grid-lines"></div>
+
+  <div class="reg-page">
+
+    <!-- ══ REGISTRATION FORM ══ -->
+    <div class="reg-box" id="reg-box">
+      <div class="reg-brand">
+        <span class="reg-brand-icon">🛡️</span>
+        <span class="reg-brand-name">Elawaady</span>
+        <span class="reg-brand-sub">إنشاء حساب جديد</span>
+      </div>
+
+      <div class="step-indicator">
+        <div class="step-dot active" id="dot-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+      </div>
+
+      <div class="reg-divider"></div>
+
+      <!-- Error box -->
+      <div class="reg-error" id="reg-error"><span>❌</span><span id="error-msg">يرجى تعبئة جميع الحقول بشكل صحيح</span></div>
+
+      <form id="reg-form" onsubmit="handleRegister(event)" novalidate>
+
+        <!-- Step 1: Account type -->
+        <div id="step-1">
+          <div class="reg-section-title">🏷️ اختر نوع حسابك</div>
+          <div class="account-type-grid">
+
+            <label class="account-type-card" id="card-supplier" onclick="selectType('supplier')">
+              <input type="radio" name="account_type" value="supplier" id="type-supplier">
+              <div class="type-check" id="check-supplier"></div>
+              <span class="type-icon">🏭</span>
+              <span class="type-name">مورد</span>
+              <span class="type-desc">قدّم خدماتك ومنتجاتك للتجار عبر المنصة</span>
+            </label>
+
+            <label class="account-type-card" id="card-merchant" onclick="selectType('merchant')">
+              <input type="radio" name="account_type" value="merchant" id="type-merchant">
+              <div class="type-check" id="check-merchant"></div>
+              <span class="type-icon">🏪</span>
+              <span class="type-name">تاجر</span>
+              <span class="type-desc">اطلب الخدمات وأدِرها من الموردين بسهولة</span>
+            </label>
+
+          </div>
+
+          <div class="reg-section-title">👤 البيانات الشخصية</div>
+          <div class="form-grid" style="margin-bottom:14px;">
+            <div class="form-group">
+              <label class="form-label">الاسم الأول <span style="color:var(--red);">*</span></label>
+              <input type="text" class="form-control" id="first-name" placeholder="محمد">
+              <span class="form-error" id="err-first">الحقل مطلوب</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">الاسم الأخير <span style="color:var(--red);">*</span></label>
+              <input type="text" class="form-control" id="last-name" placeholder="العوضي">
+              <span class="form-error" id="err-last">الحقل مطلوب</span>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">البريد الإلكتروني <span style="color:var(--red);">*</span></label>
+              <input type="email" class="form-control" id="email" placeholder="example@mail.com" dir="ltr">
+              <span class="form-error" id="err-email">بريد إلكتروني غير صحيح</span>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">رقم الهاتف <span style="color:var(--red);">*</span></label>
+              <input type="tel" class="form-control" id="phone" placeholder="+20 10XXXXXXXX" dir="ltr">
+              <span class="form-error" id="err-phone">رقم الهاتف مطلوب</span>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">كلمة المرور <span style="color:var(--red);">*</span></label>
+              <input type="password" class="form-control" id="password" placeholder="••••••••" dir="ltr" oninput="checkPwStrength(this.value)">
+              <div class="pw-strength" id="pw-strength"></div>
+              <span class="pw-hint" id="pw-hint">يجب أن تكون 8 أحرف على الأقل</span>
+              <span class="form-error" id="err-pw">كلمة المرور قصيرة جداً</span>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">تأكيد كلمة المرور <span style="color:var(--red);">*</span></label>
+              <input type="password" class="form-control" id="confirm-pw" placeholder="••••••••" dir="ltr">
+              <span class="form-error" id="err-confirm">كلمة المرور غير متطابقة</span>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <label class="terms-row" style="margin-bottom:18px;">
+            <input type="checkbox" id="terms-check">
+            <span>أوافق على <a onclick="void(0)">الشروط والأحكام</a> وأقر بأن البيانات المدخلة صحيحة</span>
+          </label>
+
+          <button type="submit" class="reg-submit" id="submit-btn">
+            <span id="btn-text">🚀 إنشاء الحساب</span>
+          </button>
+        </div>
+
+      </form>
+
+      <div class="reg-login-link">لديك حساب بالفعل؟ <a href="login.html">سجّل دخولك</a></div>
+    </div>
+
+    <!-- ══ PENDING PAGE ══ -->
+    <div class="pending-box" id="pending-box">
+      <span class="pending-icon">⏳</span>
+
+      <div id="account-chip-wrap"></div>
+
+      <div class="pending-badge">
+        <div class="pending-dot"></div>
+        قيد المراجعة
+      </div>
+
+      <div class="pending-title">حسابك تحت المراجعة</div>
+      <div class="pending-sub">
+        شكراً لتسجيلك في منصة <strong style="color:var(--gold);">Elawaady</strong>! 🎉<br>
+        تم استلام طلبك بنجاح وسيقوم فريق الإدارة بمراجعة بياناتك والموافقة على حسابك في أقرب وقت ممكن.<br><br>
+        سيصلك إشعار على بريدك الإلكتروني عند تفعيل الحساب.
+      </div>
+
+      <div class="pending-info-cards">
+        <div class="pending-info-card"><div class="pic">📧</div><div class="ptitle">تحقق من بريدك</div></div>
+        <div class="pending-info-card"><div class="pic">⏱️</div><div class="ptitle">مدة المراجعة 24-48 ساعة</div></div>
+        <div class="pending-info-card"><div class="pic">✅</div><div class="ptitle">ستُفعَّل تلقائياً</div></div>
+      </div>
+
+      <div class="pending-divider"></div>
+
+      <div class="pending-actions">
+        <a href="login.html" class="pending-go-login">🔐 العودة لتسجيل الدخول</a>
+      </div>
+      <div class="pending-support">هل تحتاج مساعدة؟ <a href="mailto:support@elawaady.com">تواصل معنا</a></div>
+    </div>
+
+  </div>
+
+  <div id="toast-container" style="position:fixed;bottom:20px;left:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;"></div>
+  <script>
+    // ── Account type selection ──
+    let selectedType = null;
+    function selectType(type){
+      selectedType = type;
+      ['supplier','merchant'].forEach(t => {
+        const card  = document.getElementById(`card-${t}`);
+        const check = document.getElementById(`check-${t}`);
+        card.classList.remove('selected-supplier','selected-merchant');
+        check.textContent = '';
+      });
+      const card  = document.getElementById(`card-${type}`);
+      const check = document.getElementById(`check-${type}`);
+      card.classList.add(`selected-${type}`);
+      check.textContent = '✓';
+      document.getElementById(`type-${type}`).checked = true;
+    }
+
+    // ── Password strength ──
+    function checkPwStrength(pw){
+      const bar  = document.getElementById('pw-strength');
+      const hint = document.getElementById('pw-hint');
+      if(!pw){ bar.className='pw-strength'; hint.textContent='يجب أن تكون 8 أحرف على الأقل'; return; }
+      const hasUpper = /[A-Z]/.test(pw);
+      const hasNum   = /[0-9]/.test(pw);
+      const hasSpec  = /[^A-Za-z0-9]/.test(pw);
+      const score = (pw.length>=8?1:0)+(hasUpper?1:0)+(hasNum?1:0)+(hasSpec?1:0);
+      if(score<=1){ bar.className='pw-strength weak';   hint.textContent='ضعيفة — أضف أرقاماً ورموزاً'; }
+      else if(score<=3){ bar.className='pw-strength medium'; hint.textContent='متوسطة — يمكنك تحسينها'; }
+      else { bar.className='pw-strength strong'; hint.textContent='✓ قوية جداً'; }
+    }
+
+    // ── Validation helpers ──
+    function showError(id, show){ document.getElementById(id).classList.toggle('show', show); document.getElementById(id.replace('err-','') === id ? id : id.replace('err-',''))?.classList?.toggle('error', show); }
+    function fieldError(inputId, errId, condition){ const el=document.getElementById(inputId); el.classList.toggle('error',condition); document.getElementById(errId).classList.toggle('show',condition); return condition; }
+
+    // ── Handle register ──
+    function handleRegister(e){
+      e.preventDefault();
+      const errBox = document.getElementById('reg-error');
+      errBox.classList.remove('show');
+      let hasError = false;
+
+      if(!selectedType){
+        document.getElementById('error-msg').textContent = '⚠️ يرجى اختيار نوع الحساب أولاً';
+        errBox.classList.add('show'); return;
+      }
+      if(fieldError('first-name','err-first', !document.getElementById('first-name').value.trim())) hasError=true;
+      if(fieldError('last-name','err-last',   !document.getElementById('last-name').value.trim())) hasError=true;
+      const email = document.getElementById('email').value.trim();
+      if(fieldError('email','err-email', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) hasError=true;
+      if(fieldError('phone','err-phone',  !document.getElementById('phone').value.trim())) hasError=true;
+      const pw = document.getElementById('password').value;
+      if(fieldError('password','err-pw', pw.length<8)) hasError=true;
+      const cpw = document.getElementById('confirm-pw').value;
+      if(fieldError('confirm-pw','err-confirm', pw!==cpw)) hasError=true;
+      if(!document.getElementById('terms-check').checked){
+        document.getElementById('error-msg').textContent = '⚠️ يجب الموافقة على الشروط والأحكام أولاً';
+        errBox.classList.add('show'); return;
+      }
+      if(hasError){ document.getElementById('error-msg').textContent='⚠️ يرجى تصحيح الأخطاء أدناه'; errBox.classList.add('show'); return; }
+
+      // ── Loading ──
+      const btn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      btn.disabled=true; btnText.innerHTML='<span class="spinner"></span>جاري إنشاء الحساب...';
+
+      // Simulate API call
+      setTimeout(()=>{
+        // ── Step dots ──
+        document.getElementById('dot-1').classList.remove('active'); document.getElementById('dot-1').classList.add('done');
+        document.getElementById('dot-2').classList.add('active');
+
+        setTimeout(()=>{
+          // Show pending page
+          document.getElementById('reg-box').style.display='none';
+          const pb = document.getElementById('pending-box');
+          pb.style.display='block';
+
+          // Set chip
+          const chipMap = { supplier:['chip-supplier','🏭 مورد'], merchant:['chip-merchant','🏪 تاجر'] };
+          const [cls, label] = chipMap[selectedType];
+          document.getElementById('account-chip-wrap').innerHTML = `<span class="account-chip ${cls}">${label}</span>`;
+          showToast('✅ تم إرسال طلب التسجيل بنجاح!', 'success');
+        }, 400);
+      }, 1400);
+    }
+
+    // ── Toast ──
+    function showToast(msg, type='info'){
+      const colorMap={ success:'rgba(34,197,94,.15)','error':'rgba(239,68,68,.15)','info':'rgba(0,200,255,.12)' };
+      const borderMap={ success:'rgba(34,197,94,.3)','error':'rgba(239,68,68,.3)','info':'rgba(0,200,255,.3)' };
+      const colorText={ success:'#86efac','error':'#fca5a5','info':'#7dd3fc' };
+      const c=document.getElementById('toast-container');
+      const t=document.createElement('div');
+      Object.assign(t.style,{
+        background:colorMap[type]||colorMap.info, border:`1px solid ${borderMap[type]||borderMap.info}`,
+        color:colorText[type]||colorText.info, padding:'10px 16px', borderRadius:'10px',
+        fontSize:'13px', fontFamily:'Cairo,sans-serif', fontWeight:'600', backdropFilter:'blur(10px)',
+        boxShadow:'0 4px 20px rgba(0,0,0,.4)', animation:'fadeUp .3s ease', maxWidth:'320px',
+        direction:'rtl',
+      });
+      t.textContent=msg;
+      c.appendChild(t);
+      setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 3200);
+    }
+
+    // Inject spinner animation
+    const sty=document.createElement('style');
+    sty.textContent='@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}';
+    document.head.appendChild(sty);
+  </script>
+</body>
+</html>

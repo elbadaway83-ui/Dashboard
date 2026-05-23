@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رصيدي | لوحة التاجر</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #0d0d0d; --bg2: #141414; --bg3: #1a1a1a; --card: #1e1e1e;
+  --border: #2a2a2a; --gold: #f0a500; --gold2: #ffc84a; --cyan: #00c8ff;
+  --green: #22c55e; --red: #ef4444; --text: #e8e8e8; --text2: #a0a0a0;
+  --sidebar-w: 240px; --radius: 10px; --shadow: 0 4px 24px rgba(0,0,0,.4);
+  --font: 'Cairo', sans-serif;
+  --accent: #48c778; --accent-bg: rgba(72,199,120,.09); --accent-border: rgba(72,199,120,.25);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);direction:rtl;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.admin-wrap{display:flex;min-height:100vh}
+.admin-sidebar{width:var(--sidebar-w);background:var(--bg2);border-left:1px solid var(--accent-border);display:flex;flex-direction:column;position:fixed;right:0;top:0;bottom:0;z-index:200;transition:transform .3s ease;overflow-y:auto}
+.sidebar-brand{padding:20px 16px 14px;border-bottom:1px solid var(--accent-border);text-align:center}
+.brand-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:-0.5px}
+.brand-logo span{color:var(--text2);font-size:11px;display:block;font-weight:400;margin-top:2px}
+.sidebar-nav{flex:1;padding:12px 10px;display:flex;flex-direction:column;gap:2px}
+.nav-label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;padding:10px 8px 4px;display:block}
+.sidebar-nav a{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius);font-size:13.5px;color:var(--text2);transition:background .2s,color .2s}
+.sidebar-nav a:hover,.sidebar-nav a.active{background:var(--accent-bg);color:var(--accent);border-right:3px solid var(--accent)}
+.nav-icon{font-size:15px}
+.sidebar-footer{padding:14px 10px;border-top:1px solid var(--border)}
+.sidebar-footer a{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--radius);color:var(--red);font-size:13.5px;transition:background .2s}
+.sidebar-footer a:hover{background:rgba(239,68,68,.1)}
+.sidebar-close-btn{display:none;position:absolute;top:10px;left:10px;background:none;border:none;color:var(--text2);font-size:18px;cursor:pointer}
+.admin-main{margin-right:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh}
+.admin-topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-title{font-size:15px;font-weight:700;color:var(--accent)}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.role-badge-topbar{display:inline-flex;align-items:center;gap:5px;background:var(--accent-bg);border:1px solid var(--accent-border);color:var(--accent);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700}
+.sidebar-toggle-btn{display:none;background:none;border:1px solid var(--border);color:var(--text);font-size:18px;padding:4px 10px;border-radius:6px;cursor:pointer}
+.admin-content{padding:20px;flex:1;display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);background:var(--bg3)}
+.panel-title{font-size:14px;font-weight:700;color:var(--accent)}
+.page-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.page-header h1{font-size:18px;font-weight:800}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 16px;border-radius:8px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:#5dd98a;transform:translateY(-1px)}
+.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm{padding:5px 12px;font-size:12px}
+/* BALANCE HERO */
+.balance-hero{background:linear-gradient(135deg,rgba(72,199,120,.15),rgba(72,199,120,.04));border:1px solid var(--accent-border);border-radius:16px;padding:32px;text-align:center;position:relative;overflow:hidden}
+.balance-hero::before{content:'';position:absolute;top:-40px;left:-40px;width:140px;height:140px;border-radius:50%;background:rgba(72,199,120,.06);pointer-events:none}
+.balance-hero::after{content:'';position:absolute;bottom:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(72,199,120,.04);pointer-events:none}
+.balance-hero .hero-label{font-size:14px;color:var(--text2);margin-bottom:8px}
+.balance-hero .hero-amount{font-size:52px;font-weight:900;color:var(--accent);line-height:1;display:block;margin-bottom:6px}
+.balance-hero .hero-sub{font-size:13px;color:var(--text2)}
+/* STAT CARDS */
+.balance-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.bal-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.bal-stat .num{font-size:22px;font-weight:800;display:block;margin-bottom:4px}
+.bal-stat .lbl{font-size:11px;color:var(--text2)}
+/* TABLE */
+.admin-table{width:100%;border-collapse:collapse;font-size:13px}
+.admin-table th{padding:10px 12px;text-align:right;color:var(--text2);font-weight:600;font-size:12px;border-bottom:1px solid var(--border);white-space:nowrap}
+.admin-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.admin-table tbody tr:last-child td{border-bottom:none}
+.admin-table tbody tr:hover{background:rgba(255,255,255,.02)}
+.tx-credit{color:var(--accent);font-weight:700}
+.tx-debit{color:var(--red);font-weight:700}
+/* MODAL */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:14px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;animation:fadeUp .25s ease}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:15px;font-weight:700;color:var(--accent)}
+.modal-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer}
+.modal-body{padding:20px;display:flex;flex-direction:column;gap:14px}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-label{font-size:13px;font-weight:600}
+.form-input{background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font);font-size:13px;padding:9px 12px;width:100%;transition:border-color .2s}
+.form-input:focus{outline:none;border-color:var(--accent)}
+.form-select{background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font);font-size:13px;padding:9px 12px;width:100%;cursor:pointer;transition:border-color .2s}
+.form-select:focus{outline:none;border-color:var(--accent)}
+.form-hint{font-size:11px;color:var(--text2)}
+.info-box{background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.2);border-radius:8px;padding:12px;font-size:12px;color:var(--text2);line-height:1.6}
+/* BADGE */
+.badge-done,.badge-completed{background:rgba(72,199,120,.12);color:#48c778;border:1px solid rgba(72,199,120,.3);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700}
+.badge-pending{background:rgba(240,165,0,.15);color:#f0a500;border:1px solid rgba(240,165,0,.3);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700}
+.badge-cancelled{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700}
+/* TOAST */
+.toast-container{position:fixed;bottom:20px;left:20px;z-index:500;display:flex;flex-direction:column;gap:8px}
+.toast{padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:var(--shadow);animation:fadeUp .3s ease;min-width:220px}
+.toast-success{background:#166534;color:#bbf7d0;border:1px solid rgba(34,197,94,.3)}
+.toast-error{background:#7f1d1d;color:#fecaca;border:1px solid rgba(239,68,68,.3)}
+.toast-info{background:#0c4a6e;color:#bae6fd;border:1px solid rgba(0,200,255,.3)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150}
+.sidebar-overlay.active{display:block}
+@media(max-width:900px){
+  .admin-sidebar{transform:translateX(100%);box-shadow:var(--shadow)}
+  .admin-sidebar.open{transform:translateX(0)}
+  .sidebar-close-btn{display:block}
+  .admin-main{margin-right:0}
+  .sidebar-toggle-btn{display:block}
+}
+@media(max-width:600px){.admin-content{padding:12px}.balance-hero .hero-amount{font-size:38px}.hide-mobile{display:none!important}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="admin-wrap">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
+    <div class="sidebar-brand"><div class="brand-logo">EXP <span>لوحة التاجر</span></div></div>
+    <nav class="sidebar-nav">
+      <span class="nav-label">لوحة التاجر</span>
+      <a href="merchant-dashboard.html"><span class="nav-icon">🏠</span> الرئيسية</a>
+      <a href="merchant-orders.html"><span class="nav-icon">📋</span> طلباتي</a>
+      <a href="merchant-catalog.html"><span class="nav-icon">🛍️</span> كتالوج الخدمات</a>
+      <a href="merchant-balance.html" class="active"><span class="nav-icon">💳</span> رصيدي</a>
+      <a href="merchant-profile.html"><span class="nav-icon">👤</span> ملفي الشخصي</a>
+      <span class="nav-label">عام</span>
+      <a href="../index.html" target="_blank"><span class="nav-icon">🌐</span> عرض الموقع</a>
+    </nav>
+    <div class="sidebar-footer"><a href="login.html"><span class="nav-icon">🚪</span> تسجيل الخروج</a></div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title">💳 رصيدي</div>
+      </div>
+      <div class="topbar-right">
+        <span class="role-badge-topbar">🏪 تاجر</span>
+        <span style="color:var(--text2);font-size:12px;" id="merchant-name">مرحبًا، التاجر</span>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="page-header">
+        <h1>💳 رصيدي</h1>
+        <button class="btn btn-primary" onclick="openRecharge()">➕ شحن رصيد</button>
+      </div>
+
+      <!-- Balance Hero -->
+      <div class="balance-hero">
+        <div class="hero-label">💳 رصيدك الحالي</div>
+        <span class="hero-amount">1,200</span>
+        <div class="hero-sub">جنيه مصري</div>
+        <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="openRecharge()">➕ شحن رصيد</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('tx-panel').scrollIntoView({behavior:'smooth'})">📊 عرض المعاملات</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="balance-stats">
+        <div class="bal-stat"><span class="num" style="color:var(--accent)">3,850 ج</span><div class="lbl">💰 إجمالي الشحن</div></div>
+        <div class="bal-stat"><span class="num" style="color:var(--red)">2,650 ج</span><div class="lbl">🛒 إجمالي الإنفاق</div></div>
+        <div class="bal-stat"><span class="num" style="color:var(--gold)">18%</span><div class="lbl">📈 هامش الربح</div></div>
+        <div class="bal-stat"><span class="num" style="color:var(--cyan)">12</span><div class="lbl">📋 عدد الطلبات</div></div>
+      </div>
+
+      <!-- Transactions -->
+      <div class="panel" id="tx-panel">
+        <div class="panel-header">
+          <div class="panel-title">📊 سجل المعاملات</div>
+          <span style="font-size:12px;color:var(--text2);">آخر 10 معاملات</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>النوع</th>
+                <th>التفاصيل</th>
+                <th>المبلغ</th>
+                <th>الرصيد بعد</th>
+                <th>الحالة</th>
+                <th class="hide-mobile">التاريخ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-010</td>
+                <td>🔴 إنفاق</td>
+                <td style="font-size:12px;">طلب Netflix - ORD-0012</td>
+                <td class="tx-debit">-150 ج</td>
+                <td style="font-size:12px;">1,200 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-23</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-009</td>
+                <td>🟢 شحن</td>
+                <td style="font-size:12px;">شحن رصيد - فودافون كاش</td>
+                <td class="tx-credit">+500 ج</td>
+                <td style="font-size:12px;">1,350 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-22</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-008</td>
+                <td>🔴 إنفاق</td>
+                <td style="font-size:12px;">طلب Midjourney - ORD-0010</td>
+                <td class="tx-debit">-180 ج</td>
+                <td style="font-size:12px;">850 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-19</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-007</td>
+                <td>🔴 إنفاق</td>
+                <td style="font-size:12px;">طلب ChatGPT Plus - ORD-0009</td>
+                <td class="tx-debit">-120 ج</td>
+                <td style="font-size:12px;">1,030 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-18</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-006</td>
+                <td>🟢 شحن</td>
+                <td style="font-size:12px;">شحن رصيد - انستا باي</td>
+                <td class="tx-credit">+1,000 ج</td>
+                <td style="font-size:12px;">1,150 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-17</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-005</td>
+                <td>🔴 إنفاق</td>
+                <td style="font-size:12px;">طلب توثيق فيسبوك - ORD-0008</td>
+                <td class="tx-debit">-300 ج</td>
+                <td style="font-size:12px;">150 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-15</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-004</td>
+                <td>🔴 إنفاق</td>
+                <td style="font-size:12px;">طلب Microsoft 365 - ORD-0007</td>
+                <td class="tx-debit">-250 ج</td>
+                <td style="font-size:12px;">450 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-14</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-003</td>
+                <td>🟢 شحن</td>
+                <td style="font-size:12px;">شحن رصيد - تحويل بنكي</td>
+                <td class="tx-credit">+2,000 ج</td>
+                <td style="font-size:12px;">700 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-10</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-002</td>
+                <td>⏳ شحن</td>
+                <td style="font-size:12px;">طلب شحن رصيد معلق</td>
+                <td class="tx-credit">+350 ج</td>
+                <td style="font-size:12px;">— ج</td>
+                <td><span class="badge-pending">قيد المراجعة</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-09</td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;color:var(--text2);font-family:monospace">TX-001</td>
+                <td>🟢 شحن</td>
+                <td style="font-size:12px;">شحن رصيد أولي - فودافون</td>
+                <td class="tx-credit">+350 ج</td>
+                <td style="font-size:12px;">350 ج</td>
+                <td><span class="badge-done">مكتمل</span></td>
+                <td class="hide-mobile" style="font-size:12px;color:var(--text2)">2026-05-01</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recharge Modal -->
+<div class="modal-backdrop" id="recharge-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">➕ طلب شحن رصيد</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">المبلغ المراد شحنه (جنيه مصري)</label>
+        <input type="number" class="form-input" id="recharge-amount" placeholder="مثال: 500" min="50">
+        <div class="form-hint">الحد الأدنى: 50 جنيه</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">طريقة الدفع</label>
+        <select class="form-select" id="recharge-method">
+          <option value="">اختر طريقة الدفع...</option>
+          <option value="vodafone">فودافون كاش</option>
+          <option value="instapay">انستا باي</option>
+          <option value="bank">تحويل بنكي</option>
+          <option value="orange">أورانج موني</option>
+        </select>
+      </div>
+      <div class="info-box">
+        ℹ️ سيتم مراجعة طلب الشحن من قِبَل الإدارة وإضافته لرصيدك خلال ساعة إلى 3 ساعات من الدفع.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="submitRecharge()">📤 إرسال طلب الشحن</button>
+      <button class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script>
+function openRecharge() { document.getElementById('recharge-modal').classList.add('open'); }
+function closeModal() { document.getElementById('recharge-modal').classList.remove('open'); }
+function submitRecharge() {
+  const amount = document.getElementById('recharge-amount').value;
+  const method = document.getElementById('recharge-method').value;
+  if (!amount || +amount < 50) { showToast('❌ أدخل مبلغاً صحيحاً (50 ج على الأقل)', 'error'); return; }
+  if (!method) { showToast('❌ اختر طريقة الدفع', 'error'); return; }
+  closeModal();
+  showToast('✅ تم إرسال طلب الشحن بقيمة ' + amount + ' ج - سيتم المراجعة قريباً', 'success');
+}
+function toggleSidebar() {
+  document.getElementById('admin-sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('active');
+}
+function closeSidebar() {
+  document.getElementById('admin-sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('active');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeModal(); closeSidebar(); } });
+window.showToast = function(msg, type='info') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div'); t.className = 'toast toast-' + type; t.textContent = msg;
+  c.appendChild(t); setTimeout(() => t.remove(), 3500);
+};
+try {
+  const user = JSON.parse(sessionStorage.getItem('elawaady_user') || '{}');
+  if (user.name) document.getElementById('merchant-name').textContent = 'مرحبًا، ' + user.name;
+} catch(e) {}
+</script>
+</body>
+</html>
